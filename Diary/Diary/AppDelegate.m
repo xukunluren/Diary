@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "MainTabBarController.h"
+#import "UIViewController+ClassName.h"
 
 
 @interface AppDelegate ()
@@ -21,7 +22,7 @@
     // Override point for customization after application launch.
     
     //显示当前类名
-//    [UIViewController displayClassName:YES];
+    [UIViewController displayClassName:YES];
     
     self.window = [[UIWindow alloc] initWithFrame:kMainScreenBounds];
     
