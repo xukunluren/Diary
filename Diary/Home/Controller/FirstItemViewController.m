@@ -9,7 +9,10 @@
 #import "FirstItemViewController.h"
 #import "PublishViewController.h"
 
-@interface FirstItemViewController ()
+@interface FirstItemViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+
+@property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) UISearchBar *searchBar;
 
 @end
 
@@ -21,6 +24,8 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(rightDown)];
+    [self.view addSubview:self.searchBar];
+    [self.view addSubview:self.tableView];
 }
 
 - (void)rightDown
@@ -35,14 +40,37 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark -------------------------------------------------------------
+#pragma mark Init
+- (UITableView *)tableView {
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] init];
+        _tableView.frame = CGRectMake(0, 94, kScreenWidth, kScreenHeight - kNavigationBarHeight - kTabBarHeight- 30);
+//        _tableView.delegate = self;
+//        _tableView.dataSource = self;
+        return _tableView;
+    }
+    return _tableView;
 }
-*/
+
+
+- (UISearchBar *)searchBar {
+    if (!_searchBar) {
+        _searchBar = [[UISearchBar alloc] init];
+        _searchBar.frame = CGRectMake(0, kNavigationBarHeight, kScreenWidth, 30);
+    }
+    return _searchBar;
+}
+
+#pragma mark -------------------------------------------------------------
+#pragma mark UITableViewDataSource && UITableViewDelegate
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+//    return 1;
+//}
+//
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return nil;
+//}
+
 
 @end
