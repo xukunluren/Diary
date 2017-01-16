@@ -61,6 +61,8 @@
 		67CC91411E2CAC2100761832 /* user_icon_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 67CC913E1E2CAC2100761832 /* user_icon_default.png */; };
 		67CC91421E2CAC2100761832 /* user_icon_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 67CC913F1E2CAC2100761832 /* user_icon_default@2x.png */; };
 		67CC91431E2CAC2100761832 /* user_icon_default@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 67CC91401E2CAC2100761832 /* user_icon_default@3x.png */; };
+		67CC91461E2D08E300761832 /* UISearchBar+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC91451E2D08E200761832 /* UISearchBar+Additions.m */; };
+		67CC91491E2D091500761832 /* UIImage+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC91481E2D091500761832 /* UIImage+Additions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -177,6 +179,10 @@
 		67CC913E1E2CAC2100761832 /* user_icon_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = user_icon_default.png; path = ../ForthItem/View/user_icon_default.png; sourceTree = "<group>"; };
 		67CC913F1E2CAC2100761832 /* user_icon_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "user_icon_default@2x.png"; path = "../ForthItem/View/user_icon_default@2x.png"; sourceTree = "<group>"; };
 		67CC91401E2CAC2100761832 /* user_icon_default@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "user_icon_default@3x.png"; path = "../ForthItem/View/user_icon_default@3x.png"; sourceTree = "<group>"; };
+		67CC91441E2D08E200761832 /* UISearchBar+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISearchBar+Additions.h"; sourceTree = "<group>"; };
+		67CC91451E2D08E200761832 /* UISearchBar+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISearchBar+Additions.m"; sourceTree = "<group>"; };
+		67CC91471E2D091500761832 /* UIImage+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Additions.h"; sourceTree = "<group>"; };
+		67CC91481E2D091500761832 /* UIImage+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Additions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -301,6 +307,10 @@
 		67CC90831E28B84100761832 /* Catogory */ = {
 			isa = PBXGroup;
 			children = (
+				67CC91471E2D091500761832 /* UIImage+Additions.h */,
+				67CC91481E2D091500761832 /* UIImage+Additions.m */,
+				67CC91441E2D08E200761832 /* UISearchBar+Additions.h */,
+				67CC91451E2D08E200761832 /* UISearchBar+Additions.m */,
 				67CC91241E2C6BE600761832 /* UIColor+pas.h */,
 				67CC91251E2C6BE600761832 /* UIColor+pas.m */,
 				67CC91261E2C6BE600761832 /* UIView+SetRect.h */,
@@ -736,6 +746,8 @@
 				67CC90BB1E28B84100761832 /* ProfileViewController.m in Sources */,
 				67CC90E21E28BE5700761832 /* MainTabBarController.m in Sources */,
 				67CC90FE1E28C02D00761832 /* AFSecurityPolicy.m in Sources */,
+				67CC91491E2D091500761832 /* UIImage+Additions.m in Sources */,
+				67CC91461E2D08E300761832 /* UISearchBar+Additions.m in Sources */,
 				25FFA0811E28D24600869B7E /* WMFPSLabel.m in Sources */,
 				67CC90B91E28B84100761832 /* MySetViewController.m in Sources */,
 				67CC90BA1E28B84100761832 /* FirstItemViewController.m in Sources */,
