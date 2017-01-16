@@ -14,4 +14,6 @@
 #import "UIColor+pas.h"
 #import "UIView+SetRect.h"
 #import "UIColor+FlatUI.h"
+#import "UIImage+Additions.h"
+#import "UISearchBar+Additions.h"
 #endif /* HeaderFiles_h */
