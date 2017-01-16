@@ -23,7 +23,13 @@
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
 }
 
-
+- (void)setBack{
+  self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithNorImage:@"navigationbar_back" higImage:@"navigationbar_back_highlighted" targe:self action:@selector(leftDown)];
+}
+- (void)leftDown
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 //设置导航条是否透明
 -(void)setNavigtionBarTransparent:(BOOL)_transparent{
     if(_transparent){

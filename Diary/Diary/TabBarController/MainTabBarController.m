@@ -61,6 +61,7 @@
     childVc.tabBarItem.image = [UIImage imageNamed:image];
     childVc.tabBarItem.selectedImage = [[UIImage imageNamed:selectedImage] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     /** 添加子控制器 */
+    //UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:childVc];
     MainNavigationController *navigationVc = [[MainNavigationController alloc] initWithRootViewController:childVc];
     [self addChildViewController:navigationVc];
 }

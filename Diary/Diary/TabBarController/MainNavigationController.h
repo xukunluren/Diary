@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface MainNavigationController : UINavigationController
+-(void)setBack;
+-(void)setRightButtonWithText:(NSString *)text;
 
 @end

@@ -9,6 +9,8 @@
 #import "MySetViewController.h"
 #import "PublishViewController.h"
 #import "MySetHeaderView.h"
+#import "MyMeansViewController.h"
+#import "LoginViewController.h"
 
 @interface MySetViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)MySetHeaderView *settingHeaderNewView;
@@ -20,7 +22,11 @@
     UITableView *mySettingTableView;
     NSMutableArray *listArray;
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    self.tabBarController.tabBar.hidden = NO;
+    self.navigationController.navigationBar.hidden = YES;
+    //[self prefersStatusBarHidden];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -100,6 +106,14 @@
     return 10;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 0 && indexPath.row == 0 ) {
+        MyMeansViewController *means = [[MyMeansViewController alloc] init];
+        [self.navigationController pushViewController:means animated:YES];
+    }
+    if (indexPath.section == 0 && indexPath.row == 1 ) {
+        LoginViewController *means = [[LoginViewController alloc] init];
+        [self.navigationController pushViewController:means animated:YES];
+    }
 
 }
 - (MySetHeaderView *)settingHeaderNewView{

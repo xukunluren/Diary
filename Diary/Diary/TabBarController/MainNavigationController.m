@@ -9,6 +9,7 @@
 #import "MainNavigationController.h"
 
 @interface MainNavigationController ()<UINavigationControllerDelegate>
+@property(nonatomic,strong)UIViewController *viewController;
 @end
 
 @implementation MainNavigationController
@@ -30,16 +31,20 @@
         self.interactivePopGestureRecognizer.delegate = weakSelf;
     }
 }
+-(void)setBack{
+    _viewController.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithNorImage:@"navigationbar_back" higImage:@"navigationbar_back_highlighted" targe:self action:@selector(leftDown)];
+}
 #pragma mark - delegate
 /** UINavigationControllerDelegate */
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
+    _viewController = viewController;
     if (self.viewControllers.count > 0) { //非根控制器
         /** push时隐藏bar */
         viewController.hidesBottomBarWhenPushed = YES;
         
         /** left bar button item */
-        viewController.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithNorImage:@"navigationbar_back" higImage:@"navigationbar_back_highlighted" targe:self action:@selector(leftDown)];
+       // viewController.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithNorImage:@"navigationbar_back" higImage:@"navigationbar_back_highlighted" targe:self action:@selector(leftDown)];
         
         /** right bar button item */
         viewController.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithNorImage:@"navigationbar_more" higImage:@"navigationbar_more_highlighted" targe:self action:@selector(rightDown)];
