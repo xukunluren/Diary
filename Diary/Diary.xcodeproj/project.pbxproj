@@ -47,6 +47,8 @@
 		67CC91001E28C02D00761832 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC90F51E28C02D00761832 /* AFURLRequestSerialization.m */; };
 		67CC91011E28C02D00761832 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC90F71E28C02D00761832 /* AFURLResponseSerialization.m */; };
 		67CC91021E28C02D00761832 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC90F91E28C02D00761832 /* AFURLSessionManager.m */; };
+		67CC91281E2C6BE600761832 /* UIColor+pas.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC91251E2C6BE600761832 /* UIColor+pas.m */; };
+		67CC91291E2C6BE600761832 /* UIView+SetRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC91271E2C6BE600761832 /* UIView+SetRect.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +143,10 @@
 		67CC90F71E28C02D00761832 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		67CC90F81E28C02D00761832 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		67CC90F91E28C02D00761832 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
+		67CC91241E2C6BE600761832 /* UIColor+pas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+pas.h"; sourceTree = "<group>"; };
+		67CC91251E2C6BE600761832 /* UIColor+pas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+pas.m"; sourceTree = "<group>"; };
+		67CC91261E2C6BE600761832 /* UIView+SetRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SetRect.h"; sourceTree = "<group>"; };
+		67CC91271E2C6BE600761832 /* UIView+SetRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SetRect.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,6 +252,10 @@
 		67CC90831E28B84100761832 /* Catogory */ = {
 			isa = PBXGroup;
 			children = (
+				67CC91241E2C6BE600761832 /* UIColor+pas.h */,
+				67CC91251E2C6BE600761832 /* UIColor+pas.m */,
+				67CC91261E2C6BE600761832 /* UIView+SetRect.h */,
+				67CC91271E2C6BE600761832 /* UIView+SetRect.m */,
 				67CC90841E28B84100761832 /* UIBarButtonItem+Custom.h */,
 				67CC90851E28B84100761832 /* UIBarButtonItem+Custom.m */,
 				67CC90861E28B84100761832 /* UIView+WY.h */,
@@ -644,6 +654,7 @@
 			files = (
 				67CC91021E28C02D00761832 /* AFURLSessionManager.m in Sources */,
 				67CC90FF1E28C02D00761832 /* AFURLConnectionOperation.m in Sources */,
+				67CC91281E2C6BE600761832 /* UIColor+pas.m in Sources */,
 				67CC90E41E28BE5700761832 /* MainTabBarControllerTabBar.m in Sources */,
 				67CC90FC1E28C02D00761832 /* AFHTTPSessionManager.m in Sources */,
 				67CC90FD1E28C02D00761832 /* AFNetworkReachabilityManager.m in Sources */,
@@ -666,6 +677,7 @@
 				67CC91001E28C02D00761832 /* AFURLRequestSerialization.m in Sources */,
 				67CC90FA1E28C02D00761832 /* AFHTTPRequestOperation.m in Sources */,
 				67CC91011E28C02D00761832 /* AFURLResponseSerialization.m in Sources */,
+				67CC91291E2C6BE600761832 /* UIView+SetRect.m in Sources */,
 				67CC90B61E28B84100761832 /* UIBarButtonItem+Custom.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
