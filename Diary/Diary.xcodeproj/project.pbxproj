@@ -23,7 +23,7 @@
 		67CC90B61E28B84100761832 /* UIBarButtonItem+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC90851E28B84100761832 /* UIBarButtonItem+Custom.m */; };
 		67CC90B71E28B84100761832 /* UIView+WY.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC90871E28B84100761832 /* UIView+WY.m */; };
 		67CC90B81E28B84100761832 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC908A1E28B84100761832 /* BaseViewController.m */; };
-		67CC90B91E28B84100761832 /* FourthItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC908E1E28B84100761832 /* FourthItemViewController.m */; };
+		67CC90B91E28B84100761832 /* MySetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC908E1E28B84100761832 /* MySetViewController.m */; };
 		67CC90BA1E28B84100761832 /* FirstItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC90941E28B84100761832 /* FirstItemViewController.m */; };
 		67CC90BB1E28B84100761832 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC90971E28B84100761832 /* ProfileViewController.m */; };
 		67CC90BC1E28B84100761832 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 67CC909A1E28B84100761832 /* first.png */; };
@@ -54,6 +54,13 @@
 		67CC91021E28C02D00761832 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC90F91E28C02D00761832 /* AFURLSessionManager.m */; };
 		67CC91281E2C6BE600761832 /* UIColor+pas.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC91251E2C6BE600761832 /* UIColor+pas.m */; };
 		67CC91291E2C6BE600761832 /* UIView+SetRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC91271E2C6BE600761832 /* UIView+SetRect.m */; };
+		67CC912C1E2C9CAA00761832 /* BaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC912B1E2C9CAA00761832 /* BaseView.m */; };
+		67CC91351E2C9D6100761832 /* MySetHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC91341E2C9D6100761832 /* MySetHeaderView.m */; };
+		67CC91371E2C9D7600761832 /* MySetHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67CC91361E2C9D7600761832 /* MySetHeaderView.xib */; };
+		67CC913B1E2C9F7C00761832 /* backgroundImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 67CC913A1E2C9F7C00761832 /* backgroundImage.png */; };
+		67CC91411E2CAC2100761832 /* user_icon_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 67CC913E1E2CAC2100761832 /* user_icon_default.png */; };
+		67CC91421E2CAC2100761832 /* user_icon_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 67CC913F1E2CAC2100761832 /* user_icon_default@2x.png */; };
+		67CC91431E2CAC2100761832 /* user_icon_default@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 67CC91401E2CAC2100761832 /* user_icon_default@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,8 +112,8 @@
 		67CC90871E28B84100761832 /* UIView+WY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WY.m"; sourceTree = "<group>"; };
 		67CC90891E28B84100761832 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		67CC908A1E28B84100761832 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
-		67CC908D1E28B84100761832 /* FourthItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FourthItemViewController.h; sourceTree = "<group>"; };
-		67CC908E1E28B84100761832 /* FourthItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FourthItemViewController.m; sourceTree = "<group>"; };
+		67CC908D1E28B84100761832 /* MySetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySetViewController.h; sourceTree = "<group>"; };
+		67CC908E1E28B84100761832 /* MySetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySetViewController.m; sourceTree = "<group>"; };
 		67CC90931E28B84100761832 /* FirstItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstItemViewController.h; sourceTree = "<group>"; };
 		67CC90941E28B84100761832 /* FirstItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstItemViewController.m; sourceTree = "<group>"; };
 		67CC90961E28B84100761832 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
@@ -161,6 +168,15 @@
 		67CC91251E2C6BE600761832 /* UIColor+pas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+pas.m"; sourceTree = "<group>"; };
 		67CC91261E2C6BE600761832 /* UIView+SetRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SetRect.h"; sourceTree = "<group>"; };
 		67CC91271E2C6BE600761832 /* UIView+SetRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SetRect.m"; sourceTree = "<group>"; };
+		67CC912A1E2C9CAA00761832 /* BaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseView.h; sourceTree = "<group>"; };
+		67CC912B1E2C9CAA00761832 /* BaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseView.m; sourceTree = "<group>"; };
+		67CC91331E2C9D6100761832 /* MySetHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySetHeaderView.h; sourceTree = "<group>"; };
+		67CC91341E2C9D6100761832 /* MySetHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySetHeaderView.m; sourceTree = "<group>"; };
+		67CC91361E2C9D7600761832 /* MySetHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MySetHeaderView.xib; sourceTree = "<group>"; };
+		67CC913A1E2C9F7C00761832 /* backgroundImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundImage.png; sourceTree = "<group>"; };
+		67CC913E1E2CAC2100761832 /* user_icon_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = user_icon_default.png; path = ../ForthItem/View/user_icon_default.png; sourceTree = "<group>"; };
+		67CC913F1E2CAC2100761832 /* user_icon_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "user_icon_default@2x.png"; path = "../ForthItem/View/user_icon_default@2x.png"; sourceTree = "<group>"; };
+		67CC91401E2CAC2100761832 /* user_icon_default@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "user_icon_default@3x.png"; path = "../ForthItem/View/user_icon_default@3x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,7 +229,7 @@
 				67CC90E51E28C02D00761832 /* ThirdTools */,
 				67CC90831E28B84100761832 /* Catogory */,
 				67CC90881E28B84100761832 /* Common */,
-				67CC908B1E28B84100761832 /* ForthItem */,
+				67CC908B1E28B84100761832 /* MySetting */,
 				67CC90911E28B84100761832 /* Home */,
 				67CC90991E28B84100761832 /* ImageResource */,
 				67CC90A41E28B84100761832 /* Publish */,
@@ -306,25 +322,28 @@
 			children = (
 				67CC90891E28B84100761832 /* BaseViewController.h */,
 				67CC908A1E28B84100761832 /* BaseViewController.m */,
+				67CC912A1E2C9CAA00761832 /* BaseView.h */,
+				67CC912B1E2C9CAA00761832 /* BaseView.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
 		};
-		67CC908B1E28B84100761832 /* ForthItem */ = {
+		67CC908B1E28B84100761832 /* MySetting */ = {
 			isa = PBXGroup;
 			children = (
 				67CC908C1E28B84100761832 /* Controller */,
 				67CC908F1E28B84100761832 /* Model */,
 				67CC90901E28B84100761832 /* View */,
 			);
+			name = MySetting;
 			path = ForthItem;
 			sourceTree = "<group>";
 		};
 		67CC908C1E28B84100761832 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				67CC908D1E28B84100761832 /* FourthItemViewController.h */,
-				67CC908E1E28B84100761832 /* FourthItemViewController.m */,
+				67CC908D1E28B84100761832 /* MySetViewController.h */,
+				67CC908E1E28B84100761832 /* MySetViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -339,6 +358,9 @@
 		67CC90901E28B84100761832 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				67CC91331E2C9D6100761832 /* MySetHeaderView.h */,
+				67CC91341E2C9D6100761832 /* MySetHeaderView.m */,
+				67CC91361E2C9D7600761832 /* MySetHeaderView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -382,6 +404,10 @@
 		67CC90991E28B84100761832 /* ImageResource */ = {
 			isa = PBXGroup;
 			children = (
+				67CC913E1E2CAC2100761832 /* user_icon_default.png */,
+				67CC913F1E2CAC2100761832 /* user_icon_default@2x.png */,
+				67CC91401E2CAC2100761832 /* user_icon_default@3x.png */,
+				67CC913A1E2C9F7C00761832 /* backgroundImage.png */,
 				67CC909A1E28B84100761832 /* first.png */,
 				67CC909B1E28B84100761832 /* fourth.png */,
 				67CC909C1E28B84100761832 /* Item_background@1x.png */,
@@ -612,7 +638,7 @@
 				TargetAttributes = {
 					67CC904C1E28B7FC00761832 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = URJ79T2XN5;
+						DevelopmentTeam = 5G6X7E2225;
 						ProvisioningStyle = Automatic;
 					};
 					67CC90651E28B7FC00761832 = {
@@ -654,6 +680,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67CC91431E2CAC2100761832 /* user_icon_default@3x.png in Resources */,
+				67CC91371E2C9D7600761832 /* MySetHeaderView.xib in Resources */,
 				67CC90C51E28B84100761832 /* third.png in Resources */,
 				67CC90BC1E28B84100761832 /* first.png in Resources */,
 				67CC90601E28B7FC00761832 /* LaunchScreen.storyboard in Resources */,
@@ -661,10 +689,13 @@
 				67CC90C31E28B84100761832 /* make_docu@3x.png in Resources */,
 				58971CF01E2C6ADA0055A7E7 /* HomePageCell.xib in Resources */,
 				67CC90BE1E28B84100761832 /* Item_background@1x.png in Resources */,
+				67CC91421E2CAC2100761832 /* user_icon_default@2x.png in Resources */,
+				67CC91411E2CAC2100761832 /* user_icon_default.png in Resources */,
 				67CC905D1E28B7FC00761832 /* Assets.xcassets in Resources */,
 				67CC90C21E28B84100761832 /* make_docu@2x.png in Resources */,
 				67CC90BD1E28B84100761832 /* fourth.png in Resources */,
 				67CC90BF1E28B84100761832 /* Item_background@2x.png in Resources */,
+				67CC913B1E2C9F7C00761832 /* backgroundImage.png in Resources */,
 				67CC90C41E28B84100761832 /* second.png in Resources */,
 				67CC90C11E28B84100761832 /* make_docu@1x.png in Resources */,
 				67CC905B1E28B7FC00761832 /* Main.storyboard in Resources */,
@@ -694,6 +725,7 @@
 			files = (
 				67CC91021E28C02D00761832 /* AFURLSessionManager.m in Sources */,
 				67CC90FF1E28C02D00761832 /* AFURLConnectionOperation.m in Sources */,
+				67CC91351E2C9D6100761832 /* MySetHeaderView.m in Sources */,
 				67CC91281E2C6BE600761832 /* UIColor+pas.m in Sources */,
 				67CC90E41E28BE5700761832 /* MainTabBarControllerTabBar.m in Sources */,
 				67CC90FC1E28C02D00761832 /* AFHTTPSessionManager.m in Sources */,
@@ -705,7 +737,7 @@
 				67CC90E21E28BE5700761832 /* MainTabBarController.m in Sources */,
 				67CC90FE1E28C02D00761832 /* AFSecurityPolicy.m in Sources */,
 				25FFA0811E28D24600869B7E /* WMFPSLabel.m in Sources */,
-				67CC90B91E28B84100761832 /* FourthItemViewController.m in Sources */,
+				67CC90B91E28B84100761832 /* MySetViewController.m in Sources */,
 				67CC90BA1E28B84100761832 /* FirstItemViewController.m in Sources */,
 				67CC90B81E28B84100761832 /* BaseViewController.m in Sources */,
 				67CC90FB1E28C02D00761832 /* AFHTTPRequestOperationManager.m in Sources */,
@@ -719,6 +751,7 @@
 				67CC90C71E28B84100761832 /* SecondItemViewController.m in Sources */,
 				67CC91001E28C02D00761832 /* AFURLRequestSerialization.m in Sources */,
 				58971CEA1E2C69C50055A7E7 /* UIColor+FlatUI.m in Sources */,
+				67CC912C1E2C9CAA00761832 /* BaseView.m in Sources */,
 				67CC90FA1E28C02D00761832 /* AFHTTPRequestOperation.m in Sources */,
 				67CC91011E28C02D00761832 /* AFURLResponseSerialization.m in Sources */,
 				67CC91291E2C6BE600761832 /* UIView+SetRect.m in Sources */,
@@ -871,7 +904,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = URJ79T2XN5;
+				DEVELOPMENT_TEAM = 5G6X7E2225;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Diary/PrefixHeader.pch;
 				INFOPLIST_FILE = Diary/Info.plist;
@@ -886,7 +919,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = URJ79T2XN5;
+				DEVELOPMENT_TEAM = 5G6X7E2225;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Diary/PrefixHeader.pch;
 				INFOPLIST_FILE = Diary/Info.plist;

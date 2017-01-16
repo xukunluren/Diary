@@ -14,13 +14,13 @@
 #import "MainTabBarControllerTabBar.h"
 #import "SecondItemViewController.h"
 #import "ThirdItemViewController.h"
-#import "FourthItemViewController.h"
+#import "MySetViewController.h"
 
 @interface MainTabBarController () <MainTabBarControllerTabBarDelegate>
 @property (nonatomic, strong) FirstItemViewController *firstItem;
 @property (nonatomic, strong) SecondItemViewController *secondtem;
 @property (nonatomic, strong) ThirdItemViewController *thirdItem;
-@property (nonatomic, strong) FourthItemViewController *fourthItem;
+@property (nonatomic, strong) MySetViewController *fourthItem;
 @property (nonatomic, strong) ProfileViewController *profileVc;
 @end
 
@@ -34,7 +34,7 @@
     [self addChildVc:self.firstItem title:@"第一项" image:@"tabbar_home" selectedImage:@"tabbar_home_selected"];
     [self addChildVc:self.secondtem title:@"第二项" image:@"tabbar_profile" selectedImage:@"tabbar_profile_selected"];
     [self addChildVc:self.thirdItem title:@"第三项" image:@"tabbar_profile" selectedImage:@"tabbar_profile_selected"];
-    [self addChildVc:self.fourthItem title:@"第四项" image:@"tabbar_profile" selectedImage:@"tabbar_profile_selected"];
+    [self addChildVc:self.fourthItem title:@"我" image:@"tabbar_profile" selectedImage:@"tabbar_profile_selected"];
     
     MainTabBarControllerTabBar *tabBar = [[MainTabBarControllerTabBar alloc] init];
     tabBar.customDelegate = self;
@@ -87,10 +87,10 @@
     }
     return _thirdItem;
 }
-- (FourthItemViewController *)fourthItem
+- (MySetViewController *)fourthItem
 {
     if (_fourthItem == nil) {
-        _fourthItem = [[FourthItemViewController alloc] init];
+        _fourthItem = [[MySetViewController alloc] init];
     }
     return _fourthItem;
 }
