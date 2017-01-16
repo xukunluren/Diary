@@ -29,6 +29,7 @@
 #pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // 添加子控制器
     [self addChildVc:self.firstItem title:@"第一项" image:@"tabbar_home" selectedImage:@"tabbar_home_selected"];
     [self addChildVc:self.secondtem title:@"第二项" image:@"tabbar_profile" selectedImage:@"tabbar_profile_selected"];
@@ -68,6 +69,7 @@
 {
     if (_firstItem == nil) {
         _firstItem = [[FirstItemViewController alloc] init];
+        
     }
     return _firstItem;
 }
