@@ -11,7 +11,6 @@
 #import "MySetHeaderView.h"
 #import "MyMeansViewController.h"
 #import "LoginController.h"
-#import "LoginViewController.h"
 
 @interface MySetViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)MySetHeaderView *settingHeaderNewView;
