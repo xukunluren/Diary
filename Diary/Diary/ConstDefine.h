@@ -17,4 +17,7 @@
 #define kTabBarHeight 49
 #define kTabBarBackgroundColor [UIColor colorWithHexString:@"#60C2EB"]
 #define kTabBarTitleColor [UIColor colorWithHexString:@"#808284"]
+//基本信息获取
+#define ScreenHeight [[UIScreen mainScreen] bounds].size.height
+#define ScreenWidth [[UIScreen mainScreen] bounds].size.width
 #endif /* ConstDefine_h */

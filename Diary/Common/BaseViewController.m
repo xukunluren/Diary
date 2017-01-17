@@ -17,6 +17,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    //设置窗口样式
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"12B7F5"];
+    [self.navigationController.navigationBar setBarStyle:UIBarStyleBlackTranslucent];
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+}
+
+- (void)setBack{
+  self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithNorImage:@"navigationbar_back" higImage:@"navigationbar_back_highlighted" targe:self action:@selector(leftDown)];
+}
+- (void)leftDown
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+//设置导航条是否透明
+-(void)setNavigtionBarTransparent:(BOOL)_transparent{
+    if(_transparent){
+        self.navigationController.navigationBar.hidden = YES;
+    }else{
+        self.navigationController.navigationBar.hidden = NO;
+
+    }
 }
 
 - (void)didReceiveMemoryWarning {

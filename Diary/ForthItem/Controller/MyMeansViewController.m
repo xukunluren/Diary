@@ -1,33 +1,30 @@
 //
-//  FirstItemViewController.m
+//  MyMeansViewController.m
 //  Diary
 //
-//  Created by xukun on 2017/1/13.
+//  Created by xukun on 2017/1/16.
 //  Copyright © 2017年 xukun. All rights reserved.
 //
 
-#import "FourthItemViewController.h"
-#import "PublishViewController.h"
+#import "MyMeansViewController.h"
 
-@interface FourthItemViewController ()
+@interface MyMeansViewController ()
 
 @end
 
-@implementation FourthItemViewController
-
+@implementation MyMeansViewController
+- (void)viewWillAppear:(BOOL)animated{
+    self.tabBarController.tabBar.hidden = YES;
+    [self setBack];
+    
+    
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor whiteColor];
-    
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(rightDown)];
-}
-
-- (void)rightDown
-{
-    PublishViewController *vc = [[PublishViewController alloc] init];
-    
-    [self.navigationController pushViewController:vc animated:YES];
+    self.view.backgroundColor = [UIColor redColor];
+    [self setNavigtionBarTransparent:NO];
+    [self setTitle:@"我的资料"];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -11,4 +11,9 @@
 #define HeaderFiles_h
 #import "UIBarButtonItem+Custom.h"
 #import "UIView+WY.h"
+#import "UIColor+pas.h"
+#import "UIView+SetRect.h"
+#import "UIColor+FlatUI.h"
+#import "UIImage+Additions.h"
+#import "UISearchBar+Additions.h"
 #endif /* HeaderFiles_h */
