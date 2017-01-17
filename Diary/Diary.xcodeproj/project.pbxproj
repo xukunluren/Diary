@@ -64,8 +64,9 @@
 		67CC91461E2D08E300761832 /* UISearchBar+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC91451E2D08E200761832 /* UISearchBar+Additions.m */; };
 		67CC91491E2D091500761832 /* UIImage+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC91481E2D091500761832 /* UIImage+Additions.m */; };
 		67CC914C1E2D09D200761832 /* MyMeansViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC914B1E2D09D200761832 /* MyMeansViewController.m */; };
-		67CC91541E2D157300761832 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC91521E2D157300761832 /* LoginViewController.m */; };
-		67CC91551E2D157300761832 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67CC91531E2D157300761832 /* LoginViewController.xib */; };
+		67CC915D1E2DBE3400761832 /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC915C1E2DBE3400761832 /* LoginController.m */; };
+		67CC91651E2DBFB900761832 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC91641E2DBFB900761832 /* LoginView.m */; };
+		67CC91671E2DBFCD00761832 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67CC91661E2DBFCD00761832 /* LoginView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -188,9 +189,11 @@
 		67CC91481E2D091500761832 /* UIImage+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Additions.m"; sourceTree = "<group>"; };
 		67CC914A1E2D09D200761832 /* MyMeansViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMeansViewController.h; sourceTree = "<group>"; };
 		67CC914B1E2D09D200761832 /* MyMeansViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMeansViewController.m; sourceTree = "<group>"; };
-		67CC91511E2D157300761832 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		67CC91521E2D157300761832 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
-		67CC91531E2D157300761832 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		67CC915B1E2DBE3400761832 /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
+		67CC915C1E2DBE3400761832 /* LoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginController.m; sourceTree = "<group>"; };
+		67CC91631E2DBFB900761832 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
+		67CC91641E2DBFB900761832 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
+		67CC91661E2DBFCD00761832 /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginView.xib; path = ../View/LoginView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -382,6 +385,8 @@
 				67CC91331E2C9D6100761832 /* MySetHeaderView.h */,
 				67CC91341E2C9D6100761832 /* MySetHeaderView.m */,
 				67CC91361E2C9D7600761832 /* MySetHeaderView.xib */,
+				67CC91631E2DBFB900761832 /* LoginView.h */,
+				67CC91641E2DBFB900761832 /* LoginView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -595,9 +600,9 @@
 		67CC914D1E2D153500761832 /* loginViewController */ = {
 			isa = PBXGroup;
 			children = (
-				67CC91511E2D157300761832 /* LoginViewController.h */,
-				67CC91521E2D157300761832 /* LoginViewController.m */,
-				67CC91531E2D157300761832 /* LoginViewController.xib */,
+				67CC915B1E2DBE3400761832 /* LoginController.h */,
+				67CC915C1E2DBE3400761832 /* LoginController.m */,
+				67CC91661E2DBFCD00761832 /* LoginView.xib */,
 			);
 			name = loginViewController;
 			sourceTree = "<group>";
@@ -711,7 +716,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				67CC91551E2D157300761832 /* LoginViewController.xib in Resources */,
 				67CC91431E2CAC2100761832 /* user_icon_default@3x.png in Resources */,
 				67CC91371E2C9D7600761832 /* MySetHeaderView.xib in Resources */,
 				67CC90C51E28B84100761832 /* third.png in Resources */,
@@ -725,6 +729,7 @@
 				67CC91411E2CAC2100761832 /* user_icon_default.png in Resources */,
 				67CC905D1E28B7FC00761832 /* Assets.xcassets in Resources */,
 				67CC90C21E28B84100761832 /* make_docu@2x.png in Resources */,
+				67CC91671E2DBFCD00761832 /* LoginView.xib in Resources */,
 				67CC90BD1E28B84100761832 /* fourth.png in Resources */,
 				67CC90BF1E28B84100761832 /* Item_background@2x.png in Resources */,
 				67CC913B1E2C9F7C00761832 /* backgroundImage.png in Resources */,
@@ -755,7 +760,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				67CC91541E2D157300761832 /* LoginViewController.m in Sources */,
 				67CC91021E28C02D00761832 /* AFURLSessionManager.m in Sources */,
 				67CC90FF1E28C02D00761832 /* AFURLConnectionOperation.m in Sources */,
 				67CC91351E2C9D6100761832 /* MySetHeaderView.m in Sources */,
@@ -764,6 +768,7 @@
 				67CC90E41E28BE5700761832 /* MainTabBarControllerTabBar.m in Sources */,
 				67CC90FC1E28C02D00761832 /* AFHTTPSessionManager.m in Sources */,
 				67CC90FD1E28C02D00761832 /* AFNetworkReachabilityManager.m in Sources */,
+				67CC915D1E2DBE3400761832 /* LoginController.m in Sources */,
 				67CC90B71E28B84100761832 /* UIView+WY.m in Sources */,
 				58971CEF1E2C6ADA0055A7E7 /* HomePageCell.m in Sources */,
 				67CC90E31E28BE5700761832 /* MainTabBarControllerMidButtonView.m in Sources */,
@@ -789,6 +794,7 @@
 				58971CEA1E2C69C50055A7E7 /* UIColor+FlatUI.m in Sources */,
 				67CC912C1E2C9CAA00761832 /* BaseView.m in Sources */,
 				67CC90FA1E28C02D00761832 /* AFHTTPRequestOperation.m in Sources */,
+				67CC91651E2DBFB900761832 /* LoginView.m in Sources */,
 				67CC91011E28C02D00761832 /* AFURLResponseSerialization.m in Sources */,
 				67CC91291E2C6BE600761832 /* UIView+SetRect.m in Sources */,
 				67CC90B61E28B84100761832 /* UIBarButtonItem+Custom.m in Sources */,

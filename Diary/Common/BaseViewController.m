@@ -23,6 +23,10 @@
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
 }
 
+-(void)goBack{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)setBack{
   self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithNorImage:@"navigationbar_back" higImage:@"navigationbar_back_highlighted" targe:self action:@selector(leftDown)];
 }

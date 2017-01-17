@@ -10,6 +10,7 @@
 #import "PublishViewController.h"
 #import "MySetHeaderView.h"
 #import "MyMeansViewController.h"
+#import "LoginController.h"
 #import "LoginViewController.h"
 
 @interface MySetViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -23,18 +24,18 @@
     NSMutableArray *listArray;
 }
 -(void)viewWillAppear:(BOOL)animated{
-    self.tabBarController.tabBar.hidden = NO;
-    self.navigationController.navigationBar.hidden = YES;
-    //[self prefersStatusBarHidden];
-}
+    
+     
+    self.navigationController.navigationBarHidden = YES;
+    }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self initView];
     [self initData];
     
-    
 }
+
+ 
 -(UIView*)loginOutView{
     if (_loginOutView == nil) {
     self.loginOutView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 70)];
@@ -49,15 +50,14 @@
 -(void)initData{
     listArray = [[NSMutableArray alloc] initWithObjects:[NSArray arrayWithObjects:@"我的资料",@"我的点赞",nil],[NSArray arrayWithObjects:@"鼓励我们",@"支持我们",@"账号安全",@"版本信息", nil], nil];
 }
-- (BOOL)prefersStatusBarHidden{
-    return YES;
-}
+
 - (void) initView{
 
-    [self setNavigtionBarTransparent:YES];
-    mySettingTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 50) style: UITableViewStyleGrouped];
+    //[self setNavigtionBarTransparent:YES];
+    mySettingTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, -20, ScreenWidth, ScreenHeight - 50) style: UITableViewStyleGrouped];
     mySettingTableView.maximumZoomScale = 1.3;
     mySettingTableView.dataSource = self;
+    mySettingTableView.scrollEnabled = NO;
     mySettingTableView.delegate = self;
     mySettingTableView.backgroundColor = [UIColor colorFromHexCode:@"eeeeee"];
     mySettingTableView.tableHeaderView = self.settingHeaderNewView;
@@ -89,6 +89,7 @@
     if (indexPath.section == 1&& indexPath.row == 3) {
          cell.detailTextLabel.text = @"V1.0";
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
    
     return cell;
 }
@@ -106,12 +107,13 @@
     return 10;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
     if (indexPath.section == 0 && indexPath.row == 0 ) {
         MyMeansViewController *means = [[MyMeansViewController alloc] init];
         [self.navigationController pushViewController:means animated:YES];
     }
     if (indexPath.section == 0 && indexPath.row == 1 ) {
-        LoginViewController *means = [[LoginViewController alloc] init];
+        LoginController *means = [[LoginController alloc] init];
         [self.navigationController pushViewController:means animated:YES];
     }
 
