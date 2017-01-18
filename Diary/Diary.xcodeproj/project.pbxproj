@@ -12,6 +12,17 @@
 		58971CEA1E2C69C50055A7E7 /* UIColor+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 58971CE91E2C69C50055A7E7 /* UIColor+FlatUI.m */; };
 		58971CEF1E2C6ADA0055A7E7 /* HomePageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58971CED1E2C6ADA0055A7E7 /* HomePageCell.m */; };
 		58971CF01E2C6ADA0055A7E7 /* HomePageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58971CEE1E2C6ADA0055A7E7 /* HomePageCell.xib */; };
+		67C06BBF1E2E051A00EBA5C6 /* MyMeansTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 67C06BBD1E2E051A00EBA5C6 /* MyMeansTableViewCell.m */; };
+		67C06BC01E2E051A00EBA5C6 /* MyMeansTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67C06BBE1E2E051A00EBA5C6 /* MyMeansTableViewCell.xib */; };
+		67C06BC91E2F3FB800EBA5C6 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67C06BC81E2F3FB800EBA5C6 /* LoginView.xib */; };
+		67C06BCD1E2F3FD600EBA5C6 /* RegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67C06BCB1E2F3FD600EBA5C6 /* RegisterController.m */; };
+		67C06BCE1E2F3FD600EBA5C6 /* RegisterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67C06BCC1E2F3FD600EBA5C6 /* RegisterView.xib */; };
+		67C06BD01E2F425B00EBA5C6 /* 6.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 67C06BCF1E2F425B00EBA5C6 /* 6.jpeg */; };
+		67C06BD31E2F443F00EBA5C6 /* BG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 67C06BD11E2F443F00EBA5C6 /* BG.jpg */; };
+		67C06BD41E2F443F00EBA5C6 /* myheadimage.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 67C06BD21E2F443F00EBA5C6 /* myheadimage.jpeg */; };
+		67C06BD81E2F491300EBA5C6 /* MyHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 67C06BD61E2F491300EBA5C6 /* MyHeaderTableViewCell.m */; };
+		67C06BD91E2F491300EBA5C6 /* MyHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67C06BD71E2F491300EBA5C6 /* MyHeaderTableViewCell.xib */; };
+		67C06BDC1E2F5B2C00EBA5C6 /* AccountSecretViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67C06BDB1E2F5B2C00EBA5C6 /* AccountSecretViewController.m */; };
 		67CC90521E28B7FC00761832 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC90511E28B7FC00761832 /* main.m */; };
 		67CC90551E28B7FC00761832 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC90541E28B7FC00761832 /* AppDelegate.m */; };
 		67CC90581E28B7FC00761832 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC90571E28B7FC00761832 /* ViewController.m */; };
@@ -66,7 +77,6 @@
 		67CC914C1E2D09D200761832 /* MyMeansViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC914B1E2D09D200761832 /* MyMeansViewController.m */; };
 		67CC915D1E2DBE3400761832 /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC915C1E2DBE3400761832 /* LoginController.m */; };
 		67CC91651E2DBFB900761832 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC91641E2DBFB900761832 /* LoginView.m */; };
-		67CC91671E2DBFCD00761832 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67CC91661E2DBFCD00761832 /* LoginView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +106,21 @@
 		58971CEC1E2C6ADA0055A7E7 /* HomePageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageCell.h; sourceTree = "<group>"; };
 		58971CED1E2C6ADA0055A7E7 /* HomePageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageCell.m; sourceTree = "<group>"; };
 		58971CEE1E2C6ADA0055A7E7 /* HomePageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomePageCell.xib; sourceTree = "<group>"; };
+		67C06BBC1E2E051A00EBA5C6 /* MyMeansTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMeansTableViewCell.h; sourceTree = "<group>"; };
+		67C06BBD1E2E051A00EBA5C6 /* MyMeansTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMeansTableViewCell.m; sourceTree = "<group>"; };
+		67C06BBE1E2E051A00EBA5C6 /* MyMeansTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyMeansTableViewCell.xib; sourceTree = "<group>"; };
+		67C06BC81E2F3FB800EBA5C6 /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
+		67C06BCA1E2F3FD600EBA5C6 /* RegisterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterController.h; sourceTree = "<group>"; };
+		67C06BCB1E2F3FD600EBA5C6 /* RegisterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterController.m; sourceTree = "<group>"; };
+		67C06BCC1E2F3FD600EBA5C6 /* RegisterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterView.xib; sourceTree = "<group>"; };
+		67C06BCF1E2F425B00EBA5C6 /* 6.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 6.jpeg; sourceTree = "<group>"; };
+		67C06BD11E2F443F00EBA5C6 /* BG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BG.jpg; sourceTree = "<group>"; };
+		67C06BD21E2F443F00EBA5C6 /* myheadimage.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = myheadimage.jpeg; sourceTree = "<group>"; };
+		67C06BD51E2F491300EBA5C6 /* MyHeaderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHeaderTableViewCell.h; sourceTree = "<group>"; };
+		67C06BD61E2F491300EBA5C6 /* MyHeaderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHeaderTableViewCell.m; sourceTree = "<group>"; };
+		67C06BD71E2F491300EBA5C6 /* MyHeaderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyHeaderTableViewCell.xib; sourceTree = "<group>"; };
+		67C06BDA1E2F5B2C00EBA5C6 /* AccountSecretViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountSecretViewController.h; sourceTree = "<group>"; };
+		67C06BDB1E2F5B2C00EBA5C6 /* AccountSecretViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountSecretViewController.m; sourceTree = "<group>"; };
 		67CC904D1E28B7FC00761832 /* Diary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Diary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67CC90511E28B7FC00761832 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		67CC90531E28B7FC00761832 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -193,7 +218,6 @@
 		67CC915C1E2DBE3400761832 /* LoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginController.m; sourceTree = "<group>"; };
 		67CC91631E2DBFB900761832 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
 		67CC91641E2DBFB900761832 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
-		67CC91661E2DBFCD00761832 /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginView.xib; path = ../View/LoginView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -368,6 +392,8 @@
 				67CC908E1E28B84100761832 /* MySetViewController.m */,
 				67CC914A1E2D09D200761832 /* MyMeansViewController.h */,
 				67CC914B1E2D09D200761832 /* MyMeansViewController.m */,
+				67C06BDA1E2F5B2C00EBA5C6 /* AccountSecretViewController.h */,
+				67C06BDB1E2F5B2C00EBA5C6 /* AccountSecretViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -387,6 +413,12 @@
 				67CC91361E2C9D7600761832 /* MySetHeaderView.xib */,
 				67CC91631E2DBFB900761832 /* LoginView.h */,
 				67CC91641E2DBFB900761832 /* LoginView.m */,
+				67C06BBC1E2E051A00EBA5C6 /* MyMeansTableViewCell.h */,
+				67C06BBD1E2E051A00EBA5C6 /* MyMeansTableViewCell.m */,
+				67C06BBE1E2E051A00EBA5C6 /* MyMeansTableViewCell.xib */,
+				67C06BD51E2F491300EBA5C6 /* MyHeaderTableViewCell.h */,
+				67C06BD61E2F491300EBA5C6 /* MyHeaderTableViewCell.m */,
+				67C06BD71E2F491300EBA5C6 /* MyHeaderTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -430,6 +462,9 @@
 		67CC90991E28B84100761832 /* ImageResource */ = {
 			isa = PBXGroup;
 			children = (
+				67C06BD11E2F443F00EBA5C6 /* BG.jpg */,
+				67C06BD21E2F443F00EBA5C6 /* myheadimage.jpeg */,
+				67C06BCF1E2F425B00EBA5C6 /* 6.jpeg */,
 				67CC913E1E2CAC2100761832 /* user_icon_default.png */,
 				67CC913F1E2CAC2100761832 /* user_icon_default@2x.png */,
 				67CC91401E2CAC2100761832 /* user_icon_default@3x.png */,
@@ -600,9 +635,12 @@
 		67CC914D1E2D153500761832 /* loginViewController */ = {
 			isa = PBXGroup;
 			children = (
+				67C06BCA1E2F3FD600EBA5C6 /* RegisterController.h */,
+				67C06BCB1E2F3FD600EBA5C6 /* RegisterController.m */,
+				67C06BCC1E2F3FD600EBA5C6 /* RegisterView.xib */,
 				67CC915B1E2DBE3400761832 /* LoginController.h */,
 				67CC915C1E2DBE3400761832 /* LoginController.m */,
-				67CC91661E2DBFCD00761832 /* LoginView.xib */,
+				67C06BC81E2F3FB800EBA5C6 /* LoginView.xib */,
 			);
 			name = loginViewController;
 			sourceTree = "<group>";
@@ -716,9 +754,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67C06BCE1E2F3FD600EBA5C6 /* RegisterView.xib in Resources */,
 				67CC91431E2CAC2100761832 /* user_icon_default@3x.png in Resources */,
 				67CC91371E2C9D7600761832 /* MySetHeaderView.xib in Resources */,
 				67CC90C51E28B84100761832 /* third.png in Resources */,
+				67C06BD91E2F491300EBA5C6 /* MyHeaderTableViewCell.xib in Resources */,
 				67CC90BC1E28B84100761832 /* first.png in Resources */,
 				67CC90601E28B7FC00761832 /* LaunchScreen.storyboard in Resources */,
 				67CC90C01E28B84100761832 /* Item_background@3x.png in Resources */,
@@ -729,13 +769,17 @@
 				67CC91411E2CAC2100761832 /* user_icon_default.png in Resources */,
 				67CC905D1E28B7FC00761832 /* Assets.xcassets in Resources */,
 				67CC90C21E28B84100761832 /* make_docu@2x.png in Resources */,
-				67CC91671E2DBFCD00761832 /* LoginView.xib in Resources */,
+				67C06BC91E2F3FB800EBA5C6 /* LoginView.xib in Resources */,
 				67CC90BD1E28B84100761832 /* fourth.png in Resources */,
 				67CC90BF1E28B84100761832 /* Item_background@2x.png in Resources */,
+				67C06BC01E2E051A00EBA5C6 /* MyMeansTableViewCell.xib in Resources */,
 				67CC913B1E2C9F7C00761832 /* backgroundImage.png in Resources */,
 				67CC90C41E28B84100761832 /* second.png in Resources */,
 				67CC90C11E28B84100761832 /* make_docu@1x.png in Resources */,
+				67C06BD01E2F425B00EBA5C6 /* 6.jpeg in Resources */,
+				67C06BD31E2F443F00EBA5C6 /* BG.jpg in Resources */,
 				67CC905B1E28B7FC00761832 /* Main.storyboard in Resources */,
+				67C06BD41E2F443F00EBA5C6 /* myheadimage.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -771,9 +815,11 @@
 				67CC915D1E2DBE3400761832 /* LoginController.m in Sources */,
 				67CC90B71E28B84100761832 /* UIView+WY.m in Sources */,
 				58971CEF1E2C6ADA0055A7E7 /* HomePageCell.m in Sources */,
+				67C06BCD1E2F3FD600EBA5C6 /* RegisterController.m in Sources */,
 				67CC90E31E28BE5700761832 /* MainTabBarControllerMidButtonView.m in Sources */,
 				67CC90BB1E28B84100761832 /* ProfileViewController.m in Sources */,
 				67CC90E21E28BE5700761832 /* MainTabBarController.m in Sources */,
+				67C06BD81E2F491300EBA5C6 /* MyHeaderTableViewCell.m in Sources */,
 				67CC90FE1E28C02D00761832 /* AFSecurityPolicy.m in Sources */,
 				67CC91491E2D091500761832 /* UIImage+Additions.m in Sources */,
 				67CC91461E2D08E300761832 /* UISearchBar+Additions.m in Sources */,
@@ -782,11 +828,13 @@
 				67CC90BA1E28B84100761832 /* FirstItemViewController.m in Sources */,
 				67CC90B81E28B84100761832 /* BaseViewController.m in Sources */,
 				67CC90FB1E28C02D00761832 /* AFHTTPRequestOperationManager.m in Sources */,
+				67C06BBF1E2E051A00EBA5C6 /* MyMeansTableViewCell.m in Sources */,
 				67CC90581E28B7FC00761832 /* ViewController.m in Sources */,
 				67CC90551E28B7FC00761832 /* AppDelegate.m in Sources */,
 				25FFA0801E28D24600869B7E /* UIViewController+ClassName.m in Sources */,
 				67CC90521E28B7FC00761832 /* main.m in Sources */,
 				67CC90C61E28B84100761832 /* PublishViewController.m in Sources */,
+				67C06BDC1E2F5B2C00EBA5C6 /* AccountSecretViewController.m in Sources */,
 				67CC90E11E28BE5700761832 /* MainNavigationController.m in Sources */,
 				67CC90C81E28B84100761832 /* ThirdItemViewController.m in Sources */,
 				67CC90C71E28B84100761832 /* SecondItemViewController.m in Sources */,

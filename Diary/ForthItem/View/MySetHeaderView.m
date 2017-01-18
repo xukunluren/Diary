@@ -24,7 +24,6 @@
         UIView *contentView = [[[NSBundle mainBundle]
                                 loadNibNamed:@"MySetHeaderView" owner:self options:nil] firstObject];
         
-        
         contentView.frame = self.bounds;
         
         [self setSpecalUI];

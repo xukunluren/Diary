@@ -7,24 +7,67 @@
 //
 
 #import "MyMeansViewController.h"
+#import "MyMeansTableViewCell.h"
 
-@interface MyMeansViewController ()
-
+@interface MyMeansViewController ()<UITableViewDelegate,UITableViewDataSource>
 @end
 
 @implementation MyMeansViewController
+{
+    UITableView *_meanTable;
+}
 - (void)viewWillAppear:(BOOL)animated{
-    self.tabBarController.tabBar.hidden = YES;
-    [self setBack];
-    
+     self.navigationController.navigationBarHidden = NO;
     
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor redColor];
-    [self setNavigtionBarTransparent:NO];
+    self.view.backgroundColor = [UIColor colorFromHexCode:@"eeeeee"];
+    [self setBack];
     [self setTitle:@"我的资料"];
+    [self initView];
+    
+}
+
+-(void)initView{
+   
+        
+    _meanTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 20, ScreenWidth, 180) style:UITableViewStylePlain];
+    _meanTable.dataSource = self;
+    _meanTable.delegate = self;
+    _meanTable.backgroundColor = [UIColor colorFromHexCode:@"eeeeee"];
+    [self.view  insertSubview:_meanTable belowSubview:self.navigationController.navigationBar];
+        
+ 
+}
+-(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 60;
+}
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 2;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *allOrderCellIdentifier = @"MyMeans";
+    MyMeansTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:allOrderCellIdentifier];
+    if (cell == nil) {
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"MyMeansTableViewCell" owner:nil options:nil] firstObject];
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    if (indexPath.row == 0) {
+        cell.titleLabel.text = @"我的头像";
+        cell.detailLabel.hidden = YES;
+        cell.headerImage.hidden = NO;
+        return cell;
+    }
+    if (indexPath.row == 1) {
+        cell.titleLabel.text = @"我的昵称";
+        cell.detailLabel.text = @"xukunluren";
+ 
+        return cell;
+    }
+    return nil;
+ 
 }
 
 - (void)didReceiveMemoryWarning {

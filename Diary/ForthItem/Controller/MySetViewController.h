@@ -9,5 +9,8 @@
 #import "BaseViewController.h"
 
 @interface MySetViewController : BaseViewController
-
+@property (nonatomic, strong) UIImageView *imageBG;
+@property (nonatomic, strong) UIView *BGView;
+@property (nonatomic, strong) UIImageView *headImageView;
+@property (nonatomic, strong) UIButton *nameLabel;
 @end
