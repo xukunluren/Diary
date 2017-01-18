@@ -31,10 +31,10 @@
     [super viewDidLoad];
     
     // 添加子控制器
-    [self addChildVc:self.firstItem title:@"第一项" image:@"tabbar_home" selectedImage:@"tabbar_home_selected"];
-    [self addChildVc:self.secondtem title:@"第二项" image:@"tabbar_profile" selectedImage:@"tabbar_profile_selected"];
-    [self addChildVc:self.thirdItem title:@"第三项" image:@"tabbar_profile" selectedImage:@"tabbar_profile_selected"];
-    [self addChildVc:self.fourthItem title:@"我" image:@"tabbar_profile" selectedImage:@"tabbar_profile_selected"];
+    [self addChildVc:self.firstItem title:@"好记" image:@"first" selectedImage:@"first_select"];
+    [self addChildVc:self.secondtem title:@"分组" image:@"second" selectedImage:@"second_select"];
+    [self addChildVc:self.thirdItem title:@"探索" image:@"tansuo" selectedImage:@"tansuo_select"];
+    [self addChildVc:self.fourthItem title:@"我" image:@"wo" selectedImage:@"wo_select"];
     
     MainTabBarControllerTabBar *tabBar = [[MainTabBarControllerTabBar alloc] init];
     tabBar.customDelegate = self;
@@ -56,7 +56,7 @@
     
     /** 设置tabbar title  和 navigationbar title */
     childVc.title = title;
-    [childVc.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor orangeColor]} forState:UIControlStateSelected];
+    [childVc.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:@"12B7F5"]} forState:UIControlStateSelected];
     /** 设置图片 */
     childVc.tabBarItem.image = [UIImage imageNamed:image];
     childVc.tabBarItem.selectedImage = [[UIImage imageNamed:selectedImage] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
