@@ -23,6 +23,8 @@
 @property (strong, nonatomic) UIView *searchHeaderView;
 @property (strong, nonatomic) UIView *searchBackgroudView;
 
+@property (strong, nonatomic) NSMutableArray *dataArray;
+
 @end
 
 @implementation FirstItemViewController
@@ -32,7 +34,7 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor colorFromHexCode:@"eeeeee"];
     
-
+    [self setTitle:@"好记"];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(rightDown)];
     
     self.automaticallyAdjustsScrollViewInsets = false;
@@ -105,7 +107,7 @@
         button.titleLabel.font = [UIFont systemFontOfSize:14.0f];
         [button setTitleColor:[UIColor colorFromHexCode:@"888888"] forState:UIControlStateNormal];
         [button setImage:[UIImage imageNamed:@"btn_sousuo_grey"] forState:UIControlStateNormal];
-        [button setTitle:@"手机号/萌店号/昵称" forState:UIControlStateNormal];
+        [button setTitle:@"搜索" forState:UIControlStateNormal];
         [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
         [button addTarget:self action:@selector(gotoSearch:) forControlEvents:UIControlEventTouchUpInside];
         [_searchHeaderView addSubview:button];
@@ -121,7 +123,7 @@
         _searchBackgroudView.backgroundColor = [UIColor colorFromHexCode:@"f2f2f2"];
         
         UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(5, 10, kScreenWidth-10, kSearchBackgroudViewHeight)];
-        searchBar.placeholder = @"手机号/萌店号/昵称";
+        searchBar.placeholder = @"搜索";
         searchBar.delegate = self;
         [searchBar setBarTintColor:[UIColor colorFromHexCode:@"f2f2f2"]];
         [searchBar setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromHexCode:@"f2f2f2"]]];
@@ -148,6 +150,7 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [[UITableViewCell alloc] init];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor greenColor];
     return cell;
 }
@@ -158,7 +161,7 @@
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
     searchBar.showsCancelButton = YES;
     [searchBar.cancelButton setTitle:@"取消" forState:UIControlStateNormal];
-    [searchBar.cancelButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [searchBar.cancelButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     return YES;
 }
 
