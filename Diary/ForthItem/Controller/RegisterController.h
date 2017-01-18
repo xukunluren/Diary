@@ -8,14 +8,14 @@
 
 #import "BaseViewController.h"
 
-@interface LoginController : BaseViewController
+@interface RegisterController : BaseViewController
 
-@property (weak, nonatomic) IBOutlet UIButton *loginButton;
-@property (weak, nonatomic) IBOutlet UIButton *registerButton;
 - (IBAction)cancelButtonEvent:(id)sender;
 - (IBAction)loginEvent:(id)sender;
 - (IBAction)registerEvent:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *accountNum;
 @property (weak, nonatomic) IBOutlet UITextField *secretNum;
+@property (weak, nonatomic) IBOutlet UIButton *registerButton;
+@property (weak, nonatomic) IBOutlet UIButton *loginButton;
 
 @end

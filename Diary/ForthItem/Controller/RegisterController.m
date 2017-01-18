@@ -6,32 +6,34 @@
 //  Copyright © 2017年 xukun. All rights reserved.
 //
 
-#import "LoginController.h"
-#import "LoginView.h"
 #import "RegisterController.h"
 
-@interface LoginController ()
+
+@interface RegisterController ()
 @property(nonatomic,strong)UIView *loginView;
 @end
 
-@implementation LoginController
+@implementation RegisterController
 
  
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _loginView = [[[NSBundle mainBundle] loadNibNamed:@"LoginView" owner:self options:nil] firstObject];
-    [self initView];
+    _loginView = [[[NSBundle mainBundle] loadNibNamed:@"RegisterView" owner:self options:nil] firstObject];
+    
+    
+  
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_loginView];
+    [self initView];
     
 }
  
-- (void)initView{
-    _loginButton.layer.cornerRadius = 4.0;
+
+-(void)initView{
+    _registerButton.layer.cornerRadius = 4.0;
 }
- 
 -(void)viewWillAppear:(BOOL)animated{
     
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
@@ -48,10 +50,10 @@
 }
 
 - (IBAction)loginEvent:(id)sender {
+
 }
 
 - (IBAction)registerEvent:(id)sender {
-    RegisterController *registerView = [[RegisterController alloc] init];
-    [self.navigationController pushViewController:registerView animated:YES];
-}
+        [self goBack];
+   }
 @end

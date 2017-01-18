@@ -11,6 +11,12 @@
 #import "MySetHeaderView.h"
 #import "MyMeansViewController.h"
 #import "LoginController.h"
+#import "MyHeaderTableViewCell.h"
+#import "AccountSecretViewController.h"
+
+
+const CGFloat BackGroupHeight = 188;
+const CGFloat HeadImageHeight= 80;
 
 @interface MySetViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)MySetHeaderView *settingHeaderNewView;
@@ -23,10 +29,8 @@
     NSMutableArray *listArray;
 }
 -(void)viewWillAppear:(BOOL)animated{
-    
-     
     self.navigationController.navigationBarHidden = YES;
-    }
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initView];
@@ -47,22 +51,52 @@
     return _loginOutView;
 }
 -(void)initData{
-    listArray = [[NSMutableArray alloc] initWithObjects:[NSArray arrayWithObjects:@"我的资料",@"我的点赞",nil],[NSArray arrayWithObjects:@"鼓励我们",@"支持我们",@"账号安全",@"版本信息", nil], nil];
+    listArray = [[NSMutableArray alloc] initWithObjects:[NSArray arrayWithObjects:@" ",nil],[NSArray arrayWithObjects:@"我的资料",@"我的点赞",nil],[NSArray arrayWithObjects:@"鼓励我们",@"支持我们",@"账号安全",@"版本信息", nil], nil];
 }
 
 - (void) initView{
 
     //[self setNavigtionBarTransparent:YES];
-    mySettingTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, -20, ScreenWidth, ScreenHeight - 50) style: UITableViewStyleGrouped];
-    mySettingTableView.maximumZoomScale = 1.3;
-    mySettingTableView.dataSource = self;
-    mySettingTableView.scrollEnabled = NO;
+    mySettingTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStylePlain];
     mySettingTableView.delegate = self;
-    mySettingTableView.backgroundColor = [UIColor colorFromHexCode:@"eeeeee"];
-    mySettingTableView.tableHeaderView = self.settingHeaderNewView;
+    mySettingTableView.dataSource = self;
+    mySettingTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    mySettingTableView.contentInset = UIEdgeInsetsMake(BackGroupHeight, 0, 0, 0);
     [self.view insertSubview:mySettingTableView belowSubview:self.navigationController.navigationBar];
+    
     mySettingTableView.tableFooterView = self.loginOutView;
+    [mySettingTableView setTableHeaderView:[[UIView alloc] initWithFrame:CGRectZero]];
+    _imageBG = [[UIImageView alloc]init];
+    _imageBG.frame = CGRectMake(0, -BackGroupHeight, ScreenWidth, BackGroupHeight + 50);
+    _imageBG.image = [UIImage imageNamed:@"BG.jpg"];
+    [mySettingTableView addSubview:_imageBG];
+    //
+    _BGView = [[UIView alloc]init];
+    _BGView.backgroundColor=[UIColor clearColor];
+    _BGView.frame=CGRectMake(0, -BackGroupHeight, ScreenWidth, BackGroupHeight);
+    
+    [mySettingTableView addSubview:_BGView];
+    
+    //
+    _headImageView=[[UIImageView alloc]init];
+    _headImageView.image=[UIImage imageNamed:@"myheadimage.jpeg"];
+    _headImageView.frame=CGRectMake((ScreenWidth-HeadImageHeight)/2, 40, HeadImageHeight, HeadImageHeight);
+    _headImageView.layer.cornerRadius = HeadImageHeight/2;
+    _headImageView.clipsToBounds = YES;
+    
+    
+    [_BGView addSubview:_headImageView];
+    
+    _nameLabel=[[UIButton alloc]init];
+    [_nameLabel setTitle:@"登录/注册" forState:UIControlStateNormal];
+    [_nameLabel addTarget:self action:@selector(loginEvent) forControlEvents:UIControlEventTouchUpInside];
+    [_nameLabel setContentMode:UIViewContentModeCenter];
+    _nameLabel.frame=CGRectMake((ScreenWidth-HeadImageHeight)/2, CGRectGetMaxY(_headImageView.frame)+10, ScreenWidth, 40);
+    [_nameLabel.titleLabel setFont:[UIFont systemFontOfSize:14.0f]];
+    [_BGView addSubview:_nameLabel];
+    
 
+    
     // 个人中心顶部背景图写死
     [self.settingHeaderNewView.setBackImage setImage:[UIImage imageNamed:@"backgroundImage.png"]];
     
@@ -77,6 +111,16 @@
     return array.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        static NSString *allOrderCellIdentifier = @"MyHeader";
+        MyHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:allOrderCellIdentifier];
+        if (cell == nil) {
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"MyHeaderTableViewCell" owner:nil options:nil] firstObject];
+        }
+        return cell;
+        
+    }
+    
     static NSString *allOrderCellIdentifier = @"allOrderCellIdentifier";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:allOrderCellIdentifier];
     if (!cell) {
@@ -84,8 +128,9 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     [cell.textLabel setFont:[UIFont systemFontOfSize:13.0]];
+    [cell addSubview:[self drawThreadWithFram:CGRectMake(15, 45.5, ScreenWidth-30, 0.5) andColor:[UIColor colorFromHexCode:@"e7e7e7"]]];
     cell.textLabel.text = [[listArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-    if (indexPath.section == 1&& indexPath.row == 3) {
+    if (indexPath.section == 2&& indexPath.row == 3) {
          cell.detailTextLabel.text = @"V1.0";
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -94,38 +139,149 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        return 50;
+    }
+    
     return 46;
 }
 -(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section == 0) {
-        return 20;
+        return 0;
     }
-    return 10;
+    return 5;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 10;
+    return 5;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+   
 
-    if (indexPath.section == 0 && indexPath.row == 0 ) {
+    if (indexPath.section == 1 && indexPath.row == 0 ) {
         MyMeansViewController *means = [[MyMeansViewController alloc] init];
         [self.navigationController pushViewController:means animated:YES];
     }
-    if (indexPath.section == 0 && indexPath.row == 1 ) {
+    if (indexPath.section == 1 && indexPath.row == 1 ) {
         LoginController *means = [[LoginController alloc] init];
         [self.navigationController pushViewController:means animated:YES];
     }
+    if (indexPath.section == 2 && indexPath.row == 2) {
+        AccountSecretViewController *account = [[AccountSecretViewController alloc] init];
+        [self.navigationController pushViewController:account animated:YES];
+    }
 
+}
+
+-(UIView *)drawThreadWithFram:(CGRect)rect andColor:(UIColor *)color{
+    UIView *view = [[UIView alloc] initWithFrame:rect];
+    view.backgroundColor = color;
+    return view;
 }
 - (MySetHeaderView *)settingHeaderNewView{
     if (_settingHeaderNewView == nil)
     {
-        CGRect frame = CGRectMake(0, 0, ScreenWidth, 228);
+        CGRect frame = CGRectMake(0, 0, ScreenWidth, 238);
         _settingHeaderNewView = [[MySetHeaderView alloc] initWithFrame:frame];
        // _settingHeaderNewView.delegate = self;
     }
     return _settingHeaderNewView;
 }
+
+
+
+-(void)loginEvent{
+    LoginController *means = [[LoginController alloc] init];
+    [self.navigationController pushViewController:means animated:YES];
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGFloat yOffset  = scrollView.contentOffset.y;
+    CGFloat xOffset = (yOffset + BackGroupHeight)/2;
+    
+    if (yOffset < -BackGroupHeight) {
+        
+        CGRect rect = _imageBG.frame;
+        rect.origin.y = yOffset;
+        rect.size.height =  -yOffset ;
+        rect.origin.x = xOffset;
+        rect.size.width = ScreenWidth + fabs(xOffset)*2;
+        _imageBG.frame = rect;
+        CGRect HeadImageRect = CGRectMake((ScreenWidth-HeadImageHeight)/2, 40, HeadImageHeight, HeadImageHeight);
+        HeadImageRect.origin.y = _headImageView.frame.origin.y;
+        HeadImageRect.size.height =  HeadImageHeight + fabs(xOffset)*0.5 ;
+        HeadImageRect.origin.x = self.view.center.x - HeadImageRect.size.height/2;
+        HeadImageRect.size.width = HeadImageHeight + fabs(xOffset)*0.5;
+        _headImageView.frame = HeadImageRect;
+        _headImageView.layer.cornerRadius = HeadImageRect.size.height/2;
+        _headImageView.clipsToBounds = YES;
+        
+        CGRect NameRect = CGRectMake((ScreenWidth-HeadImageHeight)/2, CGRectGetMaxY(_headImageView.frame)+5, HeadImageHeight, 20);
+        NameRect.origin.y = CGRectGetMaxY(_headImageView.frame)+5;
+        NameRect.size.height =  40 + fabs(xOffset)*0.5 ;
+        NameRect.size.width = ScreenWidth;
+        NameRect.origin.x = self.view.center.x - NameRect.size.width/2;
+        
+        _nameLabel.titleLabel.font=[UIFont systemFontOfSize:14+fabs(xOffset)*0.2];
+        
+        _nameLabel.frame = NameRect;
+        
+        
+    }else{
+        CGRect HeadImageRect = CGRectMake((ScreenWidth-HeadImageHeight)/2, 40, HeadImageHeight, HeadImageHeight);
+        HeadImageRect.origin.y = _headImageView.frame.origin.y;
+        HeadImageRect.size.height =  HeadImageHeight - fabs(xOffset)*0.5 ;
+        HeadImageRect.origin.x = self.view.center.x - HeadImageRect.size.height/2;
+        HeadImageRect.size.width = HeadImageHeight - fabs(xOffset)*0.5;
+        _headImageView.frame = HeadImageRect;
+        _headImageView.layer.cornerRadius = HeadImageRect.size.height/2;
+        _headImageView.clipsToBounds = YES;
+        
+        CGRect NameRect = CGRectMake((ScreenWidth-HeadImageHeight)/2, CGRectGetMaxY(_headImageView.frame)+5, HeadImageHeight, 20);
+        NameRect.origin.y = CGRectGetMaxY(_headImageView.frame)+5;
+        NameRect.size.height =  40;
+        NameRect.size.width = ScreenWidth;
+        NameRect.origin.x = self.view.center.x - NameRect.size.width/2;
+        
+        _nameLabel.titleLabel.font=[UIFont systemFontOfSize:14-fabs(xOffset)*0.2];
+        
+        _nameLabel.frame = NameRect;
+        
+    }
+    //    titleLabel.alpha=alpha;
+    //    alpha=fabs(alpha);
+    //    alpha=fabs(1-alpha);
+    //    alpha=alpha<0.2? 0:alpha-0.2;
+    //    BGView.alpha=alpha;
+    
+}
+
+
+- (UIImage *)imageWithColor:(UIColor *)color
+{
+    // 描述矩形
+    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    
+    // 开启位图上下文
+    UIGraphicsBeginImageContext(rect.size);
+    // 获取位图上下文
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    // 使用color演示填充上下文
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    
+    // 渲染上下文
+    CGContextFillRect(context, rect);
+    // 从上下文中获取图片
+    UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
+    // 结束上下文
+    UIGraphicsEndImageContext();
+    
+    return theImage;
+}
+
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
