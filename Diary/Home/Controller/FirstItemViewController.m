@@ -9,6 +9,7 @@
 #import "FirstItemViewController.h"
 #import "PublishViewController.h"
 #import "HomePageCell.h"
+#import "HomePageIfNoDataView.h"
 
 
 #define kSearchBackgroudViewHeight 40
@@ -26,6 +27,7 @@
 
 @property (strong, nonatomic) NSMutableArray *dataArray;
 
+
 @end
 
 @implementation FirstItemViewController
@@ -38,8 +40,9 @@
     [self setTitle:@"好记"];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(rightDown)];
     
-    self.automaticallyAdjustsScrollViewInsets = false;
-    //    [self.view addSubview:self.searchBar];
+    /** 自动滚动调整 */
+    self.automaticallyAdjustsScrollViewInsets = NO;
+
     [self.view addSubview:self.diaryListTableView];
     [self.view addSubview:self.searchHeaderView];
 
@@ -139,6 +142,19 @@
     return _searchBackgroudView;
 }
 
+/** 添加弹框*/
+- (void)initAlertController {
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"请注意" message:@"日记一旦删除，将无法找回!" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelButton = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        /** 确定删除日记*/
+    }];
+    [alertVC addAction:cancelButton];
+    [alertVC addAction:okButton];
+    [self presentViewController:alertVC animated:YES completion:nil];
+
+}
+
 
 #pragma mark -------------------------------------------------------------
 #pragma mark UITableViewDataSource && UITableViewDelegate
@@ -155,14 +171,47 @@
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:cellID owner:nil options:nil] firstObject];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.backgroundColor = [UIColor greenColor];
+        cell.backgroundColor = [UIColor whiteColor];
     }
     return cell;
 }
 
+//先要设Cell可编辑
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+//定义编辑样式
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //[tableView setEditing:YES animated:YES];
+    
+    return UITableViewCellEditingStyleDelete;
+}
+
+//进入编辑模式，按下出现的编辑按钮后
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView setEditing:NO animated:YES];
+}
+
+/**
+ *  左滑cell时出现什么按钮
+ */
+- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewRowAction *action1 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+        NSLog(@"点击了删除");
+        [self initAlertController];
+        tableView.editing = NO;
+    }];
+    
+    return @[action1];
+}
 
 #pragma mark -------------------------------------------------------------
-#pragma mark UITableViewDataSource && UITableViewDelegate
+#pragma mark UISearchDelegate
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
     searchBar.showsCancelButton = YES;
     [searchBar.cancelButton setTitle:@"取消" forState:UIControlStateNormal];
@@ -192,4 +241,10 @@
     [self.searchBar becomeFirstResponder];
     [self.view addSubview:self.historyTableView];
 }
+
+#pragma mark -------------------------------------------------------------
+#pragma mark other
+
+
+
 @end
