@@ -13,6 +13,8 @@
 #import "LoginController.h"
 #import "MyHeaderTableViewCell.h"
 #import "AccountSecretViewController.h"
+//#import "Person.h"
+//#import <Realm/Realm.h>
 
 
 const CGFloat BackGroupHeight = 188;
@@ -36,7 +38,36 @@ const CGFloat HeadImageHeight= 80;
     [self initView];
     [self initData];
     
+//    //数据库操作对象
+//    
+//    RLMRealm *realm = [RLMRealm defaultRealm];
+//    
+//    //打开数据库事务
+//    
+//    [realm transactionWithBlock:^(){
+//        
+//        Person* _temp = [[Person alloc] init];
+//        
+//        
+//        
+//        _temp.name = @"kevingao";
+//        
+//        _temp.iD = 44;//计算的当前ID
+//        
+//        _temp.sex = @"male";
+//        
+//        //添加到数据库
+//        
+//        [realm addObject:_temp];
+//        
+//        //提交事务
+//        
+//        [realm commitWriteTransaction];
+//        
+//    }];
+    
 }
+
 
  
 -(UIView*)loginOutView{

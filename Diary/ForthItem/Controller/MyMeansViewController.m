@@ -8,6 +8,8 @@
 
 #import "MyMeansViewController.h"
 #import "MyMeansTableViewCell.h"
+//#import <Realm/Realm.h>
+//#import "Person.h"
 
 @interface MyMeansViewController ()<UITableViewDelegate,UITableViewDataSource>
 @end
@@ -27,8 +29,23 @@
     [self setBack];
     [self setTitle:@"我的资料"];
     [self initView];
+   // [self searchFromRealmData];
     
 }
+
+//-(void)searchFromRealmData{
+//    //获得当前所有数据
+//    
+//    RLMResults* tempArray = [Person allObjects];
+//    
+//    for (Person* model in tempArray) {
+//        
+//        //打印数据
+//        
+//      NSLog(@"ID : %ld, name : %@, age : %@ ",model.iD,model.name,model.sex);
+//        
+//    }
+//}
 
 -(void)initView{
    
