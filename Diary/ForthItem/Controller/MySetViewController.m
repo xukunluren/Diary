@@ -163,6 +163,7 @@ const CGFloat HeadImageHeight= 80;
     cell.textLabel.text = [[listArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     if (indexPath.section == 2&& indexPath.row == 3) {
          cell.detailTextLabel.text = @"V1.0";
+        [cell.detailTextLabel setFont:[UIFont systemFontOfSize:12.0f]];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
    
