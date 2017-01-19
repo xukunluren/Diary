@@ -9,7 +9,7 @@
 #import "MainTabBarController.h"
 #import "FirstItemViewController.h"
 #import "ProfileViewController.h"
-#import "PublishViewController.h"
+#import "EditViewController.h"
 #import "MainNavigationController.h"
 #import "MainTabBarControllerTabBar.h"
 #import "SecondItemViewController.h"
@@ -46,7 +46,7 @@
 // MainTabBarControllerTabBarDelegate 加号按钮代理
 - (void)tabBarDidClickPlusButton:(MainTabBarControllerTabBar *)tabBar
 {
-    PublishViewController *vc = [[PublishViewController alloc] init];
+    EditViewController *vc = [[EditViewController alloc] init];
     [self presentViewController:vc animated:YES completion:nil];
 }
 #pragma mark - event response

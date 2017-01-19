@@ -7,7 +7,7 @@
 //
 
 #import "ThirdItemViewController.h"
-#import "PublishViewController.h"
+#import "EditViewController.h"
 
 @interface ThirdItemViewController ()
 

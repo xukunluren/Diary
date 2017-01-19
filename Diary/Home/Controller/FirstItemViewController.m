@@ -7,7 +7,7 @@
 //
 
 #import "FirstItemViewController.h"
-#import "PublishViewController.h"
+#import "EditViewController.h"
 #import "HomePageCell.h"
 #import "HomePageIfNoDataView.h"
 
@@ -51,7 +51,7 @@
 
 - (void)rightDown
 {
-    PublishViewController *vc = [[PublishViewController alloc] init];
+    EditViewController *vc = [[EditViewController alloc] init];
     
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -174,6 +174,10 @@
         cell.backgroundColor = [UIColor whiteColor];
     }
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"%ld",(long)indexPath.row);
 }
 
 //先要设Cell可编辑

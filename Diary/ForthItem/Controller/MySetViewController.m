@@ -7,7 +7,7 @@
 //
 
 #import "MySetViewController.h"
-#import "PublishViewController.h"
+#import "EditViewController.h"
 #import "MySetHeaderView.h"
 #import "MyMeansViewController.h"
 #import "LoginController.h"

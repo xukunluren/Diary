@@ -7,7 +7,7 @@
 //
 
 #import "SecondItemViewController.h"
-#import "PublishViewController.h"
+#import "EditViewController.h"
 
 @interface SecondItemViewController ()
 
