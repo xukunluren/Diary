@@ -20,4 +20,6 @@
 //基本信息获取
 #define ScreenHeight [[UIScreen mainScreen] bounds].size.height
 #define ScreenWidth [[UIScreen mainScreen] bounds].size.width
+#define KNaviBarHeight self.navigationController.navigationBar.height
+#define KTabBarHeight self.tabBarController.tabBar.height
 #endif /* ConstDefine_h */

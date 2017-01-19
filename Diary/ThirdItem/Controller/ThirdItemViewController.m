@@ -8,20 +8,35 @@
 
 #import "ThirdItemViewController.h"
 #import "EditViewController.h"
+#import "exploreView.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface ThirdItemViewController ()
+
 
 @end
 
 @implementation ThirdItemViewController
+{
+    exploreView *holdView;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    [self initView];
    
 }
-
+-(void)initView{
+    holdView = [[exploreView alloc] initWithFrame:CGRectMake(15, 10+ KNaviBarHeight+20, ScreenWidth-30, ScreenHeight-20-KNaviBarHeight-KTabBarHeight-20)];
+    holdView.layer.shadowOpacity = 0.5;// 阴影透明度
+    holdView.layer.shadowColor = [UIColor blackColor].CGColor;// 阴影的颜色
+    holdView.layer.shadowRadius = 5;// 阴影扩散的范围控制
+    holdView.layer.shadowOffset  = CGSizeMake(2, 2);// 阴影的范围
+    [self.view addSubview:holdView];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
