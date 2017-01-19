@@ -8,6 +8,7 @@
 
 #import "FirstItemViewController.h"
 #import "PublishViewController.h"
+#import "HomePageCell.h"
 
 
 #define kSearchBackgroudViewHeight 40
@@ -146,12 +147,16 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 100;
+    return 64;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [[UITableViewCell alloc] init];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.backgroundColor = [UIColor greenColor];
+    static NSString *cellID = @"HomePageCell";
+    HomePageCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    if (!cell) {
+        cell = [[[NSBundle mainBundle] loadNibNamed:cellID owner:nil options:nil] firstObject];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundColor = [UIColor greenColor];
+    }
     return cell;
 }
 
