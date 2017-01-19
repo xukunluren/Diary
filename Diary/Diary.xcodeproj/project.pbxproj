@@ -11,7 +11,8 @@
 		25FFA0811E28D24600869B7E /* WMFPSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 25FFA07F1E28D24600869B7E /* WMFPSLabel.m */; };
 		586E0AC81E308E720082106E /* HomePageIfNoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 586E0AC61E308E720082106E /* HomePageIfNoDataView.m */; };
 		586E0AC91E308E720082106E /* HomePageIfNoDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 586E0AC71E308E720082106E /* HomePageIfNoDataView.xib */; };
-		58971CEA1E2C69C50055A7E7 /* UIColor+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 58971CE91E2C69C50055A7E7 /* UIColor+FlatUI.m */; };
+		586E0AD61E30B9A80082106E /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 586E0AD11E30B9A80082106E /* EditViewController.m */; };
+		586E0AD71E30B9A80082106E /* UIColor+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 586E0AD41E30B9A80082106E /* UIColor+FlatUI.m */; };
 		58971CEF1E2C6ADA0055A7E7 /* HomePageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58971CED1E2C6ADA0055A7E7 /* HomePageCell.m */; };
 		58971CF01E2C6ADA0055A7E7 /* HomePageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58971CEE1E2C6ADA0055A7E7 /* HomePageCell.xib */; };
 		67C06BBF1E2E051A00EBA5C6 /* MyMeansTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 67C06BBD1E2E051A00EBA5C6 /* MyMeansTableViewCell.m */; };
@@ -83,7 +84,6 @@
 		67CC90C11E28B84100761832 /* make_docu@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 67CC909F1E28B84100761832 /* make_docu@1x.png */; };
 		67CC90C21E28B84100761832 /* make_docu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 67CC90A01E28B84100761832 /* make_docu@2x.png */; };
 		67CC90C31E28B84100761832 /* make_docu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 67CC90A11E28B84100761832 /* make_docu@3x.png */; };
-		67CC90C61E28B84100761832 /* PublishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC90A71E28B84100761832 /* PublishViewController.m */; };
 		67CC90C71E28B84100761832 /* SecondItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC90AD1E28B84100761832 /* SecondItemViewController.m */; };
 		67CC90C81E28B84100761832 /* ThirdItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC90B31E28B84100761832 /* ThirdItemViewController.m */; };
 		67CC90E11E28BE5700761832 /* MainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC90DA1E28BE5700761832 /* MainNavigationController.m */; };
@@ -140,8 +140,10 @@
 		586E0AC51E308E720082106E /* HomePageIfNoDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageIfNoDataView.h; sourceTree = "<group>"; };
 		586E0AC61E308E720082106E /* HomePageIfNoDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageIfNoDataView.m; sourceTree = "<group>"; };
 		586E0AC71E308E720082106E /* HomePageIfNoDataView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomePageIfNoDataView.xib; sourceTree = "<group>"; };
-		58971CE81E2C69C50055A7E7 /* UIColor+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+FlatUI.h"; sourceTree = "<group>"; };
-		58971CE91E2C69C50055A7E7 /* UIColor+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+FlatUI.m"; sourceTree = "<group>"; };
+		586E0AD01E30B9A80082106E /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
+		586E0AD11E30B9A80082106E /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
+		586E0AD31E30B9A80082106E /* UIColor+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+FlatUI.h"; sourceTree = "<group>"; };
+		586E0AD41E30B9A80082106E /* UIColor+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+FlatUI.m"; sourceTree = "<group>"; };
 		58971CEC1E2C6ADA0055A7E7 /* HomePageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageCell.h; sourceTree = "<group>"; };
 		58971CED1E2C6ADA0055A7E7 /* HomePageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageCell.m; sourceTree = "<group>"; };
 		58971CEE1E2C6ADA0055A7E7 /* HomePageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomePageCell.xib; sourceTree = "<group>"; };
@@ -232,8 +234,6 @@
 		67CC909F1E28B84100761832 /* make_docu@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "make_docu@1x.png"; sourceTree = "<group>"; };
 		67CC90A01E28B84100761832 /* make_docu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "make_docu@2x.png"; sourceTree = "<group>"; };
 		67CC90A11E28B84100761832 /* make_docu@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "make_docu@3x.png"; sourceTree = "<group>"; };
-		67CC90A61E28B84100761832 /* PublishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublishViewController.h; sourceTree = "<group>"; };
-		67CC90A71E28B84100761832 /* PublishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublishViewController.m; sourceTree = "<group>"; };
 		67CC90AC1E28B84100761832 /* SecondItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondItemViewController.h; sourceTree = "<group>"; };
 		67CC90AD1E28B84100761832 /* SecondItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondItemViewController.m; sourceTree = "<group>"; };
 		67CC90B21E28B84100761832 /* ThirdItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdItemViewController.h; sourceTree = "<group>"; };
@@ -330,13 +330,47 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		58971CE71E2C69C50055A7E7 /* FlatUIKit */ = {
+		586E0ACD1E30B9A80082106E /* Edit */ = {
 			isa = PBXGroup;
 			children = (
-				58971CE81E2C69C50055A7E7 /* UIColor+FlatUI.h */,
-				58971CE91E2C69C50055A7E7 /* UIColor+FlatUI.m */,
+				586E0ACE1E30B9A80082106E /* ActionUIKit */,
+				586E0ACF1E30B9A80082106E /* Controller */,
+				586E0AD21E30B9A80082106E /* FlatUIKit */,
+				586E0AD51E30B9A80082106E /* untitled folder */,
+			);
+			path = Edit;
+			sourceTree = "<group>";
+		};
+		586E0ACE1E30B9A80082106E /* ActionUIKit */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ActionUIKit;
+			sourceTree = "<group>";
+		};
+		586E0ACF1E30B9A80082106E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				586E0AD01E30B9A80082106E /* EditViewController.h */,
+				586E0AD11E30B9A80082106E /* EditViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		586E0AD21E30B9A80082106E /* FlatUIKit */ = {
+			isa = PBXGroup;
+			children = (
+				586E0AD31E30B9A80082106E /* UIColor+FlatUI.h */,
+				586E0AD41E30B9A80082106E /* UIColor+FlatUI.m */,
 			);
 			path = FlatUIKit;
+			sourceTree = "<group>";
+		};
+		586E0AD51E30B9A80082106E /* untitled folder */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "untitled folder";
 			sourceTree = "<group>";
 		};
 		58971CEB1E2C6A160055A7E7 /* Cell */ = {
@@ -414,6 +448,7 @@
 		67CC90441E28B7FC00761832 = {
 			isa = PBXGroup;
 			children = (
+				586E0ACD1E30B9A80082106E /* Edit */,
 				67C06C6B1E2FA71F00EBA5C6 /* FrameWork */,
 				67CC90E51E28C02D00761832 /* ThirdTools */,
 				67CC90831E28B84100761832 /* Catogory */,
@@ -421,7 +456,6 @@
 				67CC908B1E28B84100761832 /* MySetting */,
 				67CC90911E28B84100761832 /* Home */,
 				67CC90991E28B84100761832 /* ImageResource */,
-				67CC90A41E28B84100761832 /* Publish */,
 				67CC90AA1E28B84100761832 /* SecondItem */,
 				67CC90B01E28B84100761832 /* ThirdItem */,
 				67CC904F1E28B7FC00761832 /* Diary */,
@@ -625,40 +659,6 @@
 				67C06C671E2F71D800EBA5C6 /* nihao@2x.png */,
 			);
 			path = ImageResource;
-			sourceTree = "<group>";
-		};
-		67CC90A41E28B84100761832 /* Publish */ = {
-			isa = PBXGroup;
-			children = (
-				58971CE71E2C69C50055A7E7 /* FlatUIKit */,
-				67CC90A51E28B84100761832 /* Controller */,
-				67CC90A81E28B84100761832 /* Model */,
-				67CC90A91E28B84100761832 /* View */,
-			);
-			path = Publish;
-			sourceTree = "<group>";
-		};
-		67CC90A51E28B84100761832 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				67CC90A61E28B84100761832 /* PublishViewController.h */,
-				67CC90A71E28B84100761832 /* PublishViewController.m */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		67CC90A81E28B84100761832 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		67CC90A91E28B84100761832 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		67CC90AA1E28B84100761832 /* SecondItem */ = {
@@ -991,11 +991,13 @@
 				67CC90FD1E28C02D00761832 /* AFNetworkReachabilityManager.m in Sources */,
 				67CC915D1E2DBE3400761832 /* LoginController.m in Sources */,
 				67CC90B71E28B84100761832 /* UIView+WY.m in Sources */,
+				586E0AD61E30B9A80082106E /* EditViewController.m in Sources */,
 				58971CEF1E2C6ADA0055A7E7 /* HomePageCell.m in Sources */,
 				586E0AC81E308E720082106E /* HomePageIfNoDataView.m in Sources */,
 				67C06BCD1E2F3FD600EBA5C6 /* RegisterController.m in Sources */,
 				67CC90E31E28BE5700761832 /* MainTabBarControllerMidButtonView.m in Sources */,
 				67CC90BB1E28B84100761832 /* ProfileViewController.m in Sources */,
+				586E0AD71E30B9A80082106E /* UIColor+FlatUI.m in Sources */,
 				67CC90E21E28BE5700761832 /* MainTabBarController.m in Sources */,
 				67C06BD81E2F491300EBA5C6 /* MyHeaderTableViewCell.m in Sources */,
 				67CC90FE1E28C02D00761832 /* AFSecurityPolicy.m in Sources */,
@@ -1011,13 +1013,11 @@
 				67CC90551E28B7FC00761832 /* AppDelegate.m in Sources */,
 				25FFA0801E28D24600869B7E /* UIViewController+ClassName.m in Sources */,
 				67CC90521E28B7FC00761832 /* main.m in Sources */,
-				67CC90C61E28B84100761832 /* PublishViewController.m in Sources */,
 				67C06BDC1E2F5B2C00EBA5C6 /* AccountSecretViewController.m in Sources */,
 				67CC90E11E28BE5700761832 /* MainNavigationController.m in Sources */,
 				67CC90C81E28B84100761832 /* ThirdItemViewController.m in Sources */,
 				67CC90C71E28B84100761832 /* SecondItemViewController.m in Sources */,
 				67CC91001E28C02D00761832 /* AFURLRequestSerialization.m in Sources */,
-				58971CEA1E2C69C50055A7E7 /* UIColor+FlatUI.m in Sources */,
 				67CC912C1E2C9CAA00761832 /* BaseView.m in Sources */,
 				67CC90FA1E28C02D00761832 /* AFHTTPRequestOperation.m in Sources */,
 				67CC91651E2DBFB900761832 /* LoginView.m in Sources */,
