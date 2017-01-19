@@ -32,8 +32,8 @@
 -(void)initView{
     holdView = [[exploreView alloc] initWithFrame:CGRectMake(15, 10+ KNaviBarHeight+20, ScreenWidth-30, ScreenHeight-20-KNaviBarHeight-KTabBarHeight-20)];
     holdView.layer.shadowOpacity = 0.5;// 阴影透明度
-    holdView.layer.shadowColor = [UIColor blackColor].CGColor;// 阴影的颜色
-    holdView.layer.shadowRadius = 5;// 阴影扩散的范围控制
+    holdView.layer.shadowColor = [UIColor colorFromHexCode:@"C9C9C9"].CGColor;// 阴影的颜色
+    holdView.layer.shadowRadius = 6;// 阴影扩散的范围控制
     holdView.layer.shadowOffset  = CGSizeMake(2, 2);// 阴影的范围
     [self.view addSubview:holdView];
 }
