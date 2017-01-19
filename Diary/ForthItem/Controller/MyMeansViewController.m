@@ -8,7 +8,7 @@
 
 #import "MyMeansViewController.h"
 #import "MyMeansTableViewCell.h"
-#import <Realm/Realm.h>
+//#import <Realm/Realm.h>
 //#import "Person.h"
 
 @interface MyMeansViewController ()<UITableViewDelegate,UITableViewDataSource>
