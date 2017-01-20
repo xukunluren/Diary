@@ -205,11 +205,7 @@ const CGFloat HeadImageHeight= 80;
 
 }
 
--(UIView *)drawThreadWithFram:(CGRect)rect andColor:(UIColor *)color{
-    UIView *view = [[UIView alloc] initWithFrame:rect];
-    view.backgroundColor = color;
-    return view;
-}
+
 - (MySetHeaderView *)settingHeaderNewView{
     if (_settingHeaderNewView == nil)
     {
