@@ -28,9 +28,14 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)setBack{
-  self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithNorImage:@"navigationbar_back" higImage:@"navigationbar_back_highlighted" targe:self action:@selector(leftDown)];
+- (void)setBackWithImage{
+  self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithNorImage:@"left" higImage:@"leftSelect" targe:self action:@selector(leftDown)];
 }
+
+-(void)setBackWithText:(NSString *)text{
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:text style:UIBarButtonItemStyleDone target:self action:@selector(leftDown)];;
+}
+
 - (void)leftDown
 {
     [self.navigationController popViewControllerAnimated:YES];

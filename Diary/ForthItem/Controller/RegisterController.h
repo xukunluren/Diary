@@ -15,7 +15,8 @@
 - (IBAction)registerEvent:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *accountNum;
 @property (weak, nonatomic) IBOutlet UITextField *secretNum;
-@property (weak, nonatomic) IBOutlet UIButton *registerButton;
-@property (weak, nonatomic) IBOutlet UIButton *loginButton;
+@property (strong, nonatomic) IBOutlet UIButton *registerButton;
+@property (strong, nonatomic) IBOutlet UIButton *loginButton;
+@property (weak, nonatomic) IBOutlet UIView *middleView;
 
 @end

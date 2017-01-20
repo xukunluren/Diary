@@ -10,12 +10,13 @@
 
 @interface LoginController : BaseViewController
 
-@property (weak, nonatomic) IBOutlet UIButton *loginButton;
-@property (weak, nonatomic) IBOutlet UIButton *registerButton;
+@property (strong, nonatomic)  UIButton *loginButton;
+@property (strong, nonatomic)  UIButton *registerButton;
 - (IBAction)cancelButtonEvent:(id)sender;
-- (IBAction)loginEvent:(id)sender;
-- (IBAction)registerEvent:(id)sender;
+//- (IBAction)loginEvent:(id)sender;
+//- (IBAction)registerEvent:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *accountNum;
 @property (weak, nonatomic) IBOutlet UITextField *secretNum;
+@property (weak, nonatomic) IBOutlet UIView *middleView;
 
 @end

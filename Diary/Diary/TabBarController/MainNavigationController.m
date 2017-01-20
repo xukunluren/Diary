@@ -47,7 +47,7 @@
        // viewController.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithNorImage:@"navigationbar_back" higImage:@"navigationbar_back_highlighted" targe:self action:@selector(leftDown)];
         
         /** right bar button item */
-        viewController.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithNorImage:@"navigationbar_more" higImage:@"navigationbar_more_highlighted" targe:self action:@selector(rightDown)];
+       // viewController.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithNorImage:@"navigationbar_more" higImage:@"navigationbar_more_highlighted" targe:self action:@selector(rightDown)];
     }
     
     if ([self respondsToSelector:@selector(interactivePopGestureRecognizer)]) {

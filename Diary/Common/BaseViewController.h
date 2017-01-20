@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface BaseViewController : UIViewController
-
--(void)setBack;
+//返回上级页面分别以图标和文字两种样式
+-(void)setBackWithImage;
+-(void)setBackWithText:(NSString*)text;
 //设置导航条是否透明
 -(void)setNavigtionBarTransparent:(BOOL)_transparent;
 -(void)goBack;

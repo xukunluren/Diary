@@ -26,7 +26,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor colorFromHexCode:@"eeeeee"];
-    [self setBack];
+    [self setBackWithImage];
     [self setTitle:@"我的资料"];
     [self initView];
    // [self searchFromRealmData];
