@@ -22,4 +22,11 @@
 #define ScreenWidth [[UIScreen mainScreen] bounds].size.width
 #define KNaviBarHeight self.navigationController.navigationBar.height
 #define KTabBarHeight self.tabBarController.tabBar.height
+
+/** 动态计算textview的高度 */
+#define VD_MULTILINE_TEXTSIZE(text, font, maxSize, mode) [text length] > 0 ? [text \
+boundingRectWithSize:maxSize options:(NSStringDrawingUsesLineFragmentOrigin) \
+attributes:@{NSFontAttributeName:font} context:nil].size : CGSizeZero;
+
+
 #endif /* ConstDefine_h */

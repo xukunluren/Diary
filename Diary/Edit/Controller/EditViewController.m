@@ -7,6 +7,7 @@
 //
 
 #import "EditViewController.h"
+#import "AdaptionTextView.h"
 
 @interface EditViewController ()
 
@@ -18,12 +19,15 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
+    AdaptionTextView *textView = [[AdaptionTextView alloc] initWithFrame:CGRectMake(50, 100, 200, 50)];
+    textView.font = [UIFont systemFontOfSize:14];
+    [self.view addSubview:textView];
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-}
+//- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+//{
+//    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+//}
 
 
 @end
