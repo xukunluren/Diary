@@ -9,6 +9,7 @@
 #import "FirstItemViewController.h"
 #import "EditViewController.h"
 #import "HomePageCell.h"
+#import "RichTextViewController.h"
 #import "HomePageIfNoDataView.h"
 
 
@@ -48,7 +49,23 @@
 
 - (void)rightDown
 {
-    EditViewController *vc = [[EditViewController alloc] init];
+    
+    RichTextViewController * vc=[RichTextViewController ViewController];
+    vc.finished=^(id content){
+        NSArray * arr=(NSArray *)content;
+        NSLog(@"count--%lu",(unsigned long)arr.count);
+        NSLog(@"arr--%@",arr);
+        if (arr.count>0) {
+            
+            for (NSDictionary * dict in arr) {
+                NSLog(@"title---%@",[dict objectForKey:@"title"]);
+                
+                //注意这里的lineSpace，有时候取不到
+                
+            }
+        }
+    };
+   // EditViewController *vc = [[EditViewController alloc] init];
     
     [self.navigationController pushViewController:vc animated:YES];
 }

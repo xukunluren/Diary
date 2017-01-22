@@ -8,6 +8,7 @@
 
 #import "EditViewController.h"
 #import "AdaptionTextView.h"
+#import "RichTextViewController.h"
 
 @interface EditViewController ()
 
@@ -17,11 +18,28 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self setBackWithText:@"取消"];
     self.view.backgroundColor = [UIColor whiteColor];
-    AdaptionTextView *textView = [[AdaptionTextView alloc] initWithFrame:CGRectMake(50, 100, 200, 50)];
-    textView.font = [UIFont systemFontOfSize:14];
-    [self.view addSubview:textView];
+    
+    
+    RichTextViewController * vc=[RichTextViewController ViewController];
+    vc.finished=^(id content){
+        NSArray * arr=(NSArray *)content;
+        NSLog(@"count--%lu",(unsigned long)arr.count);
+        NSLog(@"arr--%@",arr);
+        if (arr.count>0) {
+            
+            for (NSDictionary * dict in arr) {
+                NSLog(@"title---%@",[dict objectForKey:@"title"]);
+                
+                //注意这里的lineSpace，有时候取不到
+                
+            }
+        }
+    };
+    
+    
+    [self.view addSubview:vc.view];
 }
 
 //- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
