@@ -22,6 +22,9 @@
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"12B7F5"];
     [self.navigationController.navigationBar setBarStyle:UIBarStyleBlackTranslucent];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    
+    /**  防止系统自动调节UI的位置 */
+    self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
 -(void)goBack{

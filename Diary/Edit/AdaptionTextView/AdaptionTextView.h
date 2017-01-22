@@ -10,4 +10,6 @@
 
 @interface AdaptionTextView : UITextView
 
+- (instancetype)initWithFrame:(CGRect)frame;
+
 @end

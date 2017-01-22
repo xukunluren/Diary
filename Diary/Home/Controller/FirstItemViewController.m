@@ -40,9 +40,6 @@
     [self setTitle:@"好记"];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(rightDown)];
     
-    /** 自动滚动调整 */
-    self.automaticallyAdjustsScrollViewInsets = NO;
-
     [self.view addSubview:self.diaryListTableView];
     [self.view addSubview:self.searchHeaderView];
 
