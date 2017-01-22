@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface MyMeansViewController : BaseViewController
-
+@property (nonatomic,copy)NSString *nameString;
 @end

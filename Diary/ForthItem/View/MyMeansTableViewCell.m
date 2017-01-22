@@ -13,6 +13,15 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    _headerImage.layer.borderWidth = 1.0;
+    
+    // _headImageView.image = [UIImage imageNamed:@"personcenterbg.png"];
+    
+    _headerImage.layer.borderColor = [UIColor whiteColor].CGColor;
+    
+    _headerImage.layer.masksToBounds =YES;
+    
+    _headerImage.layer.cornerRadius = _headerImage.frame.size.height*0.5;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

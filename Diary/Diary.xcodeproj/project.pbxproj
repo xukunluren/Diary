@@ -66,6 +66,13 @@
 		67C06C7D1E30C80700EBA5C6 /* exploreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 67C06C7C1E30C80700EBA5C6 /* exploreView.m */; };
 		67C06C801E30CEA800EBA5C6 /* exploreBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 67C06C7F1E30CEA800EBA5C6 /* exploreBottomView.m */; };
 		67C06C831E30D6EE00EBA5C6 /* tansuoBottomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 67C06C821E30D6EE00EBA5C6 /* tansuoBottomButton.m */; };
+		67C06C931E31F20700EBA5C6 /* STConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 67C06C871E31F20700EBA5C6 /* STConst.m */; };
+		67C06C941E31F20700EBA5C6 /* STUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 67C06C891E31F20700EBA5C6 /* STUI.m */; };
+		67C06C951E31F20700EBA5C6 /* UIImage+ST.m in Sources */ = {isa = PBXBuildFile; fileRef = 67C06C8B1E31F20700EBA5C6 /* UIImage+ST.m */; };
+		67C06C961E31F20700EBA5C6 /* UIView+ST.m in Sources */ = {isa = PBXBuildFile; fileRef = 67C06C8D1E31F20700EBA5C6 /* UIView+ST.m */; };
+		67C06C971E31F20700EBA5C6 /* STPhotoKitController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67C06C901E31F20700EBA5C6 /* STPhotoKitController.m */; };
+		67C06C981E31F20700EBA5C6 /* UIImagePickerController+ST.m in Sources */ = {isa = PBXBuildFile; fileRef = 67C06C921E31F20700EBA5C6 /* UIImagePickerController+ST.m */; };
+		67C06C9B1E31FF6400EBA5C6 /* alterNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67C06C9A1E31FF6400EBA5C6 /* alterNameViewController.m */; };
 		67CC90521E28B7FC00761832 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC90511E28B7FC00761832 /* main.m */; };
 		67CC90551E28B7FC00761832 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC90541E28B7FC00761832 /* AppDelegate.m */; };
 		67CC90581E28B7FC00761832 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC90571E28B7FC00761832 /* ViewController.m */; };
@@ -210,6 +217,21 @@
 		67C06C7F1E30CEA800EBA5C6 /* exploreBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = exploreBottomView.m; sourceTree = "<group>"; };
 		67C06C811E30D6EE00EBA5C6 /* tansuoBottomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tansuoBottomButton.h; sourceTree = "<group>"; };
 		67C06C821E30D6EE00EBA5C6 /* tansuoBottomButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tansuoBottomButton.m; sourceTree = "<group>"; };
+		67C06C851E31F20700EBA5C6 /* STConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STConfig.h; sourceTree = "<group>"; };
+		67C06C861E31F20700EBA5C6 /* STConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STConst.h; sourceTree = "<group>"; };
+		67C06C871E31F20700EBA5C6 /* STConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STConst.m; sourceTree = "<group>"; };
+		67C06C881E31F20700EBA5C6 /* STUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUI.h; sourceTree = "<group>"; };
+		67C06C891E31F20700EBA5C6 /* STUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUI.m; sourceTree = "<group>"; };
+		67C06C8A1E31F20700EBA5C6 /* UIImage+ST.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ST.h"; sourceTree = "<group>"; };
+		67C06C8B1E31F20700EBA5C6 /* UIImage+ST.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ST.m"; sourceTree = "<group>"; };
+		67C06C8C1E31F20700EBA5C6 /* UIView+ST.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ST.h"; sourceTree = "<group>"; };
+		67C06C8D1E31F20700EBA5C6 /* UIView+ST.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ST.m"; sourceTree = "<group>"; };
+		67C06C8F1E31F20700EBA5C6 /* STPhotoKitController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPhotoKitController.h; sourceTree = "<group>"; };
+		67C06C901E31F20700EBA5C6 /* STPhotoKitController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPhotoKitController.m; sourceTree = "<group>"; };
+		67C06C911E31F20700EBA5C6 /* UIImagePickerController+ST.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImagePickerController+ST.h"; sourceTree = "<group>"; };
+		67C06C921E31F20700EBA5C6 /* UIImagePickerController+ST.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImagePickerController+ST.m"; sourceTree = "<group>"; };
+		67C06C991E31FF6400EBA5C6 /* alterNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = alterNameViewController.h; sourceTree = "<group>"; };
+		67C06C9A1E31FF6400EBA5C6 /* alterNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = alterNameViewController.m; sourceTree = "<group>"; };
 		67CC904D1E28B7FC00761832 /* Diary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Diary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67CC90511E28B7FC00761832 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		67CC90531E28B7FC00761832 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -459,6 +481,33 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		67C06C841E31F20600EBA5C6 /* STConfig */ = {
+			isa = PBXGroup;
+			children = (
+				67C06C851E31F20700EBA5C6 /* STConfig.h */,
+				67C06C861E31F20700EBA5C6 /* STConst.h */,
+				67C06C871E31F20700EBA5C6 /* STConst.m */,
+				67C06C881E31F20700EBA5C6 /* STUI.h */,
+				67C06C891E31F20700EBA5C6 /* STUI.m */,
+				67C06C8A1E31F20700EBA5C6 /* UIImage+ST.h */,
+				67C06C8B1E31F20700EBA5C6 /* UIImage+ST.m */,
+				67C06C8C1E31F20700EBA5C6 /* UIView+ST.h */,
+				67C06C8D1E31F20700EBA5C6 /* UIView+ST.m */,
+			);
+			path = STConfig;
+			sourceTree = "<group>";
+		};
+		67C06C8E1E31F20700EBA5C6 /* STPhotoKit */ = {
+			isa = PBXGroup;
+			children = (
+				67C06C8F1E31F20700EBA5C6 /* STPhotoKitController.h */,
+				67C06C901E31F20700EBA5C6 /* STPhotoKitController.m */,
+				67C06C911E31F20700EBA5C6 /* UIImagePickerController+ST.h */,
+				67C06C921E31F20700EBA5C6 /* UIImagePickerController+ST.m */,
+			);
+			path = STPhotoKit;
+			sourceTree = "<group>";
+		};
 		67CC90441E28B7FC00761832 = {
 			isa = PBXGroup;
 			children = (
@@ -589,6 +638,8 @@
 				67CC908E1E28B84100761832 /* MySetViewController.m */,
 				67CC914A1E2D09D200761832 /* MyMeansViewController.h */,
 				67CC914B1E2D09D200761832 /* MyMeansViewController.m */,
+				67C06C991E31FF6400EBA5C6 /* alterNameViewController.h */,
+				67C06C9A1E31FF6400EBA5C6 /* alterNameViewController.m */,
 				67C06BDA1E2F5B2C00EBA5C6 /* AccountSecretViewController.h */,
 				67C06BDB1E2F5B2C00EBA5C6 /* AccountSecretViewController.m */,
 			);
@@ -765,6 +816,8 @@
 		67CC90E51E28C02D00761832 /* ThirdTools */ = {
 			isa = PBXGroup;
 			children = (
+				67C06C841E31F20600EBA5C6 /* STConfig */,
+				67C06C8E1E31F20700EBA5C6 /* STPhotoKit */,
 				67CC90E61E28C02D00761832 /* AFNetworking */,
 			);
 			path = ThirdTools;
@@ -1005,8 +1058,10 @@
 				67CC90FF1E28C02D00761832 /* AFURLConnectionOperation.m in Sources */,
 				67CC91351E2C9D6100761832 /* MySetHeaderView.m in Sources */,
 				67CC914C1E2D09D200761832 /* MyMeansViewController.m in Sources */,
+				67C06C961E31F20700EBA5C6 /* UIView+ST.m in Sources */,
 				67CC91281E2C6BE600761832 /* UIColor+pas.m in Sources */,
 				67CC90E41E28BE5700761832 /* MainTabBarControllerTabBar.m in Sources */,
+				67C06C981E31F20700EBA5C6 /* UIImagePickerController+ST.m in Sources */,
 				67CC90FC1E28C02D00761832 /* AFHTTPSessionManager.m in Sources */,
 				67CC90FD1E28C02D00761832 /* AFNetworkReachabilityManager.m in Sources */,
 				67CC915D1E2DBE3400761832 /* LoginController.m in Sources */,
@@ -1017,12 +1072,16 @@
 				586E0AC81E308E720082106E /* HomePageIfNoDataView.m in Sources */,
 				67C06BCD1E2F3FD600EBA5C6 /* RegisterController.m in Sources */,
 				67CC90E31E28BE5700761832 /* MainTabBarControllerMidButtonView.m in Sources */,
+				67C06C951E31F20700EBA5C6 /* UIImage+ST.m in Sources */,
 				67CC90BB1E28B84100761832 /* ProfileViewController.m in Sources */,
+				67C06C941E31F20700EBA5C6 /* STUI.m in Sources */,
 				586E0AD71E30B9A80082106E /* UIColor+FlatUI.m in Sources */,
+				67C06C931E31F20700EBA5C6 /* STConst.m in Sources */,
 				67CC90E21E28BE5700761832 /* MainTabBarController.m in Sources */,
 				67C06BD81E2F491300EBA5C6 /* MyHeaderTableViewCell.m in Sources */,
 				67CC90FE1E28C02D00761832 /* AFSecurityPolicy.m in Sources */,
 				67CC91491E2D091500761832 /* UIImage+Additions.m in Sources */,
+				67C06C971E31F20700EBA5C6 /* STPhotoKitController.m in Sources */,
 				67C06C801E30CEA800EBA5C6 /* exploreBottomView.m in Sources */,
 				67CC91461E2D08E300761832 /* UISearchBar+Additions.m in Sources */,
 				25FFA0811E28D24600869B7E /* WMFPSLabel.m in Sources */,
@@ -1033,6 +1092,7 @@
 				67C06BBF1E2E051A00EBA5C6 /* MyMeansTableViewCell.m in Sources */,
 				67CC90581E28B7FC00761832 /* ViewController.m in Sources */,
 				67CC90551E28B7FC00761832 /* AppDelegate.m in Sources */,
+				67C06C9B1E31FF6400EBA5C6 /* alterNameViewController.m in Sources */,
 				67C06C7D1E30C80700EBA5C6 /* exploreView.m in Sources */,
 				25FFA0801E28D24600869B7E /* UIViewController+ClassName.m in Sources */,
 				67CC90521E28B7FC00761832 /* main.m in Sources */,
