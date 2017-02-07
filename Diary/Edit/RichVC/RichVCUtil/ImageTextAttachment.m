@@ -25,4 +25,6 @@
     UIGraphicsEndImageContext();
     return scaledImage;
 }
+
+
 @end
