@@ -144,7 +144,7 @@
     
     eButton.contentHorizontalAlignment =UIControlContentHorizontalAlignmentLeft;
     
-    [eButton setTitleEdgeInsets:UIEdgeInsetsMake(5,-5, 0,0)];
+    [eButton setTitleEdgeInsets:UIEdgeInsetsMake(5,5, 0,0)];
     
     [eButton setImageEdgeInsets:UIEdgeInsetsMake(5,self.view.bounds.size.width - 25, 0,0)];
     
@@ -167,9 +167,15 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:allOrderCellIdentifier];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
+    
+    NSDictionary *dic = [_dataArray objectAtIndex:indexPath.section];
+    NSArray *array = [dic objectForKey:DIC_ARARRY];
+    
+    NSInteger row = indexPath.row;
+    
     [cell.textLabel setFont:[UIFont systemFontOfSize:13.0]];
     [cell addSubview:[self drawThreadWithFram:CGRectMake(15, 45.5, ScreenWidth-30, 0.5) andColor:[UIColor colorFromHexCode:@"e7e7e7"]]];
-    cell.textLabel.text = @"文本日记";
+    cell.textLabel.text = [array objectAtIndex:row];
     [cell.textLabel setFont:[UIFont systemFontOfSize:14.0f]];
     cell.detailTextLabel.text = @"12";
     [cell.detailTextLabel setFont:[UIFont systemFontOfSize:12.0f]];
@@ -214,4 +220,5 @@
     return expanded;
 
 }
+
 @end
