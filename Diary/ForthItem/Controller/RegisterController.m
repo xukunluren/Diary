@@ -19,13 +19,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _loginView = [[[NSBundle mainBundle] loadNibNamed:@"RegisterView" owner:self options:nil] firstObject];
-    
-    
-  
-    // Do any additional setup after loading the view.
+       // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:_loginView];
+    
     [self initView];
     
 }

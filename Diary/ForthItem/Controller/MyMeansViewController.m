@@ -64,8 +64,6 @@ typedef NS_ENUM(NSInteger, PhotoType)
 //}
 
 -(void)initView{
-   
-   
     headerImage = [UIImage imageNamed:@"user_icon_default.png"];
     _meanTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 20 + KTopHeight , ScreenWidth, 120) style:UITableViewStylePlain];
     _meanTable.scrollEnabled = NO;

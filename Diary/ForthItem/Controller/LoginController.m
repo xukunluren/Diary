@@ -20,16 +20,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _loginView = [[[NSBundle mainBundle] loadNibNamed:@"LoginView" owner:self options:nil] firstObject];
-    _loginView.frame = self.view.frame;
+    
     [self initView];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:_loginView];
+ 
     
 }
  
 - (void)initView{
+    
+    
+    
     
     _loginButton = [[UIButton alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_middleView.frame)+30, self.view.frame.size.width-20, 45)];
     [_loginButton setTitle:@"登录" forState:UIControlStateNormal];
