@@ -11,7 +11,12 @@
 #import "RegisterController.h"
 
 @interface LoginController ()
+
 @property(nonatomic,strong)UIView *loginView;
+
+@property (nonatomic, strong) UITextField *IDtextField;
+@property (nonatomic, strong) UITextField *codeTextField;
+
 @end
 
 @implementation LoginController
@@ -22,18 +27,56 @@
     
     
     [self initView];
-    // Do any additional setup after loading the view.
+    
+    [self addBackButton];
+    
     self.view.backgroundColor = [UIColor whiteColor];
  
     
 }
- 
+
+
+#pragma mark --------------------------------------------------------------------------
+#pragma mark - init
 - (void)initView{
     
+    UILabel *titleLabel = [[UILabel alloc] init];
+    titleLabel.frame = CGRectMake(0, 115, kScreenWidth, 30);
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.text = @"欢迎使用好记";
+    titleLabel.font = [UIFont systemFontOfSize:20];
+    [self.view addSubview:titleLabel];
+    
+    UILabel *titleIDLabel = [[UILabel alloc] init];
+    titleIDLabel.frame = CGRectMake(20, CGRectGetMaxY(titleLabel.frame)+65, 35, 20);
+    titleIDLabel.font = [UIFont systemFontOfSize:15];
+    titleIDLabel.text = @"账号";
+    titleIDLabel.textColor = [UIColor blackColor];
+    [self.view addSubview:titleIDLabel];
+    
+    _IDtextField = [[UITextField alloc] init];
+    _IDtextField.font = [UIFont systemFontOfSize:15];
+    _IDtextField.placeholder = @"请输入邮箱";
+    _IDtextField.frame = CGRectMake(CGRectGetMaxX(titleIDLabel.frame)+15, titleIDLabel.frame.origin.y, kScreenWidth-100, 20);
+    [self.view addSubview:_IDtextField];
     
     
+    UILabel *titleCodeLabel = [[UILabel alloc] init];
+    titleCodeLabel.frame = CGRectMake(20, CGRectGetMaxY(titleIDLabel.frame)+30, 35, 20);
+    titleCodeLabel.font = [UIFont systemFontOfSize:15];
+    titleCodeLabel.text = @"密码";
+    titleCodeLabel.textColor = [UIColor blackColor];
+    [self.view addSubview:titleCodeLabel];
     
-    _loginButton = [[UIButton alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_middleView.frame)+30, self.view.frame.size.width-20, 45)];
+    _codeTextField = [[UITextField alloc] init];
+    _codeTextField.font = [UIFont systemFontOfSize:15];
+    _codeTextField.placeholder = @"请输入密码";
+    _codeTextField.frame = CGRectMake(CGRectGetMaxX(titleCodeLabel.frame)+15, titleCodeLabel.frame.origin.y, kScreenWidth-100, 20);
+    [self.view addSubview:_codeTextField];
+
+    
+
+    _loginButton = [[UIButton alloc] initWithFrame:CGRectMake(10, kScreenHeight/2, self.view.frame.size.width-20, 45)];
     [_loginButton setTitle:@"登录" forState:UIControlStateNormal];
     [_loginButton setBackgroundColor:[UIColor colorFromHexCode:@"12B7F5"]];
     [_loginButton addTarget:self action:@selector(loginEvent:) forControlEvents:UIControlEventTouchUpInside];
@@ -53,27 +96,30 @@
     _loginButton.layer.cornerRadius = 4.0;
     _loginView.frame = CGRectMake(10, 0, ScreenWidth-20, 45);
     
-    [self.middleView addSubview:[self drawThreadWithFram:CGRectMake(20, CGRectGetMaxY(_accountNum.frame)+5, ScreenWidth-40, 0.5) andColor:[UIColor colorFromHexCode:@"e7e7e7"]]];
-     [self.middleView addSubview:[self drawThreadWithFram:CGRectMake(20, CGRectGetMaxY(_secretNum.frame)+5, ScreenWidth-40, 0.5) andColor:[UIColor colorFromHexCode:@"e7e7e7"]]];
-    
-    
-    
-    
-    
+
 }
- 
+
+- (void)addBackButton {
+    
+    CGRect rect = CGRectMake(5, 20, 46, 30);
+    UIButton *btn = [[UIButton alloc] initWithFrame:rect];
+    [btn addTarget:self action:@selector(cancelButtonEvent:) forControlEvents:UIControlEventTouchUpInside];
+    [btn setTitle:@"取消" forState:UIControlStateNormal];
+    btn.titleLabel.font = [UIFont systemFontOfSize:15];
+    [btn setTitleColor:[UIColor colorFromHexCode:@"#12B7F5"] forState:UIControlStateNormal];
+    [self.view addSubview:btn];
+}
+
+
+
 -(void)viewWillAppear:(BOOL)animated{
     
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 
-- (IBAction)cancelButtonEvent:(id)sender {
+- (void)cancelButtonEvent:(id)sender {
     [self goBack];
 }
 
