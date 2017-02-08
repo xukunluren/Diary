@@ -98,7 +98,7 @@ const CGFloat HeadImageHeight= 80;
     mySettingTableView.tableFooterView = self.loginOutView;
     [mySettingTableView setTableHeaderView:[[UIView alloc] initWithFrame:CGRectZero]];
     _imageBG = [[UIImageView alloc]init];
-    _imageBG.frame = CGRectMake(0, -BackGroupHeight, ScreenWidth, BackGroupHeight + 50);
+    _imageBG.frame = CGRectMake(0, -BackGroupHeight, ScreenWidth, BackGroupHeight);
     _imageBG.image = [UIImage imageNamed:@"BG.jpg"];
     [mySettingTableView addSubview:_imageBG];
     //
@@ -122,7 +122,7 @@ const CGFloat HeadImageHeight= 80;
     [_nameLabel setTitle:@"登录/注册" forState:UIControlStateNormal];
     [_nameLabel addTarget:self action:@selector(loginEvent) forControlEvents:UIControlEventTouchUpInside];
     [_nameLabel setContentMode:UIViewContentModeCenter];
-    _nameLabel.frame=CGRectMake((ScreenWidth-HeadImageHeight)/2, CGRectGetMaxY(_headImageView.frame)+10, ScreenWidth, 40);
+    _nameLabel.frame=CGRectMake(0, CGRectGetMaxY(_headImageView.frame)+10, ScreenWidth, 40);
     [_nameLabel.titleLabel setFont:[UIFont systemFontOfSize:14.0f]];
     [_BGView addSubview:_nameLabel];
     
@@ -245,7 +245,7 @@ const CGFloat HeadImageHeight= 80;
         _headImageView.layer.cornerRadius = HeadImageRect.size.height/2;
         _headImageView.clipsToBounds = YES;
         
-        CGRect NameRect = CGRectMake((ScreenWidth-HeadImageHeight)/2, CGRectGetMaxY(_headImageView.frame)+5, HeadImageHeight, 20);
+        CGRect NameRect = CGRectMake(0, CGRectGetMaxY(_headImageView.frame)+5, HeadImageHeight, 20);
         NameRect.origin.y = CGRectGetMaxY(_headImageView.frame)+5;
         NameRect.size.height =  40 + fabs(xOffset)*0.5 ;
         NameRect.size.width = ScreenWidth;
@@ -266,7 +266,7 @@ const CGFloat HeadImageHeight= 80;
         _headImageView.layer.cornerRadius = HeadImageRect.size.height/2;
         _headImageView.clipsToBounds = YES;
         
-        CGRect NameRect = CGRectMake((ScreenWidth-HeadImageHeight)/2, CGRectGetMaxY(_headImageView.frame)+5, HeadImageHeight, 20);
+        CGRect NameRect = CGRectMake(0, CGRectGetMaxY(_headImageView.frame)+5, HeadImageHeight, 20);
         NameRect.origin.y = CGRectGetMaxY(_headImageView.frame)+5;
         NameRect.size.height =  40;
         NameRect.size.width = ScreenWidth;

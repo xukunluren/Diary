@@ -65,14 +65,14 @@ typedef NS_ENUM(NSInteger, PhotoType)
 
 -(void)initView{
    
+   
     headerImage = [UIImage imageNamed:@"user_icon_default.png"];
-    _meanTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 20, ScreenWidth, 180) style:UITableViewStylePlain];
+    _meanTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 20 + KTopHeight , ScreenWidth, 120) style:UITableViewStylePlain];
+    _meanTable.scrollEnabled = NO;
     _meanTable.dataSource = self;
     _meanTable.delegate = self;
     _meanTable.backgroundColor = [UIColor colorFromHexCode:@"eeeeee"];
     [self.view  insertSubview:_meanTable belowSubview:self.navigationController.navigationBar];
-        
- 
 }
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 60;
