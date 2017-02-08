@@ -29,12 +29,12 @@
 @interface RichTextViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate,UITextViewDelegate,DPImagePickerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *upkeyboardView;
 @property (weak, nonatomic)   UITextView *textView;
-@property (weak, nonatomic) IBOutlet UIView *openOrNotView;
+
 @property (nonatomic, weak) NSTimer *timerOf60Second;
 @property (weak, nonatomic)   UISlider *imageSizeSlider;
 @property (weak, nonatomic)  NSLayoutConstraint *bottomConstraint;
 @property (weak, nonatomic)  UIImageView *imageV;
-@property (weak, nonatomic) IBOutlet UISwitch *switchButton;
+
 @property (strong, nonatomic)  DPImagePickerVC * Viewasd;
 @property (strong, nonatomic)  UIImageView *audioImage;
 @property (strong, nonatomic)  UIButton *audioButton;
@@ -76,15 +76,32 @@
     [self setInitLocation];
 }
 - (void)viewWillAppear:(BOOL)animated{
+    _upkeyboardView.hidden = YES;
+    [self setOpenOrNotView];
     
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
-    view.backgroundColor = [UIColor redColor];
-    [_upkeyboardView addSubview:view];
+}
+-(void)setOpenOrNotView{
+    UIView *openOrNot = [[UIView alloc] initWithFrame:CGRectMake(-1, 13, ScreenWidth+1, 30)];
+    openOrNot.layer.borderWidth = 0.5;
+    openOrNot.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    [_upkeyboardView addSubview:openOrNot];
+    UILabel *textlabel = [[UILabel alloc] initWithFrame:CGRectMake(7, 3, ScreenWidth*0.5-6, openOrNot.frame.size.height-6)];
+    textlabel.text = @"公开这篇日记";
+    [textlabel setFont:[UIFont boldSystemFontOfSize:10.0]];
+    [textlabel setTextColor:[UIColor blackColor]];
+    [openOrNot addSubview:textlabel];
+    
+    UISwitch *switchButton = [[UISwitch alloc] initWithFrame:CGRectMake(ScreenWidth-50, 0,50,0 )];
+     switchButton.transform = CGAffineTransformMakeScale(0.7, 0.65);
+     switchButton.onTintColor = [UIColor colorWithHexString:@"12B7F5"];
+    [switchButton setOn:YES];
+    [switchButton addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
+    [openOrNot addSubview:switchButton];
+    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     _hiddleKeyBoard = NO;
-    _switchButton.frame = CGRectMake(ScreenWidth-69, 10, 60, 10);
     [self setBackWithText:@"取消"];
     //Init text font
     //可变数组初始化
@@ -320,6 +337,7 @@
 - (void)textViewDidBeginEditing:(UITextView *)textView{
  
     [_textView becomeFirstResponder];
+    _upkeyboardView.hidden = NO;
 }
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
@@ -731,6 +749,17 @@
 }
 
 
+
+-(void)switchAction:(id)sender
+{
+    UISwitch *switchButton = (UISwitch*)sender;
+    BOOL isButtonOn = [switchButton isOn];
+    if (isButtonOn) {
+        NSLog(@"公开这篇日记");
+    }else {
+        NSLog(@"不公开这篇日记");
+    }
+}
 #pragma mark - image picker delegte
 
 

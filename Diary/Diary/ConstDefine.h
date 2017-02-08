@@ -20,8 +20,14 @@
 //基本信息获取
 #define ScreenHeight [[UIScreen mainScreen] bounds].size.height
 #define ScreenWidth [[UIScreen mainScreen] bounds].size.width
+//导航条高度
 #define KNaviBarHeight self.navigationController.navigationBar.height
+//底部tab高度
 #define KTabBarHeight self.tabBarController.tabBar.height
+//电池状态栏高度
+#define KStustus [[UIApplication sharedApplication] statusBarFrame].size.height
+//顶部总高度
+#define KTopHeight self.navigationController.navigationBar.height+[[UIApplication sharedApplication] statusBarFrame].size.height
 
 /** 动态计算textview的高度 */
 #define VD_MULTILINE_TEXTSIZE(text, font, maxSize, mode) [text length] > 0 ? [text \

@@ -13,6 +13,7 @@
 #define ScreenWidth  CGRectGetWidth([UIScreen mainScreen].bounds)
 #define ScreenHeight CGRectGetHeight([UIScreen mainScreen].bounds)
 
+
 /**
  *  2.返回一个RGBA格式的UIColor对象
  */
