@@ -10,6 +10,7 @@
 		25FFA0801E28D24600869B7E /* UIViewController+ClassName.m in Sources */ = {isa = PBXBuildFile; fileRef = 25FFA07D1E28D24600869B7E /* UIViewController+ClassName.m */; };
 		25FFA0811E28D24600869B7E /* WMFPSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 25FFA07F1E28D24600869B7E /* WMFPSLabel.m */; };
 		582192CE1E31E5360004292D /* apple.png in Resources */ = {isa = PBXBuildFile; fileRef = 582192CD1E31E5360004292D /* apple.png */; };
+		5866815D1E4C0AD600DD878E /* UserData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5866815C1E4C0AD600DD878E /* UserData.plist */; };
 		586E0AC81E308E720082106E /* HomePageIfNoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 586E0AC61E308E720082106E /* HomePageIfNoDataView.m */; };
 		586E0AC91E308E720082106E /* HomePageIfNoDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 586E0AC71E308E720082106E /* HomePageIfNoDataView.xib */; };
 		586E0AD61E30B9A80082106E /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 586E0AD11E30B9A80082106E /* EditViewController.m */; };
@@ -54,7 +55,6 @@
 		67C06BC01E2E051A00EBA5C6 /* MyMeansTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67C06BBE1E2E051A00EBA5C6 /* MyMeansTableViewCell.xib */; };
 		67C06BC91E2F3FB800EBA5C6 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67C06BC81E2F3FB800EBA5C6 /* LoginView.xib */; };
 		67C06BCD1E2F3FD600EBA5C6 /* RegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67C06BCB1E2F3FD600EBA5C6 /* RegisterController.m */; };
-		67C06BCE1E2F3FD600EBA5C6 /* RegisterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67C06BCC1E2F3FD600EBA5C6 /* RegisterView.xib */; };
 		67C06BD01E2F425B00EBA5C6 /* 6.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 67C06BCF1E2F425B00EBA5C6 /* 6.jpeg */; };
 		67C06BD31E2F443F00EBA5C6 /* BG.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 67C06BD11E2F443F00EBA5C6 /* BG.jpg */; };
 		67C06BD41E2F443F00EBA5C6 /* myheadimage.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 67C06BD21E2F443F00EBA5C6 /* myheadimage.jpeg */; };
@@ -220,6 +220,7 @@
 		25FFA07E1E28D24600869B7E /* WMFPSLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMFPSLabel.h; sourceTree = "<group>"; };
 		25FFA07F1E28D24600869B7E /* WMFPSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMFPSLabel.m; sourceTree = "<group>"; };
 		582192CD1E31E5360004292D /* apple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = apple.png; sourceTree = "<group>"; };
+		5866815C1E4C0AD600DD878E /* UserData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UserData.plist; sourceTree = "<group>"; };
 		586E0AC51E308E720082106E /* HomePageIfNoDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageIfNoDataView.h; sourceTree = "<group>"; };
 		586E0AC61E308E720082106E /* HomePageIfNoDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageIfNoDataView.m; sourceTree = "<group>"; };
 		586E0AC71E308E720082106E /* HomePageIfNoDataView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomePageIfNoDataView.xib; sourceTree = "<group>"; };
@@ -297,7 +298,6 @@
 		67C06BC81E2F3FB800EBA5C6 /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
 		67C06BCA1E2F3FD600EBA5C6 /* RegisterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterController.h; sourceTree = "<group>"; };
 		67C06BCB1E2F3FD600EBA5C6 /* RegisterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterController.m; sourceTree = "<group>"; };
-		67C06BCC1E2F3FD600EBA5C6 /* RegisterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterView.xib; sourceTree = "<group>"; };
 		67C06BCF1E2F425B00EBA5C6 /* 6.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 6.jpeg; sourceTree = "<group>"; };
 		67C06BD11E2F443F00EBA5C6 /* BG.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BG.jpg; sourceTree = "<group>"; };
 		67C06BD21E2F443F00EBA5C6 /* myheadimage.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = myheadimage.jpeg; sourceTree = "<group>"; };
@@ -544,6 +544,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5866815B1E4C0AB800DD878E /* UserData */ = {
+			isa = PBXGroup;
+			children = (
+				5866815C1E4C0AD600DD878E /* UserData.plist */,
+			);
+			path = UserData;
+			sourceTree = "<group>";
+		};
 		586E0AC41E308E720082106E /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1252,6 +1260,7 @@
 		67CC90AA1E28B84100761832 /* SecondItem */ = {
 			isa = PBXGroup;
 			children = (
+				5866815B1E4C0AB800DD878E /* UserData */,
 				67CC90AB1E28B84100761832 /* Controller */,
 				67CC90AE1E28B84100761832 /* Model */,
 				67CC90AF1E28B84100761832 /* View */,
@@ -1377,7 +1386,6 @@
 			children = (
 				67C06BCA1E2F3FD600EBA5C6 /* RegisterController.h */,
 				67C06BCB1E2F3FD600EBA5C6 /* RegisterController.m */,
-				67C06BCC1E2F3FD600EBA5C6 /* RegisterView.xib */,
 				67CC915B1E2DBE3400761832 /* LoginController.h */,
 				67CC915C1E2DBE3400761832 /* LoginController.m */,
 				67C06BC81E2F3FB800EBA5C6 /* LoginView.xib */,
@@ -1452,7 +1460,7 @@
 				TargetAttributes = {
 					67CC904C1E28B7FC00761832 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = 5G6X7E2225;
+						DevelopmentTeam = URJ79T2XN5;
 						ProvisioningStyle = Automatic;
 					};
 					67CC90651E28B7FC00761832 = {
@@ -1497,7 +1505,6 @@
 				67AC58B81E481CDC001D7BAE /* toast_vol_5@2x.png in Resources */,
 				67C06C3D1E2F6ED500EBA5C6 /* shiping@2x.png in Resources */,
 				67C06C411E2F6ED500EBA5C6 /* tianqi@2x.png in Resources */,
-				67C06BCE1E2F3FD600EBA5C6 /* RegisterView.xib in Resources */,
 				67C06D1F1E348C1900EBA5C6 /* photo_camera@3x.png in Resources */,
 				67AC58CB1E484BC1001D7BAE /* luyinicon@2x.png in Resources */,
 				67CC91431E2CAC2100761832 /* user_icon_default@3x.png in Resources */,
@@ -1576,6 +1583,7 @@
 				67C06C261E2F6DE900EBA5C6 /* yuyin_select@2x.png in Resources */,
 				67C06C3E1E2F6ED500EBA5C6 /* tansuo@2x.png in Resources */,
 				67C06BD01E2F425B00EBA5C6 /* 6.jpeg in Resources */,
+				5866815D1E4C0AD600DD878E /* UserData.plist in Resources */,
 				67C06BD31E2F443F00EBA5C6 /* BG.jpg in Resources */,
 				67AC58D41E4857B8001D7BAE /* bg_chat_me@2x.png in Resources */,
 				67C06C211E2F6DE900EBA5C6 /* tupian_select@2x.png in Resources */,
@@ -1848,7 +1856,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 5G6X7E2225;
+				DEVELOPMENT_TEAM = URJ79T2XN5;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1872,7 +1880,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 5G6X7E2225;
+				DEVELOPMENT_TEAM = URJ79T2XN5;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
