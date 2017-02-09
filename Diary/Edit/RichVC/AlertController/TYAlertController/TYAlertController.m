@@ -317,6 +317,7 @@
 #pragma mark - notifycation
 
 - (void)keyboardWillShow:(NSNotification*)notification{
+   
     CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     
     CGFloat alertViewBottomEdge = CGRectGetHeight(self.view.frame) -  CGRectGetMaxY(_alertView.frame);

@@ -31,6 +31,15 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+
+- (void)setRightWithImage{
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithNorImage:@"left" higImage:@"leftSelect" targe:self action:@selector(rightButtonClick)];
+}
+
+-(void)setRightWithText:(NSString *)text{
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:text style:UIBarButtonItemStyleDone target:self action:@selector(rightButtonClick)];;
+}
+
 - (void)setBackWithImage{
   self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithNorImage:@"left" higImage:@"leftSelect" targe:self action:@selector(leftDown)];
 }
@@ -42,6 +51,9 @@
 - (void)leftDown
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+-(void)rightButtonClick{
+    NSLog(@"右边按钮点击事件");
 }
 //设置导航条是否透明
 -(void)setNavigtionBarTransparent:(BOOL)_transparent{

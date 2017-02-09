@@ -17,6 +17,7 @@
 #import "LGAudioKit.h"
 #import "audioModel.h"
 #import "audioImage.h"
+#import "EditOfGroups.h"
 //Image default max size
 #define IMAGE_MAX_SIZE ([UIScreen mainScreen].bounds.size.width-10)
 
@@ -38,7 +39,7 @@
 @property (strong, nonatomic)  DPImagePickerVC * Viewasd;
 @property (strong, nonatomic)  UIImageView *audioImage;
 @property (strong, nonatomic)  UIButton *audioButton;
-@property (assign, nonatomic)  Boolean hiddleKeyBoard;
+@property (assign, nonatomic)  Boolean willhiddleKeyBoard;
 @property (nonatomic,assign) CGFloat lastPosition;    //最后的位置
 
 //设置
@@ -55,6 +56,9 @@
 @property (nonatomic,strong) audioImage *audioimage;//录音控件
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic,assign) NSInteger audioImageTag;//录音控件
+@property (nonatomic,strong) EditOfGroups *editOfGroups;//当前分组View
+@property (nonatomic,strong) UIView *audioView;//录音键盘
+@property (nonatomic,assign) BOOL isAudioKeyOnTop;    //是否录音键盘在最顶部的判断
 @end
 
 @implementation RichTextViewController
@@ -76,10 +80,13 @@
     [self setInitLocation];
 }
 - (void)viewWillAppear:(BOOL)animated{
-    _upkeyboardView.hidden = YES;
-    [self setOpenOrNotView];
+  
     
 }
+-(void)viewDidAppear:(BOOL)animated{
+ 
+}
+//是否公开日记模块
 -(void)setOpenOrNotView{
     UIView *openOrNot = [[UIView alloc] initWithFrame:CGRectMake(-1, 13, ScreenWidth+1, 30)];
     openOrNot.layer.borderWidth = 0.5;
@@ -92,23 +99,31 @@
     [openOrNot addSubview:textlabel];
     
     UISwitch *switchButton = [[UISwitch alloc] initWithFrame:CGRectMake(ScreenWidth-50, 0,50,0 )];
-     switchButton.transform = CGAffineTransformMakeScale(0.7, 0.65);
+     switchButton.transform = CGAffineTransformMakeScale(0.65, 0.55);
      switchButton.onTintColor = [UIColor colorWithHexString:@"12B7F5"];
     [switchButton setOn:YES];
     [switchButton addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
     [openOrNot addSubview:switchButton];
     
 }
+//当前分组列表View
+-(void)setEditOfGroups{
+    _editOfGroups = [[EditOfGroups alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
+ 
+    [self.textView addSubview:_editOfGroups];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _hiddleKeyBoard = NO;
+    _textView.layoutManager.allowsNonContiguousLayout = NO;
+    [_textView scrollRangeToVisible:NSMakeRange(_textView.text.length, 1)];
+    _willhiddleKeyBoard = YES;
     [self setBackWithText:@"取消"];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStyleDone target:self action:@selector(rightButtonClick)];;
     //Init text font
     //可变数组初始化
     _heightOfAudioArray = [[NSMutableArray alloc] init];
     _AudioArray = [[NSMutableArray alloc] init];
     _dataArray  = [NSMutableArray arrayWithCapacity:0];
-    
     _audioImageTag = 0;
     //增加监听，当键盘出现或改变时收出消息
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -125,11 +140,45 @@
     [control addTarget:self action:@selector(inputViewTapHandle) forControlEvents:UIControlEventTouchUpInside];
     [_textView addSubview:control];
     
+    self.textView.textContainerInset = UIEdgeInsetsMake(30, 5, 0, 5);//设置页边距
+    
     //Add keyboard notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onKeyboardNotification:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onKeyboardNotification:) name:UIKeyboardWillShowNotification object:nil];
+    
+    
+    //注册通知,监听键盘出现
+    [[NSNotificationCenter defaultCenter]addObserver:self
+                                            selector:@selector(handleKeyboardDidShow:)
+                                                name:UIKeyboardDidShowNotification
+                                              object:nil];
+    //注册通知，监听键盘消失事件
+    [[NSNotificationCenter defaultCenter]addObserver:self
+                                            selector:@selector(handleKeyboardDidHidden)
+                                                name:UIKeyboardDidHideNotification
+                                              object:nil];
+    [self setOpenOrNotView];//添加是否公开日记view
+    [self setEditOfGroups];//添加日记分组view
+    
 }
 
+#pragma mark 键盘监听事件
+//监听事件
+- (void)handleKeyboardDidShow:(NSNotification*)paramNotification
+{
+    //获取键盘高度
+    NSValue *keyboardRectAsObject=[[paramNotification userInfo]objectForKey:UIKeyboardFrameEndUserInfoKey];
+    
+    CGRect keyboardRect;
+    [keyboardRectAsObject getValue:&keyboardRect];
+    
+    self.textView.contentInset=UIEdgeInsetsMake(0, 0,keyboardRect.size.height, 0);
+}
+
+- (void)handleKeyboardDidHidden
+{
+    self.textView.contentInset=UIEdgeInsetsZero;
+}
 //当键盘出现或改变时调用
 - (void)keyboardWillShow:(NSNotification *)aNotification
 {
@@ -138,6 +187,8 @@
     NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
     CGRect keyboardRect = [aValue CGRectValue];
      _keyBoardHeigh = keyboardRect.size.height;
+    CGFloat upHeight = _upkeyboardView.frame.size.height;
+    _upkeyboardView.frame = CGRectMake(0, ScreenHeight - upHeight-_keyBoardHeigh, ScreenWidth, upHeight);
     
 }
 
@@ -219,6 +270,10 @@
     
     //重新设置位置
     self.location=_textView.textStorage.length;
+}
+#pragma mark  右侧保存按钮点击事件
+-(void)rightButtonClick{
+    NSLog(@"保存事件");
 }
 
 #pragma mark 滚动事件
@@ -341,7 +396,7 @@
 }
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
-    [_textView endEditing:YES];
+   // [_textView endEditing:YES];
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -359,18 +414,41 @@
         self.finished([_textView.attributedText getArrayWithAttributed]);
     }
 }
+- (IBAction)keyboardClick:(id)sender {
+    CGFloat upHeight = _upkeyboardView.frame.size.height;
+    if (_willhiddleKeyBoard) {
+        [_textView becomeFirstResponder];
+        [UIView animateWithDuration:0.5 animations:^{
+           _upkeyboardView.frame = CGRectMake(0, ScreenHeight - upHeight-_keyBoardHeigh-5, ScreenWidth, upHeight);
+        }];
+        
+    }else{
+        if (!_isAudioKeyOnTop) {
+            [_textView endEditing:YES];
+            [UIView animateWithDuration:0.5 animations:^{
+               _upkeyboardView.frame = CGRectMake(0, ScreenHeight - upHeight-5, ScreenWidth, upHeight);
+            }];
+            
+        }else{
+            [_textView becomeFirstResponder];
+            _textView.inputView = nil;
+            _isAudioKeyOnTop = NO;
+            [_textView reloadInputViews];
+        }
+        }
+}
 //录音
 - (IBAction)colorClick:(UIButton *)sender {
     
-    UIView *audioView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, _keyBoardHeigh)];
-    [audioView setBackgroundColor:[UIColor whiteColor]];
+     _audioView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, _keyBoardHeigh)];
+    [_audioView setBackgroundColor:[UIColor whiteColor]];
     //按住说话
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth*0.5-40, 20, 80, 20)];
     label.contentMode = UIViewContentModeCenter;
     [label setText:@"按住说话"];
     label.font = [UIFont systemFontOfSize:15.0];
     [label setTextColor:[UIColor grayColor]];
-    [audioView addSubview:label];
+    [_audioView addSubview:label];
     
     //录音icon
     _audioImage = [[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth*0.5-48, CGRectGetMaxY(label.frame)+20, 96, 96)];
@@ -385,9 +463,9 @@
     [_audioButton addTarget:self action:@selector(confirmRecordVoice) forControlEvents:UIControlEventTouchUpInside];
     [_audioButton addTarget:self action:@selector(updateCancelRecordVoice) forControlEvents:UIControlEventTouchDragExit];
     [_audioButton addTarget:self action:@selector(updateContinueRecordVoice) forControlEvents:UIControlEventTouchDragEnter];
-    [audioView addSubview:_audioButton];
-    
-    self.textView.inputView = audioView;
+    [_audioView addSubview:_audioButton];
+    self.textView.inputView = _audioView;
+    _isAudioKeyOnTop = YES;
     [self.textView reloadInputViews];
  
 }
@@ -558,12 +636,13 @@
 {
     [_textView becomeFirstResponder];
     _textView.inputView = nil;
+    _isAudioKeyOnTop = NO;
     [_textView reloadInputViews];
     
 }
 //选择图片
 - (IBAction)boldClick:(UIButton *)sender {
-    [self.view endEditing:YES];
+
     DPImagePickerVC *vc = [[DPImagePickerVC alloc]init];
     vc.delegate = self;
     vc.isDouble = NO;
@@ -588,7 +667,7 @@
 }
 //选择图片
 - (IBAction)imageClick:(UIButton *)sender {
-    [self.view endEditing:YES];
+    [self.view endEditing:NO];
     
     /**
     TYAlertView *alertView = [TYAlertView alertViewWithTitle:@"选择照片" message:@""];
@@ -725,7 +804,7 @@
 
 - (void)getImageArray:(NSMutableArray *)arrayImage{
     [self.navigationController popViewControllerAnimated:YES];
-    NSLog(@"------------------%ld",arrayImage.count);
+    NSLog(@"------------------%ld",(unsigned long)arrayImage.count);
     if (arrayImage.count !=0) {
         self.imageV.image = arrayImage[0];
     }
@@ -781,9 +860,11 @@
 - (void)onKeyboardNotification:(NSNotification *)notification {
     //Reset constraint constant by keyboard height
     if ([notification.name isEqualToString:UIKeyboardWillShowNotification]) {
+        _willhiddleKeyBoard = NO;
         CGRect keyboardFrame = ((NSValue *) notification.userInfo[UIKeyboardFrameEndUserInfoKey]).CGRectValue;
         _bottomConstraint.constant = keyboardFrame.size.height;
     } else if ([notification.name isEqualToString:UIKeyboardWillHideNotification]) {
+        _willhiddleKeyBoard = YES;
         _bottomConstraint.constant = -80;
     }
     //Animate change
