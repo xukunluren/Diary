@@ -317,6 +317,8 @@
 #pragma mark - notifycation
 
 - (void)keyboardWillShow:(NSNotification*)notification{
+    
+    
    
     CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     

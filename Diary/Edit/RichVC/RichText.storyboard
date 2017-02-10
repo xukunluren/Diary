@@ -114,7 +114,7 @@
                                                             <color key="titleColor" red="0.30021587014198303" green="0.30021587014198303" blue="0.30021587014198303" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
-                                                            <segue destination="F8X-lT-Tfg" kind="modal" id="MWi-A3-QtE"/>
+                                                            <action selector="weatherChose:" destination="2T2-a7-GHP" eventType="touchUpInside" id="CCQ-bJ-wuL"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>

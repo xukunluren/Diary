@@ -18,8 +18,10 @@
 #import "audioModel.h"
 #import "audioImage.h"
 #import "EditOfGroups.h"
+#import "WeatherKeyBoard.h"
+#import "ItemView.h"
 //Image default max size
-#define IMAGE_MAX_SIZE ([UIScreen mainScreen].bounds.size.width-10)
+#define IMAGE_MAX_SIZE ([UIScreen mainScreen].bounds.size.width-20)
 
 #define ImageTag (@"[UIImageView]")
 #define DefaultFont (16)
@@ -37,7 +39,8 @@
 @property (weak, nonatomic)  UIImageView *imageV;
 
 @property (strong, nonatomic)  DPImagePickerVC * Viewasd;
-@property (strong, nonatomic)  UIImageView *audioImage;
+@property (strong, nonatomic)  UIImageView *audioImage;//录音键盘
+@property (strong, nonatomic)  UIView *weatherKeyBoard;//天气键盘
 @property (strong, nonatomic)  UIButton *audioButton;
 @property (assign, nonatomic)  Boolean willhiddleKeyBoard;
 @property (nonatomic,assign) CGFloat lastPosition;    //最后的位置
@@ -51,6 +54,7 @@
 @property (nonatomic,assign) CGRect textViewBounds;    //TextView的bounds
 @property (nonatomic,assign) CGFloat lineSapce;    //行间距
 @property (nonatomic,assign) CGFloat keyBoardHeigh;    //键盘高度
+@property (nonatomic,assign) CGFloat GDkeyBoardHeigh;    //固定键盘高度
 @property (nonatomic,copy) NSMutableArray *heightOfAudioArray;    //录音高度记录用于删除使用
 @property (nonatomic,copy) NSMutableArray *AudioArray;    //用于存储录音控件便于删除
 @property (nonatomic,strong) audioImage *audioimage;//录音控件
@@ -59,6 +63,9 @@
 @property (nonatomic,strong) EditOfGroups *editOfGroups;//当前分组View
 @property (nonatomic,strong) UIView *audioView;//录音键盘
 @property (nonatomic,assign) BOOL isAudioKeyOnTop;    //是否录音键盘在最顶部的判断
+@property (nonatomic, strong) NSMutableArray *weatherImageArray;//天气图片数组
+@property (nonatomic, strong) NSMutableArray *weatherIconArray;//天气图标名称按钮
+@property (nonatomic,assign) NSInteger deleteAction;//记录删除动作
 @end
 
 @implementation RichTextViewController
@@ -104,7 +111,6 @@
     [switchButton setOn:YES];
     [switchButton addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
     [openOrNot addSubview:switchButton];
-    
 }
 //当前分组列表View
 -(void)setEditOfGroups{
@@ -114,6 +120,10 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    _GDkeyBoardHeigh = 2;//给键盘高度一个随意小的初始值
+    _deleteAction = 0;
     _textView.layoutManager.allowsNonContiguousLayout = NO;
     [_textView scrollRangeToVisible:NSMakeRange(_textView.text.length, 1)];
     _willhiddleKeyBoard = YES;
@@ -131,7 +141,6 @@
                                                  name:UIKeyboardWillShowNotification
                                                object:nil];
     
-    
     [self resetTextStyle];
     
     
@@ -143,9 +152,9 @@
     self.textView.textContainerInset = UIEdgeInsetsMake(30, 5, 0, 5);//设置页边距
     
     //Add keyboard notification
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onKeyboardNotification:) name:UIKeyboardWillHideNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onKeyboardNotification:) name:UIKeyboardWillShowNotification object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onKeyboardWillHideNotification:) name:UIKeyboardWillHideNotification object:nil];
+
+//    
     
     //注册通知,监听键盘出现
     [[NSNotificationCenter defaultCenter]addObserver:self
@@ -163,7 +172,28 @@
 }
 
 #pragma mark 键盘监听事件
-//监听事件
+
+
+//键盘即将隐藏
+- (void)onKeyboardWillHideNotification:(NSNotification *)notification {
+    //Reset constraint constant by keyboard height
+    //    if ([notification.name isEqualToString:UIKeyboardWillShowNotification]) {
+    //        _willhiddleKeyBoard = NO;
+    //        CGRect keyboardFrame = ((NSValue *) notification.userInfo[UIKeyboardFrameEndUserInfoKey]).CGRectValue;
+    //        _bottomConstraint.constant = keyboardFrame.size.height;
+    //    } else if ([notification.name isEqualToString:UIKeyboardWillHideNotification]) {
+    _willhiddleKeyBoard = YES;
+    _bottomConstraint.constant = -80;
+    //}
+    //Animate change
+    [UIView animateWithDuration:3.0f animations:^{
+        [self.view layoutIfNeeded];
+    }];
+}
+
+
+
+//监听事件键盘显示
 - (void)handleKeyboardDidShow:(NSNotification*)paramNotification
 {
     //获取键盘高度
@@ -173,20 +203,32 @@
     [keyboardRectAsObject getValue:&keyboardRect];
     
     self.textView.contentInset=UIEdgeInsetsMake(0, 0,keyboardRect.size.height, 0);
-}
 
+    _keyBoardHeigh = keyboardRect.size.height;
+    if (_GDkeyBoardHeigh<_keyBoardHeigh) {
+        _GDkeyBoardHeigh = _keyBoardHeigh;
+    }else{
+        _keyBoardHeigh = _GDkeyBoardHeigh;
+    }
+}
+//键盘隐藏
 - (void)handleKeyboardDidHidden
 {
     self.textView.contentInset=UIEdgeInsetsZero;
 }
-//当键盘出现或改变时调用
+//当键盘即将出现或改变时调用
 - (void)keyboardWillShow:(NSNotification *)aNotification
 {
+    
+    _willhiddleKeyBoard = NO;
+   
     //获取键盘的高度
     NSDictionary *userInfo = [aNotification userInfo];
     NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
     CGRect keyboardRect = [aValue CGRectValue];
      _keyBoardHeigh = keyboardRect.size.height;
+      _bottomConstraint.constant = _keyBoardHeigh;
+    
     CGFloat upHeight = _upkeyboardView.frame.size.height;
     _upkeyboardView.frame = CGRectMake(0, ScreenHeight - upHeight-_keyBoardHeigh, ScreenWidth, upHeight);
     
@@ -333,12 +375,22 @@
     CGSize maxSize = CGSizeMake(_textView.bounds.size.width, CGFLOAT_MAX);
     CGSize newSize = [_textView sizeThatFits:maxSize];
     CGFloat deletHeight = newSize.height;
-  
     CGFloat lastObjectHeight = [_heightOfAudioArray.lastObject floatValue];
-    if (deletHeight<lastObjectHeight) {
-        [[_audioimage viewWithTag:_audioImageTag--] removeFromSuperview];
+    NSInteger nowLocation =  _textView.selectedRange.location;
+        if (nowLocation>_deleteAction) {
+            _deleteAction = nowLocation;//用户编辑中，字段不断增加中
+        }else{
+            //用户数据删除中
+        
+    NSInteger viewTag = [_heightOfAudioArray.lastObject integerValue];
+        
+    if (viewTag == nowLocation) {
+        [_textView.subviews.lastObject removeFromSuperview];
+       // [[_audioimage viewWithTag:viewTag] removeFromSuperview];
+ 
         [_heightOfAudioArray removeLastObject];
         [_AudioArray  removeLastObject];
+    }
     }
     }
     
@@ -407,6 +459,9 @@
     
 }
 
+
+
+
 #pragma mark - Action
 //完成
 - (IBAction)finishClick:(UIButton *)sender {
@@ -437,14 +492,64 @@
         }
         }
 }
+#pragma mark - 选择天气模块
+// 数据准备
+-(void)initData{
+    _weatherImageArray = [[NSMutableArray alloc] initWithObjects:@"Eqingtian",@"Eduoyun",@"Efeng",@"Exiaoyu",@"Edayu",@"Eshandian",@"Exue",@"Ewumai", nil];
+    _weatherIconArray = [[NSMutableArray alloc] initWithObjects:@"晴天",@"多云",@"刮风",@"小雨",@"大雨",@"闪电",@"下雪",@"雾霾", nil];
+}
+
+- (CGSize)itemSize
+{
+    CGFloat itemWidth = (CGRectGetWidth(self.view.frame)) / 4;
+    CGFloat itemHeight = _keyBoardHeigh*0.3;
+    return CGSizeMake(itemWidth, itemHeight);
+}
+- (IBAction)weatherChose:(id)sender {
+    [_textView becomeFirstResponder];
+    [self initData];
+    CGSize size = [self itemSize];
+    NSInteger row, col;
+    NSInteger count = _weatherIconArray.count;
+    NSInteger rowNum = (count + 3) / 4;
+    _weatherKeyBoard = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, _keyBoardHeigh*0.7 )];
+    _weatherKeyBoard.backgroundColor = [UIColor whiteColor];
+    [_weatherKeyBoard addSubview:[self drawThreadWithFram:CGRectMake(0, 5, ScreenWidth, 0.5) andColor:[UIColor colorWithHexString:@"e7e7e7"]]];
+    UIView *weatherView = [[UIView alloc] initWithFrame:CGRectMake(0, 6, ScreenWidth, _weatherKeyBoard.frame.size.height)];
+    [_weatherKeyBoard addSubview:weatherView];
+   // _gridItems = @[].mutableCopy;
+    for(NSInteger i = 0; i < count; i++) {
+        row = i / 4;
+        col = i % 4;
+        ItemView *itemView = [[ItemView alloc] initWithFrame:CGRectMake(col * size.width,   row * size.height, size.width, size.height)];
+//        [itemView setBackgroundColor:[UIColor yellowColor]];
+        [itemView setTitle:_weatherIconArray[i] imageName:_weatherImageArray[i]];
+        itemView.tag = i;
+        [weatherView addSubview:itemView];
+        [itemView addTarget:self action:@selector(itemClicked:) forControlEvents:UIControlEventTouchUpInside];
+    }
+ 
+    self.textView.inputView = _weatherKeyBoard;
+    _isAudioKeyOnTop = YES;
+    [self.textView reloadInputViews];
+}
+
+
+-(void)itemClicked:(UIButton *)button{
+    NSLog(@"%ld",(long)button.tag);
+    
+}
 //录音
 - (IBAction)colorClick:(UIButton *)sender {
+    [_textView becomeFirstResponder];
     
-     _audioView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, _keyBoardHeigh)];
+     _audioView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, _keyBoardHeigh*0.7)];
     [_audioView setBackgroundColor:[UIColor whiteColor]];
+     [_audioView addSubview:[self drawThreadWithFram:CGRectMake(0, 5, ScreenWidth, 0.5) andColor:[UIColor colorWithHexString:@"e7e7e7"]]];
     //按住说话
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth*0.5-40, 20, 80, 20)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, ScreenWidth, 20)];
     label.contentMode = UIViewContentModeCenter;
+    label.textAlignment  = NSTextAlignmentCenter;
     [label setText:@"按住说话"];
     label.font = [UIFont systemFontOfSize:15.0];
     [label setTextColor:[UIColor grayColor]];
@@ -611,9 +716,9 @@
     
     //添加录音控件
     _audioimage = [[audioImage alloc] initWithFrame:CGRectMake(10, _textViewBounds.size.height, ScreenWidth-20, 30)];
-    _audioimage.tag = _audioImageTag++;
+    _audioimage.tag = _audioImageTag;
     CGFloat heightOfAudio = CGRectGetMaxY(_audioimage.frame);
-    [_heightOfAudioArray addObject:@(heightOfAudio)];
+    [_heightOfAudioArray addObject:@(_audioImageTag)];
     UITapGestureRecognizer *ges = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(audiotap:)];
     [_audioimage addGestureRecognizer:ges];
     
@@ -650,20 +755,7 @@
 }
 //字体设置
 - (IBAction)fontClick:(UIButton *)sender {
-    
-    sender.selected=!sender.selected;
-    if (sender.selected) {
-        self.font=25.f;
-        [sender setTitle:[NSString stringWithFormat:@"字体 %.f",self.font] forState:UIControlStateSelected];
-    }
-    else
-    {
-        self.font=DefaultFont;
-        [sender setTitle:[NSString stringWithFormat:@"字体 %.f",self.font] forState:UIControlStateNormal];
-    }
-    
-    //设置字的设置
-    [self setInitLocation];
+    NSLog(@"添加视频");
 }
 //选择图片
 - (IBAction)imageClick:(UIButton *)sender {
@@ -761,8 +853,10 @@
     //Insert image image
     [_textView.textStorage insertAttributedString:[NSAttributedString attributedStringWithAttachment:imageTextAttachment]
                                           atIndex:_textView.selectedRange.location];
+    _audioImageTag = _textView.selectedRange.location;
     //Move selection location
     _textView.selectedRange = NSMakeRange(_textView.selectedRange.location + 1, _textView.selectedRange.length);
+   
     
     //设置字的设置
     [self setInitLocation];
@@ -798,7 +892,7 @@
     _textView.selectedRange = NSMakeRange(_textView.selectedRange.location + 1, _textView.selectedRange.length);
     
     
-    //设置字的设置
+    //设置字的位置
     [self setInitLocation];
 }
 
@@ -855,25 +949,6 @@
     UIImage *compressedImage = [UIImage imageWithData:imageData];
     return compressedImage;
 }
-#pragma mark - Keyboard notification
-
-- (void)onKeyboardNotification:(NSNotification *)notification {
-    //Reset constraint constant by keyboard height
-    if ([notification.name isEqualToString:UIKeyboardWillShowNotification]) {
-        _willhiddleKeyBoard = NO;
-        CGRect keyboardFrame = ((NSValue *) notification.userInfo[UIKeyboardFrameEndUserInfoKey]).CGRectValue;
-        _bottomConstraint.constant = keyboardFrame.size.height;
-    } else if ([notification.name isEqualToString:UIKeyboardWillHideNotification]) {
-        _willhiddleKeyBoard = YES;
-        _bottomConstraint.constant = -80;
-    }
-    //Animate change
-    [UIView animateWithDuration:0.5f animations:^{
-        [self.view layoutIfNeeded];
-    }];
-}
-
-
 
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

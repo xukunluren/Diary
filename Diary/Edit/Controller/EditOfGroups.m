@@ -32,7 +32,7 @@
     [label setFont:[UIFont systemFontOfSize:10.0]];
     [self addSubview:label];
     
-    UIImageView *imageView1 = [[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth-25, 5, 16, 16)];
+    UIImageView *imageView1 = [[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth-25, 6, 13, 13)];
     imageView1.image = [UIImage imageNamed:@"right"];
     [self addSubview:imageView1];
     
@@ -43,6 +43,8 @@
     
     UIButton *button = [[UIButton alloc] initWithFrame:self.bounds];
     [button addTarget:self action:@selector(editorTouch) forControlEvents:UIControlEventTouchUpInside];
+    button.alpha = 0.0;	
+    [self addSubview:button];
     
     
 
