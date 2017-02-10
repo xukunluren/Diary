@@ -10,13 +10,8 @@
 
 @interface RegisterController : BaseViewController
 
-- (IBAction)cancelButtonEvent:(id)sender;
-- (IBAction)loginEvent:(id)sender;
-- (IBAction)registerEvent:(id)sender;
-@property (weak, nonatomic) IBOutlet UITextField *accountNum;
-@property (weak, nonatomic) IBOutlet UITextField *secretNum;
-@property (strong, nonatomic) IBOutlet UIButton *registerButton;
-@property (strong, nonatomic) IBOutlet UIButton *loginButton;
-@property (weak, nonatomic) IBOutlet UIView *middleView;
+@property (strong, nonatomic) UIButton *registerButton;
+@property (strong, nonatomic) UIButton *loginButton;
+
 
 @end
