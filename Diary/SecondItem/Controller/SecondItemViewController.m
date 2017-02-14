@@ -8,6 +8,7 @@
 
 #import "SecondItemViewController.h"
 #import "EditViewController.h"
+#import "DiaryGroupViewController.h"
 
 #define DIC_EXPANDED @"expanded" //是否是展开 0收缩 1展开
 
@@ -81,19 +82,6 @@
 //}
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-//    NSMutableDictionary *dic=[_dataArray objectAtIndex:section];
-    
-//    NSArray *array=[dic objectForKey:DIC_ARARRY];
-//    
-//    //判断是收缩还是展开
-//    
-//    if ([[dic objectForKey:DIC_EXPANDED] intValue]) {
-//        
-//        return array.count;
-//        
-//    }else{
-//        return 0;
-//    }
     return 10;
 }
 
@@ -103,64 +91,11 @@
     return 50;
 }
 
-
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//    
-//    UIView *hView = [[UIView alloc]initWithFrame:CGRectMake(0,0, self.view.bounds.size.width, CELL_HEIGHT)];
-//    
-//    hView.backgroundColor=[UIColor whiteColor];
-//    
-//    UIButton* eButton = [[UIButton alloc] init];
-//    
-//    //按钮填充整个视图
-//    eButton.frame = hView.frame;
-//    
-//    [eButton addTarget:self action:@selector(expandButtonClicked:)
-//     
-//      forControlEvents:UIControlEventTouchUpInside];
-//    
-//    //把节号保存到按钮tag，以便传递到expandButtonClicked方法
-//    
-//    eButton.tag = section;
-//    
-//    //设置图标
-//    
-//    //根据是否展开，切换按钮显示图片
-//    
-//    if ([self isExpanded:section]){
-//        
-//        [eButton setImage: [UIImage imageNamed: @"arrow_right_grey" ]forState:UIControlStateNormal];
-//    } else {
-//        
-//        [eButton setImage: [UIImage imageNamed: @"arrow_down_grey" ]forState:UIControlStateNormal];
-//    }
-//    //设置分组标题
-//    
-//    [eButton setTitle:[[_dataArray objectAtIndex:section] objectForKey:DIC_TITILESTRING] forState:UIControlStateNormal];
-//    
-//    [eButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//    
-//    //设置button的图片和标题的相对位置
-//    
-//    //4个参数是到上边界，左边界，下边界，右边界的距离
-//    
-//    eButton.contentHorizontalAlignment =UIControlContentHorizontalAlignmentLeft;
-//    
-//    [eButton setTitleEdgeInsets:UIEdgeInsetsMake(5,5, 0,0)];
-//    
-//    [eButton setImageEdgeInsets:UIEdgeInsetsMake(5,self.view.bounds.size.width - 25, 0,0)];
-//    
-//    //下显示线
-//    
-//    UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(0, hView.frame.size.height-1, hView.frame.size.width,1)];
-//    
-//    label.backgroundColor = [UIColor grayColor];
-//    [hView addSubview:label];
-//    
-//    [hView addSubview: eButton];
-//    
-//    return hView;
-//}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    DiaryGroupViewController *vc = [[DiaryGroupViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *allOrderCellIdentifier = @"allOrderCellIdentifier";
@@ -187,40 +122,5 @@
 
 #pragma mark --------------------------------------------------------------
 #pragma mark - Action
-//- (void)expandButtonClicked:(UIButton *)sender {
-//    UIButton *btn = (UIButton *)sender;
-//    
-//    NSInteger section = btn.tag;
-//    
-//    [self collapseOrExpand:section];
-//    
-//    //刷新数据
-//    [self.groupTable reloadData];
-//    
-//}
-//
-//- (void)collapseOrExpand:(NSInteger)section {
-//    NSMutableDictionary *dic = [_dataArray objectAtIndex:section];
-//    
-//    NSInteger expanded = [[dic objectForKey:DIC_EXPANDED] integerValue];
-//    
-//    if (expanded) {
-//        [dic setValue:[NSNumber numberWithInt:0] forKey:DIC_EXPANDED];
-//    }else {
-//        [dic setValue:[NSNumber numberWithInt:1] forKey:DIC_EXPANDED];
-//
-//    }
-//}
-//
-//
-//- (NSInteger)isExpanded:(NSInteger)section {
-//    
-//    NSDictionary *dic=[_dataArray objectAtIndex:section];
-//    
-//    int expanded=[[dic objectForKey:DIC_EXPANDED] intValue];
-//    
-//    return expanded;
-//
-//}
 
 @end
