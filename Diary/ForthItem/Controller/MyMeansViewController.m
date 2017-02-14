@@ -15,8 +15,8 @@
 #import "UIImagePickerController+ST.h"
 #import "STConfig.h"
 
-//#import <Realm/Realm.h>
-//#import "Person.h"
+#import <Realm/Realm.h>
+#import "Person.h"
 typedef NS_ENUM(NSInteger, PhotoType)
 {
     PhotoTypeIcon,
@@ -45,23 +45,40 @@ typedef NS_ENUM(NSInteger, PhotoType)
     [self setBackWithImage];
     [self setTitle:@"我的资料"];
     [self initView];
-   // [self searchFromRealmData];
+    
+    //数据库操作对象
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    //打开数据库事务
+    [realm transactionWithBlock:^(){
+        Person* _temp = [[Person alloc] init];
+        _temp.id = 1;//计算的当前ID
+        _temp.name = @"kevingao";
+        _temp.sex = @"man";
+        //添加到数据库
+        [realm addObject:_temp];
+        //提交事务
+        [realm commitWriteTransaction];
+        
+    }];
+
+    
+    [self searchFromRealmData];
     
 }
 
-//-(void)searchFromRealmData{
-//    //获得当前所有数据
-//    
-//    RLMResults* tempArray = [Person allObjects];
-//    
-//    for (Person* model in tempArray) {
-//        
-//        //打印数据
-//        
-//      NSLog(@"ID : %ld, name : %@, age : %@ ",model.iD,model.name,model.sex);
-//        
-//    }
-//}
+-(void)searchFromRealmData{
+    //获得当前所有数据
+    
+    RLMResults* tempArray = [Person allObjects];
+    
+    for (Person* model in tempArray) {
+        
+        //打印数据
+        
+      NSLog(@"ID : %ld, name : %@, age : %@ ",model.id,model.name,model.sex);
+        
+    }
+}
 
 -(void)initView{
     headerImage = [UIImage imageNamed:@"user_icon_default.png"];

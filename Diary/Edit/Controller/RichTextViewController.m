@@ -195,10 +195,7 @@
 
 
 
--(void)moviePlayDidEnd
-{
-    NSLog(@"视频结束");
-}
+
 #pragma mark 键盘监听事件
 
 
@@ -353,20 +350,6 @@
 
 #pragma mark 滚动事件
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    
-////
-//    int currentPostion = scrollView.contentOffset.y;
-//    if (currentPostion - _lastPosition >300) {
-//        _lastPosition = currentPostion;
-//         NSLog(@"ScrollUp now");
-//  
-//    }else if (_lastPosition - currentPostion > 300)
-//    {
-//        _lastPosition = currentPostion;
-//        [_textView endEditing:YES];
-//        NSLog(@"ScrollDown now");
-//    }
-//    NSLog(@"%f",scrollView.contentOffset.y);
 }
 
 #pragma mark textViewDelegate
@@ -744,7 +727,7 @@
     _textViewBounds.size = newSize;
 
     //添加图片底层
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(10, _textViewBounds.size.height, ScreenWidth-20, 30)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(10, _textViewBounds.size.height, ScreenWidth-20, 50)];
     view.alpha = 0.0;
     view.backgroundColor = [UIColor clearColor];
     UIGraphicsBeginImageContext(view.bounds.size);
@@ -874,6 +857,13 @@
     [righrPlayer play];
 }
 
+-(void)moviePlayDidEnd
+{
+    [rightPlayerLayer removeFromSuperlayer];
+    
+}
+
+
 //选择图片
 - (IBAction)imageClick:(UIButton *)sender {
     [self.view endEditing:NO];
@@ -960,13 +950,13 @@
     UIImage  *image1;
     
     ImageTextAttachment *imageTextAttachment = [ImageTextAttachment new];
-    image1=[imageTextAttachment scaleImage:image withSize:CGSizeMake(ScreenWidth, 30)];
+    image1=[imageTextAttachment scaleImage:image withSize:CGSizeMake(ScreenWidth, 50)];
     //Set tag and image
     imageTextAttachment.imageTag = ImageTag;
     imageTextAttachment.image =image1;
     
     //Set image size
-    imageTextAttachment.imageSize = CGSizeMake(ScreenWidth, 30);
+    imageTextAttachment.imageSize = CGSizeMake(ScreenWidth, 50);
     
     //Insert image image
     [_textView.textStorage insertAttributedString:[NSAttributedString attributedStringWithAttachment:imageTextAttachment]
@@ -976,7 +966,7 @@
     //Move selection location
     _textView.selectedRange = NSMakeRange(_textView.selectedRange.location + 1, _textView.selectedRange.length);
       _audioImageTag = _textView.selectedRange.location;
-
+    
     //设置字的设置
     [self setInitLocation];
 }
