@@ -10,6 +10,10 @@
 		25FFA0801E28D24600869B7E /* UIViewController+ClassName.m in Sources */ = {isa = PBXBuildFile; fileRef = 25FFA07D1E28D24600869B7E /* UIViewController+ClassName.m */; };
 		25FFA0811E28D24600869B7E /* WMFPSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 25FFA07F1E28D24600869B7E /* WMFPSLabel.m */; };
 		582192CE1E31E5360004292D /* apple.png in Resources */ = {isa = PBXBuildFile; fileRef = 582192CD1E31E5360004292D /* apple.png */; };
+		5839AC3A1E52DB4700DE7571 /* DiaryGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5839AC391E52DB4700DE7571 /* DiaryGroupViewController.m */; };
+		5839AC3E1E52E85F00DE7571 /* HttpEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 5839AC3D1E52E85F00DE7571 /* HttpEngine.m */; };
+		5839AC441E53075900DE7571 /* Jastor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5839AC411E53075900DE7571 /* Jastor.m */; };
+		5839AC451E53075900DE7571 /* JastorRuntimeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5839AC431E53075900DE7571 /* JastorRuntimeHelper.m */; };
 		5866815D1E4C0AD600DD878E /* UserData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5866815C1E4C0AD600DD878E /* UserData.plist */; };
 		586E0AC81E308E720082106E /* HomePageIfNoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 586E0AC61E308E720082106E /* HomePageIfNoDataView.m */; };
 		586E0AC91E308E720082106E /* HomePageIfNoDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 586E0AC71E308E720082106E /* HomePageIfNoDataView.xib */; };
@@ -246,6 +250,14 @@
 		25FFA07E1E28D24600869B7E /* WMFPSLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMFPSLabel.h; sourceTree = "<group>"; };
 		25FFA07F1E28D24600869B7E /* WMFPSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMFPSLabel.m; sourceTree = "<group>"; };
 		582192CD1E31E5360004292D /* apple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = apple.png; sourceTree = "<group>"; };
+		5839AC381E52DB4700DE7571 /* DiaryGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiaryGroupViewController.h; sourceTree = "<group>"; };
+		5839AC391E52DB4700DE7571 /* DiaryGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiaryGroupViewController.m; sourceTree = "<group>"; };
+		5839AC3C1E52E85F00DE7571 /* HttpEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpEngine.h; sourceTree = "<group>"; };
+		5839AC3D1E52E85F00DE7571 /* HttpEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpEngine.m; sourceTree = "<group>"; };
+		5839AC401E53075900DE7571 /* Jastor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Jastor.h; sourceTree = "<group>"; };
+		5839AC411E53075900DE7571 /* Jastor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Jastor.m; sourceTree = "<group>"; };
+		5839AC421E53075900DE7571 /* JastorRuntimeHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JastorRuntimeHelper.h; sourceTree = "<group>"; };
+		5839AC431E53075900DE7571 /* JastorRuntimeHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JastorRuntimeHelper.m; sourceTree = "<group>"; };
 		5866815C1E4C0AD600DD878E /* UserData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UserData.plist; sourceTree = "<group>"; };
 		586E0AC51E308E720082106E /* HomePageIfNoDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageIfNoDataView.h; sourceTree = "<group>"; };
 		586E0AC61E308E720082106E /* HomePageIfNoDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageIfNoDataView.m; sourceTree = "<group>"; };
@@ -610,6 +622,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5839AC3B1E52E7FD00DE7571 /* HTTP */ = {
+			isa = PBXGroup;
+			children = (
+				5839AC3C1E52E85F00DE7571 /* HttpEngine.h */,
+				5839AC3D1E52E85F00DE7571 /* HttpEngine.m */,
+			);
+			path = HTTP;
+			sourceTree = "<group>";
+		};
+		5839AC3F1E53075900DE7571 /* Jastor */ = {
+			isa = PBXGroup;
+			children = (
+				5839AC401E53075900DE7571 /* Jastor.h */,
+				5839AC411E53075900DE7571 /* Jastor.m */,
+				5839AC421E53075900DE7571 /* JastorRuntimeHelper.h */,
+				5839AC431E53075900DE7571 /* JastorRuntimeHelper.m */,
+			);
+			path = Jastor;
+			sourceTree = "<group>";
+		};
 		5866815B1E4C0AB800DD878E /* UserData */ = {
 			isa = PBXGroup;
 			children = (
@@ -1153,6 +1185,8 @@
 		67CC90441E28B7FC00761832 = {
 			isa = PBXGroup;
 			children = (
+				5839AC3F1E53075900DE7571 /* Jastor */,
+				5839AC3B1E52E7FD00DE7571 /* HTTP */,
 				586E0ACD1E30B9A80082106E /* Edit */,
 				67C06C6B1E2FA71F00EBA5C6 /* FrameWork */,
 				67CC90E51E28C02D00761832 /* ThirdTools */,
@@ -1386,6 +1420,8 @@
 			children = (
 				67CC90AC1E28B84100761832 /* SecondItemViewController.h */,
 				67CC90AD1E28B84100761832 /* SecondItemViewController.m */,
+				5839AC381E52DB4700DE7571 /* DiaryGroupViewController.h */,
+				5839AC391E52DB4700DE7571 /* DiaryGroupViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1574,7 +1610,7 @@
 				TargetAttributes = {
 					67CC904C1E28B7FC00761832 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = ZC9P3YJ2F3;
+						DevelopmentTeam = URJ79T2XN5;
 						ProvisioningStyle = Automatic;
 					};
 					67CC90651E28B7FC00761832 = {
@@ -1754,6 +1790,7 @@
 				67C06C961E31F20700EBA5C6 /* UIView+ST.m in Sources */,
 				67CC91281E2C6BE600761832 /* UIColor+pas.m in Sources */,
 				67AC58BE1E481CDC001D7BAE /* MBProgressHUD.m in Sources */,
+				5839AC3A1E52DB4700DE7571 /* DiaryGroupViewController.m in Sources */,
 				67CC90E41E28BE5700761832 /* MainTabBarControllerTabBar.m in Sources */,
 				67AC59451E5151C7001D7BAE /* EditTestViewController.m in Sources */,
 				67C06CF91E348C0400EBA5C6 /* TYAlertController.m in Sources */,
@@ -1797,6 +1834,7 @@
 				67AC58C91E481CDC001D7BAE /* ViewController+MASAdditions.m in Sources */,
 				67CC90E21E28BE5700761832 /* MainTabBarController.m in Sources */,
 				67C06BD81E2F491300EBA5C6 /* MyHeaderTableViewCell.m in Sources */,
+				5839AC441E53075900DE7571 /* Jastor.m in Sources */,
 				67CC90FE1E28C02D00761832 /* AFSecurityPolicy.m in Sources */,
 				67CC91491E2D091500761832 /* UIImage+Additions.m in Sources */,
 				67AC58C51E481CDC001D7BAE /* MASViewConstraint.m in Sources */,
@@ -1829,6 +1867,7 @@
 				67C06BDC1E2F5B2C00EBA5C6 /* AccountSecretViewController.m in Sources */,
 				67AC58D71E487B47001D7BAE /* audioImage.m in Sources */,
 				67C06CFA1E348C0400EBA5C6 /* TYAlertDropDownAnimation.m in Sources */,
+				5839AC3E1E52E85F00DE7571 /* HttpEngine.m in Sources */,
 				67CC90E11E28BE5700761832 /* MainNavigationController.m in Sources */,
 				67C06CFF1E348C0400EBA5C6 /* TYShowAlertView.m in Sources */,
 				67AC58AF1E481CDC001D7BAE /* LGAudioPlayer.m in Sources */,
@@ -1840,6 +1879,7 @@
 				67CC912C1E2C9CAA00761832 /* BaseView.m in Sources */,
 				67CC90FA1E28C02D00761832 /* AFHTTPRequestOperation.m in Sources */,
 				67CC91651E2DBFB900761832 /* LoginView.m in Sources */,
+				5839AC451E53075900DE7571 /* JastorRuntimeHelper.m in Sources */,
 				67C06D151E348C1900EBA5C6 /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */,
 				67C06D051E348C0400EBA5C6 /* ImageTextAttachment.m in Sources */,
 				67CC91011E28C02D00761832 /* AFURLResponseSerialization.m in Sources */,
@@ -1995,7 +2035,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = ZC9P3YJ2F3;
+				DEVELOPMENT_TEAM = URJ79T2XN5;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2019,7 +2059,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = ZC9P3YJ2F3;
+				DEVELOPMENT_TEAM = URJ79T2XN5;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
