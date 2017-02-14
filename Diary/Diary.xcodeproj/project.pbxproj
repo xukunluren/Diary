@@ -78,6 +78,8 @@
 		67AC59931E51B0DF001D7BAE /* videoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC59921E51B0DF001D7BAE /* videoView.m */; };
 		67AC59951E51B833001D7BAE /* playVideo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 67AC59941E51B833001D7BAE /* playVideo@2x.png */; };
 		67AC59981E529F5D001D7BAE /* RichTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC59971E529F5D001D7BAE /* RichTextViewController.m */; };
+		67AC599D1E52E48F001D7BAE /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67AC599C1E52E48F001D7BAE /* Realm.framework */; };
+		67AC59A01E52E55F001D7BAE /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC599F1E52E55F001D7BAE /* Person.m */; };
 		67C06BBF1E2E051A00EBA5C6 /* MyMeansTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 67C06BBD1E2E051A00EBA5C6 /* MyMeansTableViewCell.m */; };
 		67C06BC01E2E051A00EBA5C6 /* MyMeansTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67C06BBE1E2E051A00EBA5C6 /* MyMeansTableViewCell.xib */; };
 		67C06BC91E2F3FB800EBA5C6 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67C06BC81E2F3FB800EBA5C6 /* LoginView.xib */; };
@@ -358,6 +360,9 @@
 		67AC59921E51B0DF001D7BAE /* videoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = videoView.m; sourceTree = "<group>"; };
 		67AC59941E51B833001D7BAE /* playVideo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playVideo@2x.png"; sourceTree = "<group>"; };
 		67AC59971E529F5D001D7BAE /* RichTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RichTextViewController.m; sourceTree = "<group>"; };
+		67AC599C1E52E48F001D7BAE /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
+		67AC599E1E52E55F001D7BAE /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
+		67AC599F1E52E55F001D7BAE /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 		67C06BBC1E2E051A00EBA5C6 /* MyMeansTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMeansTableViewCell.h; sourceTree = "<group>"; };
 		67C06BBD1E2E051A00EBA5C6 /* MyMeansTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMeansTableViewCell.m; sourceTree = "<group>"; };
 		67C06BBE1E2E051A00EBA5C6 /* MyMeansTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyMeansTableViewCell.xib; sourceTree = "<group>"; };
@@ -585,11 +590,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				67AC59901E51AEBC001D7BAE /* AVFoundation.framework in Frameworks */,
 				67C06C781E2FAA5300EBA5C6 /* libz.tbd in Frameworks */,
+				67C06C701E2FA79800EBA5C6 /* libc++.tbd in Frameworks */,
+				67AC599D1E52E48F001D7BAE /* Realm.framework in Frameworks */,
+				67AC59901E51AEBC001D7BAE /* AVFoundation.framework in Frameworks */,
 				67AC58BC1E481CDC001D7BAE /* libopencore-amrnb.a in Frameworks */,
 				67AC58BD1E481CDC001D7BAE /* libopencore-amrwb.a in Frameworks */,
-				67C06C701E2FA79800EBA5C6 /* libc++.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1291,6 +1297,8 @@
 		67CC908F1E28B84100761832 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				67AC599E1E52E55F001D7BAE /* Person.h */,
+				67AC599F1E52E55F001D7BAE /* Person.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1461,6 +1469,7 @@
 		67CC90E51E28C02D00761832 /* ThirdTools */ = {
 			isa = PBXGroup;
 			children = (
+				67AC599C1E52E48F001D7BAE /* Realm.framework */,
 				67AC59741E51AE92001D7BAE /* VideoLibrary */,
 				67C06C841E31F20600EBA5C6 /* STConfig */,
 				67C06C8E1E31F20700EBA5C6 /* STPhotoKit */,
@@ -1818,6 +1827,7 @@
 				67C06CFD1E348C0400EBA5C6 /* TYAlertView.m in Sources */,
 				67C06BBF1E2E051A00EBA5C6 /* MyMeansTableViewCell.m in Sources */,
 				67CC90581E28B7FC00761832 /* ViewController.m in Sources */,
+				67AC59A01E52E55F001D7BAE /* Person.m in Sources */,
 				67C06CFC1E348C0400EBA5C6 /* TYAlertScaleFadeAnimation.m in Sources */,
 				67AC58C21E481CDC001D7BAE /* MASConstraintMaker.m in Sources */,
 				67CC90551E28B7FC00761832 /* AppDelegate.m in Sources */,
@@ -2000,6 +2010,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/ThirdTools",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Diary/PrefixHeader.pch;
@@ -2024,6 +2035,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/ThirdTools",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Diary/PrefixHeader.pch;
