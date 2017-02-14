@@ -11,6 +11,7 @@
 #import "HomePageCell.h"
 #import "RichTextViewController.h"
 #import "HomePageIfNoDataView.h"
+#import "editDiaryModel.h"
 
 
 #define kSearchBackgroudViewHeight 40
@@ -28,11 +29,27 @@
 
 @property (strong, nonatomic) NSMutableArray *dataArray;
 
+@property (strong ,nonatomic) NSMutableArray *diaryInfoArray;
+@property (strong ,nonatomic) UIView *pageView;
+
 
 @end
 
 @implementation FirstItemViewController
 
+-(void)viewWillAppear:(BOOL)animated{
+    _diaryInfoArray = [[NSMutableArray alloc] init];
+    [_diaryInfoArray removeAllObjects];
+    RLMResults* tempArray = [editDiaryModel allObjects];
+    for (editDiaryModel* model in tempArray) {
+        [_diaryInfoArray addObject:model];
+    }
+    if (_diaryInfoArray.count>0) {
+        [_pageView removeFromSuperview];
+    }
+    
+    [_diaryListTableView reloadData];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -40,13 +57,50 @@
     
     [self setTitle:@"好记"];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(rightDown)];
+    _diaryInfoArray = [[NSMutableArray alloc] init];
+    RLMResults* tempArray = [editDiaryModel allObjects];
+    for (editDiaryModel* model in tempArray) {
+        [_diaryInfoArray addObject:model];
+    }
     
     [self.view addSubview:self.diaryListTableView];
     [self.view addSubview:self.searchHeaderView];
 
+    if (_diaryInfoArray.count>0) {
+    }else{
+        [self creatNullPage];
+    }
+
     
 }
 
+
+
+
+
+-(void)creatNullPage{
+    
+    _pageView = [[UIView alloc] initWithFrame:self.view.bounds];
+    [_pageView setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
+    [self.view addSubview:_pageView];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, ScreenHeight*0.45, ScreenWidth, 30)];
+    [label setText:@"今天遇到什么好玩的事情了呢？"];
+  
+    label.contentMode = UIViewContentModeCenter;
+    label.textAlignment = NSTextAlignmentCenter;
+    [label setTextColor:[UIColor blackColor]];
+    [label setFont:[UIFont systemFontOfSize:12.0]];
+    [_pageView addSubview:label];
+    
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth*0.5-35, ScreenHeight*0.5, 70, 20)];
+    [button setTitle:@"添加日记" forState:UIControlStateNormal];
+    [button.titleLabel setFont:[UIFont systemFontOfSize:10.0]];
+    [button setBackgroundColor:[UIColor colorFromHexCode:@"12B7F5"]];
+    [button setTintColor:[UIColor whiteColor]];
+    [button addTarget:self action:@selector(rightDown) forControlEvents:UIControlEventTouchUpInside];
+    [_pageView addSubview:button];
+    
+}
 - (void)rightDown
 {
     
@@ -174,7 +228,7 @@
 #pragma mark -------------------------------------------------------------
 #pragma mark UITableViewDataSource && UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return _diaryInfoArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -188,11 +242,23 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor whiteColor];
     }
+    editDiaryModel *edit = _diaryInfoArray[indexPath.row];
+    cell.titleLabel.text = edit.title;
+    cell.monthDayLabel.text  = edit.monthAndDay;
+    cell.yearLabel.text = edit.year;
+    cell.timeLabel.text = edit.time;
+    cell.assistNumLabel.text = [NSString stringWithFormat: @"%ld", (long)edit.supportNum];
+    
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"%ld",(long)indexPath.row);
+    editDiaryModel *edit = _diaryInfoArray[indexPath.row];
+    RichTextViewController *rich = [RichTextViewController ViewController];
+    rich.NewDiary = NO;
+    rich.diaryData = edit.diaryInfo;
+    [self.navigationController pushViewController:rich animated:YES];
 }
 
 //先要设Cell可编辑

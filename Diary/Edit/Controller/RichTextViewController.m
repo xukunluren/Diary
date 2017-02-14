@@ -23,6 +23,7 @@
 #import "EditTestViewController.h"
 #import "UzysAssetsPickerController.h"
 #import "videoView.h"
+#import "editDiaryModel.h"
 //Image default max size
 #define IMAGE_MAX_SIZE ([UIScreen mainScreen].bounds.size.width-20)
 
@@ -70,6 +71,9 @@
 @property (nonatomic, strong) NSMutableArray *weatherImageArray;//天气图片数组
 @property (nonatomic, strong) NSMutableArray *weatherIconArray;//天气图标名称按钮
 @property (nonatomic,assign) NSInteger deleteAction;//记录删除动作
+
+
+@property (strong, nonatomic) NSMutableAttributedString * context;//存储图文信息
 @end
 
 @implementation RichTextViewController
@@ -80,6 +84,10 @@
     AVPlayerLayer *rightPlayerLayer;
     AVPlayerItem *rightPlayerItem;
     UIImageView *imagView;
+    BOOL haveVideoInfo;
+    BOOL haveAudioInfo;
+    BOOL havePictureInfo;
+    BOOL haveWeatherInfo;
 }
 +(instancetype)ViewController
 {
@@ -132,8 +140,12 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
+    if (_NewDiary) {
+    }else{
+        NSAttributedString *temp = [[NSAttributedString alloc] initWithData:_diaryData options:@{NSDocumentTypeDocumentAttribute : NSRTFDTextDocumentType} documentAttributes:nil error:nil];     //读取
+        [_textView setAttributedText:temp];
+
+    }
     _GDkeyBoardHeigh = 2;//给键盘高度一个随意小的初始值
     _deleteAction = 0;
     _textView.layoutManager.allowsNonContiguousLayout = NO;
@@ -341,9 +353,59 @@
 #pragma mark  右侧保存按钮点击事件
 -(void)rightButtonClick{
     NSLog(@"保存事件");
-    EditTestViewController *editTest = [[EditTestViewController alloc] init];
-//    editTest.textView.textStorage = _textView.textStorage;
     
+    NSString *diaryText = _textView.text;
+    NSString *title;
+    if (diaryText.length>20) {
+        title = [diaryText substringToIndex:20];
+    }else{
+        title = diaryText;
+    }
+    NSDate *currentDate = [NSDate date];
+    　NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    
+    // ----------设置你想要的格式,hh与HH的区别:分别表示12小时制,24小时制
+    [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+    NSString *nowtimeStr = [formatter stringFromDate:currentDate];
+    NSString *time = [[nowtimeStr substringFromIndex:11] substringToIndex:5];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:currentDate];
+    NSInteger years=[components year];
+    NSInteger month=[components month];
+    NSInteger day=[components day];
+    
+    NSString *year = [NSString stringWithFormat:@"%ld",(long)years];
+    NSString *monthDay = [NSString stringWithFormat:@"%ld - %ld",(long)month,(long)day];
+    
+    
+    
+     _context = _textView.textStorage;
+    NSData *data = [_context dataFromRange:NSMakeRange(0, _context.length) documentAttributes:@{NSDocumentTypeDocumentAttribute:NSRTFDTextDocumentType} error:nil];   //将 NSAttributedString 转为NSData
+
+    //数据库操作对象
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    //打开数据库事务
+    [realm transactionWithBlock:^(){
+        editDiaryModel *model = [[editDiaryModel alloc] init];
+        model.title = title;
+        model.year = year;
+        model.monthAndDay = monthDay;
+        model.time = time;
+        model.supportNum = 22;
+        model.haveAudioInfo = YES;
+        model.haveVideoInfo = YES;
+        model.havePictureInfo = YES;
+        model.haveWeatherInfo = YES;
+        model.diaryInfo = data;
+        
+        //添加到数据库
+        [realm addObject:model];
+        //提交事务
+        [realm commitWriteTransaction];
+        
+    }];
+
+    [self.navigationController popViewControllerAnimated:YES];
     
     
 }

@@ -80,6 +80,7 @@
 		67AC59981E529F5D001D7BAE /* RichTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC59971E529F5D001D7BAE /* RichTextViewController.m */; };
 		67AC599D1E52E48F001D7BAE /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67AC599C1E52E48F001D7BAE /* Realm.framework */; };
 		67AC59A01E52E55F001D7BAE /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC599F1E52E55F001D7BAE /* Person.m */; };
+		67AC59A31E52EC24001D7BAE /* editDiaryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC59A21E52EC24001D7BAE /* editDiaryModel.m */; };
 		67C06BBF1E2E051A00EBA5C6 /* MyMeansTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 67C06BBD1E2E051A00EBA5C6 /* MyMeansTableViewCell.m */; };
 		67C06BC01E2E051A00EBA5C6 /* MyMeansTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67C06BBE1E2E051A00EBA5C6 /* MyMeansTableViewCell.xib */; };
 		67C06BC91E2F3FB800EBA5C6 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67C06BC81E2F3FB800EBA5C6 /* LoginView.xib */; };
@@ -363,6 +364,8 @@
 		67AC599C1E52E48F001D7BAE /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		67AC599E1E52E55F001D7BAE /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
 		67AC599F1E52E55F001D7BAE /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
+		67AC59A11E52EC24001D7BAE /* editDiaryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = editDiaryModel.h; sourceTree = "<group>"; };
+		67AC59A21E52EC24001D7BAE /* editDiaryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = editDiaryModel.m; sourceTree = "<group>"; };
 		67C06BBC1E2E051A00EBA5C6 /* MyMeansTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMeansTableViewCell.h; sourceTree = "<group>"; };
 		67C06BBD1E2E051A00EBA5C6 /* MyMeansTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMeansTableViewCell.m; sourceTree = "<group>"; };
 		67C06BBE1E2E051A00EBA5C6 /* MyMeansTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyMeansTableViewCell.xib; sourceTree = "<group>"; };
@@ -921,6 +924,8 @@
 			children = (
 				67AC58CD1E484F00001D7BAE /* audioModel.h */,
 				67AC58CE1E484F00001D7BAE /* audioModel.m */,
+				67AC59A11E52EC24001D7BAE /* editDiaryModel.h */,
+				67AC59A21E52EC24001D7BAE /* editDiaryModel.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -1769,6 +1774,7 @@
 				67C06C981E31F20700EBA5C6 /* UIImagePickerController+ST.m in Sources */,
 				67AC59871E51AE92001D7BAE /* UzysAppearanceConfig.m in Sources */,
 				67C06CFE1E348C0400EBA5C6 /* TYBaseAnimation.m in Sources */,
+				67AC59A31E52EC24001D7BAE /* editDiaryModel.m in Sources */,
 				67C06D181E348C1900EBA5C6 /* DPImagePickerVC.m in Sources */,
 				67AC598C1E51AE92001D7BAE /* UzysGroupPickerView.m in Sources */,
 				67CC90FC1E28C02D00761832 /* AFHTTPSessionManager.m in Sources */,

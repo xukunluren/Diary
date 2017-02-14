@@ -13,8 +13,8 @@
 #import "LoginController.h"
 #import "MyHeaderTableViewCell.h"
 #import "AccountSecretViewController.h"
-//#import "Person.h"
-//#import <Realm/Realm.h>
+#import "Person.h"
+#import <Realm/Realm.h>
 
 
 const CGFloat BackGroupHeight = 188;
@@ -37,7 +37,7 @@ const CGFloat HeadImageHeight= 80;
     [super viewDidLoad];
     [self initView];
     [self initData];
-    
+    [self searchFromRealmData];
 //    //数据库操作对象
 //    
 //    RLMRealm *realm = [RLMRealm defaultRealm];
@@ -68,6 +68,20 @@ const CGFloat HeadImageHeight= 80;
     
 }
 
+
+-(void)searchFromRealmData{
+    //获得当前所有数据
+    
+    RLMResults* tempArray = [Person allObjects];
+    
+    for (Person* model in tempArray) {
+        
+        //打印数据
+        
+        NSLog(@"ID : %ld, name : %@, age : %@ ",model.id,model.name,model.sex);
+        
+    }
+}
 
  
 -(UIView*)loginOutView{

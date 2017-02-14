@@ -17,6 +17,7 @@
 @property (weak, nonatomic)   UIButton *previewBtn;
 @property (assign, nonatomic)   BOOL NewDiary;
 
+@property(nonatomic,strong) NSData *diaryData;
 
 @property (nonatomic,copy) void (^finished)(id  content);
 +(instancetype)ViewController;
