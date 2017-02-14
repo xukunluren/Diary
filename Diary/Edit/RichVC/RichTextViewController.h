@@ -15,6 +15,7 @@
 @property (weak, nonatomic)   UIButton *boldBtn;
 @property (weak, nonatomic)   UIButton *imageBtn;
 @property (weak, nonatomic)   UIButton *previewBtn;
+@property (assign, nonatomic)   BOOL NewDiary;
 
 
 @property (nonatomic,copy) void (^finished)(id  content);

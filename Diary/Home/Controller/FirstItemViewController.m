@@ -51,6 +51,7 @@
 {
     
     RichTextViewController * vc=[RichTextViewController ViewController];
+    vc.NewDiary = YES;
     vc.finished=^(id content){
         NSArray * arr=(NSArray *)content;
         NSLog(@"count--%lu",(unsigned long)arr.count);
