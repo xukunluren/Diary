@@ -18,6 +18,7 @@
 @property (assign, nonatomic)   BOOL NewDiary;
 
 @property(nonatomic,strong) NSData *diaryData;
+@property(nonatomic,assign) long diaryId;
 
 @property (nonatomic,copy) void (^finished)(id  content);
 +(instancetype)ViewController;

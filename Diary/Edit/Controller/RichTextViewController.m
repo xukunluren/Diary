@@ -24,6 +24,7 @@
 #import "UzysAssetsPickerController.h"
 #import "videoView.h"
 #import "editDiaryModel.h"
+#import "CRToast.h"
 //Image default max size
 #define IMAGE_MAX_SIZE ([UIScreen mainScreen].bounds.size.width-20)
 
@@ -353,6 +354,45 @@
 #pragma mark  右侧保存按钮点击事件
 -(void)rightButtonClick{
     NSLog(@"保存事件");
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+         [self dataStore];//数据保存数据库
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self showToast];
+            [self.navigationController popViewControllerAnimated:YES];
+        });
+    });
+}
+
+
+-(void)showToast{
+    [CRToastManager setDefaultOptions:@{kCRToastNotificationTypeKey : @(CRToastTypeNavigationBar),
+                                        kCRToastFontKey             : [UIFont fontWithName:@"HelveticaNeue-Light" size:16],
+                                        kCRToastTextColorKey        : [UIColor whiteColor],
+                                        kCRToastBackgroundColorKey  : [UIColor orangeColor]}];
+    
+    
+    
+    
+    NSMutableDictionary *options = [@{
+                                      kCRToastTextKey : @"保存成功",
+                                      kCRToastTextAlignmentKey : @(NSTextAlignmentLeft),
+                                      //kCRToastBackgroundColorKey : [UIColor redColor],
+                                      kCRToastAnimationInTypeKey : @(CRToastAnimationTypeGravity),
+                                      kCRToastAnimationOutTypeKey : @(CRToastAnimationTypeGravity),
+                                      kCRToastAnimationInDirectionKey : @(CRToastAnimationDirectionBottom),
+                                      kCRToastAnimationOutDirectionKey : @(CRToastAnimationDirectionTop),
+                                      kCRToastImageKey :[UIImage imageNamed:@"alert_icon.png"]
+                                      } mutableCopy];
+    [CRToastManager showNotificationWithOptions:[NSDictionary dictionaryWithDictionary:options]
+                                completionBlock:^{
+                                    NSLog(@"Completed");
+                                }];
+    
+}
+
+//数据修改及保存
+-(void)dataStore{
+    
     
     NSString *diaryText = _textView.text;
     NSString *title;
@@ -362,8 +402,7 @@
         title = diaryText;
     }
     NSDate *currentDate = [NSDate date];
-    　NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     // ----------设置你想要的格式,hh与HH的区别:分别表示12小时制,24小时制
     [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
     NSString *nowtimeStr = [formatter stringFromDate:currentDate];
@@ -379,13 +418,48 @@
     
     
     
-     _context = _textView.textStorage;
-    NSData *data = [_context dataFromRange:NSMakeRange(0, _context.length) documentAttributes:@{NSDocumentTypeDocumentAttribute:NSRTFDTextDocumentType} error:nil];   //将 NSAttributedString 转为NSData
-
-    //数据库操作对象
-    RLMRealm *realm = [RLMRealm defaultRealm];
-    //打开数据库事务
-    [realm transactionWithBlock:^(){
+    _context = _textView.textStorage;
+    NSData *data = [_context dataFromRange:NSMakeRange(0, _context.length) documentAttributes:@{NSDocumentTypeDocumentAttribute:NSRTFDTextDocumentType} error:nil];
+    if (_NewDiary) {
+           //将 NSAttributedString 转为NSData
+        NSInteger  dId;
+           RLMResults* tempArray = [[editDiaryModel allObjects] sortedResultsUsingKeyPath:@"diaryId" ascending:NO];
+        if (tempArray.count == 0) {
+            dId = 0;
+        }else{
+        editDiaryModel *model =   tempArray.firstObject;
+        dId = model.diaryId+1;
+        }
+        
+        
+        //数据库操作对象
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        //打开数据库事务
+        [realm transactionWithBlock:^(){
+            editDiaryModel *model = [[editDiaryModel alloc] init];
+            model.title = title;
+            model.year = year;
+            model.monthAndDay = monthDay;
+            model.time = time;
+            model.supportNum = 22;
+            model.haveAudioInfo = YES;
+            model.haveVideoInfo = YES;
+            model.havePictureInfo = YES;
+            model.haveWeatherInfo = YES;
+            model.diaryInfo = data;
+            model.diaryId = dId;
+            
+            
+            //添加到数据库
+            [realm addObject:model];
+            //提交事务
+            [realm commitWriteTransaction];
+        }];
+    }else{
+        RLMResults<editDiaryModel *> *model1 = [editDiaryModel   objectsWhere:@"diaryId == %@",@(_diaryId)];
+        
+        RLMRealm *realm = [RLMRealm defaultRealm];
+ 
         editDiaryModel *model = [[editDiaryModel alloc] init];
         model.title = title;
         model.year = year;
@@ -397,18 +471,20 @@
         model.havePictureInfo = YES;
         model.haveWeatherInfo = YES;
         model.diaryInfo = data;
-        
-        //添加到数据库
-        [realm addObject:model];
-        //提交事务
+        model.diaryId = _diaryId;
+ 
+        // 通过 id = 1 更新该书籍
+        [realm beginWriteTransaction];
+        [editDiaryModel createOrUpdateInRealm:realm withValue:model];
         [realm commitWriteTransaction];
+        NSLog(@"%@",model);
         
-    }];
 
-    [self.navigationController popViewControllerAnimated:YES];
     
+    }
     
 }
+
 
 #pragma mark 滚动事件
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -423,6 +499,7 @@
     NSLog(@"%@", textAttachment);
     return NO;
 }
+
 
 /**
  *  点击链接，触发代理事件

@@ -7,7 +7,12 @@
 //
 
 #import "editDiaryModel.h"
+#import <Realm/Realm.h>
 
 @implementation editDiaryModel
 
+
++(NSString*)primaryKey{
+    return @"diaryId";
+}
 @end

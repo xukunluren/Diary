@@ -85,6 +85,7 @@
 		67AC599D1E52E48F001D7BAE /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67AC599C1E52E48F001D7BAE /* Realm.framework */; };
 		67AC59A01E52E55F001D7BAE /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC599F1E52E55F001D7BAE /* Person.m */; };
 		67AC59A31E52EC24001D7BAE /* editDiaryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC59A21E52EC24001D7BAE /* editDiaryModel.m */; };
+		67AC59C01E542BB0001D7BAE /* CRToast.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC59BF1E542BB0001D7BAE /* CRToast.m */; };
 		67C06BBF1E2E051A00EBA5C6 /* MyMeansTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 67C06BBD1E2E051A00EBA5C6 /* MyMeansTableViewCell.m */; };
 		67C06BC01E2E051A00EBA5C6 /* MyMeansTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67C06BBE1E2E051A00EBA5C6 /* MyMeansTableViewCell.xib */; };
 		67C06BC91E2F3FB800EBA5C6 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67C06BC81E2F3FB800EBA5C6 /* LoginView.xib */; };
@@ -378,6 +379,8 @@
 		67AC599F1E52E55F001D7BAE /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 		67AC59A11E52EC24001D7BAE /* editDiaryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = editDiaryModel.h; sourceTree = "<group>"; };
 		67AC59A21E52EC24001D7BAE /* editDiaryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = editDiaryModel.m; sourceTree = "<group>"; };
+		67AC59BE1E542BB0001D7BAE /* CRToast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRToast.h; sourceTree = "<group>"; };
+		67AC59BF1E542BB0001D7BAE /* CRToast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRToast.m; sourceTree = "<group>"; };
 		67C06BBC1E2E051A00EBA5C6 /* MyMeansTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMeansTableViewCell.h; sourceTree = "<group>"; };
 		67C06BBD1E2E051A00EBA5C6 /* MyMeansTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMeansTableViewCell.m; sourceTree = "<group>"; };
 		67C06BBE1E2E051A00EBA5C6 /* MyMeansTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyMeansTableViewCell.xib; sourceTree = "<group>"; };
@@ -1510,6 +1513,8 @@
 		67CC90E51E28C02D00761832 /* ThirdTools */ = {
 			isa = PBXGroup;
 			children = (
+				67AC59BE1E542BB0001D7BAE /* CRToast.h */,
+				67AC59BF1E542BB0001D7BAE /* CRToast.m */,
 				67AC599C1E52E48F001D7BAE /* Realm.framework */,
 				67AC59741E51AE92001D7BAE /* VideoLibrary */,
 				67C06C841E31F20600EBA5C6 /* STConfig */,
@@ -1896,6 +1901,7 @@
 				67CC90FA1E28C02D00761832 /* AFHTTPRequestOperation.m in Sources */,
 				67CC91651E2DBFB900761832 /* LoginView.m in Sources */,
 				5839AC451E53075900DE7571 /* JastorRuntimeHelper.m in Sources */,
+				67AC59C01E542BB0001D7BAE /* CRToast.m in Sources */,
 				67C06D151E348C1900EBA5C6 /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */,
 				67C06D051E348C0400EBA5C6 /* ImageTextAttachment.m in Sources */,
 				67CC91011E28C02D00761832 /* AFURLResponseSerialization.m in Sources */,

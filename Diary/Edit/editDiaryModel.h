@@ -20,4 +20,6 @@
 @property BOOL haveAudioInfo;
 @property NSData *diaryInfo;
 
+@property long diaryId;
+
 @end

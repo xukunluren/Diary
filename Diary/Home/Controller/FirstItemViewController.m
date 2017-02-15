@@ -258,6 +258,7 @@
     RichTextViewController *rich = [RichTextViewController ViewController];
     rich.NewDiary = NO;
     rich.diaryData = edit.diaryInfo;
+    rich.diaryId = edit.diaryId;
     [self.navigationController pushViewController:rich animated:YES];
 }
 
