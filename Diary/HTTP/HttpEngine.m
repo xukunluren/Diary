@@ -28,7 +28,7 @@
     }];
 }
 
-//json字符串转换成字典aa
+//json字符串转换成字典
 - (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString {
     
     if (jsonString == nil) {

@@ -160,7 +160,7 @@
     NSString *configPath = [[NSBundle mainBundle] pathForResource:@"UserData" ofType:@"plist"];
     //通过目录获取里面的存储数组
     NSArray *configData = [[NSArray alloc] initWithContentsOfFile:configPath];
-    //另建一个数组作为添加数组
+    //另建一个数组作为添加数组aa
     NSMutableArray *muarr = [NSMutableArray arrayWithArray:configData];
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithObjectsAndKeys:_ID,@"id", nil];
     [muarr addObject:dic];
