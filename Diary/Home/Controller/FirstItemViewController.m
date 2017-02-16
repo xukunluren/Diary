@@ -12,7 +12,6 @@
 #import "RichTextViewController.h"
 #import "HomePageIfNoDataView.h"
 #import "editDiaryModel.h"
-#import "CRToast.h"
 
 
 #define kSearchBackgroudViewHeight 40
@@ -39,7 +38,7 @@
 @implementation FirstItemViewController
 
 -(void)viewWillAppear:(BOOL)animated{
-//    _diaryInfoArray = [[NSMutableArray alloc] init];
+    _diaryInfoArray = [[NSMutableArray alloc] init];
     [_diaryInfoArray removeAllObjects];
     RLMResults* tempArray = [editDiaryModel allObjects];
     for (editDiaryModel* model in tempArray) {
@@ -55,7 +54,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor colorFromHexCode:@"eeeeee"];
-     _diaryInfoArray = [[NSMutableArray alloc] init];
+    
     [self setTitle:@"好记"];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(rightDown)];
     _diaryInfoArray = [[NSMutableArray alloc] init];
@@ -69,7 +68,7 @@
 
     if (_diaryInfoArray.count>0) {
     }else{
-         [self.view addSubview:self.pageView];
+        [self creatNullPage];
     }
 
     
@@ -79,31 +78,6 @@
 
 
 
-- (UIView *)pageView{
-    if (!_pageView) {
-        _pageView = [[UIView alloc] initWithFrame:self.view.bounds];
-        [_pageView setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
-       
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, ScreenHeight*0.45, ScreenWidth, 30)];
-        [label setText:@"今天遇到什么好玩的事情了呢？"];
-        
-        label.contentMode = UIViewContentModeCenter;
-        label.textAlignment = NSTextAlignmentCenter;
-        [label setTextColor:[UIColor blackColor]];
-        [label setFont:[UIFont systemFontOfSize:12.0]];
-        [_pageView addSubview:label];
-        
-        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth*0.5-35, ScreenHeight*0.5, 70, 20)];
-        [button setTitle:@"添加日记" forState:UIControlStateNormal];
-        [button.titleLabel setFont:[UIFont systemFontOfSize:10.0]];
-        [button setBackgroundColor:[UIColor colorFromHexCode:@"12B7F5"]];
-        [button setTintColor:[UIColor whiteColor]];
-        [button addTarget:self action:@selector(rightDown) forControlEvents:UIControlEventTouchUpInside];
-        [_pageView addSubview:button];
-
-    }
-    return _pageView;
-}
 -(void)creatNullPage{
     
     _pageView = [[UIView alloc] initWithFrame:self.view.bounds];
@@ -238,63 +212,18 @@
 }
 
 /** 添加弹框*/
-- (void)initAlertControllerWithId:(editDiaryModel *)edit {
-   
-    
+- (void)initAlertController {
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"请注意" message:@"日记一旦删除，将无法找回!" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancelButton = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         /** 确定删除日记*/
-        RLMRealm *realm = [RLMRealm defaultRealm];
-        [realm beginWriteTransaction];
-       // RLMResults<editDiaryModel *> *model = [editDiaryModel objectsWhere:@"diaryId == %@",@(diaryid)];
-        [realm deleteObject:edit];
-        [realm commitWriteTransaction];
-        [self showToast];
-        
-        [_diaryInfoArray removeAllObjects];
-        RLMResults* tempArray = [editDiaryModel allObjects];
-        for (editDiaryModel* model in tempArray) {
-            [_diaryInfoArray addObject:model];
-        }
-        if (_diaryInfoArray.count == 0) {
-            [self.view addSubview:self.pageView];
-        }
-        
-        [_diaryListTableView reloadData];
-        
     }];
     [alertVC addAction:cancelButton];
     [alertVC addAction:okButton];
     [self presentViewController:alertVC animated:YES completion:nil];
 
 }
-//删除成功提示
--(void)showToast{
-    [CRToastManager setDefaultOptions:@{kCRToastNotificationTypeKey : @(CRToastTypeNavigationBar),
-                                        kCRToastFontKey             : [UIFont fontWithName:@"HelveticaNeue-Light" size:16],
-                                        kCRToastTextColorKey        : [UIColor whiteColor],
-                                        kCRToastBackgroundColorKey  : [UIColor orangeColor]}];
-    
-    
-    
-    
-    NSMutableDictionary *options = [@{
-                                      kCRToastTextKey : @"删除成功",
-                                      kCRToastTextAlignmentKey : @(NSTextAlignmentLeft),
-                                      //kCRToastBackgroundColorKey : [UIColor redColor],
-                                      kCRToastAnimationInTypeKey : @(CRToastAnimationTypeGravity),
-                                      kCRToastAnimationOutTypeKey : @(CRToastAnimationTypeGravity),
-                                      kCRToastAnimationInDirectionKey : @(CRToastAnimationDirectionBottom),
-                                      kCRToastAnimationOutDirectionKey : @(CRToastAnimationDirectionTop),
-                                      kCRToastImageKey :[UIImage imageNamed:@"alert_icon.png"]
-                                      } mutableCopy];
-    [CRToastManager showNotificationWithOptions:[NSDictionary dictionaryWithDictionary:options]
-                                completionBlock:^{
-                                    NSLog(@"Completed");
-                                }];
-    
-}
+
 
 #pragma mark -------------------------------------------------------------
 #pragma mark UITableViewDataSource && UITableViewDelegate
@@ -359,14 +288,11 @@
 - (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewRowAction *action1 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-        
-         editDiaryModel *edit = _diaryInfoArray[indexPath.row];
-        
         NSLog(@"点击了删除");
-        [self initAlertControllerWithId:edit];
+        [self initAlertController];
         tableView.editing = NO;
     }];
-   
+    
     return @[action1];
 }
 

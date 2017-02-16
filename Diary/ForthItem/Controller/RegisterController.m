@@ -15,6 +15,7 @@
 
 @property (nonatomic, strong) UITextField *IDtextField;
 @property (nonatomic, strong) UITextField *codeTextField;
+@property (nonatomic, strong) UITextField *confirmCodeTextField;
 
 @end
 
@@ -56,7 +57,7 @@
     _IDtextField.font = [UIFont systemFontOfSize:15];
     _IDtextField.delegate = self;
     _IDtextField.placeholder = @"请输入邮箱";
-    _IDtextField.frame = CGRectMake(CGRectGetMaxX(titleIDLabel.frame)+15, titleIDLabel.frame.origin.y, kScreenWidth-100, 20);
+    _IDtextField.frame = CGRectMake(CGRectGetMaxX(titleIDLabel.frame)+50, titleIDLabel.frame.origin.y, kScreenWidth-150, 20);
     [self.view addSubview:_IDtextField];
     
     
@@ -71,12 +72,30 @@
     _codeTextField.delegate = self;
     _codeTextField.font = [UIFont systemFontOfSize:15];
     _codeTextField.placeholder = @"请输入密码";
-    _codeTextField.frame = CGRectMake(CGRectGetMaxX(titleCodeLabel.frame)+15, titleCodeLabel.frame.origin.y, kScreenWidth-100, 20);
+    _codeTextField.frame = CGRectMake(CGRectGetMaxX(titleCodeLabel.frame)+50, titleCodeLabel.frame.origin.y, kScreenWidth-150, 20);
     [self.view addSubview:_codeTextField];
     
     
+    UILabel *confirmCodeTitleLabel = [[UILabel alloc] init];
+    confirmCodeTitleLabel.frame = CGRectMake(20, CGRectGetMaxY(titleCodeLabel.frame)+30, 65, 20);
+    confirmCodeTitleLabel.font = [UIFont systemFontOfSize:15];
+    confirmCodeTitleLabel.text = @"确认密码";
+    confirmCodeTitleLabel.textColor = [UIColor blackColor];
+    [self.view addSubview:confirmCodeTitleLabel];
+
+    _confirmCodeTextField = [[UITextField alloc] init];
+    _confirmCodeTextField.delegate = self;
+    _confirmCodeTextField.font = [UIFont systemFontOfSize:15];
+    _confirmCodeTextField.placeholder = @"请输入密码";
+    _confirmCodeTextField.frame = CGRectMake(CGRectGetMaxX(titleCodeLabel.frame)+50, confirmCodeTitleLabel.frame.origin.y, kScreenWidth-150, 20);
+    [self.view addSubview:_confirmCodeTextField];
+
     
-    _registerButton = [[UIButton alloc] initWithFrame:CGRectMake(10, kScreenHeight/2, self.view.frame.size.width-20, 45)];
+    
+    
+    
+    
+    _registerButton = [[UIButton alloc] initWithFrame:CGRectMake(10, kScreenHeight/2 + 50, self.view.frame.size.width-20, 45)];
     [_registerButton setTitle:@"注册" forState:UIControlStateNormal];
     [_registerButton setBackgroundColor:[UIColor colorFromHexCode:@"12B7F5"]];
     [_registerButton addTarget:self action:@selector(registerButtonClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -141,7 +160,7 @@
     NSString *configPath = [[NSBundle mainBundle] pathForResource:@"UserData" ofType:@"plist"];
     //通过目录获取里面的存储数组
     NSArray *configData = [[NSArray alloc] initWithContentsOfFile:configPath];
-    //另建一个数组作为添加数组
+    //另建一个数组作为添加数组aa
     NSMutableArray *muarr = [NSMutableArray arrayWithArray:configData];
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithObjectsAndKeys:_ID,@"id", nil];
     [muarr addObject:dic];
