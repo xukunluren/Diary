@@ -25,6 +25,8 @@
 #import "videoView.h"
 #import "editDiaryModel.h"
 #import "CRToast.h"
+#import "SecondItemViewController.h"
+#import "GroupListViewController.h"
 //Image default max size
 #define IMAGE_MAX_SIZE ([UIScreen mainScreen].bounds.size.width-20)
 
@@ -133,11 +135,22 @@
     [switchButton addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
     [openOrNot addSubview:switchButton];
 }
+
+#pragma mark  分组列表部分
 //当前分组列表View
 -(void)setEditOfGroups{
     _editOfGroups = [[EditOfGroups alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
- 
+    UITapGestureRecognizer *ges = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editGroupTap:)];
+    [_editOfGroups addGestureRecognizer:ges];
     [self.textView addSubview:_editOfGroups];
+}
+
+-(void)editGroupTap:(UITapGestureRecognizer*)gap{
+    GroupListViewController *list = [[GroupListViewController alloc] init];
+    list.selectedIndexPath = 0;
+    [self.navigationController pushViewController:list animated:YES];
+    
+
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -214,16 +227,8 @@
 
 //键盘即将隐藏
 - (void)onKeyboardWillHideNotification:(NSNotification *)notification {
-    //Reset constraint constant by keyboard height
-    //    if ([notification.name isEqualToString:UIKeyboardWillShowNotification]) {
-    //        _willhiddleKeyBoard = NO;
-    //        CGRect keyboardFrame = ((NSValue *) notification.userInfo[UIKeyboardFrameEndUserInfoKey]).CGRectValue;
-    //        _bottomConstraint.constant = keyboardFrame.size.height;
-    //    } else if ([notification.name isEqualToString:UIKeyboardWillHideNotification]) {
     _willhiddleKeyBoard = YES;
     _bottomConstraint.constant = -80;
-    //}
-    //Animate change
     [UIView animateWithDuration:3.0f animations:^{
         [self.view layoutIfNeeded];
     }];

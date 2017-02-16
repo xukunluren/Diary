@@ -1,14 +1,15 @@
 //
-//  FirstItemViewController.m
+//  GroupListViewController.m
 //  Diary
 //
-//  Created by xukun on 2017/1/13.
+//  Created by xukun on 2017/2/16.
 //  Copyright © 2017年 xukun. All rights reserved.
 //
 
-#import "SecondItemViewController.h"
+#import "GroupListViewController.h"
 #import "EditViewController.h"
 #import "DiaryGroupViewController.h"
+#import "NewGroupViewController.h"
 
 #define DIC_EXPANDED @"expanded" //是否是展开 0收缩 1展开
 
@@ -18,27 +19,44 @@
 
 #define CELL_HEIGHT 50.0f
 
-
-
-@interface SecondItemViewController ()<UITableViewDelegate,UITableViewDataSource> {
+@interface GroupListViewController ()<UITableViewDelegate,UITableViewDataSource> {
     NSMutableArray *_dataArray;
 }
 @property(nonatomic,strong) UITableView *groupTable;
-
 @end
 
-@implementation SecondItemViewController
+@implementation GroupListViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
+    [self setBackWithText:@"取消"];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStyleDone target:self action:@selector(rightButtonClick)];
+    self.title = @"选择分组";
     [self initTableView];
-   // [self initDataSource];
-    
- 
+    [self initButtomView];
+}
+-(void)rightButtonClick{
+    NSLog(@"选择保存");
 }
 
+-(void)initButtomView{
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, ScreenHeight-40, ScreenWidth, 40)];
+    [button setTitle:@"添加分组" forState:UIControlStateNormal];
+    [button setTintColor:[UIColor whiteColor]];
+    [button.titleLabel setFont:[UIFont systemFontOfSize:14.0]];
+    [button setBackgroundColor:[UIColor colorFromHexCode:@"12B7F5"]];
+    [button addTarget:self action:@selector(addGroup:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+
+}
+
+-(void)addGroup:(id)sender{
+    NSLog(@"添加分组");
+    NewGroupViewController *new = [[NewGroupViewController alloc] init];
+    [self.navigationController pushViewController:new animated:YES];
+}
 -(void)initDataSource{
     
     _dataArray = [[NSMutableArray alloc] init];
@@ -58,7 +76,7 @@
         
         [_dataArray addObject:dic];
     }
-
+    
 }
 -(void)initTableView{
     [self.view addSubview:self.groupTable];
@@ -92,36 +110,56 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    DiaryGroupViewController *vc = [[DiaryGroupViewController alloc] init];
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
+    if (self.selectedIndexPath) {
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:self.selectedIndexPath];
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    
+    self.selectedIndexPath = indexPath;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+   
     static NSString *allOrderCellIdentifier = @"allOrderCellIdentifier";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:allOrderCellIdentifier];
     if (!cell) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:allOrderCellIdentifier];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.selectionStyle = UITableViewCellSelectionStyleNone; 
+        
     }
-    
-//    NSDictionary *dic = [_dataArray objectAtIndex:indexPath.section];
-//    NSArray *array = [dic objectForKey:DIC_ARARRY];
-//    
-//    NSInteger row = indexPath.row;
+    if ([self.selectedIndexPath isEqual:indexPath]){
+        
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+    if (indexPath.row == 0) {
+        [cell.textLabel setFont:[UIFont systemFontOfSize:13.0]];
+        [cell addSubview:[self drawThreadWithFram:CGRectMake(15, 45.5, ScreenWidth-30, 0.5) andColor:[UIColor colorFromHexCode:@"e7e7e7"]]];
+        cell.textLabel.text = @"我的日记";
+        [cell.textLabel setFont:[UIFont systemFontOfSize:14.0f]];
+    }else{
     
     [cell.textLabel setFont:[UIFont systemFontOfSize:13.0]];
     [cell addSubview:[self drawThreadWithFram:CGRectMake(15, 45.5, ScreenWidth-30, 0.5) andColor:[UIColor colorFromHexCode:@"e7e7e7"]]];
     cell.textLabel.text = @"分组名";
     [cell.textLabel setFont:[UIFont systemFontOfSize:14.0f]];
-    cell.detailTextLabel.text = @"12";
-    [cell.detailTextLabel setFont:[UIFont systemFontOfSize:12.0f]];
+    }
     return cell;
 }
 
 
-#pragma mark --------------------------------------------------------------
-#pragma mark - Action
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 @end

@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface EditOfGroups : UIView
+@property(nonatomic,strong)UILabel *groupLabel;//分组名称
 
 @end
