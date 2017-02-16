@@ -10,7 +10,7 @@
 #import "EditViewController.h"
 #import "DiaryGroupViewController.h"
 #import "NewGroupViewController.h"
-#import "groupModel.h"
+
 #import <Realm/Realm.h>
 
 #define DIC_EXPANDED @"expanded" //是否是展开 0收缩 1展开
@@ -67,8 +67,8 @@
     [self.view addSubview:button];
 
 }
-- (void)returnText:(ReturnText)nameAndRow{
-    self.returnText = nameAndRow;
+- (void)returnText:(ReturnText)model{
+    self.returnText = model;
 }
 
 -(void)addGroup:(id)sender{
@@ -148,9 +148,9 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
-   
+    groupModel *model = _dataArray[indexPath.row];
     NSDictionary *rowAndName = @{@(indexPath.row):cell.textLabel.text};
-    self.returnText(rowAndName);
+    self.returnText(model);
     
     self.selectedIndexPath = indexPath;
 }

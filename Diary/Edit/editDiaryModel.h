@@ -19,7 +19,7 @@
 @property BOOL havePictureInfo;
 @property BOOL haveAudioInfo;
 @property NSData *diaryInfo;
-
+@property long atGroup;//所在分组
 @property long diaryId;
 
 @end

@@ -45,8 +45,6 @@
 -(void)initDataSource{
     
     _dataArray = [[NSMutableArray alloc] init];
-    
-    
     RLMResults* tempArray = [groupModel allObjects];
     for (groupModel *model in tempArray) {
         [_dataArray addObject:model];

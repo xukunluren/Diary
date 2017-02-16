@@ -155,16 +155,11 @@
 -(void)editGroupTap:(UITapGestureRecognizer*)gap{
     GroupListViewController *list = [[GroupListViewController alloc] init];
     list.selectedIndexPath = [NSIndexPath indexPathForRow:_groupRow inSection:0];
-    [list  returnText:^(NSDictionary *nameAndRow) {
-        for(id key in nameAndRow) {
-            _editOfGroups.groupLabel.text = [nameAndRow objectForKey:key];
-            _groupRow = [key integerValue];
-            NSLog(@"key :%@  value :%@", key, [nameAndRow objectForKey:key]);
-        }
+    [list   returnText:^(groupModel *model) {
+        _editOfGroups.groupLabel.text = model.title;
+        _groupRow = model.groupId;
     }];
     [self.navigationController pushViewController:list animated:YES];
-    
-
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -173,7 +168,6 @@
     }else{
         NSAttributedString *temp = [[NSAttributedString alloc] initWithData:_diaryData options:@{NSDocumentTypeDocumentAttribute : NSRTFDTextDocumentType} documentAttributes:nil error:nil];     //读取
         [_textView setAttributedText:temp];
-
     }
     _GDkeyBoardHeigh = 2;//给键盘高度一个随意小的初始值
     _deleteAction = 0;
@@ -412,8 +406,6 @@
 
 //数据修改及保存
 -(void)dataStore{
-    
-    
     NSString *diaryText = _textView.text;
     NSString *title;
     if (diaryText.length>20) {
@@ -450,8 +442,6 @@
         editDiaryModel *model =   tempArray.firstObject;
         dId = model.diaryId+1;
         }
-        
-        
         //数据库操作对象
         RLMRealm *realm = [RLMRealm defaultRealm];
         //打开数据库事务
@@ -468,13 +458,19 @@
             model.haveWeatherInfo = YES;
             model.diaryInfo = data;
             model.diaryId = dId;
-            
+            //新的增加属于哪个组
+//            model.atGroup = _groupRow;
             
             //添加到数据库
             [realm addObject:model];
             //提交事务
             [realm commitWriteTransaction];
         }];
+        
+        
+        //分组model上的groupNum加一
+        
+        
     }else{
         RLMResults<editDiaryModel *> *model1 = [editDiaryModel   objectsWhere:@"diaryId == %@",@(_diaryId)];
         
@@ -492,15 +488,13 @@
         model.haveWeatherInfo = YES;
         model.diaryInfo = data;
         model.diaryId = _diaryId;
- 
+        model.atGroup = _groupRow;
         // 通过 id = 1 更新该书籍
         [realm beginWriteTransaction];
         [editDiaryModel createOrUpdateInRealm:realm withValue:model];
         [realm commitWriteTransaction];
-        NSLog(@"%@",model);
+       //若分组更改，对原分组的groupNum减一，新的分组groupNum➕1
         
-
-    
     }
     
 }

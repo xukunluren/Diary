@@ -7,13 +7,13 @@
 //
 
 #import "BaseViewController.h"
-
-typedef void (^ReturnText)(NSDictionary *nameAndRow);
+#import "groupModel.h"
+typedef void (^ReturnText)(groupModel *model);
 
 
 @interface GroupListViewController : BaseViewController
 @property(nonatomic,assign)NSIndexPath *selectedIndexPath;
 @property(nonatomic,copy) ReturnText returnText;
--(void)returnText:(ReturnText)nameAndRow;
+-(void)returnText:(ReturnText)model;
 
 @end
