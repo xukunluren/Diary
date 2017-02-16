@@ -9,6 +9,8 @@
 #import "SecondItemViewController.h"
 #import "EditViewController.h"
 #import "DiaryGroupViewController.h"
+#import "groupModel.h"
+#import <Realm/Realm.h>
 
 #define DIC_EXPANDED @"expanded" //是否是展开 0收缩 1展开
 
@@ -29,12 +31,13 @@
 
 @implementation SecondItemViewController
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     [self initTableView];
-   // [self initDataSource];
+    [self initDataSource];
     
  
 }
@@ -43,20 +46,10 @@
     
     _dataArray = [[NSMutableArray alloc] init];
     
-    for (int i=0; i < 5; i++) {
-        NSMutableArray *array = [[NSMutableArray alloc] init];
-        
-        for (int j=0; j < 5; j++) {
-            NSString *string = [NSString stringWithFormat:@"第%d组，第%d行",i,j];
-            
-            [array addObject:string];
-        }
-        NSString *string = [NSString stringWithFormat:@"第%d组",i];
-        
-        //创建一个字典存储数据
-        NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithObjectsAndKeys:array,DIC_ARARRY,string,DIC_TITILESTRING,[NSNumber numberWithInt:0],DIC_EXPANDED, nil];
-        
-        [_dataArray addObject:dic];
+    
+    RLMResults* tempArray = [groupModel allObjects];
+    for (groupModel *model in tempArray) {
+        [_dataArray addObject:model];
     }
 
 }
@@ -82,7 +75,7 @@
 //}
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return _dataArray.count;
 }
 
 
@@ -105,18 +98,14 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.selectionStyle = UITableViewCellSelectionStyleNone; 
     }
-    
-//    NSDictionary *dic = [_dataArray objectAtIndex:indexPath.section];
-//    NSArray *array = [dic objectForKey:DIC_ARARRY];
-//    
-//    NSInteger row = indexPath.row;
-    
+    groupModel *model = _dataArray[indexPath.row];
     [cell.textLabel setFont:[UIFont systemFontOfSize:13.0]];
     [cell addSubview:[self drawThreadWithFram:CGRectMake(15, 45.5, ScreenWidth-30, 0.5) andColor:[UIColor colorFromHexCode:@"e7e7e7"]]];
-    cell.textLabel.text = @"分组名";
+    cell.textLabel.text = model.title;
     [cell.textLabel setFont:[UIFont systemFontOfSize:14.0f]];
     cell.detailTextLabel.text = @"12";
     [cell.detailTextLabel setFont:[UIFont systemFontOfSize:12.0f]];
+    
     return cell;
 }
 

@@ -9,5 +9,7 @@
 #import "groupModel.h"
 
 @implementation groupModel
-
++(NSString*)primaryKey{
+    return @"groupId";
+}
 @end

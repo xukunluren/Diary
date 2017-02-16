@@ -8,8 +8,12 @@
 
 #import "BaseViewController.h"
 
+typedef void (^ReturnText)(NSDictionary *nameAndRow);
+
+
 @interface GroupListViewController : BaseViewController
 @property(nonatomic,assign)NSIndexPath *selectedIndexPath;
-
+@property(nonatomic,copy) ReturnText returnText;
+-(void)returnText:(ReturnText)nameAndRow;
 
 @end

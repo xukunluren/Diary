@@ -27,6 +27,7 @@
 #import "CRToast.h"
 #import "SecondItemViewController.h"
 #import "GroupListViewController.h"
+#import "groupModel.h"
 //Image default max size
 #define IMAGE_MAX_SIZE ([UIScreen mainScreen].bounds.size.width-20)
 
@@ -74,7 +75,7 @@
 @property (nonatomic, strong) NSMutableArray *weatherImageArray;//天气图片数组
 @property (nonatomic, strong) NSMutableArray *weatherIconArray;//天气图标名称按钮
 @property (nonatomic,assign) NSInteger deleteAction;//记录删除动作
-
+@property (nonatomic,assign) NSInteger groupRow;//分组第几行
 
 @property (strong, nonatomic) NSMutableAttributedString * context;//存储图文信息
 @end
@@ -143,17 +144,31 @@
     UITapGestureRecognizer *ges = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editGroupTap:)];
     [_editOfGroups addGestureRecognizer:ges];
     [self.textView addSubview:_editOfGroups];
+    
+   // [self addDataToDB];
+   
+    
+    
 }
+
 
 -(void)editGroupTap:(UITapGestureRecognizer*)gap{
     GroupListViewController *list = [[GroupListViewController alloc] init];
-    list.selectedIndexPath = 0;
+    list.selectedIndexPath = [NSIndexPath indexPathForRow:_groupRow inSection:0];
+    [list  returnText:^(NSDictionary *nameAndRow) {
+        for(id key in nameAndRow) {
+            _editOfGroups.groupLabel.text = [nameAndRow objectForKey:key];
+            _groupRow = [key integerValue];
+            NSLog(@"key :%@  value :%@", key, [nameAndRow objectForKey:key]);
+        }
+    }];
     [self.navigationController pushViewController:list animated:YES];
     
 
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _groupRow = 0;
     if (_NewDiary) {
     }else{
         NSAttributedString *temp = [[NSAttributedString alloc] initWithData:_diaryData options:@{NSDocumentTypeDocumentAttribute : NSRTFDTextDocumentType} documentAttributes:nil error:nil];     //读取
@@ -428,7 +443,7 @@
     if (_NewDiary) {
            //将 NSAttributedString 转为NSData
         NSInteger  dId;
-           RLMResults* tempArray = [[editDiaryModel allObjects] sortedResultsUsingKeyPath:@"diaryId" ascending:NO];
+        RLMResults* tempArray = [[editDiaryModel allObjects] sortedResultsUsingKeyPath:@"diaryId" ascending:NO];
         if (tempArray.count == 0) {
             dId = 0;
         }else{

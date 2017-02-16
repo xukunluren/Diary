@@ -9,5 +9,7 @@
 #import <Realm/Realm.h>
 
 @interface groupModel : RLMObject
-
+@property NSString *title;
+@property long groupId;
+@property long diaryNum;
 @end
