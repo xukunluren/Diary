@@ -249,6 +249,39 @@
     cell.timeLabel.text = edit.time;
     cell.assistNumLabel.text = [NSString stringWithFormat: @"%ld", (long)edit.supportNum];
     
+    switch (edit.weatherType) {
+        case WeatherEqingtian:
+            cell.weatherImageView.image = [UIImage imageNamed:@"qingtian"];
+            break;
+        case WeatherEduoyun:
+            cell.weatherImageView.image = [UIImage imageNamed:@"duoyun"];
+            break;
+        case WeatherEfeng:
+            cell.weatherImageView.image = [UIImage imageNamed:@"feng"];
+            break;
+        case WeatherExiaoyu:
+            cell.weatherImageView.image = [UIImage imageNamed:@"xiaoyu"];
+            break;
+        case WeatherEdayu:
+            cell.weatherImageView.image = [UIImage imageNamed:@"dayu"];
+            break;
+        case WeatherEshandian:
+            cell.weatherImageView.image = [UIImage imageNamed:@"lei"];
+            break;
+        case WeatherExue:
+            cell.weatherImageView.image = [UIImage imageNamed:@"xue"];
+            break;
+        case WeatherEwumai:
+            cell.weatherImageView.image = [UIImage imageNamed:@"wu"];
+            break;
+        case WeatherENoSelect://未选择天气情况，设置默认的天气logo
+            cell.weatherImageView.image = [UIImage imageNamed:@"weather"];
+            break;
+            
+        default:
+            break;
+    }
+    
     return cell;
 }
 
@@ -259,6 +292,9 @@
     rich.NewDiary = NO;
     rich.diaryData = edit.diaryInfo;
     rich.diaryId = edit.diaryId;
+    rich.atGroup = edit.atGroup;
+    rich.editDiary = edit;
+    
     [self.navigationController pushViewController:rich animated:YES];
 }
 

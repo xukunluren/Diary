@@ -11,6 +11,7 @@
 #import "DiaryGroupViewController.h"
 #import "groupModel.h"
 #import <Realm/Realm.h>
+#import "NewGroupViewController.h"
 
 #define DIC_EXPANDED @"expanded" //是否是展开 0收缩 1展开
 
@@ -30,18 +31,24 @@
 @end
 
 @implementation SecondItemViewController
-
+-(void)viewWillAppear:(BOOL)animated{
+    NSLog(@"你好");
+     [self initDataSource];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(rightDown)];
     [self initTableView];
-    [self initDataSource];
-    
- 
 }
 
+-(void)rightDown{
+    NewGroupViewController *new = [[NewGroupViewController alloc] init];
+    [self.navigationController pushViewController:new animated:YES];
+
+}
 -(void)initDataSource{
     
     _dataArray = [[NSMutableArray alloc] init];
@@ -49,6 +56,7 @@
     for (groupModel *model in tempArray) {
         [_dataArray addObject:model];
     }
+    [_groupTable reloadData];
 
 }
 -(void)initTableView{
@@ -101,7 +109,7 @@
     [cell addSubview:[self drawThreadWithFram:CGRectMake(15, 45.5, ScreenWidth-30, 0.5) andColor:[UIColor colorFromHexCode:@"e7e7e7"]]];
     cell.textLabel.text = model.title;
     [cell.textLabel setFont:[UIFont systemFontOfSize:14.0f]];
-    cell.detailTextLabel.text = @"12";
+    cell.detailTextLabel.text =[NSString stringWithFormat:@"%ld",model.diaryNum] ;
     [cell.detailTextLabel setFont:[UIFont systemFontOfSize:12.0f]];
     
     return cell;

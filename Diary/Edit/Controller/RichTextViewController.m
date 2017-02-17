@@ -75,7 +75,13 @@
 @property (nonatomic, strong) NSMutableArray *weatherImageArray;//天气图片数组
 @property (nonatomic, strong) NSMutableArray *weatherIconArray;//天气图标名称按钮
 @property (nonatomic,assign) NSInteger deleteAction;//记录删除动作
-@property (nonatomic,assign) NSInteger groupRow;//分组第几行
+@property (nonatomic,assign) long groupRow;//分组第几行
+
+@property (nonatomic,assign) NSInteger groupdiaryNum;//分组有几篇文章
+@property (nonatomic,strong) groupModel *groupModel;//分组模型
+
+@property (nonatomic,assign) NSInteger weatherType;//天气类型
+@property (nonatomic,assign) BOOL weatherSelct;//天气类型
 
 @property (strong, nonatomic) NSMutableAttributedString * context;//存储图文信息
 @end
@@ -92,6 +98,7 @@
     BOOL haveAudioInfo;
     BOOL havePictureInfo;
     BOOL haveWeatherInfo;
+    NSString *groupTitle;//分组title
 }
 +(instancetype)ViewController
 {
@@ -144,6 +151,11 @@
     UITapGestureRecognizer *ges = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editGroupTap:)];
     [_editOfGroups addGestureRecognizer:ges];
     [self.textView addSubview:_editOfGroups];
+    if (_NewDiary) {
+        
+    }else{
+    _editOfGroups.groupLabel.text = _editDiary.atGroupTitle;
+    }
     
    // [self addDataToDB];
    
@@ -153,17 +165,26 @@
 
 
 -(void)editGroupTap:(UITapGestureRecognizer*)gap{
+    _groupModel = [[groupModel alloc] init];
     GroupListViewController *list = [[GroupListViewController alloc] init];
-    list.selectedIndexPath = [NSIndexPath indexPathForRow:_groupRow inSection:0];
+    if (_NewDiary) {
+         list.selectedIndexPath = [NSIndexPath indexPathForRow:_groupRow inSection:0];
+    }else{
+         list.selectedIndexPath = [NSIndexPath indexPathForRow:_editDiary.atGroup inSection:0];
+    }
+    
     [list   returnText:^(groupModel *model) {
         _editOfGroups.groupLabel.text = model.title;
         _groupRow = model.groupId;
+        groupTitle = model.title;
+        _groupdiaryNum = model.diaryNum;
     }];
     [self.navigationController pushViewController:list animated:YES];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     _groupRow = 0;
+    groupTitle = @"我的日记";
     if (_NewDiary) {
     }else{
         NSAttributedString *temp = [[NSAttributedString alloc] initWithData:_diaryData options:@{NSDocumentTypeDocumentAttribute : NSRTFDTextDocumentType} documentAttributes:nil error:nil];     //读取
@@ -458,8 +479,15 @@
             model.haveWeatherInfo = YES;
             model.diaryInfo = data;
             model.diaryId = dId;
+            model.weatherType = _weatherType;
+            if (_weatherSelct) {
+                model.weatherType = _weatherType;
+            }else{
+             model.weatherType = 8;
+            }
             //新的增加属于哪个组
-//            model.atGroup = _groupRow;
+            model.atGroup = _groupRow;
+            model.atGroupTitle = groupTitle;
             
             //添加到数据库
             [realm addObject:model];
@@ -469,11 +497,19 @@
         
         
         //分组model上的groupNum加一
+        [self addGroupModelNum];
         
         
     }else{
         RLMResults<editDiaryModel *> *model1 = [editDiaryModel   objectsWhere:@"diaryId == %@",@(_diaryId)];
+        long weatherty = 0;
+        long groupAtRow = 0;
+        for (editDiaryModel *modelaa in model1) {
+            weatherty = modelaa.weatherType;
+            groupAtRow = modelaa.atGroup;
+        }
         
+
         RLMRealm *realm = [RLMRealm defaultRealm];
  
         editDiaryModel *model = [[editDiaryModel alloc] init];
@@ -488,18 +524,83 @@
         model.haveWeatherInfo = YES;
         model.diaryInfo = data;
         model.diaryId = _diaryId;
+        //对日记所在的分组进行记录
         model.atGroup = _groupRow;
+        model.atGroupTitle = groupTitle;
+        if (_weatherSelct) {
+           model.weatherType = _weatherType;
+        }else{
+           model.weatherType =  weatherty;
+        }
+    
         // 通过 id = 1 更新该书籍
         [realm beginWriteTransaction];
         [editDiaryModel createOrUpdateInRealm:realm withValue:model];
         [realm commitWriteTransaction];
        //若分组更改，对原分组的groupNum减一，新的分组groupNum➕1
-        
+        [self changeGroup];
     }
     
 }
 
+-(void)addGroupModelNum{
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    groupModel *model = [[groupModel alloc] init];
 
+    model.groupId = _groupRow;
+    model.title = groupTitle;
+    
+    if (_groupRow == 0) {
+        RLMResults<groupModel *> *model1 = [groupModel   objectsWhere:@"groupId == %@",@(_groupRow)];
+        for (groupModel *modelaa in model1) {
+           model.diaryNum = modelaa.diaryNum+1;
+        }
+        
+    }else{
+    model.diaryNum = _groupdiaryNum+1;
+    }
+    
+    // 通过 id = 1 更新该书籍
+    [realm beginWriteTransaction];
+    [groupModel createOrUpdateInRealm:realm withValue:model];
+    [realm commitWriteTransaction];
+}
+
+-(void)changeGroup{
+    
+    if (_atGroup ==_groupRow) {
+        NSLog(@"do nothing");
+    }
+    else
+    {
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        groupModel *model = [[groupModel alloc] init];
+        
+        model.groupId = _groupRow;
+        model.title = groupTitle;
+        model.diaryNum = _groupdiaryNum+1;
+        // 通过 id = 1 更新该书籍
+        [realm beginWriteTransaction];
+        [groupModel createOrUpdateInRealm:realm withValue:model];
+        [realm commitWriteTransaction];
+        
+        
+        groupModel *model1 = [[groupModel alloc] init];
+        
+        model1.groupId = _atGroup;
+        model1.title = groupTitle;
+        if (_groupdiaryNum == 0) {
+            model1.diaryNum = 0;
+        }else{
+            model1.diaryNum = _groupdiaryNum-1;
+        }
+        // 通过 id = 1 更新该书籍
+        [realm beginWriteTransaction];
+        [groupModel createOrUpdateInRealm:realm withValue:model1];
+        [realm commitWriteTransaction];
+    }
+
+}
 #pragma mark 滚动事件
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
 }
@@ -683,6 +784,7 @@
     return CGSizeMake(itemWidth, itemHeight);
 }
 - (IBAction)weatherChose:(id)sender {
+    _weatherSelct = NO;
     [_textView becomeFirstResponder];
     [self initData];
     CGSize size = [self itemSize];
@@ -713,6 +815,8 @@
 
 -(void)itemClicked:(UIButton *)button{
     NSLog(@"%ld",(long)button.tag);
+    _weatherSelct = YES;
+    _weatherType = button.tag;
     
 }
 //录音
