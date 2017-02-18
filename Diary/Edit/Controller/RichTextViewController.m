@@ -185,6 +185,7 @@
     [super viewDidLoad];
     _groupRow = 0;
     groupTitle = @"我的日记";
+    _weatherType = 8;
     if (_NewDiary) {
     }else{
         NSAttributedString *temp = [[NSAttributedString alloc] initWithData:_diaryData options:@{NSDocumentTypeDocumentAttribute : NSRTFDTextDocumentType} documentAttributes:nil error:nil];     //读取
@@ -339,8 +340,6 @@
 }
 -(void)setInitLocation
 {
-    
-    
     self.locationStr=nil;
     self.locationStr=[[NSMutableAttributedString alloc]initWithAttributedString:self.textView.attributedText];
     //重新设置位置
@@ -816,8 +815,16 @@
 -(void)itemClicked:(UIButton *)button{
     NSLog(@"%ld",(long)button.tag);
     _weatherSelct = YES;
-    _weatherType = button.tag;
     
+//    if (_weatherType == button.tag) {
+//        
+//    }else{
+//    ItemView *itemView  = (ItemView*) button;
+//    [itemView setTitle:_weatherIconArray[_weatherType] imageName: _weatherImageArray[_weatherType]];
+//    _weatherType = button.tag;
+//    [itemView setTitle:_weatherIconArray[_weatherType] imageName: [NSString stringWithFormat:@"%@_select",_weatherImageArray[_weatherType]]];
+//    
+//    }
 }
 //录音
 - (IBAction)colorClick:(UIButton *)sender {

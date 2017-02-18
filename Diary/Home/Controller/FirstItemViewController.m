@@ -12,6 +12,7 @@
 #import "RichTextViewController.h"
 #import "HomePageIfNoDataView.h"
 #import "editDiaryModel.h"
+#import <Realm/Realm.h>
 
 
 #define kSearchBackgroudViewHeight 40
@@ -217,6 +218,7 @@
     UIAlertAction *cancelButton = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         /** 确定删除日记*/
+        
     }];
     [alertVC addAction:cancelButton];
     [alertVC addAction:okButton];
@@ -251,31 +253,31 @@
     
     switch (edit.weatherType) {
         case WeatherEqingtian:
-            cell.weatherImageView.image = [UIImage imageNamed:@"qingtian"];
+            cell.weatherImageView.image = [UIImage imageNamed:@"Eqingtian_select"];
             break;
         case WeatherEduoyun:
-            cell.weatherImageView.image = [UIImage imageNamed:@"duoyun"];
+            cell.weatherImageView.image = [UIImage imageNamed:@"Eduoyun_select"];
             break;
         case WeatherEfeng:
-            cell.weatherImageView.image = [UIImage imageNamed:@"feng"];
+            cell.weatherImageView.image = [UIImage imageNamed:@"Efeng_select"];
             break;
         case WeatherExiaoyu:
-            cell.weatherImageView.image = [UIImage imageNamed:@"xiaoyu"];
+            cell.weatherImageView.image = [UIImage imageNamed:@"Exiaoyu_select"];
             break;
         case WeatherEdayu:
-            cell.weatherImageView.image = [UIImage imageNamed:@"dayu"];
+            cell.weatherImageView.image = [UIImage imageNamed:@"Edayu_select"];
             break;
         case WeatherEshandian:
-            cell.weatherImageView.image = [UIImage imageNamed:@"lei"];
+            cell.weatherImageView.image = [UIImage imageNamed:@"Eshandian_select"];
             break;
         case WeatherExue:
-            cell.weatherImageView.image = [UIImage imageNamed:@"xue"];
+            cell.weatherImageView.image = [UIImage imageNamed:@"Exue_select"];
             break;
         case WeatherEwumai:
-            cell.weatherImageView.image = [UIImage imageNamed:@"wu"];
+            cell.weatherImageView.image = [UIImage imageNamed:@"Ewumai_select"];
             break;
         case WeatherENoSelect://未选择天气情况，设置默认的天气logo
-            cell.weatherImageView.image = [UIImage imageNamed:@"weather"];
+            cell.weatherImageView.image = [UIImage imageNamed:@"weather_icon"];
             break;
             
         default:
