@@ -12,7 +12,6 @@
 #import "RichTextViewController.h"
 #import "HomePageIfNoDataView.h"
 #import "editDiaryModel.h"
-#import <Realm/Realm.h>
 #import "CRToast.h"
 
 
@@ -40,7 +39,7 @@
 @implementation FirstItemViewController
 
 -(void)viewWillAppear:(BOOL)animated{
-    _diaryInfoArray = [[NSMutableArray alloc] init];
+//    _diaryInfoArray = [[NSMutableArray alloc] init];
     [_diaryInfoArray removeAllObjects];
     RLMResults* tempArray = [editDiaryModel allObjects];
     for (editDiaryModel* model in tempArray) {
@@ -56,7 +55,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor colorFromHexCode:@"eeeeee"];
-    
+     _diaryInfoArray = [[NSMutableArray alloc] init];
     [self setTitle:@"好记"];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(rightDown)];
     _diaryInfoArray = [[NSMutableArray alloc] init];
@@ -70,7 +69,7 @@
 
     if (_diaryInfoArray.count>0) {
     }else{
-        [self.view addSubview:self.pageView];
+         [self.view addSubview:self.pageView];
     }
 
     
@@ -79,11 +78,12 @@
 
 
 
+
 - (UIView *)pageView{
     if (!_pageView) {
         _pageView = [[UIView alloc] initWithFrame:self.view.bounds];
         [_pageView setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
-        
+       
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, ScreenHeight*0.45, ScreenWidth, 30)];
         [label setText:@"今天遇到什么好玩的事情了呢？"];
         
@@ -100,7 +100,7 @@
         [button setTintColor:[UIColor whiteColor]];
         [button addTarget:self action:@selector(rightDown) forControlEvents:UIControlEventTouchUpInside];
         [_pageView addSubview:button];
-        
+
     }
     return _pageView;
 }
@@ -239,15 +239,15 @@
 
 /** 添加弹框*/
 - (void)initAlertControllerWithId:(editDiaryModel *)edit {
+   
     
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"请注意" message:@"日记一旦删除，将无法找回!" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancelButton = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         /** 确定删除日记*/
-        /** 确定删除日记*/
         RLMRealm *realm = [RLMRealm defaultRealm];
         [realm beginWriteTransaction];
-         //RLMResults<editDiaryModel *> *model = [editDiaryModel objectsWhere:@"diaryId == %@",@(diaryid)];
+        RLMResults<editDiaryModel *> *model = [editDiaryModel objectsWhere:@"diaryId == %@",@(diaryid)];
         [realm deleteObject:edit];
         [realm commitWriteTransaction];
         [self showToast];
@@ -269,7 +269,6 @@
     [self presentViewController:alertVC animated:YES completion:nil];
 
 }
-
 //删除成功提示
 -(void)showToast{
     [CRToastManager setDefaultOptions:@{kCRToastNotificationTypeKey : @(CRToastTypeNavigationBar),
@@ -297,8 +296,6 @@
     
 }
 
-
-
 #pragma mark -------------------------------------------------------------
 #pragma mark UITableViewDataSource && UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -323,39 +320,6 @@
     cell.timeLabel.text = edit.time;
     cell.assistNumLabel.text = [NSString stringWithFormat: @"%ld", (long)edit.supportNum];
     
-    switch (edit.weatherType) {
-        case WeatherEqingtian:
-            cell.weatherImageView.image = [UIImage imageNamed:@"Eqingtian_select"];
-            break;
-        case WeatherEduoyun:
-            cell.weatherImageView.image = [UIImage imageNamed:@"Eduoyun_select"];
-            break;
-        case WeatherEfeng:
-            cell.weatherImageView.image = [UIImage imageNamed:@"Efeng_select"];
-            break;
-        case WeatherExiaoyu:
-            cell.weatherImageView.image = [UIImage imageNamed:@"Exiaoyu_select"];
-            break;
-        case WeatherEdayu:
-            cell.weatherImageView.image = [UIImage imageNamed:@"Edayu_select"];
-            break;
-        case WeatherEshandian:
-            cell.weatherImageView.image = [UIImage imageNamed:@"Eshandian_select"];
-            break;
-        case WeatherExue:
-            cell.weatherImageView.image = [UIImage imageNamed:@"Exue_select"];
-            break;
-        case WeatherEwumai:
-            cell.weatherImageView.image = [UIImage imageNamed:@"Ewumai_select"];
-            break;
-        case WeatherENoSelect://未选择天气情况，设置默认的天气logo
-            cell.weatherImageView.image = [UIImage imageNamed:@"weather_icon"];
-            break;
-            
-        default:
-            break;
-    }
-    
     return cell;
 }
 
@@ -366,9 +330,6 @@
     rich.NewDiary = NO;
     rich.diaryData = edit.diaryInfo;
     rich.diaryId = edit.diaryId;
-    rich.atGroup = edit.atGroup;
-    rich.editDiary = edit;
-    
     [self.navigationController pushViewController:rich animated:YES];
 }
 
@@ -399,14 +360,13 @@
 {
     UITableViewRowAction *action1 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
         
-        editDiaryModel *edit = _diaryInfoArray[indexPath.row];
+         editDiaryModel *edit = _diaryInfoArray[indexPath.row];
         
         NSLog(@"点击了删除");
         [self initAlertControllerWithId:edit];
         tableView.editing = NO;
     }];
-    
-    
+   
     return @[action1];
 }
 
