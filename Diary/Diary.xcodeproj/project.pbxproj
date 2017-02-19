@@ -1471,10 +1471,10 @@
 		67CC90991E28B84100761832 /* ImageResource */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
+
 				58E366FA1E59499A0073221F /* likeBtn.png */,
 				58E366F81E5949830073221F /* dislikeBtn.png */,
-=======
+
 				67AC58CA1E484BC1001D7BAE /* luyinicon@2x.png */,
 				67C06D2C1E3493AC00EBA5C6 /* myphoto@2x.png */,
 				67C06D2D1E3493AC00EBA5C6 /* picture@2x.png */,
@@ -1489,7 +1489,7 @@
 				67C06D101E348C1900EBA5C6 /* list_tick_round@3x.png */,
 				67C06D131E348C1900EBA5C6 /* photo_camera@2x.png */,
 				67C06D141E348C1900EBA5C6 /* photo_camera@3x.png */,
->>>>>>> 1a44e020131270a547a483d13780057737067f3b
+
 				67AC59E01E55783E001D7BAE /* home_dianzanSelect@2x.png */,
 				67AC59DE1E55781C001D7BAE /* home_dianzan@2x.png */,
 				67AC59DC1E556323001D7BAE /* home_weather1@2x.png */,
