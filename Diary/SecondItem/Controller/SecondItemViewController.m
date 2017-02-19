@@ -7,7 +7,6 @@
 //
 
 #import "SecondItemViewController.h"
-#import "EditViewController.h"
 #import "DiaryGroupViewController.h"
 #import "groupModel.h"
 #import <Realm/Realm.h>

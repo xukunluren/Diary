@@ -7,7 +7,6 @@
 //
 
 #import "FirstItemViewController.h"
-#import "EditViewController.h"
 #import "HomePageCell.h"
 #import "RichTextViewController.h"
 #import "HomePageIfNoDataView.h"
@@ -130,7 +129,7 @@
 - (void)rightDown
 {
     
-    RichTextViewController * vc=[RichTextViewController ViewController];
+    RichTextViewController * vc=[[RichTextViewController alloc] init];
     vc.NewDiary = YES;
     vc.finished=^(id content){
         NSArray * arr=(NSArray *)content;
@@ -362,7 +361,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"%ld",(long)indexPath.row);
     editDiaryModel *edit = _diaryInfoArray[indexPath.row];
-    RichTextViewController *rich = [RichTextViewController ViewController];
+    RichTextViewController *rich = [[RichTextViewController alloc] init];
     rich.NewDiary = NO;
     rich.diaryData = edit.diaryInfo;
     rich.diaryId = edit.diaryId;

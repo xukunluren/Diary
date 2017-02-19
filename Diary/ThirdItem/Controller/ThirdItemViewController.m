@@ -7,7 +7,6 @@
 //
 
 #import "ThirdItemViewController.h"
-#import "EditViewController.h"
 #import "exploreView.h"
 #import <QuartzCore/QuartzCore.h>
 

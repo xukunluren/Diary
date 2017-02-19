@@ -22,30 +22,28 @@
 }
 
 -(void)setView{
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 16, 16)];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 8, 16, 16)];
     imageView.image = [UIImage imageNamed:@"rijiben"];
     [self addSubview:imageView];
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(25, 3, 50, 20)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(25, 5, 50, 20)];
     [label setText:@"当前分组:"];
     [label setTextColor:[UIColor colorWithHexString:@"12B7F5"]];
     [label setFont:[UIFont systemFontOfSize:10.0]];
     [self addSubview:label];
     
-    _groupLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 3, ScreenWidth - 94, 20)];
+    _groupLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 5, ScreenWidth - 94, 20)];
     [_groupLabel setText:@"我的日记"];
     [_groupLabel setTextColor:[UIColor colorWithHexString:@"12B7F5"]];
     _groupLabel.textAlignment = NSTextAlignmentLeft;
     [_groupLabel setFont:[UIFont systemFontOfSize:10.0]];
     [self addSubview:_groupLabel];
     
-    
-    UIImageView *imageView1 = [[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth-25, 6, 13, 13)];
+    UIImageView *imageView1 = [[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth-25, 8, 13, 13)];
     imageView1.image = [UIImage imageNamed:@"right"];
     [self addSubview:imageView1];
     
-    
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(2, 26, ScreenWidth-10, 0.5)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(2, 34, ScreenWidth-10, 0.5)];
     view.backgroundColor = [UIColor colorWithHexString:@"e7e7e7"];
     [self addSubview:view];
     
