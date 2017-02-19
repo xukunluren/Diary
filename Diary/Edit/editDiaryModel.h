@@ -19,7 +19,9 @@
 @property BOOL havePictureInfo;
 @property BOOL haveAudioInfo;
 @property NSData *diaryInfo;
+@property long weatherType;//天气类型
 @property long atGroup;//所在分组
+@property NSString *atGroupTitle;//所在分组
 @property long diaryId;
 
 @end
