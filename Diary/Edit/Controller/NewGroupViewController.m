@@ -44,38 +44,12 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [self dataStore];//数据保存数据库
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self showToast];
+            [self showToastWithString:@"保存成功"];
             [self.navigationController popViewControllerAnimated:YES];
         });
     });
 }
 
-
--(void)showToast{
-    [CRToastManager setDefaultOptions:@{kCRToastNotificationTypeKey : @(CRToastTypeNavigationBar),
-                                        kCRToastFontKey             : [UIFont fontWithName:@"HelveticaNeue-Light" size:16],
-                                        kCRToastTextColorKey        : [UIColor whiteColor],
-                                        kCRToastBackgroundColorKey  : [UIColor orangeColor]}];
-    
-    
-    
-    
-    NSMutableDictionary *options = [@{
-                                      kCRToastTextKey : @"保存成功",
-                                      kCRToastTextAlignmentKey : @(NSTextAlignmentLeft),
-                                      //kCRToastBackgroundColorKey : [UIColor redColor],
-                                      kCRToastAnimationInTypeKey : @(CRToastAnimationTypeGravity),
-                                      kCRToastAnimationOutTypeKey : @(CRToastAnimationTypeGravity),
-                                      kCRToastAnimationInDirectionKey : @(CRToastAnimationDirectionBottom),
-                                      kCRToastAnimationOutDirectionKey : @(CRToastAnimationDirectionTop),
-                                      kCRToastImageKey :[UIImage imageNamed:@"alert_icon.png"]
-                                      } mutableCopy];
-    [CRToastManager showNotificationWithOptions:[NSDictionary dictionaryWithDictionary:options]
-                                completionBlock:^{
-                                    NSLog(@"Completed");
-                                }];
-    
-}
 
 
 -(void)dataStore{

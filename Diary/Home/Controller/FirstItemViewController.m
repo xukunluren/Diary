@@ -249,7 +249,7 @@
          //RLMResults<editDiaryModel *> *model = [editDiaryModel objectsWhere:@"diaryId == %@",@(diaryid)];
         [realm deleteObject:edit];
         [realm commitWriteTransaction];
-        [self showToast];
+        [self showToastWithString:@"删除成功"];
         
         [_diaryInfoArray removeAllObjects];
         RLMResults* tempArray = [editDiaryModel allObjects];
@@ -269,32 +269,6 @@
 
 }
 
-//删除成功提示
--(void)showToast{
-    [CRToastManager setDefaultOptions:@{kCRToastNotificationTypeKey : @(CRToastTypeNavigationBar),
-                                        kCRToastFontKey             : [UIFont fontWithName:@"HelveticaNeue-Light" size:16],
-                                        kCRToastTextColorKey        : [UIColor whiteColor],
-                                        kCRToastBackgroundColorKey  : [UIColor orangeColor]}];
-    
-    
-    
-    
-    NSMutableDictionary *options = [@{
-                                      kCRToastTextKey : @"删除成功",
-                                      kCRToastTextAlignmentKey : @(NSTextAlignmentLeft),
-                                      //kCRToastBackgroundColorKey : [UIColor redColor],
-                                      kCRToastAnimationInTypeKey : @(CRToastAnimationTypeGravity),
-                                      kCRToastAnimationOutTypeKey : @(CRToastAnimationTypeGravity),
-                                      kCRToastAnimationInDirectionKey : @(CRToastAnimationDirectionBottom),
-                                      kCRToastAnimationOutDirectionKey : @(CRToastAnimationDirectionTop),
-                                      kCRToastImageKey :[UIImage imageNamed:@"alert_icon.png"]
-                                      } mutableCopy];
-    [CRToastManager showNotificationWithOptions:[NSDictionary dictionaryWithDictionary:options]
-                                completionBlock:^{
-                                    NSLog(@"Completed");
-                                }];
-    
-}
 
 
 
