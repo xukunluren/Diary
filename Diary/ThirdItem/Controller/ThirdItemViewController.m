@@ -10,10 +10,13 @@
 #import "exploreView.h"
 #import "CardHeader.h"
 
-#define CARD_NUM 5
+#define CARD_NUM 2
 #define MIN_INFO_NUM 10
 #define CARD_SCALE 0.95
 
+#define TOW_BUTTON_WIDTH (kScreenWidth - 30)/2
+#define EXPLOREVIEW_WIDTH (kScreenWidth - 30)
+#define EXPLOREVIEW_HEIGHT (self.disLikeBtn.frame.origin.y - kNavigationBarHeight - 15)
 
 @interface ThirdItemViewController()<ExploreViewDelegate>
 
@@ -37,7 +40,7 @@
     [super viewDidLoad];
     
     self.title = @"ZTDraggableView";
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor colorFromHexCode:@"#f3f3f3"];
     
     self.allCards = [NSMutableArray array];
     self.sourceObject = [NSMutableArray array];
@@ -64,16 +67,19 @@
     
     
     self.disLikeBtn       = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.disLikeBtn.frame = CGRectMake(lengthFit(80), CARD_HEIGHT+lengthFit(150), 60, 60);
-    [self.disLikeBtn setImage:[UIImage imageNamed:@"dislikeBtn"] forState:UIControlStateNormal];
+    self.disLikeBtn.frame = CGRectMake(lengthFit(15), lengthFit(kScreenHeight - 49 - 15), TOW_BUTTON_WIDTH, 50);
+    self.disLikeBtn.backgroundColor = [UIColor whiteColor];
+    //[self.disLikeBtn setTtile:@"赞" forState:UIControlStateNormal];
+    [self.disLikeBtn setTitle:@"赞" forState:UIControlStateNormal];
+    [self.disLikeBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     [self.disLikeBtn addTarget:self action:@selector(leftButtonClickAction) forControlEvents:UIControlEventTouchUpInside];
-    self.disLikeBtn.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.disLikeBtn];
     
     self.liekBtn       = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.liekBtn.frame = CGRectMake(self.view.frame.size.width-lengthFit(80)-30 , CARD_HEIGHT+lengthFit(150), 60, 60);
-    self.liekBtn.backgroundColor = [UIColor clearColor];
-    [self.liekBtn setImage:[UIImage imageNamed:@"likeBtn"] forState:UIControlStateNormal];
+    self.liekBtn.frame = CGRectMake(CGRectGetMaxX(self.disLikeBtn.frame) , self.disLikeBtn.frame.origin.y, TOW_BUTTON_WIDTH, 50);
+    self.liekBtn.backgroundColor = [UIColor whiteColor];
+    [self.liekBtn setTitle:@"换" forState:UIControlStateNormal];
+    [self.liekBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     [self.liekBtn addTarget:self action:@selector(rightButtonClickAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.liekBtn];
     
@@ -95,7 +101,7 @@
         [UIView animateKeyframesWithDuration:0.5 delay:0.06*i options:UIViewKeyframeAnimationOptionCalculationModeLinear animations:^{
             
             card.center = finishPoint;
-            card.transform = CGAffineTransformMakeRotation(-ROTATION_ANGLE);
+            //card.transform = CGAffineTransformMakeRotation(-ROTATION_ANGLE);
             
         } completion:^(BOOL finished) {
             
@@ -161,7 +167,7 @@
             draggableView.transform = CGAffineTransformMakeRotation(0);
             if (i == 0) {
                             }
-            draggableView.frame = CGRectMake(20, 100 , kScreenWidth - 20, 400);
+            draggableView.frame = CGRectMake(lengthFit(15), kNavigationBarHeight + 15 , EXPLOREVIEW_WIDTH, EXPLOREVIEW_HEIGHT);
 
 //            if (i>0&&i<CARD_NUM-1) {
 //                exploreView *preDraggableView=[_allCards objectAtIndex:i-1];
@@ -195,15 +201,15 @@
         
 //        exploreView *draggableView = [[exploreView alloc]initWithFrame:CGRectMake([[UIScreen mainScreen]bounds].size.width+CARD_WIDTH, self.view.center.y-CARD_HEIGHT/2 , CARD_WIDTH, CARD_HEIGHT)];
 //
-        exploreView *draggableView = [[exploreView alloc]initWithFrame:CGRectMake(20, 100 , kScreenWidth - 20, 400)];
-        
-        if (i>0&&i<CARD_NUM-1) {
-            draggableView.transform=CGAffineTransformScale(draggableView.transform, pow(CARD_SCALE, i), pow(CARD_SCALE, i));
-        }else if(i==CARD_NUM-1){
-            draggableView.transform=CGAffineTransformScale(draggableView.transform, pow(CARD_SCALE, i-1), pow(CARD_SCALE, i-1));
-        }
-        draggableView.frame = CGRectMake(20, 100 , kScreenWidth - 20, 400);
-        draggableView.transform = CGAffineTransformMakeRotation(ROTATION_ANGLE);
+        exploreView *draggableView = [[exploreView alloc]initWithFrame:CGRectMake(lengthFit(15), kNavigationBarHeight + 15 , EXPLOREVIEW_WIDTH, EXPLOREVIEW_HEIGHT)];
+        NSLog(@"%@",NSStringFromCGRect(draggableView.frame));
+//        if (i>0&&i<CARD_NUM-1) {
+//            draggableView.transform=CGAffineTransformScale(draggableView.transform, pow(CARD_SCALE, i), pow(CARD_SCALE, i));
+//        }else if(i==CARD_NUM-1){
+//            draggableView.transform=CGAffineTransformScale(draggableView.transform, pow(CARD_SCALE, i-1), pow(CARD_SCALE, i-1));
+//        }
+        //draggableView.frame = CGRectMake(20, 100 , kScreenWidth - 20, 400);
+        draggableView.transform = CGAffineTransformMakeRotation(0);
         draggableView.delegate = self;
         
         [_allCards addObject:draggableView];
@@ -258,27 +264,6 @@
     //        NSLog(@"%d",_sourceObject.count);
 }
 
-#pragma mark - 滑动中更改其他卡片位置
--(void)moveCards:(CGFloat)distance{
-    
-    if (fabs(distance)<=PAN_DISTANCE) {
-        for (int i = 1; i<CARD_NUM-1; i++) {
-            exploreView *draggableView=_allCards[i];
-            exploreView *preDraggableView=[_allCards objectAtIndex:i-1];
-            
-            draggableView.transform=CGAffineTransformScale(draggableView.originalTransform, 1+(1/CARD_SCALE-1)*fabs(distance/PAN_DISTANCE)*0.6, 1+(1/CARD_SCALE-1)*fabs(distance/PAN_DISTANCE)*0.6);//0.6为缩减因数，使放大速度始终小于卡片移动速度
-            
-            CGPoint center=draggableView.center;
-            center.y=draggableView.originalCenter.y-(draggableView.originalCenter.y-preDraggableView.originalCenter.y)*fabs(distance/PAN_DISTANCE)*0.6;//此处的0.6同上
-            draggableView.center=center;
-        }
-    }
-    if (distance > 0) {
-        self.liekBtn.transform=CGAffineTransformMakeScale(1+0.1*fabs(distance/PAN_DISTANCE), 1+0.1*fabs(distance/PAN_DISTANCE));
-    } else {
-        self.disLikeBtn.transform=CGAffineTransformMakeScale(1+0.1*fabs(distance/PAN_DISTANCE), 1+0.1*fabs(distance/PAN_DISTANCE));
-    }
-}
 
 #pragma mark - 滑动终止后复原其他卡片
 -(void)moveBackCards{
