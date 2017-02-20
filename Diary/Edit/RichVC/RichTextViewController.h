@@ -17,6 +17,7 @@
 @property(nonatomic,strong) editDiaryModel *editDiary;
 @property(nonatomic,assign) long diaryId;
 @property(nonatomic,assign) long atGroup;
+@property(nonatomic,strong) NSString *groupTitle;
 
 @property (nonatomic,copy) void (^finished)(id  content);
 //+(instancetype)ViewController;

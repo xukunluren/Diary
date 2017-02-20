@@ -83,6 +83,7 @@
 @property (nonatomic,assign) NSInteger groupdiaryNum;//分组有几篇文章
 @property (nonatomic,strong) groupModel *groupModel;//分组模型
 @property (nonatomic,strong) editDiaryModel *editModel;//分组模型
+@property (nonatomic,assign) BOOL isTapToGroupPage;//分组是否点击事件
 
 @property (nonatomic,assign) NSInteger weatherType;//天气类型
 @property (nonatomic,assign) BOOL weatherSelct;//天气类型
@@ -138,7 +139,11 @@
     [_editOfGroups addGestureRecognizer:ges];
     [self.view addSubview:_editOfGroups];
     if (_NewDiary) {
-        
+        if (_groupTitle.length>0) {
+            _editOfGroups.groupLabel.text  = _groupTitle;
+        }else{
+            NSLog(@"默认的日记分类");
+        }
     }else{
     _editOfGroups.groupLabel.text = _editDiary.atGroupTitle;
     }
@@ -151,10 +156,17 @@
 
 
 -(void)editGroupTap:(UITapGestureRecognizer*)gap{
+    
+    _isTapToGroupPage = YES;
     _groupModel = [[groupModel alloc] init];
     GroupListViewController *list = [[GroupListViewController alloc] init];
     if (_NewDiary) {
-         list.selectedIndexPath = [NSIndexPath indexPathForRow:_groupRow inSection:0];
+        if (_groupTitle.length>0) {
+            list.selectedIndexPath = [NSIndexPath indexPathForRow:_atGroup inSection:0];
+        }else{
+            list.selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+        }
+        
     }else{
          list.selectedIndexPath = [NSIndexPath indexPathForRow:_editDiary.atGroup inSection:0];
     }
@@ -173,6 +185,7 @@
     _groupRow = 0;
     groupTitle = @"我的日记";
     _weatherType = 8;
+    _isTapToGroupPage = NO;
     
      [self setEditOfGroups];//添加日记分组view
     [self.view addSubview:self.textView];//设置日记书写区域
@@ -242,7 +255,6 @@
     [self.view addSubview:self.functionView];
     [self initGroupData];
    
-    
 }
 -(void)initGroupData{
     RLMResults* tempArray = [groupModel allObjects];
@@ -550,8 +562,14 @@
              model.weatherType = 8;
             }
             //新的增加属于哪个组
-            model.atGroup = _groupRow;
-            model.atGroupTitle = groupTitle;
+           
+            if (_isTapToGroupPage) {
+                 model.atGroupTitle = groupTitle;
+                 model.atGroup = _groupRow;
+            }else{
+                model.atGroupTitle = @"我的日记";
+            }
+           
             
             //添加到数据库
             [realm addObject:model];
@@ -590,8 +608,14 @@
         model.diaryInfo = data;
         model.diaryId = _diaryId;
         //对日记所在的分组进行记录
-        model.atGroup = _groupRow;
-        model.atGroupTitle = groupTitle;
+        if (_isTapToGroupPage) {
+            model.atGroup = _groupRow;
+            model.atGroupTitle = groupTitle;
+        }else{
+            model.atGroup = _atGroup;
+            model.atGroupTitle = _groupTitle;
+        }
+      
         if (_weatherSelct) {
            model.weatherType = _weatherType;
         }else{
@@ -633,6 +657,9 @@
 
 -(void)changeGroup{
     
+    if (!_isTapToGroupPage) {
+        NSLog(@"donoting");
+    }else{
     if (_atGroup ==_groupRow) {
         NSLog(@"do nothing");
     }
@@ -669,6 +696,7 @@
         [realm beginWriteTransaction];
         [groupModel createOrUpdateInRealm:realm withValue:model1];
         [realm commitWriteTransaction];
+    }
     }
 
 }

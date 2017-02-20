@@ -72,7 +72,10 @@
     }else{
         [self.view addSubview:self.pageView];
     }
-
+    
+    
+    
+    
     
 }
 
@@ -371,6 +374,7 @@
     rich.diaryData = edit.diaryInfo;
     rich.diaryId = edit.diaryId;
     rich.atGroup = edit.atGroup;
+    rich.groupTitle = edit.atGroupTitle;
     rich.editDiary = edit;
     
     [self.navigationController pushViewController:rich animated:YES];
