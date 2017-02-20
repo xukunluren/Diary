@@ -13,6 +13,7 @@
 #import "editDiaryModel.h"
 #import <Realm/Realm.h>
 #import "CRToast.h"
+#import "groupModel.h"
 
 
 #define kSearchBackgroudViewHeight 40
@@ -238,7 +239,7 @@
 
 /** 添加弹框*/
 - (void)initAlertControllerWithId:(editDiaryModel *)edit {
-    
+    long diaryAtGroup = edit.atGroup;
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"请注意" message:@"日记一旦删除，将无法找回!" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancelButton = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -250,6 +251,9 @@
         [realm deleteObject:edit];
         [realm commitWriteTransaction];
         [self showToastWithString:@"删除成功"];
+        
+        //删除成功后对应的分组的日记数量减一
+        [self reduceGroupDiaryNumWithGroupId:diaryAtGroup];
         
         [_diaryInfoArray removeAllObjects];
         RLMResults* tempArray = [editDiaryModel allObjects];
@@ -267,6 +271,33 @@
     [alertVC addAction:okButton];
     [self presentViewController:alertVC animated:YES completion:nil];
 
+}
+
+
+-(void)reduceGroupDiaryNumWithGroupId:(long)groupId{
+    
+    NSString *grouptitle;
+    long _groupdiaryNum = 0;
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    RLMResults<groupModel *> *groupM = [groupModel   objectsWhere:@"groupId == %@",@(groupId)];
+    for (groupModel *modelaa in groupM) {
+        grouptitle = modelaa.title;
+        _groupdiaryNum = modelaa.diaryNum;
+    }
+    
+    groupModel *model1 = [[groupModel alloc] init];
+    
+    model1.groupId = groupId;
+    model1.title = grouptitle;
+    if (_groupdiaryNum == 0) {
+        model1.diaryNum = 0;
+    }else{
+        model1.diaryNum = _groupdiaryNum-1;
+    }
+    // 通过 id = 1 更新该书籍
+    [realm beginWriteTransaction];
+    [groupModel createOrUpdateInRealm:realm withValue:model1];
+    [realm commitWriteTransaction];
 }
 
 

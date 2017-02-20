@@ -9,5 +9,6 @@
 #import "BaseViewController.h"
 
 @interface DiaryGroupViewController : BaseViewController
-@property(nonatomic,strong)NSString *title;
+@property(nonatomic,assign)NSString *title;
+@property(nonatomic,assign)long groupId;
 @end
