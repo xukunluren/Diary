@@ -7,6 +7,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "CRToast.h"
 
+
 #pragma mark - CRToast
 
 @interface CRToast : NSObject
