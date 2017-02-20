@@ -7,7 +7,6 @@
 //
 
 #import "FirstItemViewController.h"
-#import "EditViewController.h"
 #import "HomePageCell.h"
 #import "RichTextViewController.h"
 #import "HomePageIfNoDataView.h"
@@ -130,7 +129,7 @@
 - (void)rightDown
 {
     
-    RichTextViewController * vc=[RichTextViewController ViewController];
+    RichTextViewController * vc=[[RichTextViewController alloc] init];
     vc.NewDiary = YES;
     vc.finished=^(id content){
         NSArray * arr=(NSArray *)content;
@@ -250,7 +249,7 @@
          //RLMResults<editDiaryModel *> *model = [editDiaryModel objectsWhere:@"diaryId == %@",@(diaryid)];
         [realm deleteObject:edit];
         [realm commitWriteTransaction];
-        [self showToast];
+        [self showToastWithString:@"删除成功"];
         
         [_diaryInfoArray removeAllObjects];
         RLMResults* tempArray = [editDiaryModel allObjects];
@@ -270,32 +269,6 @@
 
 }
 
-//删除成功提示
--(void)showToast{
-    [CRToastManager setDefaultOptions:@{kCRToastNotificationTypeKey : @(CRToastTypeNavigationBar),
-                                        kCRToastFontKey             : [UIFont fontWithName:@"HelveticaNeue-Light" size:16],
-                                        kCRToastTextColorKey        : [UIColor whiteColor],
-                                        kCRToastBackgroundColorKey  : [UIColor orangeColor]}];
-    
-    
-    
-    
-    NSMutableDictionary *options = [@{
-                                      kCRToastTextKey : @"删除成功",
-                                      kCRToastTextAlignmentKey : @(NSTextAlignmentLeft),
-                                      //kCRToastBackgroundColorKey : [UIColor redColor],
-                                      kCRToastAnimationInTypeKey : @(CRToastAnimationTypeGravity),
-                                      kCRToastAnimationOutTypeKey : @(CRToastAnimationTypeGravity),
-                                      kCRToastAnimationInDirectionKey : @(CRToastAnimationDirectionBottom),
-                                      kCRToastAnimationOutDirectionKey : @(CRToastAnimationDirectionTop),
-                                      kCRToastImageKey :[UIImage imageNamed:@"alert_icon.png"]
-                                      } mutableCopy];
-    [CRToastManager showNotificationWithOptions:[NSDictionary dictionaryWithDictionary:options]
-                                completionBlock:^{
-                                    NSLog(@"Completed");
-                                }];
-    
-}
 
 
 
@@ -362,7 +335,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"%ld",(long)indexPath.row);
     editDiaryModel *edit = _diaryInfoArray[indexPath.row];
-    RichTextViewController *rich = [RichTextViewController ViewController];
+    RichTextViewController *rich = [[RichTextViewController alloc] init];
     rich.NewDiary = NO;
     rich.diaryData = edit.diaryInfo;
     rich.diaryId = edit.diaryId;

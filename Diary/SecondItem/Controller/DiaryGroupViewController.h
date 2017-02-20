@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface DiaryGroupViewController : BaseViewController
-
+@property(nonatomic,strong)NSString *title;
 @end

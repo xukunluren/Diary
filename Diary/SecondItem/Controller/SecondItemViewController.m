@@ -7,7 +7,6 @@
 //
 
 #import "SecondItemViewController.h"
-#import "EditViewController.h"
 #import "DiaryGroupViewController.h"
 #import "groupModel.h"
 #import <Realm/Realm.h>
@@ -91,8 +90,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    groupModel *model = _dataArray[indexPath.row];
     DiaryGroupViewController *vc = [[DiaryGroupViewController alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
+    vc.title = model.title;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

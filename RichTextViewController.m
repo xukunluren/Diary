@@ -29,8 +29,6 @@
 #import "GroupListViewController.h"
 #import "groupModel.h"
 #import "functionKeyView.h"
-#import "UIView+LQXkeyboard.h"
-//#import "MJExtension.h"
 //Image default max size
 #define IMAGE_MAX_SIZE ([UIScreen mainScreen].bounds.size.width-20)
 
@@ -82,7 +80,6 @@
 
 @property (nonatomic,assign) NSInteger groupdiaryNum;//分组有几篇文章
 @property (nonatomic,strong) groupModel *groupModel;//分组模型
-@property (nonatomic,strong) editDiaryModel *editModel;//分组模型
 
 @property (nonatomic,assign) NSInteger weatherType;//天气类型
 @property (nonatomic,assign) BOOL weatherSelct;//天气类型
@@ -112,18 +109,19 @@
 //    return ctrl;
 //}
 
-//-(void)CommomInit
-//{
-//    self.textView.delegate=self;
-//    self.font=DefaultFont;
-//    self.fontColor=[UIColor blackColor];
-//    self.location=0;
-//    self.isBold=NO;
-//    self.lineSapce=5;
-//    [self setInitLocation];
-//}
+-(void)CommomInit
+{
+    self.textView.delegate=self;
+    self.font=DefaultFont;
+    self.fontColor=[UIColor blackColor];
+    self.location=0;
+    self.isBold=NO;
+    self.lineSapce=5;
+    [self setInitLocation];
+}
 - (void)viewWillAppear:(BOOL)animated{
-
+  
+    
 }
 -(void)viewDidAppear:(BOOL)animated{
  
@@ -133,10 +131,10 @@
 #pragma mark  分组列表部分
 //当前分组列表View
 -(void)setEditOfGroups{
-    _editOfGroups = [[EditOfGroups alloc] initWithFrame:CGRectMake(0, KTopHeight, ScreenWidth, 35)];
+    _editOfGroups = [[EditOfGroups alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
     UITapGestureRecognizer *ges = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editGroupTap:)];
     [_editOfGroups addGestureRecognizer:ges];
-    [self.view addSubview:_editOfGroups];
+    [self.textView addSubview:_editOfGroups];
     if (_NewDiary) {
         
     }else{
@@ -169,12 +167,9 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view setBackgroundColor:[UIColor whiteColor]];
     _groupRow = 0;
     groupTitle = @"我的日记";
     _weatherType = 8;
-    
-     [self setEditOfGroups];//添加日记分组view
     [self.view addSubview:self.textView];//设置日记书写区域
     if (_NewDiary) {
     }else{
@@ -183,7 +178,8 @@
     }
     _GDkeyBoardHeigh = 2;//给键盘高度一个随意小的初始值
     _deleteAction = 0;
-   
+    _textView.layoutManager.allowsNonContiguousLayout = NO;
+    [_textView scrollRangeToVisible:NSMakeRange(_textView.text.length, 1)];
     _willhiddleKeyBoard = YES;
     [self setBackWithText:@"取消"];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStyleDone target:self action:@selector(rightButtonClick)];;
@@ -199,7 +195,7 @@
                                                  name:UIKeyboardWillShowNotification
                                                object:nil];
     
-//    [self resetTextStyle];//设置textView中的字体样式等
+    [self resetTextStyle];
     
     
     
@@ -207,7 +203,7 @@
     [control addTarget:self action:@selector(inputViewTapHandle) forControlEvents:UIControlEventTouchUpInside];
     [_textView addSubview:control];
     
-   
+    self.textView.textContainerInset = UIEdgeInsetsMake(30, 5, 0, 5);//设置页边距
     
     //Add keyboard notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onKeyboardWillHideNotification:) name:UIKeyboardWillHideNotification object:nil];
@@ -225,10 +221,6 @@
                                                 name:UIKeyboardDidHideNotification
                                               object:nil];
     
-    [[NSNotificationCenter
-      defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:)
-     name:UIKeyboardWillChangeFrameNotification object:nil];//在这里注册通知
-    
     
     [[NSNotificationCenter defaultCenter]addObserver:self
      
@@ -240,20 +232,14 @@
     
     
     [self.view addSubview:self.functionView];
-   
+    [self setEditOfGroups];//添加日记分组view
     
 }
 
 
 -(UITextView *)textView{
     if (!_textView) {
-        _textView = [[UITextView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_editOfGroups.frame), ScreenWidth, ScreenHeight - KTopHeight - 102)];
-        _textView.delegate = self;
-        _textView.editable = YES;
-        _textView.scrollEnabled = YES;
-        _textView.layoutManager.allowsNonContiguousLayout = NO;
-        [_textView scrollRangeToVisible:NSMakeRange(_textView.text.length, 1)];
-         self.textView.textContainerInset = UIEdgeInsetsMake(5, 5, 0, 5);//设置页边距
+        _textView = [[UITextView alloc] initWithFrame:CGRectMake(0, KTopHeight+30, ScreenWidth, ScreenHeight - KTopHeight - 102)];
     }
     return _textView;
 }
@@ -261,7 +247,7 @@
 #pragma mark   functionView 初始化及代理事件
 -(functionKeyView *)functionView{
     if (!_functionView) {
-        _functionView = [[functionKeyView alloc] initWithFrame:CGRectMake(0,ScreenHeight-72, ScreenHeight, 72)];
+        _functionView = [[functionKeyView alloc] initWithFrame:CGRectMake(0, ScreenHeight-200, ScreenHeight, 72)];
         _functionView.delegate = self;
         
         
@@ -276,24 +262,11 @@
     UIButton *button = sender;
     switch (button.tag) {
         case 0:
-            [self keyboardClick];
+            [self keyboardClick:sender];
             break;
         case 1:
             [self colorClick:sender];
             break;
-        case 2:
-            [self videoClick:sender];
-            break;
-        case 3:
-            [self pictureClick:sender];
-            break;
-        case 4:
-            [self imageClick:sender];
-            break;
-        case 5:
-            [self weatherChose:sender];
-            break;
-            
             
         default:
             break;
@@ -303,32 +276,6 @@
 
 #pragma mark 键盘监听事件
 
-
-#pragma mark - 监听方法
-/**
- * 键盘的frame发生改变时调用（显示、隐藏等）
- */
-- (void)keyboardWillChangeFrame:(NSNotification *)notification
-{
-    NSDictionary *userInfo = notification.userInfo;
-    
-    // 动画的持续时间
-    double duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    
-    // 键盘的frame
-    CGRect keyboardF = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    
-    // 执行动画
-    [UIView animateWithDuration:duration animations:^{
-        // 工具条的Y值 == 键盘的Y值 - 工具条的高度
-        if (keyboardF.origin.y > self.view.height) { // 键盘的Y值已经远远超过了控制器view的高度
-            _functionView.y = self.view.height - _functionView.height;//这里的<span style="background-color: rgb(240, 240, 240);">self.toolbar就是我的输入框。</span>
-            
-        } else {
-            _functionView.y = keyboardF.origin.y - _functionView.height;
-        }
-    }];
-}
 
 //键盘即将隐藏
 - (void)onKeyboardWillHideNotification:(NSNotification *)notification {
@@ -341,7 +288,7 @@
 
 
 
-////监听事件键盘显示
+//监听事件键盘显示
 - (void)handleKeyboardDidShow:(NSNotification*)paramNotification
 {
     //获取键盘高度
@@ -350,10 +297,10 @@
     CGRect keyboardRect;
     [keyboardRectAsObject getValue:&keyboardRect];
     
-    self.textView.contentInset=UIEdgeInsetsMake(0, 0,keyboardRect.size.height+70, 0);
+    self.textView.contentInset=UIEdgeInsetsMake(0, 0,keyboardRect.size.height, 0);
 
     _keyBoardHeigh = keyboardRect.size.height;
-    if (_GDkeyBoardHeigh<_keyBoardHeigh+70) {
+    if (_GDkeyBoardHeigh<_keyBoardHeigh) {
         _GDkeyBoardHeigh = _keyBoardHeigh;
     }else{
         _keyBoardHeigh = _GDkeyBoardHeigh;
@@ -362,23 +309,23 @@
 //键盘隐藏
 - (void)handleKeyboardDidHidden
 {
-    _textView.contentInset=UIEdgeInsetsZero;
+    self.textView.contentInset=UIEdgeInsetsZero;
 }
 //当键盘即将出现或改变时调用
 - (void)keyboardWillShow:(NSNotification *)aNotification
 {
     
-//    _willhiddleKeyBoard = NO;
-//   
-//    //获取键盘的高度
-//    NSDictionary *userInfo = [aNotification userInfo];
-//    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
-//    CGRect keyboardRect = [aValue CGRectValue];
-//     _keyBoardHeigh = keyboardRect.size.height;
-//      _bottomConstraint.constant = _keyBoardHeigh;
-//    
-//    CGFloat upHeight = _upkeyboardView.frame.size.height;
-//    _upkeyboardView.frame = CGRectMake(0, ScreenHeight - upHeight-_keyBoardHeigh, ScreenWidth, upHeight);
+    _willhiddleKeyBoard = NO;
+   
+    //获取键盘的高度
+    NSDictionary *userInfo = [aNotification userInfo];
+    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect = [aValue CGRectValue];
+     _keyBoardHeigh = keyboardRect.size.height;
+      _bottomConstraint.constant = _keyBoardHeigh;
+    
+    CGFloat upHeight = _upkeyboardView.frame.size.height;
+    _upkeyboardView.frame = CGRectMake(0, ScreenHeight - upHeight-_keyBoardHeigh, ScreenWidth, upHeight);
     
 }
 
@@ -386,32 +333,32 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-//- (void)resetTextStyle {
-//    //After changing text selection, should reset style.
-//    [self CommomInit];
-//    NSRange wholeRange = NSMakeRange(0, _textView.textStorage.length);
-//    
-//    
-//    [_textView.textStorage removeAttribute:NSFontAttributeName range:wholeRange];
-//    [_textView.textStorage removeAttribute:NSForegroundColorAttributeName range:wholeRange];
-//    
-//    //字体颜色
-//    [_textView.textStorage addAttribute:NSForegroundColorAttributeName value:self.fontColor range:wholeRange];
-//    
-//    //字体加粗
-//    if (self.isBold) {
-//        [_textView.textStorage addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:self.font] range:wholeRange];
-//    }
-//    //字体大小
-//    else
-//    {
-//        
-//        [_textView.textStorage addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:self.font] range:wholeRange];
-//    }
-//    
-//    
-//    
-//}
+- (void)resetTextStyle {
+    //After changing text selection, should reset style.
+    [self CommomInit];
+    NSRange wholeRange = NSMakeRange(0, _textView.textStorage.length);
+    
+    
+    [_textView.textStorage removeAttribute:NSFontAttributeName range:wholeRange];
+    [_textView.textStorage removeAttribute:NSForegroundColorAttributeName range:wholeRange];
+    
+    //字体颜色
+    [_textView.textStorage addAttribute:NSForegroundColorAttributeName value:self.fontColor range:wholeRange];
+    
+    //字体加粗
+    if (self.isBold) {
+        [_textView.textStorage addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:self.font] range:wholeRange];
+    }
+    //字体大小
+    else
+    {
+        
+        [_textView.textStorage addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:self.font] range:wholeRange];
+    }
+    
+    
+    
+}
 -(void)setInitLocation
 {
     self.locationStr=nil;
@@ -464,12 +411,38 @@
     NSLog(@"保存事件");
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
          [self dataStore];//数据保存数据库
-         [self updataToServer];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self showToastWithString:@"保存成功"];
+            [self showToast];
             [self.navigationController popViewControllerAnimated:YES];
         });
     });
+}
+
+
+-(void)showToast{
+    [CRToastManager setDefaultOptions:@{kCRToastNotificationTypeKey : @(CRToastTypeNavigationBar),
+                                        kCRToastFontKey             : [UIFont fontWithName:@"HelveticaNeue-Light" size:16],
+                                        kCRToastTextColorKey        : [UIColor whiteColor],
+                                        kCRToastBackgroundColorKey  : [UIColor orangeColor]}];
+    
+    
+    
+    
+    NSMutableDictionary *options = [@{
+                                      kCRToastTextKey : @"保存成功",
+                                      kCRToastTextAlignmentKey : @(NSTextAlignmentLeft),
+                                      //kCRToastBackgroundColorKey : [UIColor redColor],
+                                      kCRToastAnimationInTypeKey : @(CRToastAnimationTypeGravity),
+                                      kCRToastAnimationOutTypeKey : @(CRToastAnimationTypeGravity),
+                                      kCRToastAnimationInDirectionKey : @(CRToastAnimationDirectionBottom),
+                                      kCRToastAnimationOutDirectionKey : @(CRToastAnimationDirectionTop),
+                                      kCRToastImageKey :[UIImage imageNamed:@"alert_icon.png"]
+                                      } mutableCopy];
+    [CRToastManager showNotificationWithOptions:[NSDictionary dictionaryWithDictionary:options]
+                                completionBlock:^{
+                                    NSLog(@"Completed");
+                                }];
+    
 }
 
 //数据修改及保存
@@ -540,7 +513,6 @@
             [realm addObject:model];
             //提交事务
             [realm commitWriteTransaction];
-            _editModel = model;//为数据上传服务器做准备；
         }];
         
         
@@ -585,7 +557,6 @@
         [realm beginWriteTransaction];
         [editDiaryModel createOrUpdateInRealm:realm withValue:model];
         [realm commitWriteTransaction];
-        _editModel = model;//为数据上传服务器做准备；
        //若分组更改，对原分组的groupNum减一，新的分组groupNum➕1
         [self changeGroup];
     }
@@ -606,7 +577,6 @@
         }
         
     }else{
-        
     model.diaryNum = _groupdiaryNum+1;
     }
     
@@ -622,7 +592,7 @@
         NSLog(@"do nothing");
     }
     else
-    {//分组的title变更了  ，需要修改
+    {
         RLMRealm *realm = [RLMRealm defaultRealm];
         groupModel *model = [[groupModel alloc] init];
         
@@ -635,16 +605,10 @@
         [realm commitWriteTransaction];
         
         
-        NSString *title;
-        RLMResults<groupModel *> *groupM = [groupModel   objectsWhere:@"groupId == %@",@(_atGroup)];
-        for (groupModel *modelaa in groupM) {
-            title = modelaa.title;
-        }
-        
         groupModel *model1 = [[groupModel alloc] init];
         
         model1.groupId = _atGroup;
-        model1.title = title;
+        model1.title = groupTitle;
         if (_groupdiaryNum == 0) {
             model1.diaryNum = 0;
         }else{
@@ -657,12 +621,6 @@
     }
 
 }
-
-
--(void)updataToServer{
-//    NSDictionary *modelString = _editModel.mj_keyValues;
-//    NSLog(@"%@",modelString);
-}
 #pragma mark 滚动事件
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
 }
@@ -674,7 +632,7 @@
 - (BOOL)textView:(UITextView *)textView shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment inRange:(NSRange)characterRange
 {
     NSLog(@"%@", textAttachment);
-    return YES;
+    return NO;
 }
 
 
@@ -751,7 +709,7 @@
         if (!position) {
             NSLog(@"汉字");
             //   NSLog(@"str=%@; 本次长度=%lu",str,(unsigned long)[str length]);
-           // [self setStyle];
+            [self setStyle];
             if ( str.length>=MaxLength) {
                 NSString *strNew = [NSString stringWithString:str];
                 [ self.textView setText:[strNew substringToIndex:MaxLength]];
@@ -768,7 +726,7 @@
         }
     }else{
         NSLog(@"英文");
-        //[self setStyle];
+        [self setStyle];
         if ([str length]>=MaxLength) {
             NSString *strNew = [NSString stringWithString:str];
             [ self.textView setText:[strNew substringToIndex:MaxLength]];
@@ -784,7 +742,7 @@
 - (void)textViewDidBeginEditing:(UITextView *)textView{
  
     [_textView becomeFirstResponder];
-//    _upkeyboardView.hidden = NO;
+    _upkeyboardView.hidden = NO;
 }
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
@@ -809,34 +767,28 @@
         self.finished([_textView.attributedText getArrayWithAttributed]);
     }
 }
-- (void)keyboardClick {
-    if ([_textView isFirstResponder]) {
-        if (!_isAudioKeyOnTop) {
-            [_textView resignFirstResponder];
-                }else{
-                        [_textView becomeFirstResponder];
-                        _textView.inputView = nil;
-                        _isAudioKeyOnTop = NO;
-                        [_textView reloadInputViews];
-                    }
+- (IBAction)keyboardClick:(id)sender {
+    CGFloat upHeight = _upkeyboardView.frame.size.height;
+    if (_willhiddleKeyBoard) {
+        [_textView becomeFirstResponder];
+        [UIView animateWithDuration:0.5 animations:^{
+           _upkeyboardView.frame = CGRectMake(0, ScreenHeight - upHeight-_keyBoardHeigh-5, ScreenWidth, upHeight);
+        }];
         
     }else{
-        [_textView becomeFirstResponder];
-    }
-//        else{
-//        if (!_isAudioKeyOnTop) {
-//            [_textView endEditing:YES];
-//            [UIView animateWithDuration:0.5 animations:^{
-////               _upkeyboardView.frame = CGRectMake(0, ScreenHeight - upHeight-5, ScreenWidth, upHeight);
-//            }];
-//            
-//        }else{
-//            [_textView becomeFirstResponder];
-//            _textView.inputView = nil;
-//            _isAudioKeyOnTop = NO;
-//            [_textView reloadInputViews];
-//        }
-//        }
+        if (!_isAudioKeyOnTop) {
+            [_textView endEditing:YES];
+            [UIView animateWithDuration:0.5 animations:^{
+               _upkeyboardView.frame = CGRectMake(0, ScreenHeight - upHeight-5, ScreenWidth, upHeight);
+            }];
+            
+        }else{
+            [_textView becomeFirstResponder];
+            _textView.inputView = nil;
+            _isAudioKeyOnTop = NO;
+            [_textView reloadInputViews];
+        }
+        }
 }
 #pragma mark - 选择天气模块
 // 数据准备
@@ -851,10 +803,9 @@
     CGFloat itemHeight = _keyBoardHeigh*0.3;
     return CGSizeMake(itemWidth, itemHeight);
 }
-- (void)weatherChose:(id)sender {
-    
-    [_textView becomeFirstResponder];
+- (IBAction)weatherChose:(id)sender {
     _weatherSelct = NO;
+    [_textView becomeFirstResponder];
     [self initData];
     CGSize size = [self itemSize];
     NSInteger row, col;
@@ -875,27 +826,26 @@
         [weatherView addSubview:itemView];
         [itemView addTarget:self action:@selector(itemClicked:) forControlEvents:UIControlEventTouchUpInside];
     }
-     _isAudioKeyOnTop = YES;
+ 
     self.textView.inputView = _weatherKeyBoard;
-    
+    _isAudioKeyOnTop = YES;
     [self.textView reloadInputViews];
-  }
+}
 
 
 -(void)itemClicked:(UIButton *)button{
     NSLog(@"%ld",(long)button.tag);
     _weatherSelct = YES;
-    _weatherType = button.tag;//将天气类型传过去
   NSMutableArray  *weatherImageselect = [[NSMutableArray alloc] initWithObjects:@"qingtian",@"tianqi",@"feng",@"xiaoyu",@"dayu",@"lei",@"xue",@"wu", nil];
     NSString *picture = weatherImageselect[button.tag];
- 
-    [_functionView.weatherBT setImage:[UIImage imageNamed:picture] forState:UIControlStateNormal];
- 
+    [_previewBtn setImage:[UIImage imageNamed:picture] forState:UIControlStateNormal];
+    
+     CGFloat upHeight = _upkeyboardView.frame.size.height;
     [_textView becomeFirstResponder];
     _textView.inputView = nil;
     [_textView reloadInputViews];
     [UIView animateWithDuration:0.5 animations:^{
-//        _upkeyboardView.frame = CGRectMake(0, ScreenHeight - upHeight -_keyBoardHeigh-5, ScreenWidth, upHeight);
+        _upkeyboardView.frame = CGRectMake(0, ScreenHeight - upHeight -_keyBoardHeigh-5, ScreenWidth, upHeight);
     }];
  
 }
@@ -1077,9 +1027,9 @@
     
     //添加录音控件
     _audioimage = [[audioImage alloc] initWithFrame:CGRectMake(10, _textViewBounds.size.height, ScreenWidth-20, 30)];
-    _audioimage.tag = _audioImageTag++;
+    _audioimage.tag = _audioImageTag;
     NSInteger subViewLocation = _textView.selectedRange.location;
-    [_heightOfAudioArray addObject:@(subViewLocation)];
+    [_heightOfAudioArray addObject:@(_audioImageTag)];
     UITapGestureRecognizer *ges = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(audiotap:)];
     [_audioimage addGestureRecognizer:ges];
     
@@ -1106,7 +1056,7 @@
     
 }
 //选择图片
-- (void)pictureClick:(UIButton *)sender {
+- (IBAction)boldClick:(UIButton *)sender {
 
     DPImagePickerVC *vc = [[DPImagePickerVC alloc]init];
     vc.delegate = self;
@@ -1114,7 +1064,7 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 //字体设置
-- (void)videoClick:(UIButton *)sender {
+- (IBAction)fontClick:(UIButton *)sender {
     NSLog(@"添加视频");
     [_textView endEditing:NO];
     
@@ -1164,10 +1114,10 @@
     //添加视频控件videoTap
     _videoView = [[videoView alloc] initWithFrame:CGRectMake(10, _textViewBounds.size.height, ScreenWidth-20, 300)];
     _videoView.url = url;
-//    _videoView.tag = _audioImageTag;
+    _videoView.tag = _audioImageTag;
     [_videoView builderWithImage:pictueImage];
     NSInteger subViewLocation = _textView.selectedRange.location+1;
-    [_heightOfAudioArray addObject:@(subViewLocation)];
+    [_heightOfAudioArray addObject:@(_audioImageTag)];
     [_textView addSubview:_videoView];
     UITapGestureRecognizer *videoGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(videoTap:)];
     [_videoView addGestureRecognizer:videoGes];
@@ -1302,6 +1252,7 @@
   
     //Move selection location
     _textView.selectedRange = NSMakeRange(_textView.selectedRange.location + 1, _textView.selectedRange.length);
+      _audioImageTag = _textView.selectedRange.location;
     
     //设置字的设置
     [self setInitLocation];
@@ -1328,7 +1279,7 @@
 
     //Move selection location
     _textView.selectedRange = NSMakeRange(_textView.selectedRange.location + 1, _textView.selectedRange.length);
-
+    _audioImageTag = _textView.selectedRange.location;
     //设置字的设置
     [self setInitLocation];
 }

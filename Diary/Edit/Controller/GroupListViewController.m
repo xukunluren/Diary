@@ -7,7 +7,6 @@
 //
 
 #import "GroupListViewController.h"
-#import "EditViewController.h"
 #import "DiaryGroupViewController.h"
 #import "NewGroupViewController.h"
 
@@ -77,8 +76,6 @@
     [self.navigationController pushViewController:new animated:YES];
 }
 -(void)initDataSource{
-    
-    
     
     _dataArray = [[NSMutableArray alloc] init];
     RLMResults* tempArray = [groupModel allObjects];

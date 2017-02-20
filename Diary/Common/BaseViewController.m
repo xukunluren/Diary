@@ -7,6 +7,7 @@
 //
 
 #import "BaseViewController.h"
+#import "CRToast.h"
 
 @interface BaseViewController ()
 
@@ -68,6 +69,32 @@
     UIView *view = [[UIView alloc] initWithFrame:rect];
     view.backgroundColor = color;
     return view;
+}
+
+
+-(void)showToastWithString:(NSString *)title{
+    [CRToastManager setDefaultOptions:@{kCRToastNotificationTypeKey : @(CRToastTypeNavigationBar),
+                                        kCRToastFontKey             : [UIFont fontWithName:@"HelveticaNeue-Light" size:16],
+                                        kCRToastTextColorKey        : [UIColor whiteColor],
+                                        kCRToastBackgroundColorKey  : [UIColor orangeColor]}];
+    
+    
+    
+    
+    NSMutableDictionary *options = [@{
+                                      kCRToastTextKey : title,
+                                      kCRToastTextAlignmentKey : @(NSTextAlignmentLeft),
+                                      //kCRToastBackgroundColorKey : [UIColor redColor],
+                                      kCRToastAnimationInTypeKey : @(CRToastAnimationTypeGravity),
+                                      kCRToastAnimationOutTypeKey : @(CRToastAnimationTypeGravity),
+                                      kCRToastAnimationInDirectionKey : @(CRToastAnimationDirectionBottom),
+                                      kCRToastAnimationOutDirectionKey : @(CRToastAnimationDirectionTop),
+                                      kCRToastImageKey :[UIImage imageNamed:@"alert_icon.png"]
+                                      } mutableCopy];
+    [CRToastManager showNotificationWithOptions:[NSDictionary dictionaryWithDictionary:options]
+                                completionBlock:^{
+                                    NSLog(@"Completed");
+                                }];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

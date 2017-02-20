@@ -19,4 +19,6 @@
 -(void)setNavigtionBarTransparent:(BOOL)_transparent;
 -(void)goBack;
 -(UIView *)drawThreadWithFram:(CGRect)rect andColor:(UIColor *)color;
+
+-(void)showToastWithString:(NSString*)title;
 @end
