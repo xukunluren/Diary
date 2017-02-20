@@ -8,6 +8,24 @@
 
 #import <UIKit/UIKit.h>
 
+
+
+typedef enum
+{
+    //以下是枚举成员
+    WeatherEqingtian = 0,
+    WeatherEduoyun = 1,
+    WeatherEfeng = 2,
+    WeatherExiaoyu = 3,
+    WeatherEdayu = 4,
+    WeatherEshandian = 5,
+    WeatherExue = 6,
+    WeatherEwumai = 7,
+    WeatherENoSelect = 8,
+    
+}WeatherType;//枚举名称
+
+
 @interface BaseViewController : UIViewController
 //返回上级页面分别以图标和文字两种样式
 -(void)setBackWithImage;

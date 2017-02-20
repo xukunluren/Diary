@@ -240,10 +240,27 @@
     
     
     [self.view addSubview:self.functionView];
+    [self initGroupData];
    
     
 }
-
+-(void)initGroupData{
+    RLMResults* tempArray = [groupModel allObjects];
+    if (tempArray.count == 0) {
+        //数据库操作对象
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        //打开数据库事务
+        [realm transactionWithBlock:^(){
+            groupModel *model = [[groupModel alloc] init];
+            model.title = @"我的日记";
+            model.groupId = 0;
+            //添加到数据库
+            [realm addObject:model];
+            //提交事务
+            [realm commitWriteTransaction];
+        }];
+    }
+}
 
 -(UITextView *)textView{
     if (!_textView) {
@@ -595,7 +612,6 @@
 -(void)addGroupModelNum{
     RLMRealm *realm = [RLMRealm defaultRealm];
     groupModel *model = [[groupModel alloc] init];
-
     model.groupId = _groupRow;
     model.title = groupTitle;
     
@@ -606,8 +622,7 @@
         }
         
     }else{
-        
-    model.diaryNum = _groupdiaryNum+1;
+        model.diaryNum = _groupdiaryNum+1;
     }
     
     // 通过 id = 1 更新该书籍

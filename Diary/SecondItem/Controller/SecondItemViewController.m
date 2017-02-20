@@ -94,6 +94,8 @@
     DiaryGroupViewController *vc = [[DiaryGroupViewController alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     vc.title = model.title;
+    vc.groupId = model.groupId;
+    
     [self.navigationController pushViewController:vc animated:YES];
 }
 

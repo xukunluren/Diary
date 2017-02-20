@@ -250,6 +250,9 @@
 		67CC915D1E2DBE3400761832 /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC915C1E2DBE3400761832 /* LoginController.m */; };
 		67CC91651E2DBFB900761832 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CC91641E2DBFB900761832 /* LoginView.m */; };
 		67E23FB71E5967F300B86CDB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67E23FB61E5967F300B86CDB /* SystemConfiguration.framework */; };
+		67E23FE11E5A925100B86CDB /* SURefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 67E23FDC1E5A925100B86CDB /* SURefreshHeader.m */; };
+		67E23FE21E5A925100B86CDB /* UIScrollView+SURefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 67E23FDE1E5A925100B86CDB /* UIScrollView+SURefresh.m */; };
+		67E23FE31E5A925100B86CDB /* UIView+SURefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 67E23FE01E5A925100B86CDB /* UIView+SURefresh.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -649,6 +652,12 @@
 		67CC91631E2DBFB900761832 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
 		67CC91641E2DBFB900761832 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
 		67E23FB61E5967F300B86CDB /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		67E23FDB1E5A925100B86CDB /* SURefreshHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SURefreshHeader.h; sourceTree = "<group>"; };
+		67E23FDC1E5A925100B86CDB /* SURefreshHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SURefreshHeader.m; sourceTree = "<group>"; };
+		67E23FDD1E5A925100B86CDB /* UIScrollView+SURefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SURefresh.h"; sourceTree = "<group>"; };
+		67E23FDE1E5A925100B86CDB /* UIScrollView+SURefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SURefresh.m"; sourceTree = "<group>"; };
+		67E23FDF1E5A925100B86CDB /* UIView+SURefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SURefresh.h"; sourceTree = "<group>"; };
+		67E23FE01E5A925100B86CDB /* UIView+SURefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SURefresh.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1471,10 +1480,8 @@
 		67CC90991E28B84100761832 /* ImageResource */ = {
 			isa = PBXGroup;
 			children = (
-
 				58E366FA1E59499A0073221F /* likeBtn.png */,
 				58E366F81E5949830073221F /* dislikeBtn.png */,
-
 				67AC58CA1E484BC1001D7BAE /* luyinicon@2x.png */,
 				67C06D2C1E3493AC00EBA5C6 /* myphoto@2x.png */,
 				67C06D2D1E3493AC00EBA5C6 /* picture@2x.png */,
@@ -1489,7 +1496,6 @@
 				67C06D101E348C1900EBA5C6 /* list_tick_round@3x.png */,
 				67C06D131E348C1900EBA5C6 /* photo_camera@2x.png */,
 				67C06D141E348C1900EBA5C6 /* photo_camera@3x.png */,
-
 				67AC59E01E55783E001D7BAE /* home_dianzanSelect@2x.png */,
 				67AC59DE1E55781C001D7BAE /* home_dianzan@2x.png */,
 				67AC59DC1E556323001D7BAE /* home_weather1@2x.png */,
@@ -1616,6 +1622,7 @@
 		67CC90E51E28C02D00761832 /* ThirdTools */ = {
 			isa = PBXGroup;
 			children = (
+				67E23FDA1E5A925100B86CDB /* SURefresh */,
 				67AC59BE1E542BB0001D7BAE /* CRToast.h */,
 				67AC59BF1E542BB0001D7BAE /* CRToast.m */,
 				67AC599C1E52E48F001D7BAE /* Realm.framework */,
@@ -1663,6 +1670,19 @@
 				67C06BC81E2F3FB800EBA5C6 /* LoginView.xib */,
 			);
 			name = loginViewController;
+			sourceTree = "<group>";
+		};
+		67E23FDA1E5A925100B86CDB /* SURefresh */ = {
+			isa = PBXGroup;
+			children = (
+				67E23FDB1E5A925100B86CDB /* SURefreshHeader.h */,
+				67E23FDC1E5A925100B86CDB /* SURefreshHeader.m */,
+				67E23FDD1E5A925100B86CDB /* UIScrollView+SURefresh.h */,
+				67E23FDE1E5A925100B86CDB /* UIScrollView+SURefresh.m */,
+				67E23FDF1E5A925100B86CDB /* UIView+SURefresh.h */,
+				67E23FE01E5A925100B86CDB /* UIView+SURefresh.m */,
+			);
+			path = SURefresh;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1931,6 +1951,7 @@
 				67CC90E41E28BE5700761832 /* MainTabBarControllerTabBar.m in Sources */,
 				67AC59451E5151C7001D7BAE /* EditTestViewController.m in Sources */,
 				67C06CF91E348C0400EBA5C6 /* TYAlertController.m in Sources */,
+				67E23FE31E5A925100B86CDB /* UIView+SURefresh.m in Sources */,
 				67C06C981E31F20700EBA5C6 /* UIImagePickerController+ST.m in Sources */,
 				67AC59871E51AE92001D7BAE /* UzysAppearanceConfig.m in Sources */,
 				67C06CFE1E348C0400EBA5C6 /* TYBaseAnimation.m in Sources */,
@@ -1985,8 +2006,10 @@
 				67CC91461E2D08E300761832 /* UISearchBar+Additions.m in Sources */,
 				67C06D061E348C0400EBA5C6 /* NSAttributedString+RichText.m in Sources */,
 				67AC58BB1E481CDC001D7BAE /* amrFileCodec.m in Sources */,
+				67E23FE11E5A925100B86CDB /* SURefreshHeader.m in Sources */,
 				25FFA0811E28D24600869B7E /* WMFPSLabel.m in Sources */,
 				67AC58C01E481CDC001D7BAE /* MASCompositeConstraint.m in Sources */,
+				67E23FE21E5A925100B86CDB /* UIScrollView+SURefresh.m in Sources */,
 				67CC90B91E28B84100761832 /* MySetViewController.m in Sources */,
 				67CC90BA1E28B84100761832 /* FirstItemViewController.m in Sources */,
 				67CC90B81E28B84100761832 /* BaseViewController.m in Sources */,
