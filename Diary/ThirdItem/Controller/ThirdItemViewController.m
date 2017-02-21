@@ -10,7 +10,7 @@
 #import "exploreView.h"
 #import "CardHeader.h"
 
-#define CARD_NUM 2
+#define CARD_NUM 1
 #define MIN_INFO_NUM 10
 #define CARD_SCALE 0.95
 

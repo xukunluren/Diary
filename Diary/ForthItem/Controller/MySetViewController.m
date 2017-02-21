@@ -160,6 +160,7 @@ const CGFloat HeadImageHeight= 80;
         MyHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:allOrderCellIdentifier];
         if (cell == nil) {
             cell = [[[NSBundle mainBundle] loadNibNamed:@"MyHeaderTableViewCell" owner:nil options:nil] firstObject];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         return cell;
         
@@ -179,7 +180,6 @@ const CGFloat HeadImageHeight= 80;
         [cell.detailTextLabel setFont:[UIFont systemFontOfSize:12.0f]];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-   
     return cell;
 }
 
