@@ -253,6 +253,12 @@
 		67E23FE11E5A925100B86CDB /* SURefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 67E23FDC1E5A925100B86CDB /* SURefreshHeader.m */; };
 		67E23FE21E5A925100B86CDB /* UIScrollView+SURefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 67E23FDE1E5A925100B86CDB /* UIScrollView+SURefresh.m */; };
 		67E23FE31E5A925100B86CDB /* UIView+SURefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 67E23FE01E5A925100B86CDB /* UIView+SURefresh.m */; };
+		67E23FF21E5BE52300B86CDB /* LaunchImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 67E23FEE1E5BE52300B86CDB /* LaunchImage@2x.png */; };
+		67E240331E5C0B6500B86CDB /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 67E240321E5C0B6500B86CDB /* libsqlite3.tbd */; };
+		67E240351E5C0B7200B86CDB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67E240341E5C0B7200B86CDB /* CoreGraphics.framework */; };
+		67E240371E5C0B8A00B86CDB /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67E240361E5C0B8A00B86CDB /* CoreTelephony.framework */; };
+		67E240391E5C0BB300B86CDB /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67E240381E5C0BB300B86CDB /* ImageIO.framework */; };
+		67E2403B1E5C0BCB00B86CDB /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67E2403A1E5C0BCB00B86CDB /* MessageUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -658,6 +664,12 @@
 		67E23FDE1E5A925100B86CDB /* UIScrollView+SURefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SURefresh.m"; sourceTree = "<group>"; };
 		67E23FDF1E5A925100B86CDB /* UIView+SURefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SURefresh.h"; sourceTree = "<group>"; };
 		67E23FE01E5A925100B86CDB /* UIView+SURefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SURefresh.m"; sourceTree = "<group>"; };
+		67E23FEE1E5BE52300B86CDB /* LaunchImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage@2x.png"; sourceTree = "<group>"; };
+		67E240321E5C0B6500B86CDB /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		67E240341E5C0B7200B86CDB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		67E240361E5C0B8A00B86CDB /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		67E240381E5C0BB300B86CDB /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		67E2403A1E5C0BCB00B86CDB /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -665,9 +677,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				67E23FB71E5967F300B86CDB /* SystemConfiguration.framework in Frameworks */,
+				67E2403B1E5C0BCB00B86CDB /* MessageUI.framework in Frameworks */,
 				67C06C781E2FAA5300EBA5C6 /* libz.tbd in Frameworks */,
+				67E240391E5C0BB300B86CDB /* ImageIO.framework in Frameworks */,
 				67C06C701E2FA79800EBA5C6 /* libc++.tbd in Frameworks */,
+				67E240331E5C0B6500B86CDB /* libsqlite3.tbd in Frameworks */,
+				67E240371E5C0B8A00B86CDB /* CoreTelephony.framework in Frameworks */,
+				67E240351E5C0B7200B86CDB /* CoreGraphics.framework in Frameworks */,
+				67E23FB71E5967F300B86CDB /* SystemConfiguration.framework in Frameworks */,
 				67AC599D1E52E48F001D7BAE /* Realm.framework in Frameworks */,
 				67AC59901E51AEBC001D7BAE /* AVFoundation.framework in Frameworks */,
 				67AC58BC1E481CDC001D7BAE /* libopencore-amrnb.a in Frameworks */,
@@ -1155,6 +1172,11 @@
 		67C06C6E1E2FA79700EBA5C6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				67E2403A1E5C0BCB00B86CDB /* MessageUI.framework */,
+				67E240381E5C0BB300B86CDB /* ImageIO.framework */,
+				67E240361E5C0B8A00B86CDB /* CoreTelephony.framework */,
+				67E240341E5C0B7200B86CDB /* CoreGraphics.framework */,
+				67E240321E5C0B6500B86CDB /* libsqlite3.tbd */,
 				67E23FB61E5967F300B86CDB /* SystemConfiguration.framework */,
 				67AC598F1E51AEBC001D7BAE /* AVFoundation.framework */,
 				67C06C771E2FAA5300EBA5C6 /* libz.tbd */,
@@ -1480,6 +1502,7 @@
 		67CC90991E28B84100761832 /* ImageResource */ = {
 			isa = PBXGroup;
 			children = (
+				67E23FEE1E5BE52300B86CDB /* LaunchImage@2x.png */,
 				58E366FA1E59499A0073221F /* likeBtn.png */,
 				58E366F81E5949830073221F /* dislikeBtn.png */,
 				67AC58CA1E484BC1001D7BAE /* luyinicon@2x.png */,
@@ -1875,6 +1898,7 @@
 				67AC58D91E49787F001D7BAE /* audioImage@2x.png in Resources */,
 				582192CE1E31E5360004292D /* apple.png in Resources */,
 				67C06C1F1E2F6DE900EBA5C6 /* tansuo_select@2x.png in Resources */,
+				67E23FF21E5BE52300B86CDB /* LaunchImage@2x.png in Resources */,
 				67AC59E11E55783E001D7BAE /* home_dianzanSelect@2x.png in Resources */,
 				67C06D161E348C1900EBA5C6 /* check_photo_camera@2x.png in Resources */,
 				67C06C421E2F6ED500EBA5C6 /* tupian@2x.png in Resources */,
@@ -2209,6 +2233,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/ThirdTools",
+					"$(PROJECT_DIR)/ThirdTools/UMSocial/SocialLibraries/QQ",
+					"$(PROJECT_DIR)/ThirdTools/UMSocial/UMSocialSDK",
+					"$(PROJECT_DIR)/ThirdTools/UMSocial/UMSocialUI",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Diary/PrefixHeader.pch;
@@ -2218,6 +2245,14 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Edit/videoFromThird/Class/Vendor/AMR/lib",
+					"$(PROJECT_DIR)/ThirdTools/UMSocial/SocialLibraries/QQ",
+					"$(PROJECT_DIR)/ThirdTools/UMSocial/SocialLibraries/Sina",
+					"$(PROJECT_DIR)/ThirdTools/UMSocial/SocialLibraries/SMS",
+					"$(PROJECT_DIR)/ThirdTools/UMSocial/SocialLibraries/UniqueId",
+					"$(PROJECT_DIR)/ThirdTools/UMSocial/SocialLibraries/WeChat",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC\n\n-ObjC\n\n-ObjC\n\n-ObjC\n\n-ObjC\n\n-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hs.diary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2235,6 +2270,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/ThirdTools",
+					"$(PROJECT_DIR)/ThirdTools/UMSocial/SocialLibraries/QQ",
+					"$(PROJECT_DIR)/ThirdTools/UMSocial/UMSocialSDK",
+					"$(PROJECT_DIR)/ThirdTools/UMSocial/UMSocialUI",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Diary/PrefixHeader.pch;
@@ -2244,6 +2282,14 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Edit/videoFromThird/Class/Vendor/AMR/lib",
+					"$(PROJECT_DIR)/ThirdTools/UMSocial/SocialLibraries/QQ",
+					"$(PROJECT_DIR)/ThirdTools/UMSocial/SocialLibraries/Sina",
+					"$(PROJECT_DIR)/ThirdTools/UMSocial/SocialLibraries/SMS",
+					"$(PROJECT_DIR)/ThirdTools/UMSocial/SocialLibraries/UniqueId",
+					"$(PROJECT_DIR)/ThirdTools/UMSocial/SocialLibraries/WeChat",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC\n\n-ObjC\n\n-ObjC\n\n-ObjC\n\n-ObjC\n\n-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hs.diary;
 				PRODUCT_NAME = "$(TARGET_NAME)";

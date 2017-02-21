@@ -100,6 +100,8 @@ const CGFloat HeadImageHeight= 80;
 
 - (void) initView{
 
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(shareEvent)];
     //[self setNavigtionBarTransparent:YES];
     mySettingTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStylePlain];
     mySettingTableView.delegate = self;
@@ -143,6 +145,13 @@ const CGFloat HeadImageHeight= 80;
     
     // 个人中心顶部背景图写死
     [self.settingHeaderNewView.setBackImage setImage:[UIImage imageNamed:@"backgroundImage.png"]];
+    
+}
+
+
+-(void)shareEvent{
+//分享按钮
+    
     
 }
 
