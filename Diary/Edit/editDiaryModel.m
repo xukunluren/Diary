@@ -15,4 +15,10 @@
 +(NSString*)primaryKey{
     return @"diaryId";
 }
+
++(Class)audioDataModel_class
+{
+    return [audioModel class];
+}
+
 @end

@@ -30,6 +30,7 @@
 #import "groupModel.h"
 #import "functionKeyView.h"
 #import "UIView+LQXkeyboard.h"
+#import "videoModel.h"
 //#import "MJExtension.h"
 //Image default max size
 #define IMAGE_MAX_SIZE ([UIScreen mainScreen].bounds.size.width-20)
@@ -50,7 +51,7 @@
 @property (weak, nonatomic)  UIImageView *imageV;
 
 @property (strong, nonatomic)  DPImagePickerVC * Viewasd;
-@property (strong, nonatomic)  UIImageView *audioImage;//录音键盘
+@property (strong, nonatomic)  UIImageView *audioImageKeyBoard;//录音键盘
 @property (strong, nonatomic)  UIView *weatherKeyBoard;//天气键盘
 @property (strong, nonatomic)  UIButton *audioButton;
 @property (assign, nonatomic)  Boolean willhiddleKeyBoard;
@@ -105,6 +106,10 @@
     BOOL havePictureInfo;
     BOOL haveWeatherInfo;
     NSString *groupTitle;//分组title
+    NSInteger videoTag;//视频控件tag
+    NSMutableArray *audioHeightLocation;//音频控件位置
+    NSMutableArray *videoHeightLocation;//视频控件位置
+    videoModel *videoDataModel;//视频模型
 }
 //+(instancetype)ViewController
 //{
@@ -191,8 +196,7 @@
     [self.view addSubview:self.textView];//设置日记书写区域
     if (_NewDiary) {
     }else{
-        NSAttributedString *temp = [[NSAttributedString alloc] initWithData:_diaryData options:@{NSDocumentTypeDocumentAttribute : NSRTFDTextDocumentType} documentAttributes:nil error:nil];     //读取
-        [_textView setAttributedText:temp];
+        [self putDiaryOnThePage];
     }
     _GDkeyBoardHeigh = 2;//给键盘高度一个随意小的初始值
     _deleteAction = 0;
@@ -205,6 +209,7 @@
     _heightOfAudioArray = [[NSMutableArray alloc] init];
     _AudioArray = [[NSMutableArray alloc] init];
     _dataArray  = [NSMutableArray arrayWithCapacity:0];
+    audioHeightLocation =[[NSMutableArray alloc] init];
     _audioImageTag = 0;
     //增加监听，当键盘出现或改变时收出消息
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -253,8 +258,15 @@
     
     
     [self.view addSubview:self.functionView];
-    [self initGroupData];
+    [self initGroupData];//再次编辑进来后，页面重新渲染，需将所有数组的状态置为保存时的状态。
+    
    
+}
+
+
+-(void)putDiaryOnThePage{
+    NSAttributedString *temp = [[NSAttributedString alloc] initWithData:_diaryData options:@{NSDocumentTypeDocumentAttribute : NSRTFDTextDocumentType} documentAttributes:nil error:nil];     //读取
+    [_textView setAttributedText:temp];
 }
 -(void)initGroupData{
     RLMResults* tempArray = [groupModel allObjects];
@@ -569,7 +581,13 @@
             }else{
                 model.atGroupTitle = @"我的日记";
             }
-           
+            
+            
+            model.videoDataModel = videoDataModel;
+            for (audioModel *audiomodel in _dataArray) {
+                [model.audioDataModel addObject:audiomodel];
+            }
+        
             
             //添加到数据库
             [realm addObject:model];
@@ -751,11 +769,18 @@
         //用户数据删除中
         NSInteger viewTag = [_heightOfAudioArray.lastObject integerValue];
         if (viewTag >= nowLocation) {
+            if (viewTag == videoTag) {
+                [_videoView removeFromSuperview];
+                [_heightOfAudioArray removeLastObject];
+                videoDataModel = nil;
+            }else{
             [_textView.subviews.lastObject removeFromSuperview];
-            // [[_audioimage viewWithTag:viewTag] removeFromSuperview];
-            
+            [_dataArray removeLastObject];
             [_heightOfAudioArray removeLastObject];
-            [_AudioArray  removeLastObject];
+            _audioImageTag  = _audioImageTag -1;
+            [audioHeightLocation removeLastObject];
+        
+            }
         }
         }
         
@@ -959,8 +984,8 @@
     [_audioView addSubview:label];
     
     //录音icon
-    _audioImage = [[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth*0.5-48, CGRectGetMaxY(label.frame)+20, 96, 96)];
-    _audioImage.backgroundColor = [UIColor clearColor];
+    _audioImageKeyBoard = [[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth*0.5-48, CGRectGetMaxY(label.frame)+20, 96, 96)];
+    _audioImageKeyBoard.backgroundColor = [UIColor clearColor];
     //[audioView addSubview:_audioImage];
     
     //录音icon添加点击事件
@@ -1105,7 +1130,7 @@
     CGSize maxSize = CGSizeMake(_textViewBounds.size.width, CGFLOAT_MAX);
     CGSize newSize = [_textView sizeThatFits:maxSize];
     _textViewBounds.size = newSize;
-
+    NSLog(@"%f",_textViewBounds.size.height);
     //添加图片底层
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(10, _textViewBounds.size.height, ScreenWidth-20, 50)];
     view.alpha = 0.0;
@@ -1119,15 +1144,15 @@
     viewImage = nil;
     
     //添加录音控件
-    _audioimage = [[audioImage alloc] initWithFrame:CGRectMake(10, _textViewBounds.size.height, ScreenWidth-20, 30)];
+    _audioimage = [[audioImage alloc] initWithFrame:CGRectMake(10, _textViewBounds.size.height+10, ScreenWidth-20, 30)];
+    messageModel.textHeight =  _textViewBounds.size.height;
     _audioimage.tag = _audioImageTag++;
     NSInteger subViewLocation = _textView.selectedRange.location;
+    messageModel.textLocation = subViewLocation;
     [_heightOfAudioArray addObject:@(subViewLocation)];
     UITapGestureRecognizer *ges = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(audiotap:)];
     [_audioimage addGestureRecognizer:ges];
-    
     [_audioimage builderViewWithSceond:[[LGSoundRecorder shareInstance] soundRecordTime]];
-
     [_textView addSubview:_audioimage];
     [_AudioArray addObject:_audioimage];
     [self.dataArray addObject:messageModel];
@@ -1135,7 +1160,7 @@
 
 -(void)audiotap:(UITapGestureRecognizer*)gap{
     NSLog(@"%ld",gap.view.tag);
-    NSInteger indexrow = gap.view.tag;
+    NSInteger indexrow = gap.view.tag;//删除后卫队tag进行修改
     audioModel *messageModel = [self.dataArray objectAtIndex:indexrow];
     [[LGAudioPlayer sharePlayer] playAudioWithURLString:messageModel.soundFilePath atIndex:indexrow];
     NSLog(@"手势识别时间");
@@ -1185,6 +1210,9 @@
 }
 
 -(void)putVideoOnTextViewWithUrl:(NSURL *)url image:(UIImage *)pictueImage{
+    videoDataModel = [[videoModel alloc] init];
+    videoDataModel.url = [url absoluteString];
+    videoDataModel.image =UIImageJPEGRepresentation(pictueImage, 0.75);
     
     //计算textView中现在的内容高度，用于设置语音控件的位置
     _textViewBounds = _textView.bounds;
@@ -1205,11 +1233,14 @@
     viewImage = nil;
 
     //添加视频控件videoTap
-    _videoView = [[videoView alloc] initWithFrame:CGRectMake(10, _textViewBounds.size.height, ScreenWidth-20, 300)];
+    _videoView = [[videoView alloc] initWithFrame:CGRectMake(15, _textViewBounds.size.height+10, ScreenWidth-30, 280)];
+    videoDataModel.textHeight =  _textViewBounds.size.height;
     _videoView.url = url;
-//    _videoView.tag = _audioImageTag;
     [_videoView builderWithImage:pictueImage];
     NSInteger subViewLocation = _textView.selectedRange.location+1;
+    videoTag = subViewLocation;
+    videoDataModel.textLocation = videoTag;
+    _videoView.tag = videoTag;
     [_heightOfAudioArray addObject:@(subViewLocation)];
     [_textView addSubview:_videoView];
     UITapGestureRecognizer *videoGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(videoTap:)];
@@ -1507,7 +1538,7 @@
           long long size = representation.size;
         if (true) {//在此处判断视频的大小，超出大小则提示用户视频过大，请重新选择
             [self putVideoOnTextViewWithUrl:movieURL image:img];
-            [_textView becomeFirstResponder];
+            //[_textView becomeFirstResponder];
         }
         NSURL *uploadURL = [NSURL fileURLWithPath:[[NSTemporaryDirectory() stringByAppendingPathComponent:@"test"] stringByAppendingString:@".mp4"]];
         

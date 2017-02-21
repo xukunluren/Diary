@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface audioModel : NSObject
+@interface audioModel : RLMObject
 @property (nonatomic, copy) NSString *soundFilePath;
 @property (nonatomic, assign) NSTimeInterval seconds;
+@property (nonatomic,assign)  NSInteger  textLocation;
+@property (nonatomic,assign)  CGFloat  textHeight;
 @end
