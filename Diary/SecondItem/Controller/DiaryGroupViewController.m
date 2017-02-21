@@ -10,6 +10,7 @@
 #import "HomePageCell.h"
 #import "editDiaryModel.h"
 #import "groupModel.h"
+#import "RichTextViewController.h"
 
 
 @interface DiaryGroupViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -23,6 +24,7 @@
     [super viewDidLoad];
     _diaryInfoArray = [[NSMutableArray alloc] init];
     [self setBackWithText:@"返回"];
+     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(rightDown)];
     [self setTitle:self.title];
     UIButton *btn = [[UIButton alloc] init];
     btn.frame = CGRectMake(100, 100, 100, 100);
@@ -42,6 +44,18 @@
     [_diaryListTableView reloadData];
 
 }
+
+
+- (void)rightDown
+{
+    
+    RichTextViewController *rich = [[RichTextViewController alloc] init];
+    rich.NewDiary = YES;
+    rich.atGroup = _groupId;
+    rich.groupTitle = self.title;
+    [self.navigationController pushViewController:rich animated:YES];}
+
+
 - (UITableView *)diaryListTableView {
     if (!_diaryListTableView) {
         CGRect rect = CGRectMake(0, KTopHeight, kScreenWidth, kScreenHeight - kNavigationBarHeight-KTopHeight);
@@ -125,15 +139,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"%ld",(long)indexPath.row);
-//    editDiaryModel *edit = _diaryInfoArray[indexPath.row];
-//    RichTextViewController *rich = [[RichTextViewController alloc] init];
-//    rich.NewDiary = NO;
-//    rich.diaryData = edit.diaryInfo;
-//    rich.diaryId = edit.diaryId;
-//    rich.atGroup = edit.atGroup;
-//    rich.editDiary = edit;
-//    
-//    [self.navigationController pushViewController:rich animated:YES];
+    editDiaryModel *edit = _diaryInfoArray[indexPath.row];
+    RichTextViewController *rich = [[RichTextViewController alloc] init];
+    rich.NewDiary = NO;
+    rich.diaryData = edit.diaryInfo;
+    rich.diaryId = edit.diaryId;
+    rich.atGroup = edit.atGroup;
+    rich.editDiary = edit;
+    rich.groupTitle = edit.atGroupTitle;
+    
+    [self.navigationController pushViewController:rich animated:YES];
 }
 
 //先要设Cell可编辑

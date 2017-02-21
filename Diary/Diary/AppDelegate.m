@@ -31,6 +31,8 @@
     self.window.rootViewController = [[MainTabBarController alloc] init];
     
     [self.window makeKeyAndVisible];
+    
+    
     return YES;
 }
 
