@@ -191,13 +191,8 @@
     groupTitle = @"我的日记";
     _weatherType = 8;
     _isTapToGroupPage = NO;
-    
      [self setEditOfGroups];//添加日记分组view
     [self.view addSubview:self.textView];//设置日记书写区域
-    if (_NewDiary) {
-    }else{
-        [self putDiaryOnThePage];
-    }
     _GDkeyBoardHeigh = 2;//给键盘高度一个随意小的初始值
     _deleteAction = 0;
    
@@ -258,7 +253,13 @@
     
     
     [self.view addSubview:self.functionView];
-    [self initGroupData];//再次编辑进来后，页面重新渲染，需将所有数组的状态置为保存时的状态。
+    [self initGroupData];
+    //再次编辑进来后渲染上次编辑保存时的状态
+    if (_NewDiary) {
+    }else{
+        [self putDiaryOnThePage];
+    }
+
     
    
 }
@@ -267,6 +268,21 @@
 -(void)putDiaryOnThePage{
     NSAttributedString *temp = [[NSAttributedString alloc] initWithData:_diaryData options:@{NSDocumentTypeDocumentAttribute : NSRTFDTextDocumentType} documentAttributes:nil error:nil];     //读取
     [_textView setAttributedText:temp];
+    
+    [self putAudioAndVideoOnPage];//放置好audio和video后将数组状态还原，用于保存。
+    
+}
+
+-(void)putAudioAndVideoOnPage{
+    NSArray *audioArray = (NSArray *)_editDiary.audioDataModel;
+    if (audioArray.count>0) {
+        for (audioModel *model in audioArray) {
+            [self putAudioViewAndBackImage:model];//放置语音控件的位置。
+        }
+    }
+    videoModel *video = _editDiary.videoDataModel;
+    
+
 }
 -(void)initGroupData{
     RLMResults* tempArray = [groupModel allObjects];
@@ -764,7 +780,7 @@
         if (_heightOfAudioArray.count == 0) {//这里修改
             NSLog(@"子控件删除完");
         }else{
-        NSLog(@"点击了删除按键");
+ 
         NSInteger nowLocation =  _textView.selectedRange.location;
         //用户数据删除中
         NSInteger viewTag = [_heightOfAudioArray.lastObject integerValue];
@@ -1130,9 +1146,19 @@
     CGSize maxSize = CGSizeMake(_textViewBounds.size.width, CGFLOAT_MAX);
     CGSize newSize = [_textView sizeThatFits:maxSize];
     _textViewBounds.size = newSize;
-    NSLog(@"%f",_textViewBounds.size.height);
-    //添加图片底层
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(10, _textViewBounds.size.height, ScreenWidth-20, 50)];
+    //赋值语音模型数值
+    NSInteger subViewLocation = _textView.selectedRange.location+1;
+    messageModel.textLocation = subViewLocation;
+     messageModel.textHeight =  _textViewBounds.size.height;
+    //添加语音控件图片底层
+    [self putAudioViewAndBackImage:messageModel];
+    
+    
+    
+    
+}
+-(void)putAudioViewAndBackImage:(audioModel *)model{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(10,model.textHeight, ScreenWidth-20, 50)];
     view.alpha = 0.0;
     view.backgroundColor = [UIColor clearColor];
     UIGraphicsBeginImageContext(view.bounds.size);
@@ -1144,20 +1170,16 @@
     viewImage = nil;
     
     //添加录音控件
-    _audioimage = [[audioImage alloc] initWithFrame:CGRectMake(10, _textViewBounds.size.height+10, ScreenWidth-20, 30)];
-    messageModel.textHeight =  _textViewBounds.size.height;
+    _audioimage = [[audioImage alloc] initWithFrame:CGRectMake(10, model.textHeight+10, ScreenWidth-20, 30)];
     _audioimage.tag = _audioImageTag++;
-    NSInteger subViewLocation = _textView.selectedRange.location;
-    messageModel.textLocation = subViewLocation;
-    [_heightOfAudioArray addObject:@(subViewLocation)];
+    [_heightOfAudioArray addObject:@(model.textLocation)];
     UITapGestureRecognizer *ges = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(audiotap:)];
     [_audioimage addGestureRecognizer:ges];
-    [_audioimage builderViewWithSceond:[[LGSoundRecorder shareInstance] soundRecordTime]];
+    [_audioimage builderViewWithSceond:model.seconds];
     [_textView addSubview:_audioimage];
     [_AudioArray addObject:_audioimage];
-    [self.dataArray addObject:messageModel];
+    [self.dataArray addObject:model];
 }
-
 -(void)audiotap:(UITapGestureRecognizer*)gap{
     NSLog(@"%ld",gap.view.tag);
     NSInteger indexrow = gap.view.tag;//删除后卫队tag进行修改
