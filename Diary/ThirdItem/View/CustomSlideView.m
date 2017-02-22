@@ -184,7 +184,7 @@
         [self.delegate slideCardViewDidSlectIndex:_index];
     }
     
-    NSLog(@"%ld",_index);
+     
 }
 
 #pragma mark- UIScrollViewDelegate

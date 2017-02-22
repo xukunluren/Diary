@@ -98,7 +98,7 @@ NSString *const kXMNAudioDataKey;
 	}
 	
 	if (audioData) {
-		objc_setAssociatedObject(audioData, &kXMNAudioDataKey, [NSString stringWithFormat:@"%@_%ld",URLString,index], OBJC_ASSOCIATION_COPY);
+		objc_setAssociatedObject(audioData, &kXMNAudioDataKey, [NSString stringWithFormat:@"%@_%ld",URLString,(unsigned long)index], OBJC_ASSOCIATION_COPY);
 	}
 	
 	return audioData;

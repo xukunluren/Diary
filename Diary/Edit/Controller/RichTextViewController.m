@@ -48,7 +48,6 @@
 @property (nonatomic, weak) NSTimer *timerOf60Second;
 @property (weak, nonatomic)   UISlider *imageSizeSlider;
 @property (weak, nonatomic)  NSLayoutConstraint *bottomConstraint;
-@property (weak, nonatomic)  UIImageView *imageV;
 
 @property (strong, nonatomic)  DPImagePickerVC * Viewasd;
 @property (strong, nonatomic)  UIImageView *audioImageKeyBoard;//录音键盘
@@ -100,7 +99,6 @@
     AVPlayer *righrPlayer;
     AVPlayerLayer *rightPlayerLayer;
     AVPlayerItem *rightPlayerItem;
-    UIImageView *imagView;
     BOOL haveVideoInfo;
     BOOL haveAudioInfo;
     BOOL havePictureInfo;
@@ -109,7 +107,8 @@
     NSInteger videoTag;//视频控件tag
     NSMutableArray *audioHeightLocation;//音频控件位置
     NSMutableArray *videoHeightLocation;//视频控件位置
-    videoModel *videoDataModel;//视频模型
+    
+    NSMutableArray *videoDataArray;//视频数组
 }
 //+(instancetype)ViewController
 //{
@@ -118,17 +117,23 @@
 //    return ctrl;
 //}
 
-//-(void)CommomInit
-//{
-//    self.textView.delegate=self;
-//    self.font=DefaultFont;
-//    self.fontColor=[UIColor blackColor];
-//    self.location=0;
-//    self.isBold=NO;
-//    self.lineSapce=5;
-//    [self setInitLocation];
-//}
+-(void)CommomInit
+{
+
+    self.font=DefaultFont;
+    self.fontColor=[UIColor blackColor];
+    self.location=0;
+    self.isBold=NO;
+    self.lineSapce=5;
+    [self setInitLocation];
+}
 - (void)viewWillAppear:(BOOL)animated{
+    
+    //再次编辑进来后渲染上次编辑保存时的状态
+    if (_NewDiary) {
+    }else{
+        [self putDiaryOnThePage];
+    }
 
 }
 -(void)viewDidAppear:(BOOL)animated{
@@ -204,6 +209,7 @@
     _heightOfAudioArray = [[NSMutableArray alloc] init];
     _AudioArray = [[NSMutableArray alloc] init];
     _dataArray  = [NSMutableArray arrayWithCapacity:0];
+    videoDataArray  = [NSMutableArray arrayWithCapacity:0];
     audioHeightLocation =[[NSMutableArray alloc] init];
     _audioImageTag = 0;
     //增加监听，当键盘出现或改变时收出消息
@@ -212,7 +218,7 @@
                                                  name:UIKeyboardWillShowNotification
                                                object:nil];
     
-//    [self resetTextStyle];//设置textView中的字体样式等
+    [self CommomInit];//设置textView中的字体样式等
     
     
     
@@ -249,17 +255,12 @@
      
                                                 name:AVPlayerItemDidPlayToEndTimeNotification
      
-                                              object:rightPlayerItem];
+                                            object:rightPlayerItem];
     
     
     [self.view addSubview:self.functionView];
     [self initGroupData];
-    //再次编辑进来后渲染上次编辑保存时的状态
-    if (_NewDiary) {
-    }else{
-        [self putDiaryOnThePage];
-    }
-
+   
     
    
 }
@@ -280,7 +281,15 @@
             [self putAudioViewAndBackImage:model];//放置语音控件的位置。
         }
     }
-    videoModel *video = _editDiary.videoDataModel;
+    
+    
+     NSArray *video = (NSArray *)_editDiary.videoDataModel;
+    if (video.count>0) {
+        for (videoModel *model in video) {
+            [self putVideoAndBackImage:model];
+        }
+    }
+    
     
 
 }
@@ -598,8 +607,10 @@
                 model.atGroupTitle = @"我的日记";
             }
             
+            for (videoModel *video in videoDataArray) {
+                [model.videoDataModel addObject:video];
+            }
             
-            model.videoDataModel = videoDataModel;
             for (audioModel *audiomodel in _dataArray) {
                 [model.audioDataModel addObject:audiomodel];
             }
@@ -654,6 +665,12 @@
            model.weatherType = _weatherType;
         }else{
            model.weatherType =  weatherty;
+        }
+        for (videoModel *video in videoDataArray) {
+            [model.videoDataModel addObject:video];
+        }
+        for (audioModel *audiomodel in _dataArray) {
+            [model.audioDataModel addObject:audiomodel];
         }
     
         // 通过 id = 1 更新该书籍
@@ -772,6 +789,15 @@
 }
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
+    
+    
+    for(UIView *imageView in [_textView subviews])//删除多余的UIImageView
+    {
+        if ([imageView isKindOfClass:[UIImageView class]]) {
+            [imageView removeFromSuperview];
+        }
+    }
+    
     if([text length] != 0) //点击了非删除键
     {
     }
@@ -788,9 +814,16 @@
             if (viewTag == videoTag) {
                 [_videoView removeFromSuperview];
                 [_heightOfAudioArray removeLastObject];
-                videoDataModel = nil;
+                [videoDataArray removeLastObject];
             }else{
-            [_textView.subviews.lastObject removeFromSuperview];
+                if (_NewDiary) {
+                [_textView.subviews.lastObject removeFromSuperview];
+                }else{
+                     
+                    
+                    [_textView.subviews.lastObject removeFromSuperview];
+                }
+           
             [_dataArray removeLastObject];
             [_heightOfAudioArray removeLastObject];
             _audioImageTag  = _audioImageTag -1;
@@ -1228,22 +1261,29 @@
     [self presentViewController:picker animated:YES completion:^{
         
     }];
-
 }
 
 -(void)putVideoOnTextViewWithUrl:(NSURL *)url image:(UIImage *)pictueImage{
-    videoDataModel = [[videoModel alloc] init];
-    videoDataModel.url = [url absoluteString];
-    videoDataModel.image =UIImageJPEGRepresentation(pictueImage, 0.75);
+   videoModel *videoM = [[videoModel alloc] init];
+    videoM.url = [url absoluteString];
+    videoM.image =UIImageJPEGRepresentation(pictueImage, 0.75);
     
     //计算textView中现在的内容高度，用于设置语音控件的位置
     _textViewBounds = _textView.bounds;
     CGSize maxSize = CGSizeMake(_textViewBounds.size.width, CGFLOAT_MAX);
     CGSize newSize = [_textView sizeThatFits:maxSize];
     _textViewBounds.size = newSize;
+    videoM.textHeight =  _textViewBounds.size.height;
+    NSInteger subViewLocation = _textView.selectedRange.location+2;
+    videoM.textLocation = subViewLocation;
     
+    [self putVideoAndBackImage:videoM];
+    
+
+}
+-(void)putVideoAndBackImage:(videoModel*)model{
     //添加图片底层
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(10, _textViewBounds.size.height, ScreenWidth-20, 300)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(10, model.textHeight, ScreenWidth-20, 300)];
     view.alpha = 0.0;
     view.backgroundColor = [UIColor redColor];
     UIGraphicsBeginImageContext(view.bounds.size);
@@ -1253,22 +1293,21 @@
     view = nil;
     [self putVideoWithImage:viewImage];
     viewImage = nil;
-
+    
     //添加视频控件videoTap
-    _videoView = [[videoView alloc] initWithFrame:CGRectMake(15, _textViewBounds.size.height+10, ScreenWidth-30, 280)];
-    videoDataModel.textHeight =  _textViewBounds.size.height;
-    _videoView.url = url;
-    [_videoView builderWithImage:pictueImage];
-    NSInteger subViewLocation = _textView.selectedRange.location+1;
-    videoTag = subViewLocation;
-    videoDataModel.textLocation = videoTag;
+    _videoView = [[videoView alloc] initWithFrame:CGRectMake(15, model.textHeight+10, ScreenWidth-30, 280)];
+    
+    _videoView.url = [NSURL URLWithString:model.url];
+    
+    [_videoView builderWithImage:[UIImage imageWithData:model.image]];
+    
+    videoTag = model.textLocation;
     _videoView.tag = videoTag;
-    [_heightOfAudioArray addObject:@(subViewLocation)];
+    [_heightOfAudioArray addObject:@(videoTag)];
     [_textView addSubview:_videoView];
     UITapGestureRecognizer *videoGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(videoTap:)];
     [_videoView addGestureRecognizer:videoGes];
-//
-
+    [videoDataArray addObject:model];
 }
 
 
@@ -1385,7 +1424,7 @@
     ImageTextAttachment *imageTextAttachment = [ImageTextAttachment new];
     image1=[imageTextAttachment scaleImage:image withSize:CGSizeMake(ScreenWidth, 50)];
     //Set tag and image
-    imageTextAttachment.imageTag = ImageTag;
+//    imageTextAttachment.imageTag = ImageTag;
     imageTextAttachment.image =image1;
     
     //Set image size
@@ -1412,7 +1451,7 @@
     ImageTextAttachment *imageTextAttachment = [ImageTextAttachment new];
     image1=[imageTextAttachment scaleImage:image withSize:CGSizeMake(ScreenWidth, 320)];
     //Set tag and image
-    imageTextAttachment.imageTag = ImageTag;
+//    imageTextAttachment.imageTag = ImageTag;
     imageTextAttachment.image =image1;
     
     //Set image size
@@ -1463,14 +1502,7 @@
     [self setInitLocation];
 }
 
-- (void)getImageArray:(NSMutableArray *)arrayImage{
-    [self.navigationController popViewControllerAnimated:YES];
-    NSLog(@"------------------%ld",(unsigned long)arrayImage.count);
-    if (arrayImage.count !=0) {
-        self.imageV.image = arrayImage[0];
-    }
-    
-}
+
 
 -(void)selectedImage
 {

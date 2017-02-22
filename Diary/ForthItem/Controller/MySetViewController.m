@@ -77,7 +77,7 @@ const CGFloat HeadImageHeight= 80;
         
         //打印数据
         
-        NSLog(@"ID : %ld, name : %@, age : %@ ",model.id,model.name,model.sex);
+        NSLog(@"ID : %ld, name : %@, age : %@ ",(long)model.id,model.name,model.sex);
         
     }
 }

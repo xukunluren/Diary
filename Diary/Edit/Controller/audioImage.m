@@ -56,7 +56,12 @@
 }
 -(void)audioTouch{
     NSLog(@"录音点击事件");
+    
 }
+
+ 
+
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

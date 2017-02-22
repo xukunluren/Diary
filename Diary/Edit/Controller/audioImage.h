@@ -10,6 +10,7 @@
 
 @interface audioImage : UIView
 
-
 -(void)builderViewWithSceond:(NSTimeInterval)second;
+//-(void)viewWithTag:(NSInteger)viewTag;
+ 
 @end

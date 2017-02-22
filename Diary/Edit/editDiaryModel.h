@@ -12,6 +12,7 @@
 
 
 RLM_ARRAY_TYPE(audioModel)
+RLM_ARRAY_TYPE(videoModel)
 @interface editDiaryModel : RLMObject
 @property NSString *year;
 @property NSString *monthAndDay;
@@ -27,7 +28,7 @@ RLM_ARRAY_TYPE(audioModel)
 @property long atGroup;//所在分组
 @property NSString *atGroupTitle;//所在分组
 @property long diaryId;
-@property videoModel *videoDataModel;//视频模型数据
+@property RLMArray<videoModel *><videoModel>  *videoDataModel;//视频模型数据
 @property RLMArray<audioModel *><audioModel> *audioDataModel;//音频模型数据
 
 @end

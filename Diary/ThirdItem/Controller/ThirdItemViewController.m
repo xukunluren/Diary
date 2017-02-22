@@ -126,7 +126,7 @@
     
     NSMutableArray *objectArray = [@[] mutableCopy];
     for (int i = 1; i<=10; i++) {
-        [objectArray addObject:@{@"number":[NSString stringWithFormat:@"%ld",self.page*10+i],@"image":[NSString stringWithFormat:@"%d.jpeg",i]}];
+        [objectArray addObject:@{@"number":[NSString stringWithFormat:@"%d",self.page*10+i],@"image":[NSString stringWithFormat:@"%d.jpeg",i]}];
     }
     
     [self.sourceObject addObjectsFromArray:objectArray];
