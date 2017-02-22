@@ -129,11 +129,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     
-    //再次编辑进来后渲染上次编辑保存时的状态
-    if (_NewDiary) {
-    }else{
-        [self putDiaryOnThePage];
-    }
+   
 
 }
 -(void)viewDidAppear:(BOOL)animated{
@@ -260,6 +256,11 @@
     
     [self.view addSubview:self.functionView];
     [self initGroupData];
+    //再次编辑进来后渲染上次编辑保存时的状态
+    if (_NewDiary) {
+    }else{
+        [self putDiaryOnThePage];
+    }
    
     
    
@@ -528,14 +529,18 @@
 #pragma mark  右侧保存按钮点击事件
 -(void)rightButtonClick{
     NSLog(@"保存事件");
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-         [self dataStore];//数据保存数据库
-         [self updataToServer];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self showToastWithString:@"保存成功"];
-            [self.navigationController popViewControllerAnimated:YES];
-        });
-    });
+    [self dataStore];//数据保存数据库
+    [self updataToServer];
+    [self showToastWithString:@"保存成功"];
+    [self.navigationController popViewControllerAnimated:YES];
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//         [self dataStore];//数据保存数据库
+//         [self updataToServer];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [self showToastWithString:@"保存成功"];
+//            [self.navigationController popViewControllerAnimated:YES];
+//        });
+//    });
 }
 
 //数据修改及保存
