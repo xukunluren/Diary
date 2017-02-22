@@ -14,6 +14,7 @@
 		5839AC3E1E52E85F00DE7571 /* HttpEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 5839AC3D1E52E85F00DE7571 /* HttpEngine.m */; };
 		5839AC441E53075900DE7571 /* Jastor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5839AC411E53075900DE7571 /* Jastor.m */; };
 		5839AC451E53075900DE7571 /* JastorRuntimeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5839AC431E53075900DE7571 /* JastorRuntimeHelper.m */; };
+		585E8F791E5D65BF00AC1F75 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 585E8F781E5D65BF00AC1F75 /* UIView+Frame.m */; };
 		5863737B1E569BC5007F2970 /* CustomSlideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5863737A1E569BC5007F2970 /* CustomSlideView.m */; };
 		5866815D1E4C0AD600DD878E /* UserData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5866815C1E4C0AD600DD878E /* UserData.plist */; };
 		586E0AC81E308E720082106E /* HomePageIfNoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 586E0AC61E308E720082106E /* HomePageIfNoDataView.m */; };
@@ -294,6 +295,8 @@
 		5839AC411E53075900DE7571 /* Jastor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Jastor.m; sourceTree = "<group>"; };
 		5839AC421E53075900DE7571 /* JastorRuntimeHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JastorRuntimeHelper.h; sourceTree = "<group>"; };
 		5839AC431E53075900DE7571 /* JastorRuntimeHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JastorRuntimeHelper.m; sourceTree = "<group>"; };
+		585E8F771E5D65BF00AC1F75 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
+		585E8F781E5D65BF00AC1F75 /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
 		586373791E569BC5007F2970 /* CustomSlideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSlideView.h; sourceTree = "<group>"; };
 		5863737A1E569BC5007F2970 /* CustomSlideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSlideView.m; sourceTree = "<group>"; };
 		5866815C1E4C0AD600DD878E /* UserData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UserData.plist; sourceTree = "<group>"; };
@@ -1406,6 +1409,8 @@
 				25FFA07D1E28D24600869B7E /* UIViewController+ClassName.m */,
 				25FFA07E1E28D24600869B7E /* WMFPSLabel.h */,
 				25FFA07F1E28D24600869B7E /* WMFPSLabel.m */,
+				585E8F771E5D65BF00AC1F75 /* UIView+Frame.h */,
+				585E8F781E5D65BF00AC1F75 /* UIView+Frame.m */,
 			);
 			path = Catogory;
 			sourceTree = "<group>";
@@ -2081,6 +2086,7 @@
 				67CC91651E2DBFB900761832 /* LoginView.m in Sources */,
 				5839AC451E53075900DE7571 /* JastorRuntimeHelper.m in Sources */,
 				67AC59C01E542BB0001D7BAE /* CRToast.m in Sources */,
+				585E8F791E5D65BF00AC1F75 /* UIView+Frame.m in Sources */,
 				67C06D151E348C1900EBA5C6 /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */,
 				67C06D051E348C0400EBA5C6 /* ImageTextAttachment.m in Sources */,
 				67CC91011E28C02D00761832 /* AFURLResponseSerialization.m in Sources */,

@@ -16,5 +16,6 @@
 #import "UIColor+FlatUI.h"
 #import "UIImage+Additions.h"
 #import "UISearchBar+Additions.h"
+#import "UIView+Frame.h"
 #import <Realm/Realm.h>
 #endif /* HeaderFiles_h */
