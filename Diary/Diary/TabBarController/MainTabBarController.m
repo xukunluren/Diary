@@ -16,6 +16,7 @@
 #import "ThirdItemViewController.h"
 #import "MySetViewController.h"
 
+
 @interface MainTabBarController () <MainTabBarControllerTabBarDelegate>
 @property (nonatomic, strong) FirstItemViewController *firstItem;
 @property (nonatomic, strong) SecondItemViewController *secondtem;
@@ -29,7 +30,7 @@
 #pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    //self.view.backgroundColor = [UIColor redColor];
     // 添加子控制器
     [self addChildVc:self.firstItem title:@"好记" image:@"first" selectedImage:@"first_select"];
     [self addChildVc:self.secondtem title:@"分组" image:@"second" selectedImage:@"second_select"];
@@ -38,9 +39,21 @@
     
     MainTabBarControllerTabBar *tabBar = [[MainTabBarControllerTabBar alloc] init];
     tabBar.customDelegate = self;
+    
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    // app版本
+    NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+    NSLog(@"%@---",app_Version);
+    
+    
+    NSLog(@"%@----",app_Version);
+
+    // app build版本
     /** KVC */
     //[self setValue:tabBar forKey:@"tabBar"];
 }
+
+
 
 #pragma mark - delegate
 // MainTabBarControllerTabBarDelegate 加号按钮代理
@@ -102,4 +115,5 @@
     }
     return _profileVc;
 }
+
 @end
