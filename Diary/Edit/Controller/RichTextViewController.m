@@ -625,7 +625,7 @@
             [realm addObject:model];
             //提交事务
             [realm commitWriteTransaction];
-            _editModel = model;//为数据上传服务器做准备；
+            //_editModel = model;//为数据上传服务器做准备；
         }];
         
         
@@ -1268,10 +1268,10 @@
     }];
 }
 
--(void)putVideoOnTextViewWithUrl:(NSURL *)url image:(UIImage *)pictueImage{
+-(void)putVideoOnTextViewWithUrl:(NSURL *)url image:(NSString *)pictueImage{
    videoModel *videoM = [[videoModel alloc] init];
     videoM.url = [url absoluteString];
-    videoM.image =UIImageJPEGRepresentation(pictueImage, 0.75);
+    videoM.image = pictueImage;
     
     //计算textView中现在的内容高度，用于设置语音控件的位置
     _textViewBounds = _textView.bounds;
@@ -1279,7 +1279,7 @@
     CGSize newSize = [_textView sizeThatFits:maxSize];
     _textViewBounds.size = newSize;
     videoM.textHeight =  _textViewBounds.size.height;
-    NSInteger subViewLocation = _textView.selectedRange.location+2;
+    NSInteger subViewLocation = _textView.selectedRange.location+1;
     videoM.textLocation = subViewLocation;
     
     [self putVideoAndBackImage:videoM];
@@ -1303,8 +1303,8 @@
     _videoView = [[videoView alloc] initWithFrame:CGRectMake(15, model.textHeight+10, ScreenWidth-30, 280)];
     
     _videoView.url = [NSURL URLWithString:model.url];
-    
-    [_videoView builderWithImage:[UIImage imageWithData:model.image]];
+    UIImage *getimage = [UIImage imageWithContentsOfFile:model.image];
+    [_videoView builderWithImage:getimage];
     
     videoTag = model.textLocation;
     _videoView.tag = videoTag;
@@ -1590,13 +1590,36 @@
         UIImage *img = [UIImage imageWithCGImage:alAsset.defaultRepresentation.fullResolutionImage
                                            scale:alAsset.defaultRepresentation.scale
                                      orientation:(UIImageOrientation)alAsset.defaultRepresentation.orientation];
+        
+        NSString *path_document = NSHomeDirectory();
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        
+        // ----------设置你想要的格式,hh与HH的区别:分别表示12小时制,24小时制
+        
+        [formatter setDateFormat:@"YYYYMMddHHmmss"];
+        
+        //现在时间,你可以输出来看下是什么格式
+        
+        NSDate *datenow = [NSDate date];
+        
+        //----------将nsdate按formatter格式转成nsstring
+        
+        NSString *nowtimeStr = [formatter stringFromDate:datenow];
+        NSString *file = [NSString stringWithFormat:@"/Documents/%@",nowtimeStr];
+
+        //设置一个图片的存储路径
+        NSString *imagePath = [path_document stringByAppendingString:file];
+        //把图片直接保存到指定的路径（同时应该把图片的路径imagePath存起来，下次就可以直接用来取）
+        [UIImagePNGRepresentation(img) writeToFile:imagePath atomically:YES];
+        
+        
         ALAssetRepresentation *representation = alAsset.defaultRepresentation;
         AVAsset *avasset = [AVAsset assetWithURL:alAsset.defaultRepresentation.url];
         NSURL *movieURL = representation.url;
         mp4Url = movieURL;
           long long size = representation.size;
         if (true) {//在此处判断视频的大小，超出大小则提示用户视频过大，请重新选择
-            [self putVideoOnTextViewWithUrl:movieURL image:img];
+            [self putVideoOnTextViewWithUrl:movieURL image:imagePath];
             //[_textView becomeFirstResponder];
         }
         NSURL *uploadURL = [NSURL fileURLWithPath:[[NSTemporaryDirectory() stringByAppendingPathComponent:@"test"] stringByAppendingString:@".mp4"]];

@@ -10,7 +10,7 @@
 
 @interface videoModel : RLMObject
 @property (nonatomic, assign) NSString *url;
-@property (nonatomic, assign) NSData *image;
+@property (nonatomic, copy) NSString *image;
 @property (nonatomic,assign)  NSInteger  textLocation;
 @property (nonatomic,assign)  CGFloat  textHeight;
 @end

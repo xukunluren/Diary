@@ -37,6 +37,8 @@ typedef enum
 -(void)setNavigtionBarTransparent:(BOOL)_transparent;
 -(void)goBack;
 -(UIView *)drawThreadWithFram:(CGRect)rect andColor:(UIColor *)color;
-
+-(NSString *)UIImageToBase64Str:(UIImage *)image;
+//字符串转图片
+-(UIImage *)Base64StrToUIImage:(NSString *)_encodedImageStr;
 -(void)showToastWithString:(NSString*)title;
 @end

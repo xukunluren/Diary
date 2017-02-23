@@ -96,6 +96,21 @@
                                     NSLog(@"Completed");
                                 }];
 }
+
+-(NSString *)UIImageToBase64Str:(UIImage *) image
+{
+    NSData *data = UIImageJPEGRepresentation(image, 1.0f);
+    NSString *encodedImageStr = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    return encodedImageStr;
+}
+//字符串转图片
+-(UIImage *)Base64StrToUIImage:(NSString *)_encodedImageStr
+{
+    NSData *_decodedImageData   = [[NSData alloc] initWithBase64Encoding:_encodedImageStr];
+    UIImage *_decodedImage      = [UIImage imageWithData:_decodedImageData];
+    return _decodedImage;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
