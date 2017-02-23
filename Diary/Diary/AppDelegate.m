@@ -9,9 +9,13 @@
 #import "AppDelegate.h"
 #import "MainTabBarController.h"
 #import "UIViewController+ClassName.h"
+#import "GuideView.h"
 
+#define LAST_RUN_VERSION_KEY @"last_run_version_of_application"
 
-@interface AppDelegate ()
+@interface AppDelegate ()<GuideViewDelegate>
+
+@property (strong, nonatomic) NSArray *imageArray;
 
 @end
 
@@ -22,15 +26,23 @@
     // Override point for customization after application launch.
     
     //显示当前类名
+    BOOL b = [self isFirstLoad];
+    NSLog(@"%d",b);
     [UIViewController displayClassName:YES];
-    
-    self.window = [[UIWindow alloc] initWithFrame:kMainScreenBounds];
-    
-    self.window.backgroundColor = [UIColor whiteColor];
-    
-    self.window.rootViewController = [[MainTabBarController alloc] init];
-    
-    [self.window makeKeyAndVisible];
+    GuideView *guideView = [[GuideView alloc] initWithFrame:self.window.bounds];
+    guideView.delegate = self;
+    guideView.imageArray = self.imageArray;
+    [self.window.rootViewController.view addSubview:guideView];
+
+//    if (b) {
+//        GuideView *guideView = [[GuideView alloc] initWithFrame:self.window.bounds];
+//        guideView.delegate = self;
+//        guideView.imageArray = self.imageArray;
+//        [self.window.rootViewController.view addSubview:guideView];
+//        
+//    }else {
+//        [self setRootViewController];
+//    }
     
     
     return YES;
@@ -63,5 +75,48 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+#pragma mark -------------------------------------------------------
+#pragma mark - 判断是否是第一次安装进入，或者是更新之后第一进入
+- (BOOL) isFirstLoad{
+    NSString *currentVersion = [[[NSBundle mainBundle] infoDictionary]
+                                objectForKey:@"CFBundleShortVersionString"];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSString *lastRunVersion = [defaults objectForKey:LAST_RUN_VERSION_KEY];
+    
+    if (!lastRunVersion) {
+        [defaults setObject:currentVersion forKey:LAST_RUN_VERSION_KEY];
+        return YES;
+    }
+    else if (![lastRunVersion isEqualToString:currentVersion]) {
+        [defaults setObject:currentVersion forKey:LAST_RUN_VERSION_KEY];
+        return YES;
+    }
+    return NO;
+}
 
+- (void)setRootViewController {
+    self.window = [[UIWindow alloc] initWithFrame:kMainScreenBounds];
+    
+    self.window.backgroundColor = [UIColor whiteColor];
+    
+    self.window.rootViewController = [[MainTabBarController alloc] init];
+    
+    [self.window makeKeyAndVisible];
+
+}
+
+- (NSArray *)imageArray {
+    if (!_imageArray) {
+        _imageArray = [[NSArray alloc] initWithObjects:@"welcome1",@"welcome2",@"welcome3",@"welcome4",@"welcome5", nil];
+        return _imageArray;
+    }
+    return _imageArray;
+}
+
+- (void)GuideViewDelegate:(GuideView *)guideView {
+    [guideView removeFromSuperview];
+    [self setRootViewController];
+}
 @end
