@@ -14,7 +14,7 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = [UIColor whiteColor];
         [self setView];
     }
     return self;
@@ -24,6 +24,7 @@
 -(void)setView{
     UIView *openOrNot = [[UIView alloc] initWithFrame:CGRectMake(-1, 0, ScreenWidth+1, 35)];
     openOrNot.layer.borderWidth = 0.5;
+    [openOrNot setBackgroundColor:[UIColor whiteColor]];
     openOrNot.layer.borderColor = [UIColor lightGrayColor].CGColor;
     [self addSubview:openOrNot];
     UILabel *textlabel = [[UILabel alloc] initWithFrame:CGRectMake(7, 3, ScreenWidth*0.5-6, openOrNot.frame.size.height-6)];
@@ -40,7 +41,8 @@
     [openOrNot addSubview:_openOrNotButton];
     NSMutableArray *picture = [[NSMutableArray alloc] initWithObjects:@"keyboard.png",@"sound.png",@"video.png",@"picture.png",@"myphoto.png",@"weather.png", nil];
     
-    UIView *functionKeyView = [[UIView alloc] initWithFrame:CGRectMake(0, 36, ScreenWidth, 35)];
+    UIView *functionKeyView = [[UIView alloc] initWithFrame:CGRectMake(0, 35.5, ScreenWidth, 35)];
+    [functionKeyView setBackgroundColor:[UIColor whiteColor]];
      CGFloat  bTWith = ScreenWidth/6;
     for (int i=0; i<5; i++) {
        

@@ -196,6 +196,7 @@
     _isTapToGroupPage = NO;
      [self setEditOfGroups];//添加日记分组view
     [self.view addSubview:self.textView];//设置日记书写区域
+    [self.view addSubview:self.functionView];
     _GDkeyBoardHeigh = 2;//给键盘高度一个随意小的初始值
     _deleteAction = 0;
    
@@ -256,7 +257,7 @@
                                             object:rightPlayerItem];
     
     
-    [self.view addSubview:self.functionView];
+    
     [self initGroupData];
     //再次编辑进来后渲染上次编辑保存时的状态
     if (_NewDiary) {
@@ -321,7 +322,7 @@
 
 -(UITextView *)textView{
     if (!_textView) {
-        _textView = [[UITextView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_editOfGroups.frame), ScreenWidth, ScreenHeight - KTopHeight - 102)];
+        _textView = [[UITextView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_editOfGroups.frame), ScreenWidth, ScreenHeight - KTopHeight - 112)];
         _textView.delegate = self;
         _textView.editable = YES;
         _textView.scrollEnabled = YES;
@@ -422,7 +423,10 @@
     CGRect keyboardRect;
     [keyboardRectAsObject getValue:&keyboardRect];
     
-    self.textView.contentInset=UIEdgeInsetsMake(0, 0,keyboardRect.size.height+70, 0);
+    [UIView animateWithDuration:0.9 animations:^{
+        self.textView.contentInset=UIEdgeInsetsMake(0, 0,keyboardRect.size.height+70, 0);
+    }];
+    
 
     _keyBoardHeigh = keyboardRect.size.height;
     if (_GDkeyBoardHeigh<_keyBoardHeigh+70) {
@@ -434,11 +438,21 @@
 //键盘隐藏
 - (void)handleKeyboardDidHidden
 {
-    _textView.contentInset=UIEdgeInsetsZero;
-}
+    [UIView animateWithDuration:0.5 animations:^{
+        _textView.contentInset=UIEdgeInsetsZero;
+    }];
+  }
 //当键盘即将出现或改变时调用
 - (void)keyboardWillShow:(NSNotification *)aNotification
 {
+    //获取键盘高度
+    NSValue *keyboardRectAsObject=[[aNotification userInfo]objectForKey:UIKeyboardFrameEndUserInfoKey];
+    
+    CGRect keyboardRect;
+    [keyboardRectAsObject getValue:&keyboardRect];
+    
+    
+    self.textView.contentInset=UIEdgeInsetsMake(0, 0,keyboardRect.size.height+70, 0);
     
 //    _willhiddleKeyBoard = NO;
 //   
