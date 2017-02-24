@@ -109,6 +109,7 @@
     NSMutableArray *videoHeightLocation;//视频控件位置
     
     NSMutableArray *videoDataArray;//视频数组
+    BOOL openOrNot;//是否公开
 }
 //+(instancetype)ViewController
 //{
@@ -190,6 +191,7 @@
     [self.view setBackgroundColor:[UIColor whiteColor]];
     _groupRow = 0;
     groupTitle = @"我的日记";
+    openOrNot = YES;
     _weatherType = 8;
     _isTapToGroupPage = NO;
      [self setEditOfGroups];//添加日记分组view
@@ -225,7 +227,7 @@
    
     
     //Add keyboard notification
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onKeyboardWillHideNotification:) name:UIKeyboardWillHideNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onKeyboardWillHideNotification:) name:UIKeyboardWillHideNotification object:nil];
 
 //    
     
@@ -269,6 +271,11 @@
 
 -(void)putDiaryOnThePage{
     NSAttributedString *temp = [[NSAttributedString alloc] initWithData:_diaryData options:@{NSDocumentTypeDocumentAttribute : NSRTFDTextDocumentType} documentAttributes:nil error:nil];     //读取
+
+    
+    _functionView.openOrNotButton.on = _editDiary.openOrNo;
+    [_functionView setweatherIconPicture: _editDiary.weatherType];
+    
     [_textView setAttributedText:temp];
     
     [self putAudioAndVideoOnPage];//放置好audio和video后将数组状态还原，用于保存。
@@ -330,8 +337,6 @@
     if (!_functionView) {
         _functionView = [[functionKeyView alloc] initWithFrame:CGRectMake(0,ScreenHeight-72, ScreenHeight, 72)];
         _functionView.delegate = self;
-        
-        
     }
     return _functionView;
 }
@@ -598,6 +603,7 @@
             model.diaryInfo = data;
             model.diaryId = dId;
             model.weatherType = _weatherType;
+            model.openOrNo = openOrNot;
             if (_weatherSelct) {
                 model.weatherType = _weatherType;
             }else{
@@ -657,6 +663,7 @@
         model.haveWeatherInfo = YES;
         model.diaryInfo = data;
         model.diaryId = _diaryId;
+        model.openOrNo = openOrNot;
         //对日记所在的分组进行记录
         if (_isTapToGroupPage) {
             model.atGroup = _groupRow;
@@ -945,20 +952,6 @@
     }else{
         [_textView becomeFirstResponder];
     }
-//        else{
-//        if (!_isAudioKeyOnTop) {
-//            [_textView endEditing:YES];
-//            [UIView animateWithDuration:0.5 animations:^{
-////               _upkeyboardView.frame = CGRectMake(0, ScreenHeight - upHeight-5, ScreenWidth, upHeight);
-//            }];
-//            
-//        }else{
-//            [_textView becomeFirstResponder];
-//            _textView.inputView = nil;
-//            _isAudioKeyOnTop = NO;
-//            [_textView reloadInputViews];
-//        }
-//        }
 }
 #pragma mark - 选择天气模块
 // 数据准备
@@ -1023,9 +1016,23 @@
 }
 //录音
 - (IBAction)colorClick:(UIButton *)sender {
+    if (_dataArray.count == 3) {
+        NSLog(@"不能再添加语音");
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"nihao" message:@"提示框" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [_textView becomeFirstResponder];
+            _textView.inputView = nil;
+            _isAudioKeyOnTop = NO;
+            [_textView reloadInputViews];
+        }];
+        [alert addAction:action1];
+        [self presentViewController:alert animated:YES completion:^{
+        }];
+     
+    }
     [_textView becomeFirstResponder];
-    
-     _audioView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, _keyBoardHeigh*0.7)];
+ 
+    _audioView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, _keyBoardHeigh*0.7)];
     [_audioView setBackgroundColor:[UIColor whiteColor]];
      [_audioView addSubview:[self drawThreadWithFram:CGRectMake(0, 5, ScreenWidth, 0.5) andColor:[UIColor colorWithHexString:@"e7e7e7"]]];
     //按住说话
@@ -1044,6 +1051,8 @@
     
     //录音icon添加点击事件
     _audioButton = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth*0.5-48, CGRectGetMaxY(label.frame)+20, 96, 96)];
+    _audioButton.center = _audioView.center;
+    _audioButton.centerY = _audioView.centerY+20;
     [_audioButton setBackgroundImage:[UIImage imageNamed:@"luyinicon"] forState:UIControlStateNormal];
     [_audioButton addTarget:self action:@selector(startRecordVoice) forControlEvents:UIControlEventTouchDown];
     [_audioButton addTarget:self action:@selector(cancelRecordVoice) forControlEvents:UIControlEventTouchUpOutside];
@@ -1057,12 +1066,57 @@
  
 }
 
+-(void)show{
+    _centerRadarView = [[AnimationView alloc] initWithFrame:_audioButton.bounds];
+    _centerRadarView.lineColor = [UIColor whiteColor];
+    _centerRadarView.backgroundColor = [UIColor clearColor];
+    _centerRadarView.center = _audioView.center;
+    _centerRadarView.centerY = _audioView.centerY+20;
+    [_audioView addSubview:_centerRadarView];
+    
+    
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 96, 96)];
+    [_centerRadarView addSubview:label];
+    label.layer.cornerRadius = 48;
+//    label.layer.masksToBounds = YES;
+    label.backgroundColor = [UIColor clearColor];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationEnterFoground) name:@"enterForeground" object:nil];
+}
+
+-(void)hide{
+    [_centerRadarView removeFromSuperview];
+}
+- (void)notificationEnterFoground
+{
+    [_centerRadarView setNeedsDisplay];
+    _centerRadarView.lineColor = [UIColor whiteColor];
+    _centerRadarView.backgroundColor = [UIColor clearColor];
+}
+
 #pragma mark - Private Methods
 
 /**
  *  开始录音
  */
 - (void)startRecordVoice{
+    if (_dataArray.count == 3) {
+        NSLog(@"不能再添加语音");
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"nihao" message:@"提示框" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [_textView becomeFirstResponder];
+            _textView.inputView = nil;
+            _isAudioKeyOnTop = NO;
+            [_textView reloadInputViews];
+        }];
+        [alert addAction:action1];
+        [self presentViewController:alert animated:YES completion:^{
+        }];
+        
+    }
+    [self show];
+    
     __block BOOL isAllow = 0;
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
     if ([audioSession respondsToSelector:@selector(requestRecordPermission:)]) {
@@ -1094,6 +1148,7 @@
  *  录音结束
  */
 - (void)confirmRecordVoice {
+    [self hide];
     if ([[LGSoundRecorder shareInstance] soundRecordTime] < 1.0f) {
         if (_timerOf60Second) {
             [_timerOf60Second invalidate];
@@ -1221,6 +1276,9 @@
 -(void)audiotap:(UITapGestureRecognizer*)gap{
     NSLog(@"%ld",gap.view.tag);
     NSInteger indexrow = gap.view.tag;//删除后卫队tag进行修改
+    audioImage *audio = (audioImage*)gap.view;
+    [audio audioTapEvent];
+    
     audioModel *messageModel = [self.dataArray objectAtIndex:indexrow];
     [[LGAudioPlayer sharePlayer] playAudioWithURLString:messageModel.soundFilePath atIndex:indexrow];
     NSLog(@"手势识别时间");
@@ -1241,9 +1299,21 @@
     vc.isDouble = NO;
     [self.navigationController pushViewController:vc animated:YES];
 }
-//字体设置
+//视频添加
 - (void)videoClick:(UIButton *)sender {
-    NSLog(@"添加视频");
+    if (videoDataArray.count == 1) {
+        NSLog(@"不能再添加语音");
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"nihao" message:@"提示框" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [_textView becomeFirstResponder];
+            _textView.inputView = nil;
+            _isAudioKeyOnTop = NO;
+            [_textView reloadInputViews];
+        }];
+        [alert addAction:action1];
+        [self presentViewController:alert animated:YES completion:^{
+        }];
+    }
     [_textView endEditing:NO];
     
     
@@ -1255,16 +1325,11 @@
     appearanceConfig.assetsCountInALine = 5;
     [UzysAssetsPickerController setUpAppearanceConfig:appearanceConfig];
 #endif
-    
     UzysAssetsPickerController *picker = [[UzysAssetsPickerController alloc] init];
     picker.delegate = self;
-    
-    
-    picker.maximumNumberOfSelectionVideo = 2;
+    picker.maximumNumberOfSelectionVideo = 1;
     picker.maximumNumberOfSelectionPhoto = 0;
-    
     [self presentViewController:picker animated:YES completion:^{
-        
     }];
 }
 
@@ -1303,7 +1368,9 @@
     _videoView = [[videoView alloc] initWithFrame:CGRectMake(15, model.textHeight+10, ScreenWidth-30, 280)];
     
     _videoView.url = [NSURL URLWithString:model.url];
+    
     UIImage *getimage = [UIImage imageWithContentsOfFile:model.image];
+    
     [_videoView builderWithImage:getimage];
     
     videoTag = model.textLocation;
@@ -1345,55 +1412,21 @@
 - (IBAction)imageClick:(UIButton *)sender {
     [self.view endEditing:NO];
     
-    /**
-    TYAlertView *alertView = [TYAlertView alertViewWithTitle:@"选择照片" message:@""];
-    
-    __weak typeof(self)weakSelf=self;
-    [alertView addAction:[TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancle handler:^(TYAlertAction *action) {
-        
-    }]];
-    
-    [alertView addAction:[TYAlertAction actionWithTitle:@"确定" style:TYAlertActionStyleDestructive handler:^(TYAlertAction *action) {
-        [weakSelf selectedImage];
-    }]];
-    
-    // first way to show ,use UIView Category
-    [alertView showInWindowWithOriginY:200 backgoundTapDismissEnable:YES];
-     **/
-//    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-//    UIAlertAction *cancle = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-//        
-//    }];
-//    UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-    
 #if TARGET_IPHONE_SIMULATOR
-        //模拟器
-        UIAlertView *alerView=[[UIAlertView alloc]initWithTitle:@"提醒" message:@"请真机测试！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [alerView show];
+    //模拟器
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"请真机测试！" message:@"提醒" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    }];
+    [alert addAction:action1];
+    [self presentViewController:alert animated:YES completion:^{
+    }];
 #elif TARGET_OS_IPHONE
-        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-        imagePickerController.delegate = self;
-        imagePickerController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:([UIColor colorWithRed:231.0/255.0 green:56.0/255.0 blue:32.0/255.0 alpha:1.0]),NSForegroundColorAttributeName, nil];
-        imagePickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-        [self presentViewController:imagePickerController animated:YES completion:^{}];
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.delegate = self;
+    imagePickerController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:([UIColor colorWithRed:231.0/255.0 green:56.0/255.0 blue:32.0/255.0 alpha:1.0]),NSForegroundColorAttributeName, nil];
+    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+    [self presentViewController:imagePickerController animated:YES completion:^{}];
 #endif
-        
-        
-//    }];
-//    UIAlertAction *confirm2 = [UIAlertAction actionWithTitle:@"从手机相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-//        DPImagePickerVC *vc = [[DPImagePickerVC alloc]init];
-//        vc.delegate = self;
-//        vc.isDouble = NO;
-//        [self.navigationController pushViewController:vc animated:YES];
-//        
-//        
-//    }];
-//    [alertVc addAction:cancle];
-//    [alertVc addAction:confirm];
-//    [alertVc addAction:confirm2];
-//    [self presentViewController:alertVc animated:YES completion:nil];
-
-    
     
     
 }
@@ -1533,8 +1566,10 @@
     BOOL isButtonOn = [switchButton isOn];
     if (isButtonOn) {
         NSLog(@"公开这篇日记");
+        openOrNot = YES;
     }else {
         NSLog(@"不公开这篇日记");
+        openOrNot = NO;
     }
 }
 #pragma mark - image picker delegte

@@ -9,8 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 #import "editDiaryModel.h"
-
+#import "AnimationView.h"
 @interface RichTextViewController : BaseViewController
+
+@property (nonatomic,strong)AnimationView *centerRadarView;
+
+
 @property (assign, nonatomic)   BOOL NewDiary;
 
 @property(nonatomic,strong) NSData *diaryData;

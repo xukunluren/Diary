@@ -23,6 +23,7 @@ RLM_ARRAY_TYPE(videoModel)
 @property BOOL haveVideoInfo;
 @property BOOL havePictureInfo;
 @property BOOL haveAudioInfo;
+@property BOOL openOrNo;//是否公开日记
 @property NSData *diaryInfo;
 @property long weatherType;//天气类型
 @property long atGroup;//所在分组

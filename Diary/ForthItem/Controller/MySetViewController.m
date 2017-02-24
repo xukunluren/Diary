@@ -76,8 +76,7 @@ const CGFloat HeadImageHeight= 80;
     for (Person* model in tempArray) {
         
         //打印数据
-        
-        NSLog(@"ID : %ld, name : %@, age : %@ ",(long)model.id,model.name,model.sex);
+       
         
     }
 }
@@ -86,6 +85,7 @@ const CGFloat HeadImageHeight= 80;
 -(UIView*)loginOutView{
     if (_loginOutView == nil) {
     self.loginOutView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 70)];
+    self.loginOutView.backgroundColor = [UIColor clearColor];
     UIButton *loginOutButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 35)];
     [loginOutButton setTitle:@"退出登录" forState:UIControlStateNormal];
     [loginOutButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -104,6 +104,7 @@ const CGFloat HeadImageHeight= 80;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(shareEvent)];
     //[self setNavigtionBarTransparent:YES];
     mySettingTableView = [[UITableView alloc]initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStylePlain];
+    [mySettingTableView setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
     mySettingTableView.delegate = self;
     mySettingTableView.dataSource = self;
     mySettingTableView.separatorStyle = UITableViewCellSeparatorStyleNone;

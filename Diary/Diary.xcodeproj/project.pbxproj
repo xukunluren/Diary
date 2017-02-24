@@ -268,6 +268,9 @@
 		67E2403B1E5C0BCB00B86CDB /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67E2403A1E5C0BCB00B86CDB /* MessageUI.framework */; };
 		67E2403E1E5C2A6D00B86CDB /* videoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 67E2403D1E5C2A6D00B86CDB /* videoModel.m */; };
 		67E240421E5D2EEC00B86CDB /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 67E240411E5D2EEC00B86CDB /* Default@2x.png */; };
+		67E240501E5EE3F000B86CDB /* chat_animation_white3.png in Resources */ = {isa = PBXBuildFile; fileRef = 67E2404F1E5EE3F000B86CDB /* chat_animation_white3.png */; };
+		67E240521E5EE58700B86CDB /* yuan.png in Resources */ = {isa = PBXBuildFile; fileRef = 67E240511E5EE58700B86CDB /* yuan.png */; };
+		67E240711E5FE27700B86CDB /* AnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 67E240701E5FE27700B86CDB /* AnimationView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -691,6 +694,10 @@
 		67E2403C1E5C2A6D00B86CDB /* videoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = videoModel.h; sourceTree = "<group>"; };
 		67E2403D1E5C2A6D00B86CDB /* videoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = videoModel.m; sourceTree = "<group>"; };
 		67E240411E5D2EEC00B86CDB /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		67E2404F1E5EE3F000B86CDB /* chat_animation_white3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_animation_white3.png; sourceTree = "<group>"; };
+		67E240511E5EE58700B86CDB /* yuan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yuan.png; sourceTree = "<group>"; };
+		67E2406F1E5FE27700B86CDB /* AnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationView.h; sourceTree = "<group>"; };
+		67E240701E5FE27700B86CDB /* AnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1117,6 +1124,8 @@
 		67B029041E588925008F5992 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				67E240511E5EE58700B86CDB /* yuan.png */,
+				67E2404F1E5EE3F000B86CDB /* chat_animation_white3.png */,
 				67AC58D51E487B47001D7BAE /* audioImage.h */,
 				67AC58D61E487B47001D7BAE /* audioImage.m */,
 				67AC58E01E4C4855001D7BAE /* EditOfGroups.h */,
@@ -1694,6 +1703,8 @@
 		67CC90E51E28C02D00761832 /* ThirdTools */ = {
 			isa = PBXGroup;
 			children = (
+				67E2406F1E5FE27700B86CDB /* AnimationView.h */,
+				67E240701E5FE27700B86CDB /* AnimationView.m */,
 				67E23FDA1E5A925100B86CDB /* SURefresh */,
 				67AC59BE1E542BB0001D7BAE /* CRToast.h */,
 				67AC59BF1E542BB0001D7BAE /* CRToast.m */,
@@ -1922,6 +1933,7 @@
 				67C06D331E3493AC00EBA5C6 /* sound@2x.png in Resources */,
 				588B5B8D1E5EC2520030C144 /* welcome2.png in Resources */,
 				67C06C251E2F6DE900EBA5C6 /* xue_select@2x.png in Resources */,
+				67E240521E5EE58700B86CDB /* yuan.png in Resources */,
 				67C06C3B1E2F6ED500EBA5C6 /* qingtian@2x.png in Resources */,
 				67AC59DF1E55781C001D7BAE /* home_dianzan@2x.png in Resources */,
 				67C06C3A1E2F6ED500EBA5C6 /* feng@2x.png in Resources */,
@@ -1966,6 +1978,7 @@
 				67C06BC01E2E051A00EBA5C6 /* MyMeansTableViewCell.xib in Resources */,
 				67AC59D71E5560F9001D7BAE /* home_weather@2x.png in Resources */,
 				67CC913B1E2C9F7C00761832 /* backgroundImage.png in Resources */,
+				67E240501E5EE3F000B86CDB /* chat_animation_white3.png in Resources */,
 				67C06D171E348C1900EBA5C6 /* check_photo_camera@3x.png in Resources */,
 				67AC58FA1E4C6AB9001D7BAE /* Eqingtian@2x.png in Resources */,
 				67AC58FB1E4C6AB9001D7BAE /* Eshandian@2x.png in Resources */,
@@ -2083,6 +2096,7 @@
 				67C06C971E31F20700EBA5C6 /* STPhotoKitController.m in Sources */,
 				67C06C801E30CEA800EBA5C6 /* exploreBottomView.m in Sources */,
 				67CC91461E2D08E300761832 /* UISearchBar+Additions.m in Sources */,
+				67E240711E5FE27700B86CDB /* AnimationView.m in Sources */,
 				67C06D061E348C0400EBA5C6 /* NSAttributedString+RichText.m in Sources */,
 				67AC58BB1E481CDC001D7BAE /* amrFileCodec.m in Sources */,
 				67E23FE11E5A925100B86CDB /* SURefreshHeader.m in Sources */,

@@ -40,26 +40,35 @@
     [backView addSubview:audioImage];
     
     UILabel *timelable = [[UILabel alloc] initWithFrame:CGRectMake(backView.frame.size.width-35, 0, 30, 30)];
-    [timelable setText:[NSString stringWithFormat:@"%ld‘’",(long)time]];
+    
+    [timelable setText:[NSString stringWithFormat:@"%ld",(long)time]];
     [timelable setTextColor:[UIColor whiteColor]];
     //[timelable setFont:[UIFont fontWithName:@"Helvetica-Bold" size:12.0]];
     [timelable setFont:[UIFont boldSystemFontOfSize:12.0]];
     [backView addSubview:timelable];
     
-    //为录音添加点击事件
-    UIButton *audioButton = [[UIButton alloc] initWithFrame:self.bounds];
-    audioButton.alpha = 0.0;
-    [audioButton setBackgroundColor:[UIColor clearColor]];
-    [audioButton addTarget:self action:@selector(audioTouch) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:audioButton];
     
 }
--(void)audioTouch{
+-(void)audioTapEvent{
     NSLog(@"录音点击事件");
+    UIImageView *voice = [[UIImageView alloc]initWithFrame:CGRectMake(40, 2, 15, 15)];
+    //动画未开始前的图片
+    voice.image = [UIImage imageNamed:@"chat_animation_white3"];
+    //进行动画效果的3张图片（按照播放顺序放置）
+    voice.animationImages = [NSArray arrayWithObjects:
+                             [UIImage imageNamed:@"chat_animation_white3"],
+                             [UIImage imageNamed:@"chat_animation_white3"],
+                             [UIImage imageNamed:@"chat_animation_white3"],nil];
+    //设置动画间隔
+    voice.animationDuration = 1;
+    voice.animationRepeatCount = 0;
+    voice.userInteractionEnabled = NO;
+    voice.backgroundColor = [UIColor clearColor];
     
+    [self addSubview:voice];
 }
 
- 
+
 
 
 /*

@@ -32,12 +32,12 @@
     [textlabel setTextColor:[UIColor blackColor]];
     [openOrNot addSubview:textlabel];
     
-    UISwitch *switchButton = [[UISwitch alloc] initWithFrame:CGRectMake(ScreenWidth-50, 0,50,0 )];
-    switchButton.transform = CGAffineTransformMakeScale(0.65, 0.55);
-    switchButton.onTintColor = [UIColor colorWithHexString:@"12B7F5"];
-    [switchButton setOn:YES];
-    [switchButton addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
-    [openOrNot addSubview:switchButton];
+    _openOrNotButton = [[UISwitch alloc] initWithFrame:CGRectMake(ScreenWidth-50, 0,50,0 )];
+    _openOrNotButton.transform = CGAffineTransformMakeScale(0.65, 0.55);
+    _openOrNotButton.onTintColor = [UIColor colorWithHexString:@"12B7F5"];
+    [_openOrNotButton setOn:YES];
+    [_openOrNotButton addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
+    [openOrNot addSubview:_openOrNotButton];
     NSMutableArray *picture = [[NSMutableArray alloc] initWithObjects:@"keyboard.png",@"sound.png",@"video.png",@"picture.png",@"myphoto.png",@"weather.png", nil];
     
     UIView *functionKeyView = [[UIView alloc] initWithFrame:CGRectMake(0, 36, ScreenWidth, 35)];
@@ -59,7 +59,10 @@
     [functionKeyView addSubview:_weatherBT];
     [self addSubview:functionKeyView];
 }
-
+-(void)setweatherIconPicture:(long)icon{
+   NSMutableArray  *weatherImageselect = [[NSMutableArray alloc] initWithObjects:@"qingtian",@"tianqi",@"feng",@"xiaoyu",@"dayu",@"lei",@"xue",@"wu", nil];
+    [_weatherBT setImage:[UIImage imageNamed:weatherImageselect[icon]] forState:UIControlStateNormal];
+}
 -(void)functionBT:(id)sender
 {
     

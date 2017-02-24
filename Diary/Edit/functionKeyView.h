@@ -19,7 +19,10 @@
 @interface functionKeyView : BaseView
 @property(nonatomic,weak)id<sendClickEvent>delegate;
 @property(nonatomic,strong) UIButton *weatherBT;
+@property(nonatomic,strong) UISwitch *openOrNotButton;
+@property(nonatomic,assign) long weatherIcon;
 
+-(void)setweatherIconPicture:(long)icon;
 
 //-(void)setWeatherBTPicture:(UIButton *)weatherBT
 @end

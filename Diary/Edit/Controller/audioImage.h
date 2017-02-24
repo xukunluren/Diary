@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface audioImage : UIView
 
 -(void)builderViewWithSceond:(NSTimeInterval)second;
-//-(void)viewWithTag:(NSInteger)viewTag;
- 
+-(void)audioTapEvent;
+@property (nonatomic,strong) UIView *voiceWaveParentView;
+
 @end
