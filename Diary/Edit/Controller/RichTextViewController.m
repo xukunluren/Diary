@@ -1018,8 +1018,8 @@
 - (IBAction)colorClick:(UIButton *)sender {
     if (_dataArray.count == 3) {
         NSLog(@"不能再添加语音");
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"nihao" message:@"提示框" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"这是一篇日记，请不要用录音偷懒哦！" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"已阅" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             [_textView becomeFirstResponder];
             _textView.inputView = nil;
             _isAudioKeyOnTop = NO;
@@ -1103,8 +1103,8 @@
 - (void)startRecordVoice{
     if (_dataArray.count == 3) {
         NSLog(@"不能再添加语音");
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"nihao" message:@"提示框" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"这是一篇日记，请不要用录音偷懒哦！" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"已阅" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             [_textView becomeFirstResponder];
             _textView.inputView = nil;
             _isAudioKeyOnTop = NO;
@@ -1303,8 +1303,8 @@
 - (void)videoClick:(UIButton *)sender {
     if (videoDataArray.count == 1) {
         NSLog(@"不能再添加语音");
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"nihao" message:@"提示框" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"暂支持插入一段视频到日记文本中！" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"已阅" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             [_textView becomeFirstResponder];
             _textView.inputView = nil;
             _isAudioKeyOnTop = NO;
@@ -1652,11 +1652,9 @@
         AVAsset *avasset = [AVAsset assetWithURL:alAsset.defaultRepresentation.url];
         NSURL *movieURL = representation.url;
         mp4Url = movieURL;
-          long long size = representation.size;
-        if (true) {//在此处判断视频的大小，超出大小则提示用户视频过大，请重新选择
+      
+        //在此处判断视频的大小，超出大小则提示用户视频过大，请重新选择
             [self putVideoOnTextViewWithUrl:movieURL image:imagePath];
-            //[_textView becomeFirstResponder];
-        }
         NSURL *uploadURL = [NSURL fileURLWithPath:[[NSTemporaryDirectory() stringByAppendingPathComponent:@"test"] stringByAppendingString:@".mp4"]];
         
         AVAsset *asset      = [AVURLAsset URLAssetWithURL:movieURL options:nil];

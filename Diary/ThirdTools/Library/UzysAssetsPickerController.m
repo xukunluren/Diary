@@ -193,7 +193,7 @@
             if(_maximumNumberOfSelection > 1)
                 self.labelSelectedMedia.text = NSLocalizedStringFromTable(@"Choose videos", @"UzysAssetsPickerController", nil);
             else
-                self.labelSelectedMedia.text = NSLocalizedStringFromTable(@"Choose a video", @"UzysAssetsPickerController", nil);
+                self.labelSelectedMedia.text = NSLocalizedStringFromTable(@"请选择一段视频", @"UzysAssetsPickerController", nil);
         }
         else if(_maximumNumberOfSelectionVideo == 0)
         {
@@ -613,8 +613,19 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ALAsset *selectedAsset = [self.assets objectAtIndex:indexPath.item];
-    [self.orderedSelectedItem addObject:selectedAsset];
-    [self setAssetsCountWithSelectedIndexPaths:collectionView.indexPathsForSelectedItems];
+   long long size = [[selectedAsset defaultRepresentation] size];
+    long long maxSize = 104857600;
+    if (size>maxSize) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"视频太大，请重新选择其他视频" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"已阅" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            }];
+        [alert addAction:action1];
+        [self presentViewController:alert animated:YES completion:^{
+        }];
+    }else{
+        [self.orderedSelectedItem addObject:selectedAsset];
+        [self setAssetsCountWithSelectedIndexPaths:collectionView.indexPathsForSelectedItems];
+    }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -750,12 +761,7 @@
         NSSet *updatedAssetGroup = [info objectForKey:ALAssetLibraryUpdatedAssetGroupsKey];
         NSSet *deletedAssetGroup = [info objectForKey:ALAssetLibraryDeletedAssetGroupsKey];
         NSSet *insertedAssetGroup = [info objectForKey:ALAssetLibraryInsertedAssetGroupsKey];
-        DLog(@"-------------+");
-        DLog(@"updated assets:%@", updatedAssets);
-        DLog(@"updated asset group:%@", updatedAssetGroup);
-        DLog(@"deleted asset group:%@", deletedAssetGroup);
-        DLog(@"inserted asset group:%@", insertedAssetGroup);
-        DLog(@"-------------=");
+        
         
         if(info == nil)
         {
