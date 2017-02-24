@@ -35,4 +35,6 @@ boundingRectWithSize:maxSize options:(NSStringDrawingUsesLineFragmentOrigin) \
 attributes:@{NSFontAttributeName:font} context:nil].size : CGSizeZero;
 
 
+
+
 #endif /* ConstDefine_h */
