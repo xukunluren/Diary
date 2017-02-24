@@ -60,7 +60,7 @@
     [self addSubview:functionKeyView];
 }
 -(void)setweatherIconPicture:(long)icon{
-   NSMutableArray  *weatherImageselect = [[NSMutableArray alloc] initWithObjects:@"qingtian",@"tianqi",@"feng",@"xiaoyu",@"dayu",@"lei",@"xue",@"wu", nil];
+   NSMutableArray  *weatherImageselect = [[NSMutableArray alloc] initWithObjects:@"qingtian",@"tianqi",@"feng",@"xiaoyu",@"dayu",@"lei",@"xue",@"wu",@"weather", nil];
     [_weatherBT setImage:[UIImage imageNamed:weatherImageselect[icon]] forState:UIControlStateNormal];
 }
 -(void)functionBT:(id)sender
