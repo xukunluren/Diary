@@ -21,4 +21,5 @@
 @property (strong, nonatomic) NSArray *imageArray;
 @property (weak, nonatomic) id<GuideViewDelegate> delegate;
 
+- (instancetype)initWithFrame:(CGRect)frame count:(NSInteger)count;
 @end

@@ -29,7 +29,7 @@
     BOOL b = [self isFirstLoad];
     NSLog(@"%d",b);
     [UIViewController displayClassName:YES];
-    GuideView *guideView = [[GuideView alloc] initWithFrame:self.window.bounds];
+    GuideView *guideView = [[GuideView alloc] initWithFrame:self.window.bounds count:self.imageArray.count];
     guideView.delegate = self;
     guideView.imageArray = self.imageArray;
     [self.window.rootViewController.view addSubview:guideView];
@@ -109,7 +109,7 @@
 
 - (NSArray *)imageArray {
     if (!_imageArray) {
-        _imageArray = [[NSArray alloc] initWithObjects:@"welcome1",@"welcome2",@"welcome3",@"welcome4",@"welcome5", nil];
+        _imageArray = [[NSArray alloc] initWithObjects:@"welcome1",@"welcome2",@"welcome3", nil];
         return _imageArray;
     }
     return _imageArray;

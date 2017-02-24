@@ -7,32 +7,38 @@
 //
 
 #import "GuideView.h"
-#define PAGECONTROL_WIDTH 100
+#import "CustomPageControl.h"
+
+
+//#define PAGECONTROL_WIDTH 100
+
 
 @interface GuideView()<UIScrollViewDelegate> {
     NSArray *_imageArray;
+    NSInteger _index;
+    NSInteger _count;
 }
 
 @property (strong, nonatomic) UIScrollView *scrollView;
-@property (strong, nonatomic) UIPageControl *pageControl;
-
+@property (strong, nonatomic) CustomPageControl *customPageControl;
 
 @end
 
 @implementation GuideView
 
-- (instancetype)initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame count:(NSInteger)count {
     self = [super initWithFrame:frame];
     if (self) {
-        
+        _count = count;
         //scrollView
         _scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
         _scrollView.delegate = self;
+        _scrollView.showsVerticalScrollIndicator = NO;
+        _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.pagingEnabled = YES;
         [self addSubview:_scrollView];
         
-        [self addSubview:self.pageControl];
-        
+        [self addSubview:self.customPageControl];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeSelf)];
         [self addGestureRecognizer:tap];
     }
@@ -40,25 +46,24 @@
 }
 
 #pragma mark - lazy load
-- (UIPageControl *)pageControl {
-    if (!_pageControl) {
-        _pageControl = [[UIPageControl alloc] init];
-        _pageControl.frame = CGRectMake((kScreenWidth-PAGECONTROL_WIDTH)/2, 600, PAGECONTROL_WIDTH, 50);
-        _pageControl.currentPageIndicatorTintColor = [UIColor redColor];
-        _pageControl.pageIndicatorTintColor = [UIColor blackColor];
-        return  _pageControl;
+
+- (CustomPageControl *)customPageControl {
+    if (!_customPageControl) {
+        CGFloat width = _count * (PAGECONTROL_SPACE + PAGECONTROL_WIDTH) - PAGECONTROL_SPACE;
+        CGRect rect = CGRectMake((kScreenWidth - width)/2, kScreenHeight - 35, width, 35);
+        _customPageControl = [[CustomPageControl alloc] initWithFrame:rect pageCount:3];
+        return _customPageControl;
     }
-    return _pageControl;
+    return _customPageControl;
 }
 
 #pragma mark - 设置图片
 - (void)setImageArray:(NSArray *)imageArray {
     _imageArray = imageArray;
-    NSInteger count = imageArray.count;
+    _count = imageArray.count;
     if (imageArray.count > 0) {
-        _pageControl.numberOfPages = count;
-        self.scrollView.contentSize = CGSizeMake(kScreenWidth * count, kScreenHeight);
-        for (NSInteger i=0; i<count; i++) {
+        self.scrollView.contentSize = CGSizeMake(kScreenWidth * _count, kScreenHeight);
+        for (NSInteger i=0; i<_count; i++) {
             NSString *imageStr = imageArray[i];
             UIImage *image = [UIImage imageNamed:imageStr];
             UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
@@ -72,12 +77,14 @@
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGPoint offset = scrollView.contentOffset;
-    _pageControl.currentPage = round(offset.x / kScreenWidth);
+    _index = offset.x / kScreenWidth;
+
+    [_customPageControl changePageControlColor:_index];
 }
 
 #pragma mark - tap
 - (void)removeSelf {
-    if (_pageControl.currentPage == _imageArray.count - 1) {
+    if (_index == _imageArray.count - 1) {
         if ([_delegate respondsToSelector:@selector(GuideViewDelegate:)]) {
             [_delegate GuideViewDelegate:self];
         }

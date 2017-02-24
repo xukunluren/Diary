@@ -17,5 +17,6 @@
 #import "UIImage+Additions.h"
 #import "UISearchBar+Additions.h"
 #import "UIView+Frame.h"
+#import "CardHeader.h"
 #import <Realm/Realm.h>
 #endif /* HeaderFiles_h */
