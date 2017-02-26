@@ -22,50 +22,56 @@
 - (void)builderViewWithSceond:(NSTimeInterval)second
 {
     NSInteger time = second;
-    CGFloat ViewWith = 300;
-    CGFloat with = time/10+1;
-    if (with>10) {
-        ViewWith = 200 ;
-    }else{
-        ViewWith = ViewWith*with;
-    }
-    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(10, 0, 200, 30)];
-    backView.layer.cornerRadius = 2.0;
-    [backView setBackgroundColor:[UIColor blackColor]];
-    backView.alpha = 0.7;
-    [self addSubview:backView];
+    CGFloat ViewWith = 100;
+    ViewWith = ViewWith+time*3;
     
-    UIImageView *audioImage = [[UIImageView alloc] initWithFrame:CGRectMake(4, 5, 21, 20)];
-    audioImage.image = [UIImage imageNamed:@"audioImage"];
-    [backView addSubview:audioImage];
+       _backView = [[UIView alloc] initWithFrame:CGRectMake(10, 0, ViewWith, 30)];
+    _backView.layer.cornerRadius = 2.0;
+    [_backView setBackgroundColor:[UIColor blackColor]];
+    _backView.alpha = 0.7;
+    [self addSubview:_backView];
     
-    UILabel *timelable = [[UILabel alloc] initWithFrame:CGRectMake(backView.frame.size.width-35, 0, 30, 30)];
+
     
-    [timelable setText:[NSString stringWithFormat:@"%ld",(long)time]];
-    [timelable setTextColor:[UIColor whiteColor]];
-    //[timelable setFont:[UIFont fontWithName:@"Helvetica-Bold" size:12.0]];
-    [timelable setFont:[UIFont boldSystemFontOfSize:12.0]];
-    [backView addSubview:timelable];
+    _audioBtn = [[UIButton alloc] initWithFrame:CGRectMake(4, 5, 21, 20)];
+    [_audioBtn setImage:[UIImage imageNamed:@"audio_icon_3"] forState:UIControlStateNormal];
+    _audioBtn.userInteractionEnabled = YES;
+    [_audioBtn addSubview:self.animationview];
+    [_backView addSubview:_audioBtn];
+    
+    UILabel *timelable = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_backView.frame)+5, 5, 30, 20)];
+    
+    [timelable setText:[NSString stringWithFormat:@"%ld''",(long)time]];
+//    [timelable setTextColor:[UIColor blueColor]];
+    [timelable setTextColor:[UIColor grayColor]];
+    [timelable setFont:[UIFont systemFontOfSize:12.0]];
+//    [timelable setFont:[UIFont boldSystemFontOfSize:15.0]];
+    [self addSubview:timelable];
     
     
 }
+
+
+//动画的imageview
+- (UIImageView *)animationview{
+    if (!_animationview) {
+        _animationview = [[UIImageView alloc] initWithFrame:_audioBtn.bounds];
+        NSArray *myImages = [NSArray arrayWithObjects: [UIImage imageNamed:@"audio_icon_3"],[UIImage imageNamed:@"audio_icon_1"],[UIImage imageNamed:@"audio_icon_2"],[UIImage imageNamed:@"audio_icon_3"],nil];
+        
+        _animationview.animationImages = myImages;
+        _animationview.animationDuration = 1;
+        _animationview.animationRepeatCount = 0; //动画重复次数，0表示无限循环
+  
+    }
+    return _animationview;
+}
+
+
 -(void)audioTapEvent{
     NSLog(@"录音点击事件");
-    UIImageView *voice = [[UIImageView alloc]initWithFrame:CGRectMake(40, 2, 15, 15)];
-    //动画未开始前的图片
-    voice.image = [UIImage imageNamed:@"chat_animation_white3"];
-    //进行动画效果的3张图片（按照播放顺序放置）
-    voice.animationImages = [NSArray arrayWithObjects:
-                             [UIImage imageNamed:@"chat_animation_white3"],
-                             [UIImage imageNamed:@"chat_animation_white3"],
-                             [UIImage imageNamed:@"chat_animation_white3"],nil];
-    //设置动画间隔
-    voice.animationDuration = 1;
-    voice.animationRepeatCount = 0;
-    voice.userInteractionEnabled = NO;
-    voice.backgroundColor = [UIColor clearColor];
-    
-    [self addSubview:voice];
+    //点击播放按钮时，动画开始
+    [self.animationview startAnimating];
+    [self.audioBtn setImage:nil forState:UIControlStateNormal];
 }
 
 

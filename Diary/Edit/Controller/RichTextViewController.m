@@ -110,6 +110,9 @@
     
     NSMutableArray *videoDataArray;//视频数组
     BOOL openOrNot;//是否公开
+    UILabel  *secondText;//剩余说话时间
+    UIButton *cancelBtnLeft;
+    UIButton *cancelBtnRight;
 }
 //+(instancetype)ViewController
 //{
@@ -1050,7 +1053,7 @@
     [_audioView setBackgroundColor:[UIColor whiteColor]];
      [_audioView addSubview:[self drawThreadWithFram:CGRectMake(0, 5, ScreenWidth, 0.5) andColor:[UIColor colorWithHexString:@"e7e7e7"]]];
     //按住说话
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, ScreenWidth, 20)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 20)];
     label.contentMode = UIViewContentModeCenter;
     label.textAlignment  = NSTextAlignmentCenter;
     [label setText:@"按住说话"];
@@ -1058,8 +1061,18 @@
     [label setTextColor:[UIColor grayColor]];
     [_audioView addSubview:label];
     
+    
+    //按住说话
+    secondText = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(label.frame)+5, ScreenWidth, 20)];
+    secondText.contentMode = UIViewContentModeCenter;
+    secondText.textAlignment  = NSTextAlignmentCenter;
+    [secondText setText:@"左右滑动取消"];
+    secondText.font = [UIFont systemFontOfSize:10.0];
+    [secondText setTextColor:[UIColor grayColor]];
+    [_audioView addSubview:secondText];
+    
     //录音icon
-    _audioImageKeyBoard = [[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth*0.5-48, CGRectGetMaxY(label.frame)+20, 96, 96)];
+    _audioImageKeyBoard = [[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth*0.5-48, CGRectGetMaxY(secondText.frame)+5, 96, 96)];
     _audioImageKeyBoard.backgroundColor = [UIColor clearColor];
     //[audioView addSubview:_audioImage];
     
@@ -1074,6 +1087,23 @@
     [_audioButton addTarget:self action:@selector(updateCancelRecordVoice) forControlEvents:UIControlEventTouchDragExit];
     [_audioButton addTarget:self action:@selector(updateContinueRecordVoice) forControlEvents:UIControlEventTouchDragEnter];
     [_audioView addSubview:_audioButton];
+    
+    
+     cancelBtnLeft = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth*0.5-48, CGRectGetMaxY(label.frame)+20, 24, 24)];
+    cancelBtnLeft.centerX = ScreenWidth-60;
+    cancelBtnLeft.centerY = _audioView.centerY+20;
+    cancelBtnLeft.hidden = YES;
+    [cancelBtnLeft setBackgroundImage:[UIImage imageNamed:@"cancel"] forState:UIControlStateNormal];
+    [_audioView addSubview:cancelBtnLeft];
+
+    cancelBtnRight = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth*0.5-48, CGRectGetMaxY(label.frame)+20, 24, 24)];
+    cancelBtnRight.centerX = 48;
+    cancelBtnRight.hidden = YES;
+    cancelBtnRight.centerY = _audioView.centerY+20;
+    [cancelBtnRight setBackgroundImage:[UIImage imageNamed:@"cancel"] forState:UIControlStateNormal];
+    [_audioView addSubview:cancelBtnRight];
+
+    
     self.textView.inputView = _audioView;
     _isAudioKeyOnTop = YES;
     [self.textView reloadInputViews];
@@ -1115,6 +1145,11 @@
  *  开始录音
  */
 - (void)startRecordVoice{
+    cancelBtnLeft.hidden = YES;
+    cancelBtnRight.hidden = YES;
+   
+    NSArray*array = [NSArray arrayWithObjects:@"左右滑动取消",@"请控制在60s内", nil];
+    secondText.text = array[(int)(arc4random() % (2))];
     if (_dataArray.count == 3) {
         NSLog(@"不能再添加语音");
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"这是一篇日记，请不要用录音偷懒哦！" preferredStyle:UIAlertControllerStyleAlert];
@@ -1186,7 +1221,11 @@
  *  更新录音显示状态,手指向上滑动后 提示松开取消录音
  */
 - (void)updateCancelRecordVoice {
-    //[[LGSoundRecorder shareInstance] readyCancelSound];
+      [[LGSoundRecorder shareInstance] readyCancelSound];
+//     [[LGSoundRecorder shareInstance] soundRecordFailed:self.view];
+    cancelBtnRight.hidden = NO;
+    cancelBtnLeft.hidden = NO;
+    
 }
 
 /**
@@ -1200,7 +1239,8 @@
  *  取消录音
  */
 - (void)cancelRecordVoice {
-   // [[LGSoundRecorder shareInstance] soundRecordFailed:self.view];
+    [self hide];
+    [[LGSoundRecorder shareInstance] soundRecordFailed:self.view];
 }
 
 /**
@@ -1213,10 +1253,11 @@
 
 - (void)sixtyTimeStopSendVodio {
     int countDown = 60 - [[LGSoundRecorder shareInstance] soundRecordTime];
-    NSLog(@"countDown is %d soundRecordTime is %f",countDown,[[LGSoundRecorder shareInstance] soundRecordTime]);
-    if (countDown <= 10) {
+    secondText.text = [NSString stringWithFormat:@"--%d秒--",(int)[[LGSoundRecorder shareInstance] soundRecordTime]];
+    
+    if (countDown <= 20) {
         [[LGSoundRecorder shareInstance] showCountdown:countDown - 1];
-    }
+              }
     if ([[LGSoundRecorder shareInstance] soundRecordTime] >= 60 && [[LGSoundRecorder shareInstance] soundRecordTime] <= 61) {
         
         if (_timerOf60Second) {
@@ -1244,6 +1285,7 @@
 }
 
 - (void)sendSound {
+    
     audioModel *messageModel = [[audioModel alloc] init];
     messageModel.soundFilePath = [[LGSoundRecorder shareInstance] soundFilePath];
     messageModel.seconds = [[LGSoundRecorder shareInstance] soundRecordTime];

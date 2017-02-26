@@ -13,6 +13,10 @@
 
 -(void)builderViewWithSceond:(NSTimeInterval)second;
 -(void)audioTapEvent;
-@property (nonatomic,strong) UIView *voiceWaveParentView;
+@property (nonatomic,strong) UIView *backView;
+
+@property (nonatomic,strong) UIButton *audioBtn;
+
+@property (nonatomic,strong) UIImageView *animationview;
 
 @end

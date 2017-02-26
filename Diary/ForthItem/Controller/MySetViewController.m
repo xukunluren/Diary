@@ -14,14 +14,16 @@
 #import "AccountSecretViewController.h"
 #import "Person.h"
 #import <Realm/Realm.h>
+#import "ZFJWaveView.h"
 
 
-const CGFloat BackGroupHeight = 188;
+const CGFloat BackGroupHeight = 200;
 const CGFloat HeadImageHeight= 80;
 
 @interface MySetViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)MySetHeaderView *settingHeaderNewView;
 @property(nonatomic,strong)UIView *loginOutView;
+@property (nonatomic, strong) ZFJWaveView *headerView;
 @end
 
 @implementation MySetViewController
@@ -29,6 +31,8 @@ const CGFloat HeadImageHeight= 80;
     UITableView *mySettingTableView;
     NSMutableArray *listArray;
 }
+
+
 -(void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBarHidden = YES;
 }
@@ -65,6 +69,16 @@ const CGFloat HeadImageHeight= 80;
 //        
 //    }];
     
+}
+- (ZFJWaveView *)headerView{
+    if (!_headerView) {
+        _headerView = [[ZFJWaveView alloc] initWithFrame:CGRectMake(0, -20, self.view.frame.size.width, 40)];
+        _headerView.backgroundColor = [UIColor colorWithRed:1.000 green:0.318 blue:0.129 alpha:1.00];
+        _headerView.waveBlock = ^(CGFloat currentY){
+        };
+        [_headerView startWaveAnimation];
+    }
+    return _headerView;
 }
 
 
@@ -140,7 +154,11 @@ const CGFloat HeadImageHeight= 80;
     [_nameLabel setContentMode:UIViewContentModeCenter];
     _nameLabel.frame=CGRectMake(0, CGRectGetMaxY(_headImageView.frame)+10, ScreenWidth, 40);
     [_nameLabel.titleLabel setFont:[UIFont systemFontOfSize:14.0f]];
+    
     [_BGView addSubview:_nameLabel];
+    
+    [_BGView addSubview:self.headerView];
+    [_BGView sendSubviewToBack:self.headerView];
     
 
     
@@ -232,7 +250,7 @@ const CGFloat HeadImageHeight= 80;
 - (MySetHeaderView *)settingHeaderNewView{
     if (_settingHeaderNewView == nil)
     {
-        CGRect frame = CGRectMake(0, 0, ScreenWidth, 238);
+        CGRect frame = CGRectMake(0, 0, ScreenWidth, 280);
         _settingHeaderNewView = [[MySetHeaderView alloc] initWithFrame:frame];
        // _settingHeaderNewView.delegate = self;
     }
@@ -245,12 +263,14 @@ const CGFloat HeadImageHeight= 80;
     LoginController *means = [[LoginController alloc] init];
     [self.navigationController pushViewController:means animated:YES];
 }
-
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    _nameLabel.hidden = NO;
+}
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     CGFloat yOffset  = scrollView.contentOffset.y;
     CGFloat xOffset = (yOffset + BackGroupHeight)/2;
-    
+    _nameLabel.hidden = YES;
     if (yOffset < -BackGroupHeight) {
         
         CGRect rect = _imageBG.frame;
@@ -280,6 +300,7 @@ const CGFloat HeadImageHeight= 80;
         
         
     }else{
+      
         CGRect HeadImageRect = CGRectMake((ScreenWidth-HeadImageHeight)/2, 40, HeadImageHeight, HeadImageHeight);
         HeadImageRect.origin.y = _headImageView.frame.origin.y;
         HeadImageRect.size.height =  HeadImageHeight - fabs(xOffset)*0.5 ;
@@ -300,11 +321,6 @@ const CGFloat HeadImageHeight= 80;
         _nameLabel.frame = NameRect;
         
     }
-    //    titleLabel.alpha=alpha;
-    //    alpha=fabs(alpha);
-    //    alpha=fabs(1-alpha);
-    //    alpha=alpha<0.2? 0:alpha-0.2;
-    //    BGView.alpha=alpha;
     
 }
 
