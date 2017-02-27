@@ -329,7 +329,15 @@
     cell.yearLabel.text = edit.year;
     cell.timeLabel.text = edit.time;
     cell.assistNumLabel.text = [NSString stringWithFormat: @"%ld", (long)edit.supportNum];
-    
+    if (!edit.haveAudioInfo) {
+        cell.soundsImageView.hidden = YES;
+    }
+    if (!edit.haveVideoInfo) {
+        cell.videoImageView.hidden = YES;
+    }
+    if (!edit.havePictureInfo) {
+        cell.pictureImageView.hidden = YES;
+    }
     switch (edit.weatherType) {
         case WeatherEqingtian:
             cell.weatherImageView.image = [UIImage imageNamed:@"Eqingtian_select"];

@@ -14,6 +14,8 @@
 -(void)builderViewWithSceond:(NSTimeInterval)second;
 -(void)audioTapEvent;
 @property (nonatomic,strong) UIView *backView;
+@property (nonatomic,strong) NSTimer *time;
+@property (nonatomic,assign) long secondTime;
 
 @property (nonatomic,strong) UIButton *audioBtn;
 

@@ -19,6 +19,7 @@ RLM_ARRAY_TYPE(videoModel)
 @property NSString *title;
 @property NSString *time;
 @property NSInteger supportNum;
+@property NSInteger pictureLocation;//图片所在位置
 @property BOOL haveWeatherInfo;
 @property BOOL haveVideoInfo;
 @property BOOL havePictureInfo;

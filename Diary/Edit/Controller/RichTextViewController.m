@@ -113,6 +113,8 @@
     UILabel  *secondText;//剩余说话时间
     UIButton *cancelBtnLeft;
     UIButton *cancelBtnRight;
+    NSInteger pictureLocation;//图片位置
+    BOOL havePicture;//是否有图片插入
 }
 //+(instancetype)ViewController
 //{
@@ -196,6 +198,7 @@
     groupTitle = @"我的日记";
     openOrNot = YES;
     _weatherType = 8;
+    pictureLocation = 0;
     _isTapToGroupPage = NO;
      [self setEditOfGroups];//添加日记分组view
     [self.view addSubview:self.textView];//设置日记书写区域
@@ -279,6 +282,10 @@
     
     _functionView.openOrNotButton.on = _editDiary.openOrNo;
     [_functionView setweatherIconPicture: _editDiary.weatherType];
+    if (_editDiary.havePictureInfo) {
+        havePicture = YES;
+        pictureLocation = _editDiary.pictureLocation;
+    }
     
     [_textView setAttributedText:temp];
     
@@ -613,13 +620,18 @@
             model.monthAndDay = monthDay;
             model.time = time;
             model.supportNum = 22;
-            model.haveAudioInfo = YES;
-            model.haveVideoInfo = YES;
-            model.havePictureInfo = YES;
-            model.haveWeatherInfo = YES;
             model.diaryInfo = data;
             model.diaryId = dId;
+            if (_weatherType == 8) {
+             
+                model.haveWeatherInfo = NO;
+            }else{
+               model.haveWeatherInfo = YES;
+            }
             model.weatherType = _weatherType;
+            model.pictureLocation = pictureLocation;
+            
+            model.havePictureInfo = havePicture;
             model.openOrNo = openOrNot;
             if (_weatherSelct) {
                 model.weatherType = _weatherType;
@@ -634,13 +646,15 @@
             }else{
                 model.atGroupTitle = @"我的日记";
             }
-            
             for (videoModel *video in videoDataArray) {
                 [model.videoDataModel addObject:video];
+                model.haveVideoInfo = YES;
+               
             }
             
             for (audioModel *audiomodel in _dataArray) {
                 [model.audioDataModel addObject:audiomodel];
+                model.haveAudioInfo = YES;
             }
         
             
@@ -674,13 +688,11 @@
         model.monthAndDay = monthDay;
         model.time = time;
         model.supportNum = 22;
-        model.haveAudioInfo = YES;
-        model.haveVideoInfo = YES;
-        model.havePictureInfo = YES;
-        model.haveWeatherInfo = YES;
+        model.havePictureInfo = havePicture;
         model.diaryInfo = data;
         model.diaryId = _diaryId;
         model.openOrNo = openOrNot;
+        model.pictureLocation = pictureLocation;
         //对日记所在的分组进行记录
         if (_isTapToGroupPage) {
             model.atGroup = _groupRow;
@@ -691,15 +703,22 @@
         }
       
         if (_weatherSelct) {
+            model.weatherType = _weatherType;
+        }else{
+            model.weatherType = 8;
+        }
+        if (_weatherSelct) {
            model.weatherType = _weatherType;
         }else{
            model.weatherType =  weatherty;
         }
         for (videoModel *video in videoDataArray) {
             [model.videoDataModel addObject:video];
+            model.haveVideoInfo = YES;
         }
         for (audioModel *audiomodel in _dataArray) {
             [model.audioDataModel addObject:audiomodel];
+            model.haveAudioInfo = YES;
         }
     
         // 通过 id = 1 更新该书籍
@@ -832,11 +851,15 @@
     }
     else
     {
+        NSInteger nowLocation =  _textView.selectedRange.location;
+        if (nowLocation<=pictureLocation) {
+            havePicture = NO;
+        }
         if (_heightOfAudioArray.count == 0) {//这里修改
             NSLog(@"子控件删除完");
         }else{
  
-        NSInteger nowLocation =  _textView.selectedRange.location;
+       
         //用户数据删除中
         NSInteger viewTag = [_heightOfAudioArray.lastObject integerValue];
         if (viewTag >= nowLocation) {
@@ -1285,7 +1308,8 @@
 }
 
 - (void)sendSound {
-    
+    NSArray*array = [NSArray arrayWithObjects:@"左右滑动取消",@"请控制在60s内", nil];
+    secondText.text = array[(int)(arc4random() % (2))];
     audioModel *messageModel = [[audioModel alloc] init];
     messageModel.soundFilePath = [[LGSoundRecorder shareInstance] soundFilePath];
     messageModel.seconds = [[LGSoundRecorder shareInstance] soundRecordTime];
@@ -1580,17 +1604,19 @@
     //Set tag and image
     imageTextAttachment.imageTag = ImageTag;
     imageTextAttachment.image =image1;
-    
     //Set image size
     imageTextAttachment.imageSize = CGSizeMake(image1.size.width,  image1.size.width*bili);
     
     //Insert image image
     [_textView.textStorage insertAttributedString:[NSAttributedString attributedStringWithAttachment:imageTextAttachment]
                                           atIndex:_textView.selectedRange.location];
-    
     //Move selection location
     _textView.selectedRange = NSMakeRange(_textView.selectedRange.location + 1, _textView.selectedRange.length);
-    
+    if (!havePicture) {
+        havePicture = YES;
+        pictureLocation = _textView.selectedRange.location;
+    }
+   
     
     //设置字的位置
     [self setInitLocation];

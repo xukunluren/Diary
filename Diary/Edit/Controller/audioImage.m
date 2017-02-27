@@ -21,9 +21,10 @@
 
 - (void)builderViewWithSceond:(NSTimeInterval)second
 {
-    NSInteger time = second;
+    _secondTime = second;
+    
     CGFloat ViewWith = 100;
-    ViewWith = ViewWith+time*3;
+    ViewWith = ViewWith+_secondTime*3;
     
        _backView = [[UIView alloc] initWithFrame:CGRectMake(10, 0, ViewWith, 30)];
     _backView.layer.cornerRadius = 2.0;
@@ -41,7 +42,7 @@
     
     UILabel *timelable = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_backView.frame)+5, 5, 30, 20)];
     
-    [timelable setText:[NSString stringWithFormat:@"%ld''",(long)time]];
+    [timelable setText:[NSString stringWithFormat:@"%ld''",(long)_secondTime]];
 //    [timelable setTextColor:[UIColor blueColor]];
     [timelable setTextColor:[UIColor grayColor]];
     [timelable setFont:[UIFont systemFontOfSize:12.0]];
@@ -69,13 +70,21 @@
 
 -(void)audioTapEvent{
     NSLog(@"录音点击事件");
+    
+    _time = [NSTimer scheduledTimerWithTimeInterval:_secondTime target:self selector:@selector(stop) userInfo:nil repeats:NO];
     //点击播放按钮时，动画开始
     [self.animationview startAnimating];
     [self.audioBtn setImage:nil forState:UIControlStateNormal];
+    
 }
 
 
-
+-(void)stop{
+    [_time invalidate];
+    [self.animationview stopAnimating];
+    [self.audioBtn setImage:[UIImage imageNamed:@"audio_icon_3"] forState:UIControlStateNormal];
+    
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.
