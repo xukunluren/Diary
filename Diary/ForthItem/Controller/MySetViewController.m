@@ -14,7 +14,6 @@
 #import "AccountSecretViewController.h"
 #import "Person.h"
 #import <Realm/Realm.h>
-#import "ZFJWaveView.h"
 
 
 const CGFloat BackGroupHeight = 200;
@@ -23,7 +22,6 @@ const CGFloat HeadImageHeight= 80;
 @interface MySetViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)MySetHeaderView *settingHeaderNewView;
 @property(nonatomic,strong)UIView *loginOutView;
-@property (nonatomic, strong) ZFJWaveView *headerView;
 @end
 
 @implementation MySetViewController
@@ -70,17 +68,6 @@ const CGFloat HeadImageHeight= 80;
 //    }];
     
 }
-- (ZFJWaveView *)headerView{
-    if (!_headerView) {
-        _headerView = [[ZFJWaveView alloc] initWithFrame:CGRectMake(0, -20, self.view.frame.size.width, 40)];
-        _headerView.backgroundColor = [UIColor colorWithRed:1.000 green:0.318 blue:0.129 alpha:1.00];
-        _headerView.waveBlock = ^(CGFloat currentY){
-        };
-        [_headerView startWaveAnimation];
-    }
-    return _headerView;
-}
-
 
 -(void)searchFromRealmData{
     //获得当前所有数据
@@ -144,8 +131,6 @@ const CGFloat HeadImageHeight= 80;
     _headImageView.frame=CGRectMake((ScreenWidth-HeadImageHeight)/2, 40, HeadImageHeight, HeadImageHeight);
     _headImageView.layer.cornerRadius = HeadImageHeight/2;
     _headImageView.clipsToBounds = YES;
-    
-    
     [_BGView addSubview:_headImageView];
     
     _nameLabel=[[UIButton alloc]init];
@@ -157,8 +142,6 @@ const CGFloat HeadImageHeight= 80;
     
     [_BGView addSubview:_nameLabel];
     
-    [_BGView addSubview:self.headerView];
-    [_BGView sendSubviewToBack:self.headerView];
     
 
     

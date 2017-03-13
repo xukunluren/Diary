@@ -86,7 +86,7 @@
     _confirmCodeTextField = [[UITextField alloc] init];
     _confirmCodeTextField.delegate = self;
     _confirmCodeTextField.font = [UIFont systemFontOfSize:15];
-    _confirmCodeTextField.placeholder = @"请输入密码";
+    _confirmCodeTextField.placeholder = @"请确认密码";
     _confirmCodeTextField.frame = CGRectMake(CGRectGetMaxX(titleCodeLabel.frame)+50, confirmCodeTitleLabel.frame.origin.y, kScreenWidth-150, 20);
     [self.view addSubview:_confirmCodeTextField];
 
@@ -143,6 +143,18 @@
 }
 
 - (void)registerButtonClick:(id)sender {
+    
+    //检查两次输入的密码是否相同
+    NSString *username = _IDtextField.text;
+    NSString *one = _codeTextField.text;
+    NSString *two = _confirmCodeTextField.text;
+    if (![one isEqualToString:two]) {
+        UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"提示" message:@"您两次输入的密码不一致,请确认" preferredStyle:UIAlertControllerStyleAlert];
+        [ac addAction:[UIAlertAction actionWithTitle:@"确定" style:0 handler:^(UIAlertAction * _Nonnull action) {
+        }]];
+        [self presentViewController:ac animated:YES completion:^{
+        }];
+    }
     //存储账号数据
     NSLog(@"%@",_ID);
 //    NSArray *data= [[NSArray alloc]initWithContentsOfFile:[[NSBundle mainBundle]pathForResource:@"UserData"ofType:@"plist"]];

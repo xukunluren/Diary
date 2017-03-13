@@ -28,21 +28,21 @@
     //显示当前类名
     BOOL b = [self isFirstLoad];
     NSLog(@"%d",b);
-    [UIViewController displayClassName:YES];
+//    [UIViewController displayClassName:YES];
     GuideView *guideView = [[GuideView alloc] initWithFrame:self.window.bounds count:self.imageArray.count];
     guideView.delegate = self;
     guideView.imageArray = self.imageArray;
     [self.window.rootViewController.view addSubview:guideView];
 
-//    if (b) {
-//        GuideView *guideView = [[GuideView alloc] initWithFrame:self.window.bounds];
-//        guideView.delegate = self;
-//        guideView.imageArray = self.imageArray;
-//        [self.window.rootViewController.view addSubview:guideView];
-//        
-//    }else {
-//        [self setRootViewController];
-//    }
+    if (b) {
+        GuideView *guideView = [[GuideView alloc] initWithFrame:self.window.bounds];
+        guideView.delegate = self;
+        guideView.imageArray = self.imageArray;
+        [self.window.rootViewController.view addSubview:guideView];
+        
+    }else {
+        [self setRootViewController];
+    }
     
     
     return YES;

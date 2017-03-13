@@ -30,7 +30,6 @@
 		58971CF01E2C6ADA0055A7E7 /* HomePageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58971CEE1E2C6ADA0055A7E7 /* HomePageCell.xib */; };
 		58E366F91E5949830073221F /* dislikeBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 58E366F81E5949830073221F /* dislikeBtn.png */; };
 		58E366FB1E59499A0073221F /* likeBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 58E366FA1E59499A0073221F /* likeBtn.png */; };
-		674813EB1E61557C008D25E6 /* ZFJWaveView.m in Sources */ = {isa = PBXBuildFile; fileRef = 674813EA1E61557C008D25E6 /* ZFJWaveView.m */; };
 		674813F01E61C8EA008D25E6 /* audio_icon_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 674813ED1E61C8EA008D25E6 /* audio_icon_2.png */; };
 		674813F11E61C8EA008D25E6 /* audio_icon_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 674813EE1E61C8EA008D25E6 /* audio_icon_3.png */; };
 		67637D251E630E1D0065F868 /* cancel_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 67637D231E630E1D0065F868 /* cancel_select@2x.png */; };
@@ -332,8 +331,6 @@
 		58E366F71E5935290073221F /* CardHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardHeader.h; sourceTree = "<group>"; };
 		58E366F81E5949830073221F /* dislikeBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dislikeBtn.png; sourceTree = "<group>"; };
 		58E366FA1E59499A0073221F /* likeBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = likeBtn.png; sourceTree = "<group>"; };
-		674813E91E61557C008D25E6 /* ZFJWaveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFJWaveView.h; sourceTree = "<group>"; };
-		674813EA1E61557C008D25E6 /* ZFJWaveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFJWaveView.m; sourceTree = "<group>"; };
 		674813ED1E61C8EA008D25E6 /* audio_icon_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = audio_icon_2.png; sourceTree = "<group>"; };
 		674813EE1E61C8EA008D25E6 /* audio_icon_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = audio_icon_3.png; sourceTree = "<group>"; };
 		67637D231E630E1D0065F868 /* cancel_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel_select@2x.png"; sourceTree = "<group>"; };
@@ -1507,6 +1504,8 @@
 				67C06C9A1E31FF6400EBA5C6 /* alterNameViewController.m */,
 				67C06BDA1E2F5B2C00EBA5C6 /* AccountSecretViewController.h */,
 				67C06BDB1E2F5B2C00EBA5C6 /* AccountSecretViewController.m */,
+				67C06BCA1E2F3FD600EBA5C6 /* RegisterController.h */,
+				67C06BCB1E2F3FD600EBA5C6 /* RegisterController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1716,8 +1715,6 @@
 			children = (
 				67E2406F1E5FE27700B86CDB /* AnimationView.h */,
 				67E240701E5FE27700B86CDB /* AnimationView.m */,
-				674813E91E61557C008D25E6 /* ZFJWaveView.h */,
-				674813EA1E61557C008D25E6 /* ZFJWaveView.m */,
 				67E23FDA1E5A925100B86CDB /* SURefresh */,
 				67AC59BE1E542BB0001D7BAE /* CRToast.h */,
 				67AC59BF1E542BB0001D7BAE /* CRToast.m */,
@@ -1759,8 +1756,6 @@
 		67CC914D1E2D153500761832 /* loginViewController */ = {
 			isa = PBXGroup;
 			children = (
-				67C06BCA1E2F3FD600EBA5C6 /* RegisterController.h */,
-				67C06BCB1E2F3FD600EBA5C6 /* RegisterController.m */,
 				67CC915B1E2DBE3400761832 /* LoginController.h */,
 				67CC915C1E2DBE3400761832 /* LoginController.m */,
 				67C06BC81E2F3FB800EBA5C6 /* LoginView.xib */,
@@ -2079,7 +2074,6 @@
 				67AC59981E529F5D001D7BAE /* RichTextViewController.m in Sources */,
 				58971CEF1E2C6ADA0055A7E7 /* HomePageCell.m in Sources */,
 				67C06CF41E348C0400EBA5C6 /* SettingModelView.m in Sources */,
-				674813EB1E61557C008D25E6 /* ZFJWaveView.m in Sources */,
 				586E0AC81E308E720082106E /* HomePageIfNoDataView.m in Sources */,
 				67C06CF31E348C0400EBA5C6 /* UIImage+ImageEffects.m in Sources */,
 				67AC58C81E481CDC001D7BAE /* View+MASAdditions.m in Sources */,

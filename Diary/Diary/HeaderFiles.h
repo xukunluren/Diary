@@ -19,4 +19,5 @@
 #import "UIView+Frame.h"
 #import "CardHeader.h"
 #import <Realm/Realm.h>
+#import "AFNetworking.h"
 #endif /* HeaderFiles_h */

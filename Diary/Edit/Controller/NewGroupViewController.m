@@ -11,6 +11,7 @@
 #import <Realm/Realm.h>
 #import "CRToast.h"
 
+
 @interface NewGroupViewController ()
 @property(nonatomic,strong)UITextField *textField;
 
@@ -48,6 +49,8 @@
             [self.navigationController popViewControllerAnimated:YES];
         });
     });
+    
+    
 }
 
 

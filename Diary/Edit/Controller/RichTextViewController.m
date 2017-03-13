@@ -31,7 +31,7 @@
 #import "functionKeyView.h"
 #import "UIView+LQXkeyboard.h"
 #import "videoModel.h"
-//#import "MJExtension.h"
+#import "MJExtension.h"
 //Image default max size
 #define IMAGE_MAX_SIZE ([UIScreen mainScreen].bounds.size.width-20)
 
@@ -570,6 +570,7 @@
 //            [self.navigationController popViewControllerAnimated:YES];
 //        });
 //    });
+    
 }
 
 //数据修改及保存
@@ -662,7 +663,7 @@
             [realm addObject:model];
             //提交事务
             [realm commitWriteTransaction];
-            //_editModel = model;//为数据上传服务器做准备；
+            _editModel = model;//为数据上传服务器做准备；
         }];
         
         
@@ -802,6 +803,33 @@
 
 
 -(void)updataToServer{
+    
+    NSLog(@"%@",_editModel);
+    AFHTTPSessionManager *manage1 = [AFHTTPSessionManager manager];
+    NSDictionary *dic = [NSDictionary dictionaryWithObject:@"nihao" forKey:@"key"];
+    [manage1 POST:@"http://202.121.66.52:8010/" parameters:_editModel success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSLog(@"成功");
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"%@",error);
+    }];
+//
+//    
+//    
+//    AFHTTPSessionManager *manage = [AFHTTPSessionManager manager];
+//    [manage POST:@"ni" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+//        //上传文件参数
+//        UIImage *iamge = [UIImage imageNamed:@"123.png"];
+//        NSData *data = UIImagePNGRepresentation(iamge);
+//        //这个就是参数
+//        [formData appendPartWithFileData:data name:@"file" fileName:@"123.png" mimeType:@"image/png"];
+//
+//    } success:^(NSURLSessionDataTask *task, id responseObject) {
+//        
+//        
+//    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+//        
+//        
+//    }];
 //    NSDictionary *modelString = _editModel.mj_keyValues;
 //    NSLog(@"%@",modelString);
 }
