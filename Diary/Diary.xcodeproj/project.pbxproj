@@ -273,6 +273,7 @@
 		67E2403E1E5C2A6D00B86CDB /* videoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 67E2403D1E5C2A6D00B86CDB /* videoModel.m */; };
 		67E240421E5D2EEC00B86CDB /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 67E240411E5D2EEC00B86CDB /* Default@2x.png */; };
 		67E240711E5FE27700B86CDB /* AnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 67E240701E5FE27700B86CDB /* AnimationView.m */; };
+		67FB9BAF1E779841009009D3 /* Waver.m in Sources */ = {isa = PBXBuildFile; fileRef = 67FB9BAE1E779841009009D3 /* Waver.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -599,7 +600,7 @@
 		67C06D2E1E3493AC00EBA5C6 /* sound@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "sound@2x.png"; path = "../Edit/RichVC/sound@2x.png"; sourceTree = "<group>"; };
 		67C06D2F1E3493AC00EBA5C6 /* video@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "video@2x.png"; path = "../Edit/RichVC/video@2x.png"; sourceTree = "<group>"; };
 		67C06D301E3493AC00EBA5C6 /* weather@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "weather@2x.png"; path = "../Edit/RichVC/weather@2x.png"; sourceTree = "<group>"; };
-		67CC904D1E28B7FC00761832 /* Diary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Diary.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		67CC904D1E28B7FC00761832 /* 好记.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "好记.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		67CC90511E28B7FC00761832 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		67CC90531E28B7FC00761832 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		67CC90541E28B7FC00761832 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -703,6 +704,8 @@
 		67E240411E5D2EEC00B86CDB /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		67E2406F1E5FE27700B86CDB /* AnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationView.h; sourceTree = "<group>"; };
 		67E240701E5FE27700B86CDB /* AnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationView.m; sourceTree = "<group>"; };
+		67FB9BAD1E779841009009D3 /* Waver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Waver.h; sourceTree = "<group>"; };
+		67FB9BAE1E779841009009D3 /* Waver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Waver.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1149,6 +1152,8 @@
 		67B029051E588935008F5992 /* other */ = {
 			isa = PBXGroup;
 			children = (
+				67FB9BAD1E779841009009D3 /* Waver.h */,
+				67FB9BAE1E779841009009D3 /* Waver.m */,
 				67AC58681E481CDC001D7BAE /* videoFromThird */,
 				67C06CC61E348C0400EBA5C6 /* RichVC */,
 				586E0ADB1E30CA1E0082106E /* AdaptionTextView */,
@@ -1389,7 +1394,7 @@
 		67CC904E1E28B7FC00761832 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				67CC904D1E28B7FC00761832 /* Diary.app */,
+				67CC904D1E28B7FC00761832 /* 好记.app */,
 				67CC90661E28B7FC00761832 /* DiaryTests.xctest */,
 				67CC90711E28B7FC00761832 /* DiaryUITests.xctest */,
 			);
@@ -1793,7 +1798,7 @@
 			);
 			name = Diary;
 			productName = Diary;
-			productReference = 67CC904D1E28B7FC00761832 /* Diary.app */;
+			productReference = 67CC904D1E28B7FC00761832 /* 好记.app */;
 			productType = "com.apple.product-type.application";
 		};
 		67CC90651E28B7FC00761832 /* DiaryTests */ = {
@@ -2113,6 +2118,7 @@
 				25FFA0811E28D24600869B7E /* WMFPSLabel.m in Sources */,
 				67AC58C01E481CDC001D7BAE /* MASCompositeConstraint.m in Sources */,
 				67E23FE21E5A925100B86CDB /* UIScrollView+SURefresh.m in Sources */,
+				67FB9BAF1E779841009009D3 /* Waver.m in Sources */,
 				67CC90B91E28B84100761832 /* MySetViewController.m in Sources */,
 				67CC90BA1E28B84100761832 /* FirstItemViewController.m in Sources */,
 				67CC90B81E28B84100761832 /* BaseViewController.m in Sources */,
@@ -2340,7 +2346,7 @@
 					"-ObjC\n\n-ObjC\n\n-ObjC\n\n-ObjC\n\n-ObjC\n\n-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hs.diary;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "好记";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2378,7 +2384,7 @@
 					"-ObjC\n\n-ObjC\n\n-ObjC\n\n-ObjC\n\n-ObjC\n\n-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hs.diary;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "好记";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
