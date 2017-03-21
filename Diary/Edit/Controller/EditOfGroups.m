@@ -26,17 +26,17 @@
     imageView.image = [UIImage imageNamed:@"rijiben"];
     [self addSubview:imageView];
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(25, 5, 55, 20)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(25, 5, 50, 20)];
     [label setText:@"当前分组:"];
     [label setTextColor:[UIColor colorWithHexString:@"12B7F5"]];
-    [label setFont:[UIFont systemFontOfSize:12.0]];
+    [label setFont:[UIFont systemFontOfSize:10.0]];
     [self addSubview:label];
     
-    _groupLabel = [[UILabel alloc] initWithFrame:CGRectMake(85, 5, ScreenWidth - 94, 20)];
+    _groupLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 5, ScreenWidth - 94, 20)];
     [_groupLabel setText:@"我的日记"];
     [_groupLabel setTextColor:[UIColor colorWithHexString:@"12B7F5"]];
     _groupLabel.textAlignment = NSTextAlignmentLeft;
-    [_groupLabel setFont:[UIFont systemFontOfSize:12.0]];
+    [_groupLabel setFont:[UIFont systemFontOfSize:10.0]];
     [self addSubview:_groupLabel];
     
     UIImageView *imageView1 = [[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth-25, 8, 13, 13)];

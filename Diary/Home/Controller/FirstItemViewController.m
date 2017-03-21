@@ -114,11 +114,11 @@
     [self.view addSubview:_pageView];
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, ScreenHeight*0.45, ScreenWidth, 30)];
     [label setText:@"今天遇到什么好玩的事情了呢？"];
-    [label setTextColor:[UIColor colorFromHexCode:@"6B6B6B"]];
+  
     label.contentMode = UIViewContentModeCenter;
     label.textAlignment = NSTextAlignmentCenter;
     [label setTextColor:[UIColor blackColor]];
-    [label setFont:[UIFont systemFontOfSize:14.0]];
+    [label setFont:[UIFont systemFontOfSize:12.0]];
     [_pageView addSubview:label];
     
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth*0.5-35, ScreenHeight*0.5, 70, 20)];

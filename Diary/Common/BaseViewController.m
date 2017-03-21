@@ -87,7 +87,7 @@
                                       //kCRToastBackgroundColorKey : [UIColor redColor],
                                       kCRToastAnimationInTypeKey : @(CRToastAnimationTypeGravity),
                                       kCRToastAnimationOutTypeKey : @(CRToastAnimationTypeGravity),
-                                      kCRToastAnimationInDirectionKey : @(CRToastAnimationDirectionTop),
+                                      kCRToastAnimationInDirectionKey : @(CRToastAnimationDirectionBottom),
                                       kCRToastAnimationOutDirectionKey : @(CRToastAnimationDirectionTop),
                                       kCRToastImageKey :[UIImage imageNamed:@"alert_icon.png"]
                                       } mutableCopy];
