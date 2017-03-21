@@ -30,6 +30,7 @@
 		58971CF01E2C6ADA0055A7E7 /* HomePageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58971CEE1E2C6ADA0055A7E7 /* HomePageCell.xib */; };
 		58E366F91E5949830073221F /* dislikeBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 58E366F81E5949830073221F /* dislikeBtn.png */; };
 		58E366FB1E59499A0073221F /* likeBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 58E366FA1E59499A0073221F /* likeBtn.png */; };
+		673180FD1E815A6A00EACE1F /* Waver.m in Sources */ = {isa = PBXBuildFile; fileRef = 673180FC1E815A6A00EACE1F /* Waver.m */; };
 		674813F01E61C8EA008D25E6 /* audio_icon_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 674813ED1E61C8EA008D25E6 /* audio_icon_2.png */; };
 		674813F11E61C8EA008D25E6 /* audio_icon_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 674813EE1E61C8EA008D25E6 /* audio_icon_3.png */; };
 		67637D251E630E1D0065F868 /* cancel_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 67637D231E630E1D0065F868 /* cancel_select@2x.png */; };
@@ -331,6 +332,8 @@
 		58E366F71E5935290073221F /* CardHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardHeader.h; sourceTree = "<group>"; };
 		58E366F81E5949830073221F /* dislikeBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dislikeBtn.png; sourceTree = "<group>"; };
 		58E366FA1E59499A0073221F /* likeBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = likeBtn.png; sourceTree = "<group>"; };
+		673180FB1E815A6A00EACE1F /* Waver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Waver.h; sourceTree = "<group>"; };
+		673180FC1E815A6A00EACE1F /* Waver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Waver.m; sourceTree = "<group>"; };
 		674813ED1E61C8EA008D25E6 /* audio_icon_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = audio_icon_2.png; sourceTree = "<group>"; };
 		674813EE1E61C8EA008D25E6 /* audio_icon_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = audio_icon_3.png; sourceTree = "<group>"; };
 		67637D231E630E1D0065F868 /* cancel_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel_select@2x.png"; sourceTree = "<group>"; };
@@ -1149,6 +1152,8 @@
 		67B029051E588935008F5992 /* other */ = {
 			isa = PBXGroup;
 			children = (
+				673180FB1E815A6A00EACE1F /* Waver.h */,
+				673180FC1E815A6A00EACE1F /* Waver.m */,
 				67AC58681E481CDC001D7BAE /* videoFromThird */,
 				67C06CC61E348C0400EBA5C6 /* RichVC */,
 				586E0ADB1E30CA1E0082106E /* AdaptionTextView */,
@@ -2113,6 +2118,7 @@
 				25FFA0811E28D24600869B7E /* WMFPSLabel.m in Sources */,
 				67AC58C01E481CDC001D7BAE /* MASCompositeConstraint.m in Sources */,
 				67E23FE21E5A925100B86CDB /* UIScrollView+SURefresh.m in Sources */,
+				673180FD1E815A6A00EACE1F /* Waver.m in Sources */,
 				67CC90B91E28B84100761832 /* MySetViewController.m in Sources */,
 				67CC90BA1E28B84100761832 /* FirstItemViewController.m in Sources */,
 				67CC90B81E28B84100761832 /* BaseViewController.m in Sources */,

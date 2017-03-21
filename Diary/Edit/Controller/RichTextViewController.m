@@ -31,7 +31,8 @@
 #import "functionKeyView.h"
 #import "UIView+LQXkeyboard.h"
 #import "videoModel.h"
-#import "MJExtension.h"
+#import "Waver.h"
+
 //Image default max size
 #define IMAGE_MAX_SIZE ([UIScreen mainScreen].bounds.size.width-20)
 
@@ -90,6 +91,8 @@
 
 @property (strong, nonatomic) NSMutableAttributedString * context;//存储图文信息
 @property(strong ,nonatomic) functionKeyView *functionView;//底部功能键View
+@property (nonatomic, strong) AVAudioRecorder *recorder;
+
 @end
 
 @implementation RichTextViewController
@@ -115,6 +118,11 @@
     UIButton *cancelBtnRight;
     NSInteger pictureLocation;//图片位置
     BOOL havePicture;//是否有图片插入
+    UILabel *_saySomething;
+    UILabel *_timeLabel;
+    Waver *_leftWave;
+    Waver *_rightLeft;
+
 }
 //+(instancetype)ViewController
 //{
@@ -1078,7 +1086,6 @@
     _textView.inputView = nil;
     [_textView reloadInputViews];
     [UIView animateWithDuration:0.5 animations:^{
-//        _upkeyboardView.frame = CGRectMake(0, ScreenHeight - upHeight -_keyBoardHeigh-5, ScreenWidth, upHeight);
     }];
  
 }
@@ -1104,31 +1111,44 @@
     [_audioView setBackgroundColor:[UIColor whiteColor]];
      [_audioView addSubview:[self drawThreadWithFram:CGRectMake(0, 5, ScreenWidth, 0.5) andColor:[UIColor colorWithHexString:@"e7e7e7"]]];
     //按住说话
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth, 20)];
-    label.contentMode = UIViewContentModeCenter;
-    label.textAlignment  = NSTextAlignmentCenter;
-    [label setText:@"按住说话"];
-    label.font = [UIFont systemFontOfSize:15.0];
-    [label setTextColor:[UIColor grayColor]];
-    [_audioView addSubview:label];
+    _saySomething = [[UILabel alloc] initWithFrame:CGRectMake(0, 25, ScreenWidth, 20)];
+    _saySomething.contentMode = UIViewContentModeCenter;
+    _saySomething.textAlignment  = NSTextAlignmentCenter;
+    [_saySomething setText:@"按住说话"];
+    _saySomething.font = [UIFont systemFontOfSize:14.0];
+    [_saySomething setTextColor:[UIColor grayColor]];
+    [_audioView addSubview:_saySomething];
+    
+    _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, ScreenWidth, 20)];
+    _timeLabel.contentMode = UIViewContentModeCenter;
+    _timeLabel.textAlignment  = NSTextAlignmentCenter;
+    _timeLabel.font = [UIFont systemFontOfSize:12.0];
+    [_timeLabel setTextColor:[UIColor grayColor]];
+    _timeLabel.hidden = YES;
+    [_audioView addSubview:_timeLabel];
+
     
     
     //按住说话
-    secondText = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(label.frame)+5, ScreenWidth, 20)];
+    secondText = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_timeLabel.frame), ScreenWidth, 20)];
+
     secondText.contentMode = UIViewContentModeCenter;
     secondText.textAlignment  = NSTextAlignmentCenter;
     [secondText setText:@"左右滑动取消"];
-    secondText.font = [UIFont systemFontOfSize:10.0];
+    secondText.hidden = YES;
+    secondText.font = [UIFont systemFontOfSize:12.0];
+
     [secondText setTextColor:[UIColor grayColor]];
     [_audioView addSubview:secondText];
     
     //录音icon
-    _audioImageKeyBoard = [[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth*0.5-48, CGRectGetMaxY(secondText.frame)+5, 96, 96)];
+    _audioButton = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth*0.5-48, CGRectGetMaxY(_timeLabel.frame)+20, 96, 96)];
+
     _audioImageKeyBoard.backgroundColor = [UIColor clearColor];
     //[audioView addSubview:_audioImage];
     
     //录音icon添加点击事件
-    _audioButton = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth*0.5-48, CGRectGetMaxY(label.frame)+20, 96, 96)];
+    _audioButton = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth*0.5-48, CGRectGetMaxY(_timeLabel.frame)+20, 96, 96)];
     _audioButton.center = _audioView.center;
     _audioButton.centerY = _audioView.centerY+20;
     [_audioButton setBackgroundImage:[UIImage imageNamed:@"luyinicon"] forState:UIControlStateNormal];
@@ -1139,15 +1159,34 @@
     [_audioButton addTarget:self action:@selector(updateContinueRecordVoice) forControlEvents:UIControlEventTouchDragEnter];
     [_audioView addSubview:_audioButton];
     
+    [self setupRecorder];
+    _leftWave = [[Waver alloc] initWithFrame:CGRectMake(0, -20, CGRectGetWidth(self.view.bounds), 80.0)];
+    _leftWave.hidden = YES;
     
-     cancelBtnLeft = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth*0.5-48, CGRectGetMaxY(label.frame)+20, 24, 24)];
+    __block AVAudioRecorder *weakRecorder = self.recorder;
+    
+    _leftWave.waverLevelCallback = ^(Waver * waver) {
+        
+        [weakRecorder updateMeters];
+        
+        CGFloat normalizedValue = pow (10, [weakRecorder averagePowerForChannel:0] / 40);
+        
+        waver.level = normalizedValue;
+        
+    };
+    [_audioView addSubview:_leftWave];
+
+    
+    cancelBtnLeft = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth*0.5-48, CGRectGetMaxY(_timeLabel.frame)+20, 24, 24)];
+
     cancelBtnLeft.centerX = ScreenWidth-60;
     cancelBtnLeft.centerY = _audioView.centerY+20;
     cancelBtnLeft.hidden = YES;
     [cancelBtnLeft setBackgroundImage:[UIImage imageNamed:@"cancel"] forState:UIControlStateNormal];
     [_audioView addSubview:cancelBtnLeft];
 
-    cancelBtnRight = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth*0.5-48, CGRectGetMaxY(label.frame)+20, 24, 24)];
+    cancelBtnRight = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth*0.5-48, CGRectGetMaxY(_timeLabel.frame)+20, 24, 24)];
+
     cancelBtnRight.centerX = 48;
     cancelBtnRight.hidden = YES;
     cancelBtnRight.centerY = _audioView.centerY+20;
@@ -1161,27 +1200,44 @@
  
 }
 
+
+-(void)setupRecorder
+{
+    NSURL *url = [NSURL fileURLWithPath:@"/dev/null"];
+    
+    NSDictionary *settings = @{AVSampleRateKey:          [NSNumber numberWithFloat: 44100.0],
+                               AVFormatIDKey:            [NSNumber numberWithInt: kAudioFormatAppleLossless],
+                               AVNumberOfChannelsKey:    [NSNumber numberWithInt: 2],
+                               AVEncoderAudioQualityKey: [NSNumber numberWithInt: AVAudioQualityMin]};
+    
+    NSError *error;
+    self.recorder = [[AVAudioRecorder alloc] initWithURL:url settings:settings error:&error];
+    
+    if(error) {
+        NSLog(@"Ups, could not create recorder %@", error);
+        return;
+    }
+    
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:&error];
+    
+    if (error) {
+        NSLog(@"Error setting category: %@", [error description]);
+    }
+    
+    [self.recorder prepareToRecord];
+    [self.recorder setMeteringEnabled:YES];
+    [self.recorder record];
+    
+}
+
 -(void)show{
-    _centerRadarView = [[AnimationView alloc] initWithFrame:_audioButton.bounds];
-    _centerRadarView.lineColor = [UIColor whiteColor];
-    _centerRadarView.backgroundColor = [UIColor clearColor];
-    _centerRadarView.center = _audioView.center;
-    _centerRadarView.centerY = _audioView.centerY+20;
-    [_audioView addSubview:_centerRadarView];
     
-    
-    
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 96, 96)];
-    [_centerRadarView addSubview:label];
-    label.layer.cornerRadius = 48;
-//    label.layer.masksToBounds = YES;
-    label.backgroundColor = [UIColor clearColor];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationEnterFoground) name:@"enterForeground" object:nil];
+    _leftWave.hidden = NO;
 }
 
 -(void)hide{
-    [_centerRadarView removeFromSuperview];
+    _leftWave.hidden = YES;
+
 }
 - (void)notificationEnterFoground
 {
@@ -1198,7 +1254,10 @@
 - (void)startRecordVoice{
     cancelBtnLeft.hidden = YES;
     cancelBtnRight.hidden = YES;
-   
+    _saySomething.hidden = YES;
+    _timeLabel.hidden = NO;
+    secondText.hidden = NO;
+
     NSArray*array = [NSArray arrayWithObjects:@"左右滑动取消",@"请控制在60s内", nil];
     secondText.text = array[(int)(arc4random() % (2))];
     if (_dataArray.count == 3) {
@@ -1249,6 +1308,10 @@
  */
 - (void)confirmRecordVoice {
     [self hide];
+    _timeLabel.hidden = YES;
+    _saySomething.hidden = NO;
+    secondText.hidden = YES;
+
     if ([[LGSoundRecorder shareInstance] soundRecordTime] < 1.0f) {
         if (_timerOf60Second) {
             [_timerOf60Second invalidate];
@@ -1291,6 +1354,10 @@
  */
 - (void)cancelRecordVoice {
     [self hide];
+    _timeLabel.hidden = YES;
+    _saySomething.hidden = NO;
+    secondText.hidden = YES;
+
     [[LGSoundRecorder shareInstance] soundRecordFailed:self.view];
 }
 
@@ -1304,7 +1371,8 @@
 
 - (void)sixtyTimeStopSendVodio {
     int countDown = 60 - [[LGSoundRecorder shareInstance] soundRecordTime];
-    secondText.text = [NSString stringWithFormat:@"--%d秒--",(int)[[LGSoundRecorder shareInstance] soundRecordTime]];
+    _timeLabel.text = [NSString stringWithFormat:@"%ds",(int)[[LGSoundRecorder shareInstance] soundRecordTime]];
+
     
     if (countDown <= 20) {
         [[LGSoundRecorder shareInstance] showCountdown:countDown - 1];

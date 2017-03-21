@@ -13,9 +13,10 @@
 #import "editDiaryModel.h"
 #import <Realm/Realm.h>
 #import "CRToast.h"
+#import "LoginController.h"
 #import "groupModel.h"
 
-
+#define LAST_RUN_VERSION_KEY @"last_run_version_of_application"
 #define kSearchBackgroudViewHeight 40
 
 @interface FirstItemViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
@@ -49,13 +50,24 @@
     if (_diaryInfoArray.count>0) {
         [_pageView removeFromSuperview];
     }
-    
     [_diaryListTableView reloadData];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor colorFromHexCode:@"eeeeee"];
+    BOOL b = [self isFirstLoad];
+    if (!b) {
+        UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"  登录好记能在多终端书写并查看" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelButton = [UIAlertAction actionWithTitle:@"已阅" style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction *okButton =  [UIAlertAction actionWithTitle:@"去登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            LoginController *vc = [[LoginController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }];
+        [alertVC addAction:cancelButton];
+        [alertVC addAction:okButton];
+        [self presentViewController:alertVC animated:YES completion:nil];
+    }
     
     [self setTitle:@"好记"];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(rightDown)];
@@ -79,7 +91,24 @@
     
 }
 
-
+- (BOOL) isFirstLoad{
+    NSString *currentVersion = [[[NSBundle mainBundle] infoDictionary]
+                                objectForKey:@"CFBundleShortVersionString"];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSString *lastRunVersion = [defaults objectForKey:LAST_RUN_VERSION_KEY];
+    
+    if (!lastRunVersion) {
+        [defaults setObject:currentVersion forKey:LAST_RUN_VERSION_KEY];
+        return YES;
+    }
+    else if (![lastRunVersion isEqualToString:currentVersion]) {
+        [defaults setObject:currentVersion forKey:LAST_RUN_VERSION_KEY];
+        return YES;
+    }
+    return NO;
+}
 
 
 - (UIView *)pageView{
@@ -114,11 +143,12 @@
     [self.view addSubview:_pageView];
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, ScreenHeight*0.45, ScreenWidth, 30)];
     [label setText:@"今天遇到什么好玩的事情了呢？"];
-  
+    [label setTextColor:[UIColor colorFromHexCode:@"6B6B6B"]];
+
     label.contentMode = UIViewContentModeCenter;
     label.textAlignment = NSTextAlignmentCenter;
     [label setTextColor:[UIColor blackColor]];
-    [label setFont:[UIFont systemFontOfSize:12.0]];
+    [label setFont:[UIFont systemFontOfSize:14.0]];
     [_pageView addSubview:label];
     
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth*0.5-35, ScreenHeight*0.5, 70, 20)];

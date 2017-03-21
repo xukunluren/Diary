@@ -29,12 +29,12 @@
     [self addSubview:openOrNot];
     UILabel *textlabel = [[UILabel alloc] initWithFrame:CGRectMake(7, 3, ScreenWidth*0.5-6, openOrNot.frame.size.height-6)];
     textlabel.text = @"公开这篇日记";
-    [textlabel setFont:[UIFont boldSystemFontOfSize:10.0]];
+    [textlabel setFont:[UIFont systemFontOfSize:12.0]];
     [textlabel setTextColor:[UIColor blackColor]];
     [openOrNot addSubview:textlabel];
     
     _openOrNotButton = [[UISwitch alloc] initWithFrame:CGRectMake(ScreenWidth-50, 0,50,0 )];
-    _openOrNotButton.transform = CGAffineTransformMakeScale(0.65, 0.55);
+    _openOrNotButton.transform = CGAffineTransformMakeScale(0.75, 0.65);
     _openOrNotButton.onTintColor = [UIColor colorWithHexString:@"12B7F5"];
     [_openOrNotButton setOn:YES];
     [_openOrNotButton addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];

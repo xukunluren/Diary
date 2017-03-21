@@ -21,8 +21,8 @@
                         <rect key="frame" x="75" y="15" width="230" height="44"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="是看得见佛为减肥了开始的卢卡斯分接欧文" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Of-p9-wSb">
-                                <rect key="frame" x="0.0" y="0.0" width="230" height="15"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <rect key="frame" x="0.0" y="0.0" width="230" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
@@ -102,27 +102,27 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jDl-27-YrG" userLabel="first backgroundView">
                         <rect key="frame" x="15" y="20" width="60" height="39"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12-12" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XZH-7l-56H">
-                                <rect key="frame" x="0.0" y="0.0" width="60" height="15"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12-12" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XZH-7l-56H">
+                                <rect key="frame" x="-2" y="0.0" width="57" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1202" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YAv-5i-ZpW">
-                                <rect key="frame" x="0.0" y="22" width="60" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1202" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YAv-5i-ZpW">
+                                <rect key="frame" x="-2" y="24.5" width="57" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="YAv-5i-ZpW" secondAttribute="bottom" id="7oL-J3-73z"/>
-                            <constraint firstAttribute="trailing" secondItem="XZH-7l-56H" secondAttribute="trailing" id="AcK-bq-J0l"/>
-                            <constraint firstAttribute="trailing" secondItem="YAv-5i-ZpW" secondAttribute="trailing" id="B2l-Bh-Fl2"/>
-                            <constraint firstItem="XZH-7l-56H" firstAttribute="leading" secondItem="jDl-27-YrG" secondAttribute="leading" id="KeM-JW-o2q"/>
+                            <constraint firstAttribute="trailing" secondItem="XZH-7l-56H" secondAttribute="trailing" constant="5" id="AcK-bq-J0l"/>
+                            <constraint firstAttribute="trailing" secondItem="YAv-5i-ZpW" secondAttribute="trailing" constant="5" id="B2l-Bh-Fl2"/>
+                            <constraint firstItem="XZH-7l-56H" firstAttribute="leading" secondItem="jDl-27-YrG" secondAttribute="leading" constant="-2" id="KeM-JW-o2q"/>
                             <constraint firstAttribute="width" constant="60" id="VXg-xQ-e14"/>
                             <constraint firstItem="XZH-7l-56H" firstAttribute="top" secondItem="jDl-27-YrG" secondAttribute="top" id="cQr-2j-iYL"/>
-                            <constraint firstItem="YAv-5i-ZpW" firstAttribute="leading" secondItem="jDl-27-YrG" secondAttribute="leading" id="z6M-Ud-GGK"/>
+                            <constraint firstItem="YAv-5i-ZpW" firstAttribute="leading" secondItem="jDl-27-YrG" secondAttribute="leading" constant="-2" id="z6M-Ud-GGK"/>
                         </constraints>
                     </view>
                 </subviews>
