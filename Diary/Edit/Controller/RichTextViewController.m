@@ -278,7 +278,7 @@
     }else{
         [self putDiaryOnThePage];
     }
-   
+
     
    
 }
@@ -901,6 +901,7 @@
         if (viewTag >= nowLocation) {
             if (viewTag == videoTag) {
                 [_videoView removeFromSuperview];
+                [righrPlayer pause];
                 [_heightOfAudioArray removeLastObject];
                 [videoDataArray removeLastObject];
             }else{
@@ -927,6 +928,26 @@
 -(void)textViewDidChange:(UITextView *)textView
 {
     
+    
+    //    textview 改变字体的行间距
+    
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    
+    paragraphStyle.lineSpacing = 14;// 字体的行间距
+    
+    NSDictionary *attributes = @{
+                                 
+                                 NSFontAttributeName:[UIFont systemFontOfSize:16],
+                                 
+                                 NSParagraphStyleAttributeName:paragraphStyle
+                                 
+                                 };
+    
+    textView.attributedText = [[NSAttributedString alloc] initWithString:textView.text attributes:attributes];
+    
+
+    
+    
 //    else{
 //    NSInteger nowLocation =  _textView.selectedRange.location;
 //        if (nowLocation>_deleteAction) {
@@ -936,49 +957,49 @@
 //    }
 //    }
     
-    bool isChinese;//判断当前输入法是否是中文
-    NSArray *currentar = [UITextInputMode activeInputModes];
-    UITextInputMode *textInputMode = [currentar firstObject];
-    
-    if ([[textInputMode primaryLanguage] isEqualToString: @"en-US"]) {
-        isChinese = false;
-    }
-    else
-    {
-        isChinese = true;
-    }
-    NSString *str = [[ self.textView text] stringByReplacingOccurrencesOfString:@"?" withString:@""];
-    if (isChinese) { //中文输入法下
-        UITextRange *selectedRange = [ self.textView markedTextRange];
-        //获取高亮部分
-        UITextPosition *position = [ self.textView positionFromPosition:selectedRange.start offset:0];
-        // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
-        if (!position) {
-            NSLog(@"汉字");
-            //   NSLog(@"str=%@; 本次长度=%lu",str,(unsigned long)[str length]);
-           // [self setStyle];
-            if ( str.length>=MaxLength) {
-                NSString *strNew = [NSString stringWithString:str];
-                [ self.textView setText:[strNew substringToIndex:MaxLength]];
-            }
-        }
-        else
-        {
-            NSLog(@"输入的英文还没有转化为汉字的状态");
-            if ([str length]>=MaxLength+10) {
-                NSString *strNew = [NSString stringWithString:str];
-                [ self.textView setText:[strNew substringToIndex:MaxLength+10]];
-            }
-            
-        }
-    }else{
-        NSLog(@"英文");
-        //[self setStyle];
-        if ([str length]>=MaxLength) {
-            NSString *strNew = [NSString stringWithString:str];
-            [ self.textView setText:[strNew substringToIndex:MaxLength]];
-        }
-    }
+//    bool isChinese;//判断当前输入法是否是中文
+//    NSArray *currentar = [UITextInputMode activeInputModes];
+//    UITextInputMode *textInputMode = [currentar firstObject];
+//    
+//    if ([[textInputMode primaryLanguage] isEqualToString: @"en-US"]) {
+//        isChinese = false;
+//    }
+//    else
+//    {
+//        isChinese = true;
+//    }
+//    NSString *str = [[ self.textView text] stringByReplacingOccurrencesOfString:@"?" withString:@""];
+//    if (isChinese) { //中文输入法下
+//        UITextRange *selectedRange = [ self.textView markedTextRange];
+//        //获取高亮部分
+//        UITextPosition *position = [ self.textView positionFromPosition:selectedRange.start offset:0];
+//        // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
+//        if (!position) {
+//            NSLog(@"汉字");
+//            //   NSLog(@"str=%@; 本次长度=%lu",str,(unsigned long)[str length]);
+//           // [self setStyle];
+//            if ( str.length>=MaxLength) {
+//                NSString *strNew = [NSString stringWithString:str];
+//                [ self.textView setText:[strNew substringToIndex:MaxLength]];
+//            }
+//        }
+//        else
+//        {
+//            NSLog(@"输入的英文还没有转化为汉字的状态");
+//            if ([str length]>=MaxLength+10) {
+//                NSString *strNew = [NSString stringWithString:str];
+//                [ self.textView setText:[strNew substringToIndex:MaxLength+10]];
+//            }
+//            
+//        }
+//    }else{
+//        NSLog(@"英文");
+//        //[self setStyle];
+//        if ([str length]>=MaxLength) {
+//            NSString *strNew = [NSString stringWithString:str];
+//            [ self.textView setText:[strNew substringToIndex:MaxLength]];
+//        }
+//    }
     
     
 }
@@ -1160,7 +1181,7 @@
     [_audioView addSubview:_audioButton];
     
     [self setupRecorder];
-    _leftWave = [[Waver alloc] initWithFrame:CGRectMake(0, -20, CGRectGetWidth(self.view.bounds), 80.0)];
+    _leftWave = [[Waver alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 40.0)];
     _leftWave.hidden = YES;
     
     __block AVAudioRecorder *weakRecorder = self.recorder;
@@ -1205,9 +1226,9 @@
 {
     NSURL *url = [NSURL fileURLWithPath:@"/dev/null"];
     
-    NSDictionary *settings = @{AVSampleRateKey:          [NSNumber numberWithFloat: 44100.0],
+    NSDictionary *settings = @{AVSampleRateKey:          [NSNumber numberWithFloat: 100.0],
                                AVFormatIDKey:            [NSNumber numberWithInt: kAudioFormatAppleLossless],
-                               AVNumberOfChannelsKey:    [NSNumber numberWithInt: 2],
+                               AVNumberOfChannelsKey:    [NSNumber numberWithInt: 1],
                                AVEncoderAudioQualityKey: [NSNumber numberWithInt: AVAudioQualityMin]};
     
     NSError *error;
@@ -1231,7 +1252,7 @@
 }
 
 -(void)show{
-    
+  
     _leftWave.hidden = NO;
 }
 
@@ -1505,8 +1526,7 @@
     picker.delegate = self;
     picker.maximumNumberOfSelectionVideo = 1;
     picker.maximumNumberOfSelectionPhoto = 0;
-    [self presentViewController:picker animated:YES completion:^{
-    }];
+    [self.navigationController pushViewController:picker animated:YES];
 }
 
 -(void)putVideoOnTextViewWithUrl:(NSURL *)url image:(NSString *)pictueImage{
@@ -1677,7 +1697,6 @@
 
     //Move selection location
     _textView.selectedRange = NSMakeRange(_textView.selectedRange.location + 1, _textView.selectedRange.length);
-
     //设置字的设置
     [self setInitLocation];
 }
@@ -1858,7 +1877,7 @@
 - (void)uzysAssetsPickerControllerDidExceedMaximumNumberOfSelection:(UzysAssetsPickerController *)picker
 {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
-                                                    message:NSLocalizedStringFromTable(@"Exceed Maximum Number Of Selection", @"UzysAssetsPickerController", nil)
+                                                    message:NSLocalizedStringFromTable(@"您只能选择一段视频", @"UzysAssetsPickerController", nil)
                                                    delegate:nil
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];

@@ -89,10 +89,11 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self setBackWithText:@"取消"];
+  self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStyleDone target:self action:@selector(rightButtonClick)];;
     [self initVariable];
     [self initImagePicker];
     [self setupOneMediaTypeSelection];
-    
     __weak typeof(self) weakSelf = self;
     [self setupGroup:^{
         [weakSelf.groupPicker.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
@@ -103,7 +104,10 @@
     [self initNoAssetView];
     
 }
-
+-(void)rightButtonClick{
+    [self finishPickingAssets];
+}
+ 
 - (void)initVariable
 {
     //    self.assetsFilter = [ALAssetsFilter allPhotos];
@@ -231,7 +235,7 @@
     layout.minimumInteritemSpacing      = 1.0;
     layout.minimumLineSpacing           = appearanceConfig.cellSpacing;
   
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64 -48) collectionViewLayout:layout];
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height) collectionViewLayout:layout];
     self.collectionView.allowsMultipleSelection = YES;
     [self.collectionView registerClass:[UzysAssetsViewCell class]
             forCellWithReuseIdentifier:kAssetsViewCellIdentifier];
@@ -367,7 +371,7 @@
 
 - (void)setupAssets:(voidBlock)successBlock
 {
-    self.title = [self.assetsGroup valueForProperty:ALAssetsGroupPropertyName];
+//    self.title = [self.assetsGroup valueForProperty:ALAssetsGroupPropertyName];
     
     if (!self.assets)
         self.assets = [[NSMutableArray alloc] init];
@@ -464,7 +468,7 @@
 
 - (void)showNotAllowed
 {
-    self.title              = nil;
+    self.title              = @"视频";
     
     UIView *lockedView      = [[UIView alloc] initWithFrame:self.collectionView.bounds];
     UIImageView *locked     = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"UzysAssetPickerController.bundle/uzysAP_ico_no_access"]];
@@ -655,9 +659,7 @@
         if([picker.delegate respondsToSelector:@selector(uzysAssetsPickerController:didFinishPickingAssets:)])
             [picker.delegate uzysAssetsPickerController:picker didFinishPickingAssets:assets];
         
-        [self dismissViewControllerAnimated:YES completion:^{
-            
-        }];
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 #pragma mark - Helper methods
@@ -930,9 +932,7 @@
             {
                 [self.delegate uzysAssetsPickerControllerDidCancel:self];
             }
-            [self dismissViewControllerAnimated:YES completion:^{
-                
-            }];
+            [self.navigationController  popViewControllerAnimated:YES];
         }
             break;
         case kTagButtonGroupPicker:
