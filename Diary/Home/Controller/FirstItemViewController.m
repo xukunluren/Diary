@@ -165,7 +165,7 @@
 }
 - (void)rightDown
 {
-    [self tuisong];
+//    [self tuisong];
     RichTextViewController * vc=[[RichTextViewController alloc] init];
     vc.NewDiary = YES;
     vc.finished=^(id content){
@@ -184,16 +184,11 @@
     };
    // EditViewController *vc = [[EditViewController alloc] init];
     
-//    [self.navigationController pushViewController:vc animated:YES];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)tuisong{
     
-    
-    
-    
-    
-  
     
     
     UILocalNotification *localNotification = [[UILocalNotification alloc] init];
