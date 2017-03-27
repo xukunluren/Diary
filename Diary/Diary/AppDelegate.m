@@ -13,10 +13,14 @@
 #import "RichTextViewController.h"
 
 #define LAST_RUN_VERSION_KEY @"last_run_version_of_application"
-#define IS_iOS8 ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0)
+
 @interface AppDelegate ()<GuideViewDelegate>
 
 @property (strong, nonatomic) NSArray *imageArray;
+<<<<<<< HEAD
+=======
+
+>>>>>>> parent of e6572fc... 推送
 @end
 
 @implementation AppDelegate
@@ -24,8 +28,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    [self registerLocalNotification];
-    [self setNotification];
+    
     //显示当前类名
     BOOL b = [self isFirstLoad];
     NSLog(@"%d",b);
@@ -44,8 +47,8 @@
     }else {
         [self setRootViewController];
     }
-  
     
+<<<<<<< HEAD
     return YES;
 }
 
@@ -77,10 +80,13 @@
 {
     //创建UIUserNotificationSettings，并设置消息的显示类类型
     UIUserNotificationSettings *uns = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound) categories:nil];
+=======
+>>>>>>> parent of e6572fc... 推送
     
-    [[UIApplication sharedApplication] registerUserNotificationSettings:uns];
+    return YES;
 }
 
+<<<<<<< HEAD
 // 本地通知回调函数，当应用程序在前台时调用
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
@@ -99,6 +105,8 @@
     [alert addAction:action];
     [self.window.rootViewController showDetailViewController:alert sender:nil];
 }
+=======
+>>>>>>> parent of e6572fc... 推送
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

@@ -56,7 +56,7 @@
     self.amplitude = 1.0f;
     self.idleAmplitude = 0.01f;
     
-    self.numberOfWaves = 3;
+    self.numberOfWaves = 5;
     self.phaseShift = -0.25f;
     self.density = 1.f;
     
@@ -127,12 +127,16 @@
         // Progress is a value between 1.0 and -0.5, determined by the current wave idx, which is used to alter the wave's amplitude.
         CGFloat progress = 1.0f - (CGFloat)i / self.numberOfWaves;
         CGFloat normedAmplitude = (1.5f * progress - 0.5f) * self.amplitude;
+
+        
         for(CGFloat x = 0; x<self.waveWidth + self.density; x += self.density) {
+            
             //Thanks to https://github.com/stefanceriu/SCSiriWaveformView
             // We use a parable to scale the sinus wave, that has its peak in the middle of the view.
             CGFloat scaling = -pow(x / self.waveMid  - 1, 2) + 1; // make center bigger
             
             CGFloat y = scaling * self.maxAmplitude * normedAmplitude * sinf(2 * M_PI *(x / self.waveWidth) * self.frequency + self.phase) + (self.waveHeight * 0.5);
+            
             if (x==0) {
                 [wavelinePath moveToPoint:CGPointMake(x, y)];
             }

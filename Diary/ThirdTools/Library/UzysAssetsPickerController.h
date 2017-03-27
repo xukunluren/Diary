@@ -10,7 +10,6 @@
 #import "UzysAssetsPickerController_Configuration.h"
 #import "UzysAppearanceConfig.h"
 #import <CoreLocation/CoreLocation.h>
-#import "BaseViewController.h"
 
 @class UzysAssetsPickerController;
 @protocol UzysAssetsPickerControllerDelegate<NSObject>
@@ -20,7 +19,7 @@
 - (void)uzysAssetsPickerControllerDidExceedMaximumNumberOfSelection:(UzysAssetsPickerController *)picker;
 @end
 
-@interface UzysAssetsPickerController : BaseViewController
+@interface UzysAssetsPickerController : UIViewController
 @property (nonatomic, strong) ALAssetsFilter *assetsFilter;
 @property (nonatomic, strong) CLLocation * location;
 @property (nonatomic, assign) NSInteger maximumNumberOfSelectionVideo;

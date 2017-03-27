@@ -16,9 +16,6 @@
 #import "LoginController.h"
 #import "groupModel.h"
 
-
-#define kLocalNotificationKey @"kLocalNotificationKey"
-#define kNotificationCategoryIdentifile @"kNotificationCategoryIdentifile"
 #define LAST_RUN_VERSION_KEY @"last_run_version_of_application"
 #define kSearchBackgroudViewHeight 40
 
@@ -60,7 +57,7 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor colorFromHexCode:@"eeeeee"];
     BOOL b = [self isFirstLoad];
-    if (b) {
+    if (!b) {
         UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"  登录好记能在多终端书写并查看" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *cancelButton = [UIAlertAction actionWithTitle:@"已阅" style:UIAlertActionStyleCancel handler:nil];
         UIAlertAction *okButton =  [UIAlertAction actionWithTitle:@"去登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -165,7 +162,11 @@
 }
 - (void)rightDown
 {
+<<<<<<< HEAD
 //    [self tuisong];
+=======
+    
+>>>>>>> parent of e6572fc... 推送
     RichTextViewController * vc=[[RichTextViewController alloc] init];
     vc.NewDiary = YES;
     vc.finished=^(id content){
@@ -185,6 +186,7 @@
    // EditViewController *vc = [[EditViewController alloc] init];
     
     [self.navigationController pushViewController:vc animated:YES];
+<<<<<<< HEAD
 }
 
 -(void)tuisong{
@@ -210,6 +212,8 @@
     
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
 
+=======
+>>>>>>> parent of e6572fc... 推送
 }
 
 - (void)didReceiveMemoryWarning {
