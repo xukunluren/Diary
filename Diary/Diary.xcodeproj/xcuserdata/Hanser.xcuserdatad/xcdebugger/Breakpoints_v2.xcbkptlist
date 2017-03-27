@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Home/Controller/FirstItemViewController.m"
-            timestampString = "506501395.623393"
+            timestampString = "512278587.187809"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
-            landmarkName = "-initAlertController"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
+            landmarkName = "-tuisong"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,28 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Home/Controller/FirstItemViewController.m"
-            timestampString = "506501395.623393"
+            timestampString = "512278587.187809"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "196"
-            endingLineNumber = "196"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Home/Controller/FirstItemViewController.m"
-            timestampString = "506501395.623393"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "188"
-            endingLineNumber = "188"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
+            landmarkName = "-rightDown"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -194,11 +178,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Diary/AppDelegate.m"
-            timestampString = "512278282.322901"
+            timestampString = "512278587.187809"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
             landmarkName = "-application:didFinishLaunchingWithOptions:"
             landmarkType = "7">
          </BreakpointContent>

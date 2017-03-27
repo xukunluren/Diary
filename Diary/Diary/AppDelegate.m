@@ -15,6 +15,7 @@
 #define LAST_RUN_VERSION_KEY @"last_run_version_of_application"
 #define IS_iOS8 ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0)
 @interface AppDelegate ()
+
 @end
 
 @implementation AppDelegate
@@ -22,8 +23,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    [self registerLocalNotification];
-    [self setNotification];
+    
     //显示当前类名
     BOOL b = [self isFirstLoad];
     NSLog(@"%d",b);
@@ -51,7 +51,6 @@
     }else {
         [self setRootViewController];
     }
-  
     
     return YES;
 }
@@ -83,9 +82,7 @@
 - (void)registerLocalNotification
 {
     //创建UIUserNotificationSettings，并设置消息的显示类类型
-    UIUserNotificationSettings *uns = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound) categories:nil];
-    
-    [[UIApplication sharedApplication] registerUserNotificationSettings:uns];
+//    UIUserNotificationSettings *uns = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound) categories:nil];
 }
 
 // 本地通知回调函数，当应用程序在前台时调用
