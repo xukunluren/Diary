@@ -32,9 +32,6 @@
 #import "UIView+LQXkeyboard.h"
 #import "videoModel.h"
 #import "Waver.h"
-#import "FBShimmeringView.h"
-#import "WARVGarbageView.h"
-
 
 //Image default max size
 #define IMAGE_MAX_SIZE ([UIScreen mainScreen].bounds.size.width-20)
@@ -96,22 +93,6 @@
 @property(strong ,nonatomic) functionKeyView *functionView;//底部功能键View
 @property (nonatomic, strong) AVAudioRecorder *recorder;
 
-
-
-@property (nonatomic, strong) UITextField *textField;
-@property (nonatomic, strong) FBShimmeringView *slideView;
-@property (nonatomic, strong) UIButton *recordBtn;
-@property (nonatomic, strong) UIButton *voiceBtn;
-@property (nonatomic, strong) UIButton *otherBtn;
-@property (nonatomic, strong) UILabel *timeLabel;
-@property (nonatomic, assign) CGPoint trackTouchPoint;
-@property (nonatomic, assign) CGPoint firstTouchPoint;
-@property (nonatomic, strong) WARVGarbageView *garbageImageView;
-@property (nonatomic, assign) BOOL canCancelAnimation;
-@property (nonatomic, assign) BOOL isCanceling;
-@property (nonatomic, strong) NSTimer *countTimer;
-@property (nonatomic, assign) NSUInteger currentSeconds;
-
 @end
 
 @implementation RichTextViewController
@@ -141,9 +122,14 @@
     UILabel *_timeLabel;
     Waver *_leftWave;
     Waver *_rightLeft;
-    
 
 }
+//+(instancetype)ViewController
+//{
+//    RichTextViewController * ctrl=[[UIStoryboard storyboardWithName:@"RichText" bundle:nil]instantiateViewControllerWithIdentifier:@"RichTextViewController"];
+//    
+//    return ctrl;
+//}
 
 -(void)CommomInit
 {
@@ -254,6 +240,11 @@
     [_textView addSubview:control];
     
    
+    
+    //Add keyboard notification
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onKeyboardWillHideNotification:) name:UIKeyboardWillHideNotification object:nil];
+
+//    
     
     //注册通知,监听键盘出现
     [[NSNotificationCenter defaultCenter]addObserver:self
@@ -481,7 +472,17 @@
     
     self.textView.contentInset=UIEdgeInsetsMake(0, 0,keyboardRect.size.height+70, 0);
     
- 
+//    _willhiddleKeyBoard = NO;
+//   
+//    //获取键盘的高度
+//    NSDictionary *userInfo = [aNotification userInfo];
+//    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+//    CGRect keyboardRect = [aValue CGRectValue];
+//     _keyBoardHeigh = keyboardRect.size.height;
+//      _bottomConstraint.constant = _keyBoardHeigh;
+//    
+//    CGFloat upHeight = _upkeyboardView.frame.size.height;
+//    _upkeyboardView.frame = CGRectMake(0, ScreenHeight - upHeight-_keyBoardHeigh, ScreenWidth, upHeight);
     
 }
 
@@ -489,7 +490,32 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-
+//- (void)resetTextStyle {
+//    //After changing text selection, should reset style.
+//    [self CommomInit];
+//    NSRange wholeRange = NSMakeRange(0, _textView.textStorage.length);
+//    
+//    
+//    [_textView.textStorage removeAttribute:NSFontAttributeName range:wholeRange];
+//    [_textView.textStorage removeAttribute:NSForegroundColorAttributeName range:wholeRange];
+//    
+//    //字体颜色
+//    [_textView.textStorage addAttribute:NSForegroundColorAttributeName value:self.fontColor range:wholeRange];
+//    
+//    //字体加粗
+//    if (self.isBold) {
+//        [_textView.textStorage addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:self.font] range:wholeRange];
+//    }
+//    //字体大小
+//    else
+//    {
+//        
+//        [_textView.textStorage addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:self.font] range:wholeRange];
+//    }
+//    
+//    
+//    
+//}
 -(void)setInitLocation
 {
     self.locationStr=nil;
@@ -544,7 +570,14 @@
     [self updataToServer];
     [self showToastWithString:@"保存成功"];
     [self.navigationController popViewControllerAnimated:YES];
- 
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//         [self dataStore];//数据保存数据库
+//         [self updataToServer];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [self showToastWithString:@"保存成功"];
+//            [self.navigationController popViewControllerAnimated:YES];
+//        });
+//    });
     
 }
 
@@ -894,24 +927,6 @@
 -(void)textViewDidChange:(UITextView *)textView
 {
     
-<<<<<<< HEAD
-    
-    //    textview 改变字体的行间距
-    
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    
-    paragraphStyle.lineSpacing = 14;// 字体的行间距
-    
-    NSDictionary *attributes = @{
-                                 
-                                 NSFontAttributeName:[UIFont systemFontOfSize:16],
-                                 
-                                 NSParagraphStyleAttributeName:paragraphStyle
-                                 
-                                 };
-    
-    textView.attributedText = [[NSAttributedString alloc] initWithString:textView.text attributes:attributes];
-=======
 //    else{
 //    NSInteger nowLocation =  _textView.selectedRange.location;
 //        if (nowLocation>_deleteAction) {
@@ -966,7 +981,6 @@
     }
     
     
->>>>>>> parent of e6572fc... 推送
 }
 
 
@@ -1092,14 +1106,10 @@
      
     }
     [_textView becomeFirstResponder];
-    [self addLuYin];
  
-}
--(void)addLuYin{
-    
     _audioView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, _keyBoardHeigh*0.7)];
     [_audioView setBackgroundColor:[UIColor whiteColor]];
-    [_audioView addSubview:[self drawThreadWithFram:CGRectMake(0, 5, ScreenWidth, 0.5) andColor:[UIColor colorWithHexString:@"e7e7e7"]]];
+     [_audioView addSubview:[self drawThreadWithFram:CGRectMake(0, 5, ScreenWidth, 0.5) andColor:[UIColor colorWithHexString:@"e7e7e7"]]];
     //按住说话
     _saySomething = [[UILabel alloc] initWithFrame:CGRectMake(0, 25, ScreenWidth, 20)];
     _saySomething.contentMode = UIViewContentModeCenter;
@@ -1116,23 +1126,26 @@
     [_timeLabel setTextColor:[UIColor grayColor]];
     _timeLabel.hidden = YES;
     [_audioView addSubview:_timeLabel];
+
+    
     
     //按住说话
     secondText = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_timeLabel.frame), ScreenWidth, 20)];
-    
+
     secondText.contentMode = UIViewContentModeCenter;
     secondText.textAlignment  = NSTextAlignmentCenter;
     [secondText setText:@"左右滑动取消"];
     secondText.hidden = YES;
     secondText.font = [UIFont systemFontOfSize:12.0];
-    
+
     [secondText setTextColor:[UIColor grayColor]];
     [_audioView addSubview:secondText];
     
     //录音icon
     _audioButton = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth*0.5-48, CGRectGetMaxY(_timeLabel.frame)+20, 96, 96)];
-    
+
     _audioImageKeyBoard.backgroundColor = [UIColor clearColor];
+    //[audioView addSubview:_audioImage];
     
     //录音icon添加点击事件
     _audioButton = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth*0.5-48, CGRectGetMaxY(_timeLabel.frame)+20, 96, 96)];
@@ -1162,29 +1175,31 @@
         
     };
     [_audioView addSubview:_leftWave];
-    
+
     
     cancelBtnLeft = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth*0.5-48, CGRectGetMaxY(_timeLabel.frame)+20, 24, 24)];
-    
+
     cancelBtnLeft.centerX = ScreenWidth-60;
     cancelBtnLeft.centerY = _audioView.centerY+20;
     cancelBtnLeft.hidden = YES;
     [cancelBtnLeft setBackgroundImage:[UIImage imageNamed:@"cancel"] forState:UIControlStateNormal];
     [_audioView addSubview:cancelBtnLeft];
-    
+
     cancelBtnRight = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth*0.5-48, CGRectGetMaxY(_timeLabel.frame)+20, 24, 24)];
-    
+
     cancelBtnRight.centerX = 48;
     cancelBtnRight.hidden = YES;
     cancelBtnRight.centerY = _audioView.centerY+20;
     [cancelBtnRight setBackgroundImage:[UIImage imageNamed:@"cancel"] forState:UIControlStateNormal];
     [_audioView addSubview:cancelBtnRight];
-    
+
     
     self.textView.inputView = _audioView;
     _isAudioKeyOnTop = YES;
     [self.textView reloadInputViews];
+ 
 }
+
 
 -(void)setupRecorder
 {
