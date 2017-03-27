@@ -78,7 +78,8 @@
     self.liekBtn       = [UIButton buttonWithType:UIButtonTypeCustom];
     self.liekBtn.frame = CGRectMake(CGRectGetMaxX(self.disLikeBtn.frame) , self.disLikeBtn.frame.origin.y, TOW_BUTTON_WIDTH, 50);
     self.liekBtn.backgroundColor = [UIColor whiteColor];
-    [self.liekBtn setTitle:@"换" forState:UIControlStateNormal];
+//    [self.liekBtn setTitle:@"换" forState:UIControlStateNormal];
+    [self.liekBtn setImage:[UIImage imageNamed:@"likeBtn"] forState:UIControlStateNormal];
     [self.liekBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     [self.liekBtn addTarget:self action:@selector(rightButtonClickAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.liekBtn];
