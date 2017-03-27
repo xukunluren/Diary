@@ -9,14 +9,12 @@
 #import "AppDelegate.h"
 #import "MainTabBarController.h"
 #import "UIViewController+ClassName.h"
-#import "GuideView.h"
 #import "RichTextViewController.h"
+#import "CoreNewFeatureVC.h"
 
 #define LAST_RUN_VERSION_KEY @"last_run_version_of_application"
 #define IS_iOS8 ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0)
-@interface AppDelegate ()<GuideViewDelegate>
-
-@property (strong, nonatomic) NSArray *imageArray;
+@interface AppDelegate ()
 @end
 
 @implementation AppDelegate
@@ -29,17 +27,26 @@
     //显示当前类名
     BOOL b = [self isFirstLoad];
     NSLog(@"%d",b);
-//    [UIViewController displayClassName:YES];
-    GuideView *guideView = [[GuideView alloc] initWithFrame:self.window.bounds count:self.imageArray.count];
-    guideView.delegate = self;
-    guideView.imageArray = self.imageArray;
-    [self.window.rootViewController.view addSubview:guideView];
-
-    if (b) {
-        GuideView *guideView = [[GuideView alloc] initWithFrame:self.window.bounds];
-        guideView.delegate = self;
-        guideView.imageArray = self.imageArray;
-        [self.window.rootViewController.view addSubview:guideView];
+    [UIViewController displayClassName:YES];
+    UIWindow *window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    
+    self.window = window;
+    
+    BOOL canShow = [CoreNewFeatureVC canShowNewFeature];
+    NSLog(@"%d",canShow);
+    
+    if (canShow) {
+        NewFeatureModel *m1 = [NewFeatureModel model:[UIImage imageNamed:@"welcome1"]];
+        
+        NewFeatureModel *m2 = [NewFeatureModel model:[UIImage imageNamed:@"welcome2"]];
+        
+        NewFeatureModel *m3 = [NewFeatureModel model:[UIImage imageNamed:@"welcome3"]];
+        
+        window.rootViewController = [CoreNewFeatureVC newFeatureVCWithModels:@[m1,m2,m3] enterBlock:^{
+            
+            NSLog(@"进入主页面");
+            [self setRootViewController];
+        }];
         
     }else {
         [self setRootViewController];
@@ -158,16 +165,4 @@
 
 }
 
-- (NSArray *)imageArray {
-    if (!_imageArray) {
-        _imageArray = [[NSArray alloc] initWithObjects:@"welcome1",@"welcome2",@"welcome3", nil];
-        return _imageArray;
-    }
-    return _imageArray;
-}
-
-- (void)GuideViewDelegate:(GuideView *)guideView {
-    [guideView removeFromSuperview];
-    [self setRootViewController];
-}
 @end
