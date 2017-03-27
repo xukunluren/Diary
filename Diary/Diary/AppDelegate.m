@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "MainTabBarController.h"
 #import "UIViewController+ClassName.h"
+<<<<<<< HEAD
 #import "GuideView.h"
 #import "RichTextViewController.h"
 
@@ -17,6 +18,15 @@
 @interface AppDelegate ()<GuideViewDelegate>
 
 @property (strong, nonatomic) NSArray *imageArray;
+=======
+#import "RichTextViewController.h"
+#import "CoreNewFeatureVC.h"
+
+#define LAST_RUN_VERSION_KEY @"last_run_version_of_application"
+#define IS_iOS8 ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0)
+@interface AppDelegate ()
+
+>>>>>>> 1ca516032e73885845c120fcf128dc1b72b0f65c
 @end
 
 @implementation AppDelegate
@@ -28,17 +38,26 @@
     //显示当前类名
     BOOL b = [self isFirstLoad];
     NSLog(@"%d",b);
-//    [UIViewController displayClassName:YES];
-    GuideView *guideView = [[GuideView alloc] initWithFrame:self.window.bounds count:self.imageArray.count];
-    guideView.delegate = self;
-    guideView.imageArray = self.imageArray;
-    [self.window.rootViewController.view addSubview:guideView];
-
-    if (b) {
-        GuideView *guideView = [[GuideView alloc] initWithFrame:self.window.bounds];
-        guideView.delegate = self;
-        guideView.imageArray = self.imageArray;
-        [self.window.rootViewController.view addSubview:guideView];
+    [UIViewController displayClassName:YES];
+    UIWindow *window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    
+    self.window = window;
+    
+    BOOL canShow = [CoreNewFeatureVC canShowNewFeature];
+    NSLog(@"%d",canShow);
+    
+    if (canShow) {
+        NewFeatureModel *m1 = [NewFeatureModel model:[UIImage imageNamed:@"welcome1"]];
+        
+        NewFeatureModel *m2 = [NewFeatureModel model:[UIImage imageNamed:@"welcome2"]];
+        
+        NewFeatureModel *m3 = [NewFeatureModel model:[UIImage imageNamed:@"welcome3"]];
+        
+        window.rootViewController = [CoreNewFeatureVC newFeatureVCWithModels:@[m1,m2,m3] enterBlock:^{
+            
+            NSLog(@"进入主页面");
+            [self setRootViewController];
+        }];
         
     }else {
         [self setRootViewController];
@@ -58,7 +77,11 @@
         localNotification.applicationIconBadgeNumber = 1;
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"HH:mm:ss"];
+<<<<<<< HEAD
         NSDate *date = [formatter dateFromString:@"11:20:00"];
+=======
+        NSDate *date = [formatter dateFromString:@"20:05:00"];
+>>>>>>> 1ca516032e73885845c120fcf128dc1b72b0f65c
         //通知发出的时间
         localNotification.fireDate = date;
     }
@@ -74,8 +97,12 @@
 - (void)registerLocalNotification
 {
     //创建UIUserNotificationSettings，并设置消息的显示类类型
+<<<<<<< HEAD
     UIUserNotificationSettings *uns = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound) categories:nil];
     
+=======
+//    UIUserNotificationSettings *uns = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound) categories:nil];
+>>>>>>> 1ca516032e73885845c120fcf128dc1b72b0f65c
 }
 
 
@@ -156,16 +183,4 @@
 
 }
 
-- (NSArray *)imageArray {
-    if (!_imageArray) {
-        _imageArray = [[NSArray alloc] initWithObjects:@"welcome1",@"welcome2",@"welcome3", nil];
-        return _imageArray;
-    }
-    return _imageArray;
-}
-
-- (void)GuideViewDelegate:(GuideView *)guideView {
-    [guideView removeFromSuperview];
-    [self setRootViewController];
-}
 @end

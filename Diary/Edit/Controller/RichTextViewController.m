@@ -927,6 +927,7 @@
 -(void)textViewDidChange:(UITextView *)textView
 {
     
+<<<<<<< HEAD
     
    
     
@@ -935,6 +936,21 @@
     NSArray *currentar = [UITextInputMode activeInputModes];
     UITextInputMode *textInputMode = [currentar firstObject];
     
+=======
+//    else{
+//    NSInteger nowLocation =  _textView.selectedRange.location;
+//        if (nowLocation>_deleteAction) {
+//            _deleteAction = nowLocation;//用户编辑中，字段不断增加中
+//        }else{
+//   
+//    }
+//    }
+    
+    bool isChinese;//判断当前输入法是否是中文
+    NSArray *currentar = [UITextInputMode activeInputModes];
+    UITextInputMode *textInputMode = [currentar firstObject];
+    
+>>>>>>> 1ca516032e73885845c120fcf128dc1b72b0f65c
     if ([[textInputMode primaryLanguage] isEqualToString: @"en-US"]) {
         isChinese = false;
     }
@@ -949,8 +965,14 @@
         UITextPosition *position = [ self.textView positionFromPosition:selectedRange.start offset:0];
         // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
         if (!position) {
+<<<<<<< HEAD
             
             [self setStyle];
+=======
+            NSLog(@"汉字");
+            //   NSLog(@"str=%@; 本次长度=%lu",str,(unsigned long)[str length]);
+           // [self setStyle];
+>>>>>>> 1ca516032e73885845c120fcf128dc1b72b0f65c
             if ( str.length>=MaxLength) {
                 NSString *strNew = [NSString stringWithString:str];
                 [ self.textView setText:[strNew substringToIndex:MaxLength]];
@@ -967,7 +989,11 @@
         }
     }else{
         NSLog(@"英文");
+<<<<<<< HEAD
         [self setStyle];
+=======
+        //[self setStyle];
+>>>>>>> 1ca516032e73885845c120fcf128dc1b72b0f65c
         if ([str length]>=MaxLength) {
             NSString *strNew = [NSString stringWithString:str];
             [ self.textView setText:[strNew substringToIndex:MaxLength]];
