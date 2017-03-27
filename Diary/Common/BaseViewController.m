@@ -74,9 +74,9 @@
 
 -(void)showToastWithString:(NSString *)title{
     [CRToastManager setDefaultOptions:@{kCRToastNotificationTypeKey : @(CRToastTypeNavigationBar),
-                                        kCRToastFontKey             : [UIFont fontWithName:@"HelveticaNeue-Light" size:16],
-                                        kCRToastTextColorKey        : [UIColor whiteColor],
-                                        kCRToastBackgroundColorKey  : [UIColor orangeColor]}];
+                                        kCRToastFontKey             : [UIFont fontWithName:@"HelveticaNeue-Light" size:18],
+                                        kCRToastTextColorKey        : [UIColor blackColor],
+                                        kCRToastBackgroundColorKey  : [UIColor whiteColor]}];
     
     
     
@@ -87,9 +87,9 @@
                                       //kCRToastBackgroundColorKey : [UIColor redColor],
                                       kCRToastAnimationInTypeKey : @(CRToastAnimationTypeGravity),
                                       kCRToastAnimationOutTypeKey : @(CRToastAnimationTypeGravity),
-                                      kCRToastAnimationInDirectionKey : @(CRToastAnimationDirectionBottom),
-                                      kCRToastAnimationOutDirectionKey : @(CRToastAnimationDirectionTop),
-                                      kCRToastImageKey :[UIImage imageNamed:@"alert_icon.png"]
+                                      kCRToastAnimationInDirectionKey : @(CRToastAnimationDirectionTop),
+                                      kCRToastAnimationOutDirectionKey : @(CRToastAnimationDirectionBottom),
+                                      kCRToastImageKey :[UIImage imageNamed:@"queren.png"]
                                       } mutableCopy];
     [CRToastManager showNotificationWithOptions:[NSDictionary dictionaryWithDictionary:options]
                                 completionBlock:^{

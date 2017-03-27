@@ -108,7 +108,7 @@ static CRToastAnimationType         kCRAnimationTypeDefaultOut              = CR
 static CRToastAnimationDirection    kCRInAnimationDirectionDefault          = CRToastAnimationDirectionTop;
 static CRToastAnimationDirection    kCROutAnimationDirectionDefault         = CRToastAnimationDirectionBottom;
 static NSTimeInterval               kCRAnimateInTimeIntervalDefault         = 0.4;
-static NSTimeInterval               kCRTimeIntervalDefault                  = 2.0f;
+static NSTimeInterval               kCRTimeIntervalDefault                  = 1.0f;
 static NSTimeInterval               kCRAnimateOutTimeIntervalDefault        = 0.4;
 
 static CGFloat                      kCRSpringDampingDefault                 = 0.6;

@@ -10,24 +10,21 @@
 #import "MainTabBarController.h"
 #import "UIViewController+ClassName.h"
 #import "GuideView.h"
+#import "RichTextViewController.h"
 
 #define LAST_RUN_VERSION_KEY @"last_run_version_of_application"
-#define IS_iOS8 ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0)
+
 @interface AppDelegate ()<GuideViewDelegate>
 
 @property (strong, nonatomic) NSArray *imageArray;
-
-
 @end
 
 @implementation AppDelegate
 
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    [self registerLocalNotification];
-    [self setNotification];
+    
     //显示当前类名
     BOOL b = [self isFirstLoad];
     NSLog(@"%d",b);
@@ -46,38 +43,47 @@
     }else {
         [self setRootViewController];
     }
-  
     
     return YES;
 }
 
 -(void)setNotification{
-    UILocalNotification *notification=[[UILocalNotification alloc] init];
-    if (notification!=nil) {//判断系统是否支持本地通知
-        notification.fireDate = [NSDate dateWithTimeIntervalSince1970:17*60*60*24];//本次开启立即执行的周期
-        notification.repeatInterval=kCFCalendarUnitWeekday;//循环通知的周期
-        notification.timeZone=[NSTimeZone defaultTimeZone];
-        notification.alertBody=@"哇哇哇";//弹出的提示信息
-        notification.applicationIconBadgeNumber=0; //应用程序的右上角小数字
-        notification.soundName= UILocalNotificationDefaultSoundName;//本地化通知的声音
-        //notification.alertAction = NSLocalizedString(@"美女呀", nil);  //弹出的提示框按钮
-        notification.hasAction = NO;
-        [[UIApplication sharedApplication]   scheduleLocalNotification:notification];
+    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+    //设置时区（跟随手机的时区）
+    localNotification.timeZone = [NSTimeZone defaultTimeZone];
+    if (localNotification) {
+        localNotification.alertBody = @"今天发生了哪些有趣的事情呢？ -- 好记，记录好时光";
+//        localNotification.alertAction = @"";
+        //小图标数字
+        localNotification.applicationIconBadgeNumber = 1;
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"HH:mm:ss"];
+        NSDate *date = [formatter dateFromString:@"11:20:00"];
+        //通知发出的时间
+        localNotification.fireDate = date;
     }
+    //循环通知的周期
+    localNotification.repeatInterval = kCFCalendarUnitDay;
+    
+    //设置userinfo方便撤销
+    NSDictionary *info = [NSDictionary dictionaryWithObject:@"name" forKey:@"key"];
+    localNotification.userInfo = info;
+    //启动任务
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
 }
 - (void)registerLocalNotification
 {
     //创建UIUserNotificationSettings，并设置消息的显示类类型
     UIUserNotificationSettings *uns = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound) categories:nil];
     
-    [[UIApplication sharedApplication] registerUserNotificationSettings:uns];
 }
+
 
 // 本地通知回调函数，当应用程序在前台时调用
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
     NSLog(@"%@", notification.userInfo);
-    [self showAlertView:@"用户没点击按钮直接点的推送消息进来的/或者该app在前台状态时收到推送消息"];
+    [self showAlertView:@"只属于您的秘密日记。-- 好记，记录好时光"];
     NSInteger badge = [UIApplication sharedApplication].applicationIconBadgeNumber;
     badge -= notification.applicationIconBadgeNumber;
     badge = badge >= 0 ? badge : 0;
@@ -87,6 +93,7 @@
 {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+    
     [alert addAction:action];
     [self.window.rootViewController showDetailViewController:alert sender:nil];
 }
