@@ -162,13 +162,10 @@
 }
 - (void)rightDown
 {
-<<<<<<< HEAD
+ 
      RichTextViewController * vc=[[RichTextViewController alloc] init];
-=======
-//    [self tuisong];
-
-    RichTextViewController * vc=[[RichTextViewController alloc] init];
->>>>>>> 1ca516032e73885845c120fcf128dc1b72b0f65c
+ 
+ 
     vc.NewDiary = YES;
     vc.finished=^(id content){
         NSArray * arr=(NSArray *)content;
@@ -187,33 +184,10 @@
    // EditViewController *vc = [[EditViewController alloc] init];
     
     [self.navigationController pushViewController:vc animated:YES];
-<<<<<<< HEAD
-=======
+ 
 }
 
--(void)tuisong{
-    
-    
-    
-    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-    //触发通知时间
-    localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:3];
-    //重复间隔
-    //    localNotification.repeatInterval = kCFCalendarUnitMinute;
-    localNotification.timeZone = [NSTimeZone defaultTimeZone];
-    
-    //通知内容
-    localNotification.alertBody = @"i am a test local notification";
-    localNotification.applicationIconBadgeNumber = 1;
-    localNotification.soundName = UILocalNotificationDefaultSoundName;
-    
-    //通知参数
-    
-    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
-
->>>>>>> 1ca516032e73885845c120fcf128dc1b72b0f65c
-}
-
+ 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

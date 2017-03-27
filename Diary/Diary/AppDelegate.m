@@ -9,16 +9,15 @@
 #import "AppDelegate.h"
 #import "MainTabBarController.h"
 #import "UIViewController+ClassName.h"
-<<<<<<< HEAD
-#import "GuideView.h"
+
 #import "RichTextViewController.h"
 
 #define LAST_RUN_VERSION_KEY @"last_run_version_of_application"
 
-@interface AppDelegate ()<GuideViewDelegate>
+@interface AppDelegate ()
 
 @property (strong, nonatomic) NSArray *imageArray;
-=======
+
 #import "RichTextViewController.h"
 #import "CoreNewFeatureVC.h"
 
@@ -26,7 +25,6 @@
 #define IS_iOS8 ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0)
 @interface AppDelegate ()
 
->>>>>>> 1ca516032e73885845c120fcf128dc1b72b0f65c
 @end
 
 @implementation AppDelegate
@@ -77,11 +75,8 @@
         localNotification.applicationIconBadgeNumber = 1;
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"HH:mm:ss"];
-<<<<<<< HEAD
         NSDate *date = [formatter dateFromString:@"11:20:00"];
-=======
-        NSDate *date = [formatter dateFromString:@"20:05:00"];
->>>>>>> 1ca516032e73885845c120fcf128dc1b72b0f65c
+ 
         //通知发出的时间
         localNotification.fireDate = date;
     }
@@ -97,12 +92,9 @@
 - (void)registerLocalNotification
 {
     //创建UIUserNotificationSettings，并设置消息的显示类类型
-<<<<<<< HEAD
+ 
     UIUserNotificationSettings *uns = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound) categories:nil];
     
-=======
-//    UIUserNotificationSettings *uns = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound) categories:nil];
->>>>>>> 1ca516032e73885845c120fcf128dc1b72b0f65c
 }
 
 

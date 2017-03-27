@@ -41,18 +41,15 @@
 		6722CCD01E83AAA90039D16A /* FBShimmeringView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6722CCCE1E83AAA90039D16A /* FBShimmeringView.m */; };
 		6722CCD61E83AD100039D16A /* WARVGarbageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6722CCD51E83AD100039D16A /* WARVGarbageView.m */; };
 		6722CCD91E83AD7E0039D16A /* WARVSlideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6722CCD81E83AD7E0039D16A /* WARVSlideView.m */; };
-<<<<<<< HEAD
-=======
+
 		6722CCE41E83B1690039D16A /* bk.png in Resources */ = {isa = PBXBuildFile; fileRef = 6722CCDA1E83B1690039D16A /* bk.png */; };
->>>>>>> 1ca516032e73885845c120fcf128dc1b72b0f65c
+
 		6722CCE51E83B1690039D16A /* BucketBodyTemplate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6722CCDB1E83B1690039D16A /* BucketBodyTemplate@2x.png */; };
 		6722CCE61E83B1690039D16A /* BucketLidTemplate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6722CCDC1E83B1690039D16A /* BucketLidTemplate@2x.png */; };
 		6722CCE71E83B1690039D16A /* ButtonAttachMedia7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6722CCDD1E83B1690039D16A /* ButtonAttachMedia7@2x.png */; };
 		6722CCE81E83B1690039D16A /* ButtonMic7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6722CCDE1E83B1690039D16A /* ButtonMic7@2x.png */; };
-<<<<<<< HEAD
-=======
+
 		6722CCE91E83B1690039D16A /* Default-iOS7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6722CCDF1E83B1690039D16A /* Default-iOS7@2x.png */; };
->>>>>>> 1ca516032e73885845c120fcf128dc1b72b0f65c
 		6722CCEA1E83B1690039D16A /* MicRecBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 6722CCE01E83B1690039D16A /* MicRecBtn.png */; };
 		6722CCEB1E83B1690039D16A /* MicRecBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6722CCE11E83B1690039D16A /* MicRecBtn@2x.png */; };
 		6722CCEC1E83B1690039D16A /* MicRecRed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6722CCE21E83B1690039D16A /* MicRecRed@2x.png */; };
@@ -382,18 +379,16 @@
 		6722CCD51E83AD100039D16A /* WARVGarbageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WARVGarbageView.m; sourceTree = "<group>"; };
 		6722CCD71E83AD7E0039D16A /* WARVSlideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WARVSlideView.h; sourceTree = "<group>"; };
 		6722CCD81E83AD7E0039D16A /* WARVSlideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WARVSlideView.m; sourceTree = "<group>"; };
-<<<<<<< HEAD
-=======
+
 		6722CCDA1E83B1690039D16A /* bk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bk.png; sourceTree = "<group>"; };
->>>>>>> 1ca516032e73885845c120fcf128dc1b72b0f65c
+
 		6722CCDB1E83B1690039D16A /* BucketBodyTemplate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BucketBodyTemplate@2x.png"; sourceTree = "<group>"; };
 		6722CCDC1E83B1690039D16A /* BucketLidTemplate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BucketLidTemplate@2x.png"; sourceTree = "<group>"; };
 		6722CCDD1E83B1690039D16A /* ButtonAttachMedia7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonAttachMedia7@2x.png"; sourceTree = "<group>"; };
 		6722CCDE1E83B1690039D16A /* ButtonMic7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonMic7@2x.png"; sourceTree = "<group>"; };
-<<<<<<< HEAD
-=======
+
 		6722CCDF1E83B1690039D16A /* Default-iOS7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-iOS7@2x.png"; sourceTree = "<group>"; };
->>>>>>> 1ca516032e73885845c120fcf128dc1b72b0f65c
+
 		6722CCE01E83B1690039D16A /* MicRecBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MicRecBtn.png; sourceTree = "<group>"; };
 		6722CCE11E83B1690039D16A /* MicRecBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MicRecBtn@2x.png"; sourceTree = "<group>"; };
 		6722CCE21E83B1690039D16A /* MicRecRed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MicRecRed@2x.png"; sourceTree = "<group>"; };
@@ -885,18 +880,16 @@
 		586E0ACD1E30B9A80082106E /* Edit */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
-=======
+
 				6722CCDA1E83B1690039D16A /* bk.png */,
->>>>>>> 1ca516032e73885845c120fcf128dc1b72b0f65c
+
 				6722CCDB1E83B1690039D16A /* BucketBodyTemplate@2x.png */,
 				6722CCDC1E83B1690039D16A /* BucketLidTemplate@2x.png */,
 				6722CCDD1E83B1690039D16A /* ButtonAttachMedia7@2x.png */,
 				6722CCDE1E83B1690039D16A /* ButtonMic7@2x.png */,
-<<<<<<< HEAD
-=======
+
 				6722CCDF1E83B1690039D16A /* Default-iOS7@2x.png */,
->>>>>>> 1ca516032e73885845c120fcf128dc1b72b0f65c
+
 				6722CCE01E83B1690039D16A /* MicRecBtn.png */,
 				6722CCE11E83B1690039D16A /* MicRecBtn@2x.png */,
 				6722CCE21E83B1690039D16A /* MicRecRed@2x.png */,
@@ -2229,11 +2222,9 @@
 				67C06CF41E348C0400EBA5C6 /* SettingModelView.m in Sources */,
 				586E0AC81E308E720082106E /* HomePageIfNoDataView.m in Sources */,
 				6722CCD91E83AD7E0039D16A /* WARVSlideView.m in Sources */,
-<<<<<<< HEAD
-=======
+
 				584F8AD11E88B52400D6124F /* CoreArchive.m in Sources */,
->>>>>>> 1ca516032e73885845c120fcf128dc1b72b0f65c
-				67C06CF31E348C0400EBA5C6 /* UIImage+ImageEffects.m in Sources */,
+ 				67C06CF31E348C0400EBA5C6 /* UIImage+ImageEffects.m in Sources */,
 				67AC58C81E481CDC001D7BAE /* View+MASAdditions.m in Sources */,
 				67C06CF21E348C0400EBA5C6 /* TYAlertController+BlurEffects.m in Sources */,
 				67C06BCD1E2F3FD600EBA5C6 /* RegisterController.m in Sources */,
