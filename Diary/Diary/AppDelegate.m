@@ -42,8 +42,7 @@
     self.window = window;
     
     BOOL canShow = [CoreNewFeatureVC canShowNewFeature];
-    NSLog(@"%d",canShow);
-    
+
     if (canShow) {
         NewFeatureModel *m1 = [NewFeatureModel model:[UIImage imageNamed:@"welcome1"]];
         
