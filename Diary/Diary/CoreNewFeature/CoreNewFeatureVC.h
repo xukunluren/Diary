@@ -21,8 +21,6 @@
  */
 +(instancetype)newFeatureVCWithModels:(NSArray *)models enterBlock:(void(^)())enterBlock;
 
-
-
 /*
  *  是否应该显示版本新特性界面
  */

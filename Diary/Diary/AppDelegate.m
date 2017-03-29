@@ -11,6 +11,11 @@
 #import "UIViewController+ClassName.h"
 
 #import "RichTextViewController.h"
+#import "RichTextViewController.h"
+#import "CoreNewFeatureVC.h"
+
+#define LAST_RUN_VERSION_KEY @"last_run_version_of_application"
+#define IS_iOS8 ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0)
 
 #define LAST_RUN_VERSION_KEY @"last_run_version_of_application"
 
@@ -18,12 +23,6 @@
 
 @property (strong, nonatomic) NSArray *imageArray;
 
-#import "RichTextViewController.h"
-#import "CoreNewFeatureVC.h"
-
-#define LAST_RUN_VERSION_KEY @"last_run_version_of_application"
-#define IS_iOS8 ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0)
-@interface AppDelegate ()
 
 @end
 
