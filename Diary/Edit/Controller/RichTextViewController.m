@@ -110,6 +110,7 @@ static const CGFloat kScrapYOffsetFromBase = 7;
 
 @property (nonatomic, strong) UIButton *button;
 @property (nonatomic, strong) CALayer *scrapLayer;
+@property (nonatomic, strong) CALayer *scrapLayer1;
 @property (nonatomic, strong) CALayer *bucketContainerLayer;
 @property (nonatomic, strong) GLBucket *bucket;
 @property (nonatomic, assign) CFTimeInterval duration;
@@ -145,6 +146,8 @@ static const CGFloat kScrapYOffsetFromBase = 7;
     UILabel *_timeLabel;
     Waver *_leftWave;
     Waver *_rightLeft;
+    
+    BOOL _isCancel;
 
 }
 //+(instancetype)ViewController
@@ -1184,7 +1187,7 @@ static const CGFloat kScrapYOffsetFromBase = 7;
     [_audioButton addTarget:self action:@selector(startRecordVoice) forControlEvents:UIControlEventTouchDown];
     [_audioButton addTarget:self action:@selector(cancelRecordVoice) forControlEvents:UIControlEventTouchUpOutside];
     [_audioButton addTarget:self action:@selector(confirmRecordVoice) forControlEvents:UIControlEventTouchUpInside];
-    [_audioButton addTarget:self action:@selector(updateCancelRecordVoice) forControlEvents:UIControlEventTouchDragExit];
+    [_audioButton addTarget:self action:@selector(mayCancelRecord:forEvent:) forControlEvents:UIControlEventTouchDragExit | UIControlEventTouchDragOutside ];
     [_audioButton addTarget:self action:@selector(updateContinueRecordVoice) forControlEvents:UIControlEventTouchDragEnter];
     [_audioView addSubview:_audioButton];
     
@@ -1223,7 +1226,6 @@ static const CGFloat kScrapYOffsetFromBase = 7;
     
     // trash layer
         rect.origin.y = self.baseviewYOrigin;
-    
     self.bucketContainerLayer = [CALayer layer];
     self.bucketContainerLayer.frame = rect;
     self.bucketContainerLayer.bounds = rect;
@@ -1244,16 +1246,7 @@ static const CGFloat kScrapYOffsetFromBase = 7;
     self.bucketContainerLayerActualYPos = self.baseviewYOrigin - (self.bucket.actualHeight / 2) - kScrapYOffsetFromBase; //divide by 2 considering center from y-axis
     
     
-    
-    
-    
-
-    
-
-    cancelBtnRight = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth*0.5-48, CGRectGetMaxY(_timeLabel.frame)+20, 24, 24)];
-
-   
-
+  
     
     self.textView.inputView = _audioView;
     _isAudioKeyOnTop = YES;
@@ -1319,6 +1312,7 @@ static const CGFloat kScrapYOffsetFromBase = 7;
  *  开始录音
  */
 - (void)startRecordVoice{
+    _isCancel = NO;
     cancelBtnLeft.hidden = YES;
     cancelBtnRight.hidden = YES;
     _saySomething.hidden = YES;
@@ -1401,12 +1395,41 @@ static const CGFloat kScrapYOffsetFromBase = 7;
 /**
  *  更新录音显示状态,手指向上滑动后 提示松开取消录音
  */
-- (void)updateCancelRecordVoice {
-    self.scrapLayer.hidden = NO;
-      [self scrapDriveUpAnimation];
-      [[LGSoundRecorder shareInstance] readyCancelSound];
-    cancelBtnRight.hidden = NO;
-    cancelBtnLeft.hidden = NO;
+- (void)mayCancelRecord:(UIButton *)btn forEvent:(UIEvent *)event
+{
+    
+    UITouch *touch = [[event touchesForView:btn] anyObject];
+    CGPoint curPoint = [touch locationInView:_audioView];
+    NSLog(@"=======%f======",curPoint.x);
+    if (_isCancel) {
+        
+    }else{
+    if (curPoint.x>0.75*ScreenWidth) {
+        _isCancel = YES;
+        CGRect rect = [self CGRectIntegralCenteredInRect:CGRectMake(0, 0, 13 - 5, 20 - 5) withRect:_audioView.frame];
+        rect.origin.y = self.baseviewYOrigin - CGRectGetHeight(rect) - kScrapYOffsetFromBase;
+        rect.origin.x = ScreenWidth - 50;
+        self.scrapLayer.frame = rect;
+        self.scrapLayer.bounds = rect;
+        self.scrapLayer.hidden = NO;
+        [self scrapDriveUpAnimation];
+        [[LGSoundRecorder shareInstance] readyCancelSound];
+        cancelBtnRight.hidden = NO;
+        cancelBtnLeft.hidden = NO;
+    }else if (curPoint.x<0.25*ScreenWidth){
+        _isCancel = YES;
+        CGRect rect = [self CGRectIntegralCenteredInRect:CGRectMake(0, 0, 13 - 5, 20 - 5) withRect:_audioView.frame];
+        rect.origin.y = self.baseviewYOrigin - CGRectGetHeight(rect) - kScrapYOffsetFromBase;
+        rect.origin.x = 50;
+        self.scrapLayer.frame = rect;
+        self.scrapLayer.bounds = rect;
+        self.scrapLayer.hidden = NO;
+        [self scrapDriveUpAnimation];
+        [[LGSoundRecorder shareInstance] readyCancelSound];
+        cancelBtnRight.hidden = NO;
+        cancelBtnLeft.hidden = NO;
+    }
+    }
     
 }
 
@@ -2026,6 +2049,7 @@ static const CGFloat kScrapYOffsetFromBase = 7;
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
+    _isCancel = NO;
     if (flag) {
         NSString *animationName = [anim valueForKey:kAnimationNameKey];
         if ([animationName isEqualToString:kScrapDriveUpAnimationName]) {
