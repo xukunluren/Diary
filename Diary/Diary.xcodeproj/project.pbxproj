@@ -43,6 +43,8 @@
 		6722CCE61E83B1690039D16A /* BucketLidTemplate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6722CCDC1E83B1690039D16A /* BucketLidTemplate@2x.png */; };
 		6722CCEB1E83B1690039D16A /* MicRecBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6722CCE11E83B1690039D16A /* MicRecBtn@2x.png */; };
 		673180FD1E815A6A00EACE1F /* Waver.m in Sources */ = {isa = PBXBuildFile; fileRef = 673180FC1E815A6A00EACE1F /* Waver.m */; };
+		673798FD1E8CDAB9008982D7 /* RadiaViewLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 673798FC1E8CDAB9008982D7 /* RadiaViewLayer.m */; };
+		673799031E8E3F37008982D7 /* icon_yy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 673799021E8E3F37008982D7 /* icon_yy@2x.png */; };
 		674813F01E61C8EA008D25E6 /* audio_icon_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 674813ED1E61C8EA008D25E6 /* audio_icon_2.png */; };
 		674813F11E61C8EA008D25E6 /* audio_icon_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 674813EE1E61C8EA008D25E6 /* audio_icon_3.png */; };
 		67637D251E630E1D0065F868 /* cancel_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 67637D231E630E1D0065F868 /* cancel_select@2x.png */; };
@@ -369,6 +371,9 @@
 		6722CCE11E83B1690039D16A /* MicRecBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MicRecBtn@2x.png"; sourceTree = "<group>"; };
 		673180FB1E815A6A00EACE1F /* Waver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Waver.h; sourceTree = "<group>"; };
 		673180FC1E815A6A00EACE1F /* Waver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Waver.m; sourceTree = "<group>"; };
+		673798FB1E8CDAB9008982D7 /* RadiaViewLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadiaViewLayer.h; sourceTree = "<group>"; };
+		673798FC1E8CDAB9008982D7 /* RadiaViewLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadiaViewLayer.m; sourceTree = "<group>"; };
+		673799021E8E3F37008982D7 /* icon_yy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_yy@2x.png"; sourceTree = "<group>"; };
 		674813ED1E61C8EA008D25E6 /* audio_icon_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = audio_icon_2.png; sourceTree = "<group>"; };
 		674813EE1E61C8EA008D25E6 /* audio_icon_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = audio_icon_3.png; sourceTree = "<group>"; };
 		67637D231E630E1D0065F868 /* cancel_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel_select@2x.png"; sourceTree = "<group>"; };
@@ -858,6 +863,7 @@
 			children = (
 				6722CCDB1E83B1690039D16A /* BucketBodyTemplate@2x.png */,
 				6722CCDC1E83B1690039D16A /* BucketLidTemplate@2x.png */,
+				673799021E8E3F37008982D7 /* icon_yy@2x.png */,
 				6722CCE11E83B1690039D16A /* MicRecBtn@2x.png */,
 				67B029051E588935008F5992 /* other */,
 				67B029041E588925008F5992 /* View */,
@@ -1230,6 +1236,8 @@
 				67AC58EF1E4C6760001D7BAE /* ItemView.m */,
 				67B029061E588A62008F5992 /* functionKeyView.h */,
 				67B029071E588A62008F5992 /* functionKeyView.m */,
+				673798FB1E8CDAB9008982D7 /* RadiaViewLayer.h */,
+				673798FC1E8CDAB9008982D7 /* RadiaViewLayer.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2102,6 +2110,7 @@
 				67C06C261E2F6DE900EBA5C6 /* yuyin_select@2x.png in Resources */,
 				67C06C3E1E2F6ED500EBA5C6 /* tansuo@2x.png in Resources */,
 				5866815D1E4C0AD600DD878E /* UserData.plist in Resources */,
+				673799031E8E3F37008982D7 /* icon_yy@2x.png in Resources */,
 				67C06BD31E2F443F00EBA5C6 /* BG.jpg in Resources */,
 				67C06C211E2F6DE900EBA5C6 /* tupian_select@2x.png in Resources */,
 				67B028FC1E56ED32008F5992 /* Edayu_select@2x.png in Resources */,
@@ -2167,6 +2176,7 @@
 				67CC915D1E2DBE3400761832 /* LoginController.m in Sources */,
 				67AC58B01E481CDC001D7BAE /* LGSoundRecorder.m in Sources */,
 				67CC90B71E28B84100761832 /* UIView+WY.m in Sources */,
+				673798FD1E8CDAB9008982D7 /* RadiaViewLayer.m in Sources */,
 				67AC59861E51AE92001D7BAE /* UIImage+UzysExtension.m in Sources */,
 				67AC58C11E481CDC001D7BAE /* MASConstraint.m in Sources */,
 				67C06C831E30D6EE00EBA5C6 /* tansuoBottomButton.m in Sources */,

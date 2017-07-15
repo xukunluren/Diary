@@ -33,6 +33,7 @@
 #import "videoModel.h"
 #import "Waver.h"
 #import "GLBucket.h"
+#import "RadiaViewLayer.h"
 
 //Image default max size
 
@@ -147,7 +148,11 @@ static const CGFloat kScrapYOffsetFromBase = 7;
     Waver *_leftWave;
     Waver *_rightLeft;
     
+    CGRect CGFrome;
+    
     BOOL _isCancel;
+    NSTimer *time;
+    RadiaViewLayer *animationlayer;
 
 }
 //+(instancetype)ViewController
@@ -1159,7 +1164,7 @@ static const CGFloat kScrapYOffsetFromBase = 7;
     _timeLabel.hidden = YES;
     [_audioView addSubview:_timeLabel];
 
-    
+    CGFrome=self.view.bounds;
     
     //按住说话
     secondText = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_timeLabel.frame), ScreenWidth, 20)];
@@ -1191,29 +1196,13 @@ static const CGFloat kScrapYOffsetFromBase = 7;
     [_audioButton addTarget:self action:@selector(updateContinueRecordVoice) forControlEvents:UIControlEventTouchDragEnter];
     [_audioView addSubview:_audioButton];
     
-    [self setupRecorder];
-    _leftWave = [[Waver alloc] initWithFrame:CGRectMake(0, -20, CGRectGetWidth(self.view.bounds), 80.0)];
-    _leftWave.hidden = YES;
-    
-    __block AVAudioRecorder *weakRecorder = self.recorder;
-    
-    _leftWave.waverLevelCallback = ^(Waver * waver) {
-        
-        [weakRecorder updateMeters];
-        
-        CGFloat normalizedValue = pow (10, [weakRecorder averagePowerForChannel:0] / 40);
-        
-        waver.level = normalizedValue;
-        
-    };
-    [_audioView addSubview:_leftWave];
     CGRect rect = [self CGRectIntegralCenteredInRect:CGRectMake(0, 0, 200, 40) withRect:_audioView.frame];
     self.baseviewYOrigin = rect.origin.y + 100;
     
 
     // scrap layer
     UIImage *img = [UIImage imageNamed:@"MicRecBtn"];
-    rect = [self CGRectIntegralCenteredInRect:CGRectMake(0, 0, img.size.width - 5, img.size.height - 5) withRect:_audioView.frame];
+    rect = [self CGRectIntegralCenteredInRect:CGRectMake(0, 0, img.size.width, img.size.height) withRect:_audioView.frame];
     rect.origin.y = self.baseviewYOrigin - CGRectGetHeight(rect) - kScrapYOffsetFromBase;
     rect.origin.x = 50;
     self.scrapLayer = [CALayer layer];
@@ -1254,6 +1243,22 @@ static const CGFloat kScrapYOffsetFromBase = 7;
  
 }
 
+
+-(void)clickAnimation{
+    
+    
+    
+    //对封装的动画初始化
+    animationlayer = [RadiaViewLayer layer];
+    //设置动画的位置(根据需要自己修改)
+    animationlayer.position = _audioButton.center ;
+    //将动画添加到显示动画的视图的layer层上
+    [_audioView.layer insertSublayer:animationlayer below:_audioButton.layer];
+    
+    
+}
+
+
 - (CGRect)CGRectIntegralCenteredInRect:(CGRect)innerRect withRect:(CGRect)outerRect
 {
     CGFloat originX = floorf((outerRect.size.width - innerRect.size.width) * 0.5f);
@@ -1261,42 +1266,14 @@ static const CGFloat kScrapYOffsetFromBase = 7;
     CGRect bounds = CGRectMake(originX, originY, innerRect.size.width, innerRect.size.height);
     return bounds;
 }
--(void)setupRecorder
-{
-    NSURL *url = [NSURL fileURLWithPath:@"/dev/null"];
-    
-    NSDictionary *settings = @{AVSampleRateKey:          [NSNumber numberWithFloat: 44100.0],
-                               AVFormatIDKey:            [NSNumber numberWithInt: kAudioFormatAppleLossless],
-                               AVNumberOfChannelsKey:    [NSNumber numberWithInt: 2],
-                               AVEncoderAudioQualityKey: [NSNumber numberWithInt: AVAudioQualityMin]};
-    
-    NSError *error;
-    self.recorder = [[AVAudioRecorder alloc] initWithURL:url settings:settings error:&error];
-    
-    if(error) {
-        NSLog(@"Ups, could not create recorder %@", error);
-        return;
-    }
-    
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:&error];
-    
-    if (error) {
-        NSLog(@"Error setting category: %@", [error description]);
-    }
-    
-    [self.recorder prepareToRecord];
-    [self.recorder setMeteringEnabled:YES];
-    [self.recorder record];
-    
-}
 
 -(void)show{
     
-    _leftWave.hidden = NO;
-}
+    [self clickAnimation];
+ }
 
 -(void)hide{
-    _leftWave.hidden = YES;
+    [animationlayer removeFromSuperlayer];
 
 }
 - (void)notificationEnterFoground
@@ -1312,7 +1289,7 @@ static const CGFloat kScrapYOffsetFromBase = 7;
  *  开始录音
  */
 - (void)startRecordVoice{
-    _isCancel = NO;
+    _isCancel = YES;
     cancelBtnLeft.hidden = YES;
     cancelBtnRight.hidden = YES;
     _saySomething.hidden = YES;
@@ -1400,35 +1377,39 @@ static const CGFloat kScrapYOffsetFromBase = 7;
     
     UITouch *touch = [[event touchesForView:btn] anyObject];
     CGPoint curPoint = [touch locationInView:_audioView];
-    NSLog(@"=======%f======",curPoint.x);
-    if (_isCancel) {
-        
-    }else{
+  
+    
     if (curPoint.x>0.75*ScreenWidth) {
-        _isCancel = YES;
+      
+          NSLog(@"=======%f======",curPoint.x);
         CGRect rect = [self CGRectIntegralCenteredInRect:CGRectMake(0, 0, 13 - 5, 20 - 5) withRect:_audioView.frame];
         rect.origin.y = self.baseviewYOrigin - CGRectGetHeight(rect) - kScrapYOffsetFromBase;
         rect.origin.x = ScreenWidth - 50;
         self.scrapLayer.frame = rect;
         self.scrapLayer.bounds = rect;
         self.scrapLayer.hidden = NO;
-        [self scrapDriveUpAnimation];
+        if (_isCancel) {
+            [self scrapDriveUpAnimation];
+        }
         [[LGSoundRecorder shareInstance] readyCancelSound];
         cancelBtnRight.hidden = NO;
         cancelBtnLeft.hidden = NO;
     }else if (curPoint.x<0.25*ScreenWidth){
-        _isCancel = YES;
+          NSLog(@"=======%f======",curPoint.x);
+        
         CGRect rect = [self CGRectIntegralCenteredInRect:CGRectMake(0, 0, 13 - 5, 20 - 5) withRect:_audioView.frame];
         rect.origin.y = self.baseviewYOrigin - CGRectGetHeight(rect) - kScrapYOffsetFromBase;
         rect.origin.x = 50;
         self.scrapLayer.frame = rect;
         self.scrapLayer.bounds = rect;
         self.scrapLayer.hidden = NO;
-        [self scrapDriveUpAnimation];
+        if (_isCancel) {
+               [self scrapDriveUpAnimation];
+        }
+     
         [[LGSoundRecorder shareInstance] readyCancelSound];
         cancelBtnRight.hidden = NO;
         cancelBtnLeft.hidden = NO;
-    }
     }
     
 }
@@ -1963,6 +1944,7 @@ static const CGFloat kScrapYOffsetFromBase = 7;
 
 - (void)scrapDriveUpAnimation
 {
+    _isCancel = NO;
     CABasicAnimation *moveAnimation = [CABasicAnimation animationWithKeyPath:@"position"];
     moveAnimation.fromValue = [NSValue valueWithCGPoint:self.scrapLayer.position];
     moveAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(CGRectGetMidX(self.scrapLayer.frame), CGRectGetMidY(self.scrapLayer.frame) - kScrapDriveUpAnimationHeight)];
@@ -2049,7 +2031,7 @@ static const CGFloat kScrapYOffsetFromBase = 7;
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
-    _isCancel = NO;
+    
     if (flag) {
         NSString *animationName = [anim valueForKey:kAnimationNameKey];
         if ([animationName isEqualToString:kScrapDriveUpAnimationName]) {
