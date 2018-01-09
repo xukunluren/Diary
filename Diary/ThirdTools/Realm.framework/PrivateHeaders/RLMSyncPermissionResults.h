@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2014 Realm Inc.
+// Copyright 2017 Realm Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,22 +17,11 @@
 ////////////////////////////////////////////////////////////////////////////
 
 #import <Foundation/Foundation.h>
-#import <memory>
-#import <string>
 
-@class RLMRealm;
+#import "RLMResults.h"
 
-namespace realm {
-    class BindingContext;
-}
+@class RLMSyncPermission;
 
-// Add a Realm to the weak cache
-void RLMCacheRealm(std::string const& path, RLMRealm *realm);
-// Get a Realm for the given path which can be used on the current thread
-RLMRealm *RLMGetThreadLocalCachedRealmForPath(std::string const& path);
-// Get a Realm for the given path
-RLMRealm *RLMGetAnyCachedRealmForPath(std::string const& path);
-// Clear the weak cache of Realms
-void RLMClearRealmCache();
-
-std::unique_ptr<realm::BindingContext> RLMCreateBindingContext(RLMRealm *realm);
+// A private subclass of `RLMResults`.
+@interface RLMSyncPermissionResults : RLMResults<RLMSyncPermission *>
+@end

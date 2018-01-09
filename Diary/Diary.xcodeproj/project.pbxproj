@@ -110,7 +110,6 @@
 		67AC59931E51B0DF001D7BAE /* videoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC59921E51B0DF001D7BAE /* videoView.m */; };
 		67AC59951E51B833001D7BAE /* playVideo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 67AC59941E51B833001D7BAE /* playVideo@2x.png */; };
 		67AC59981E529F5D001D7BAE /* RichTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC59971E529F5D001D7BAE /* RichTextViewController.m */; };
-		67AC599D1E52E48F001D7BAE /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67AC599C1E52E48F001D7BAE /* Realm.framework */; };
 		67AC59A01E52E55F001D7BAE /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC599F1E52E55F001D7BAE /* Person.m */; };
 		67AC59A31E52EC24001D7BAE /* editDiaryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC59A21E52EC24001D7BAE /* editDiaryModel.m */; };
 		67AC59C01E542BB0001D7BAE /* CRToast.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC59BF1E542BB0001D7BAE /* CRToast.m */; };
@@ -140,6 +139,8 @@
 		67B029031E56ED32008F5992 /* Exue_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 67B028FB1E56ED32008F5992 /* Exue_select@2x.png */; };
 		67B029081E588A62008F5992 /* functionKeyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 67B029071E588A62008F5992 /* functionKeyView.m */; };
 		67B0290B1E589537008F5992 /* UIView+LQXkeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 67B0290A1E589537008F5992 /* UIView+LQXkeyboard.m */; };
+		67B8E8EF2004BDD4000A2CA9 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67B8E8EE2004BDD4000A2CA9 /* Realm.framework */; };
+		67B8E8F02004BDD4000A2CA9 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 67B8E8EE2004BDD4000A2CA9 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		67C06BBF1E2E051A00EBA5C6 /* MyMeansTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 67C06BBD1E2E051A00EBA5C6 /* MyMeansTableViewCell.m */; };
 		67C06BC01E2E051A00EBA5C6 /* MyMeansTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67C06BBE1E2E051A00EBA5C6 /* MyMeansTableViewCell.xib */; };
 		67C06BC91E2F3FB800EBA5C6 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67C06BC81E2F3FB800EBA5C6 /* LoginView.xib */; };
@@ -307,6 +308,20 @@
 			remoteInfo = Diary;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6702F8512004BCE7002008CE /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				67B8E8F02004BDD4000A2CA9 /* Realm.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		25FFA07C1E28D24600869B7E /* UIViewController+ClassName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ClassName.h"; sourceTree = "<group>"; };
@@ -478,7 +493,6 @@
 		67AC59921E51B0DF001D7BAE /* videoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = videoView.m; sourceTree = "<group>"; };
 		67AC59941E51B833001D7BAE /* playVideo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playVideo@2x.png"; sourceTree = "<group>"; };
 		67AC59971E529F5D001D7BAE /* RichTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RichTextViewController.m; sourceTree = "<group>"; };
-		67AC599C1E52E48F001D7BAE /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		67AC599E1E52E55F001D7BAE /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
 		67AC599F1E52E55F001D7BAE /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 		67AC59A11E52EC24001D7BAE /* editDiaryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = editDiaryModel.h; sourceTree = "<group>"; };
@@ -516,6 +530,7 @@
 		67B029071E588A62008F5992 /* functionKeyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = functionKeyView.m; sourceTree = "<group>"; };
 		67B029091E589537008F5992 /* UIView+LQXkeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LQXkeyboard.h"; sourceTree = "<group>"; };
 		67B0290A1E589537008F5992 /* UIView+LQXkeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LQXkeyboard.m"; sourceTree = "<group>"; };
+		67B8E8EE2004BDD4000A2CA9 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		67C06BBC1E2E051A00EBA5C6 /* MyMeansTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMeansTableViewCell.h; sourceTree = "<group>"; };
 		67C06BBD1E2E051A00EBA5C6 /* MyMeansTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMeansTableViewCell.m; sourceTree = "<group>"; };
 		67C06BBE1E2E051A00EBA5C6 /* MyMeansTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyMeansTableViewCell.xib; sourceTree = "<group>"; };
@@ -755,6 +770,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67B8E8EF2004BDD4000A2CA9 /* Realm.framework in Frameworks */,
 				67E2403B1E5C0BCB00B86CDB /* MessageUI.framework in Frameworks */,
 				67C06C781E2FAA5300EBA5C6 /* libz.tbd in Frameworks */,
 				67E240391E5C0BB300B86CDB /* ImageIO.framework in Frameworks */,
@@ -763,7 +779,6 @@
 				67E240371E5C0B8A00B86CDB /* CoreTelephony.framework in Frameworks */,
 				67E240351E5C0B7200B86CDB /* CoreGraphics.framework in Frameworks */,
 				67E23FB71E5967F300B86CDB /* SystemConfiguration.framework in Frameworks */,
-				67AC599D1E52E48F001D7BAE /* Realm.framework in Frameworks */,
 				67AC59901E51AEBC001D7BAE /* AVFoundation.framework in Frameworks */,
 				67AC58BC1E481CDC001D7BAE /* libopencore-amrnb.a in Frameworks */,
 				67AC58BD1E481CDC001D7BAE /* libopencore-amrwb.a in Frameworks */,
@@ -1818,13 +1833,13 @@
 		67CC90E51E28C02D00761832 /* ThirdTools */ = {
 			isa = PBXGroup;
 			children = (
+				67B8E8EE2004BDD4000A2CA9 /* Realm.framework */,
 				6722CCC91E83AAA90039D16A /* FBShimmering */,
 				67E2406F1E5FE27700B86CDB /* AnimationView.h */,
 				67E240701E5FE27700B86CDB /* AnimationView.m */,
 				67E23FDA1E5A925100B86CDB /* SURefresh */,
 				67AC59BE1E542BB0001D7BAE /* CRToast.h */,
 				67AC59BF1E542BB0001D7BAE /* CRToast.m */,
-				67AC599C1E52E48F001D7BAE /* Realm.framework */,
 				67AC59741E51AE92001D7BAE /* VideoLibrary */,
 				67C06C841E31F20600EBA5C6 /* STConfig */,
 				67C06C8E1E31F20700EBA5C6 /* STPhotoKit */,
@@ -1892,6 +1907,8 @@
 				67CC90491E28B7FC00761832 /* Sources */,
 				67CC904A1E28B7FC00761832 /* Frameworks */,
 				67CC904B1E28B7FC00761832 /* Resources */,
+				6702F8512004BCE7002008CE /* Embed Frameworks */,
+				67B8E8F12004BE1B000A2CA9 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1949,7 +1966,7 @@
 				TargetAttributes = {
 					67CC904C1E28B7FC00761832 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = ZC9P3YJ2F3;
+						DevelopmentTeam = 5G6X7E2225;
 						ProvisioningStyle = Automatic;
 					};
 					67CC90651E28B7FC00761832 = {
@@ -2142,6 +2159,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		67B8E8F12004BE1B000A2CA9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework/strip-frameworks.sh\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		67CC90491E28B7FC00761832 /* Sources */ = {
@@ -2433,7 +2466,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = ZC9P3YJ2F3;
+				DEVELOPMENT_TEAM = 5G6X7E2225;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2471,7 +2504,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = ZC9P3YJ2F3;
+				DEVELOPMENT_TEAM = 5G6X7E2225;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
